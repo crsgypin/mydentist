@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+  <%= render_relative_partial "common/head" %>
+  <body id="admin">
+  	<% if @embedded == 1 %>
+  	  <%= yield %>
+  	<% else %>
+  	<%= render_relative_partial "admin_digggest/navbar" %>
+  	<div class="container" style="min-height: 600px; padding-bottom: 40px;">
+  	  <%= yield %>
+  	</div>
+    <%= render_relative_partial "common/footer" %>
+  	<% end %>
+  </body>
+</html>
+
