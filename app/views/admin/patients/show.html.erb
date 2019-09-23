@@ -1,0 +1,7 @@
+<%= render :partial => "common/tabs_iframe", locals: {
+  id: "patient",
+  sel_tab_index: 0,
+  tabs: [
+    {name: "events", url: admin_patient_events_path(@patient)}
+  ]
+ } %>
