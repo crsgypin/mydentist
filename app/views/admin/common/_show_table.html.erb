@@ -1,0 +1,42 @@
+<%# required: resource, fields %>
+<% mode = local_assigns[:mode] || "show" %>
+<% table_class = local_assigns[:table_class] || "" %>
+<% table_style = local_assigns[:table_style] || "" %>
+<% title_class = local_assigns[:title_class] || "" %>
+<% title_style = local_assigns[:title_style] || "" %>
+<% value_class = local_assigns[:value_class] || "" %>
+<% value_style = local_assigns[:value_style] || "" %>
+<% fields_per_row = local_assigns[:fields_per_row] || 1 %>
+
+<%# variable: mode, trs %>
+<table class="table table-sm <%= table_class %>" style="<%= table_style %>">
+<% fields.each_with_index do |field, index| %>
+	<% next if mode == "edit" && !field.keys.include?(:e) %>
+	<%= "<tr>".html_safe if index % fields_per_row == 0 %>
+		<td class="<%= title_class %>" style="<%= title_style %>">
+			<% if field.keys.include?(:t) %>
+				<%= field[:t] %>
+			<% else %>
+				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
+			<% end %>
+		</td>
+		<% if mode == "show" %>
+		<td class="<%= value_class %>" style="<%= value_style %>">
+			<% if field.keys.include?(:v) %>
+				<%= field[:v].call(resource) %>
+			<% else %>
+				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
+			<% end %>
+		</td>
+		<% elsif mode == "edit" %>
+		<td class="<%= value_class %>" style="<%= value_style %>">
+			<% if field.keys.include?(:e) %>
+				<%= field[:e].call(resource) %>
+			<% end %>
+		</td>
+		<% end %>
+	<%= "</tr>".html_safe if ((index + 1) % fields_per_row == 0) || (fields.lenth == index + 1)  %>
+	</tr>
+<% end %>
+</table>
+

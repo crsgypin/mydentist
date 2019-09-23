@@ -1,0 +1,27 @@
+<% iframe_id = "#{id}_iframe" %>
+<% js = local_assigns[:js] || false %>
+
+<ul class="tab_menu mb10"
+	id="<%= id %>"
+  evt-selTab="
+    $(this).find('>li').removeClass('select');
+    $(this).find('>li[data-index='+ event.index +']').addClass('select');
+    $('#<%= iframe_id %>').callEvt('loadIframe', {url: event.url});"
+  evt-onInit="$(this).find('li').eq(<%= sel_tab_index %>).find('a').click()">
+  <% tabs.each_with_index do |t,index| %>
+    <li class="mr1" data-index="<%= index %>">
+      <a href="<%= t[:url] %>" data-index="<%= index %>" onclick="event.preventDefault(); $.callEvt('selTab', {index: $(this).data('index'), url: $(this).attr('href')})"><%= t[:name] %></a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="">
+  <% if !js %>
+  <iframe id="<%= iframe_id %>" src="" class="iframe" scrolling="no" style="<%= "height: #{local_assigns[:iframe_height]}px" if local_assigns[:iframe_height].present? %>"
+      evt-loadIframe=" $(this).attr('src', event.url)">
+  </iframe>
+  <% else %>
+  <div id="<%= iframe_id %>" style="margin-top: 20px;" src="" evt-loadIframe="$(this).data('url', event.url); $(this).loadFrame();"></div>
+  <% end %>
+</div>
+

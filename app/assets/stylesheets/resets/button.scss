@@ -1,0 +1,112 @@
+
+.btn1 {
+	display: inline-block;
+	border: solid 1px #eee;
+	color: $colorW;
+	background-color: $colorGn;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { background-color: $colorBu; }
+}
+
+.btn2 {
+	display: inline-block;
+	line-height: 1.5;
+	border: solid 1px $colorGn;
+	border-radius: 10px;
+	color: $colorGn;
+	padding: 3px 10px;
+	text-align: center;
+	&:hover { 
+		color: $colorBu_d;
+		border: solid 1px $colorBu_d;
+	}
+}
+
+.btn_tab {
+	display: inline-block;
+	line-height: 1.5;
+	border-radius: 10px;
+	color: $colorGn;
+	background: $colorW;
+	padding: 3px 4px;
+	text-align: center;
+	&:hover {
+		color: $colorBu;
+	}
+	&.select {
+		border: 1px solid $colorW;
+		color: $colorW;
+		background: $colorGn;
+		&:hover {
+			background: $colorBu;
+		}
+	}
+}
+
+.btn_cancel, .btn_edit, input.btn_submit {
+	border: solid 1px $colorGn;
+	color: $colorGn;
+	background-color: $colorW;
+	border-radius: 20px;
+	padding: 5px 15px;
+	line-height: 1.5;
+	&:hover { 
+		color: $colorGy_l;
+		border: solid 1px $colorGy_l;
+	}
+}
+
+.btn_save, input.btn_save {
+	border: solid 1px $colorBl;
+	color: $colorW;
+	background-color: $colorBl;
+	border-radius: 20px;
+	padding: 5px 15px;
+	line-height: 1;
+}
+
+.google_btn {
+	display: inline-block;
+	width: 100%;
+	height: 30px;
+	font-size: 15px;
+	line-height: 30px;
+	background: #ED3833;
+	text-align: center;
+	color: $colorW;
+	border-radius: 10px;
+	&:hover {
+		/*background: #FD4843;*/
+		color: $colorW;
+	}
+	i {
+		float: left;
+		line-height: 2;
+		margin-left: 15px;
+	}
+}
+.fb_btn {
+	display: inline-block;
+	width: 100%;
+	height: 30px;
+	font-size: 15px;
+	line-height: 30px;
+	background: #4267b2;
+	text-align: center;
+	color: #fff;
+	border-radius: 10px;
+	&:hover {
+		/*background: #5277b2;*/
+		color: $colorW;
+	}				
+	i {
+		float: left;
+		line-height: 2;
+		margin-left: 15px;
+	}
+}
+
+

@@ -1,0 +1,102 @@
+<% if local_assigns[:row].present? || local_assigns[:new].present?
+  iframe_id = "#{id}_iframe"
+else
+  iframe_id = nil
+end %>
+
+<div class="">
+  <div>
+  <% if local_assigns[:new].present? %>
+    <% if local_assigns[:new][:iframe_link_url] %>
+    <%= link_to "<i class=\"fas fa-plus pr1\"></i>#{local_assigns[:new][:btn_name]}", local_assigns[:new][:iframe_link_url], onclick1: "event.preventDefault(); $('##{iframe_id}').callEvt('loadIframe', {url: $(this).attr('href')})".html_safe, class: "btn_edit" %>
+    <% elsif local_assigns[:new][:link_url] %>
+    <%= link_to "<i class=\"fas fa-plus pr1\"></i>#{local_assigns[:new][:btn_name]}".html_safe, local_assigns[:new][:link_url], class: "btn_edit" %>
+    <% end %>
+  <% end %>
+  <% if local_assigns[:buttons_box].present? %>
+  <%= local_assigns[:buttons_box].call %>
+  <% end %>
+  </div>
+<table id="<%= id %>" class="table table_list table-bordered table-sm mt3"
+  <% if iframe_id.present? %>
+  evt-selRow="$('#<%= iframe_id %>').callEvt('loadIframe', {url: event.url});"
+  <% if local_assigns[:row].present? && local_assigns[:row][:default_sel_index].present? %>
+  evt-onInit="$(this).find('tr').eq(<%= row[:default_sel_index] + 1 %>).click();"
+  <% end %>
+  <% end %>
+  >
+  <thead class="bg_colorGn colorW">
+    <tr>
+      <% cols.each do |col| %>
+      <th>
+        <%= if col.keys.include?(:t) 
+          col[:t]
+        elsif col.keys.include?(:k)
+          if resources.class.name == "ActiveRecord::Relation" || resources.class.name == "ActiveRecord::AssociationRelation"
+            resources.klass.human_attribute_name(col[:k])
+          end
+        end %>
+      </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody
+    evt-selRow="
+      $(this).find('>tr').removeClass('bg_colorGy_l');
+      $(this).find('>tr[data-index='+ event.index +']').addClass('bg_colorGy_l');">
+    <% if resources.length > 0 %>
+      <% resources.each_with_index do |resource, index| %>
+      <tr
+        <% if iframe_id %>
+        data-index="<%= index %>"
+        <% if local_assigns[:row] %>
+        data-url="<%= row[:iframe_link_url].call(resource) %>"
+        <% end %>
+        onclick="if($(event.target).closest('a').length == 0){
+          event.preventDefault();
+          $(this).closest('table').callEvt('selRow', {index: $(this).data('index'), url: $(this).data('url')})}"
+        <% end %>
+        evt-hideTable="
+          if($(this).hasClass('bg_colorGy_l')){
+          }else{
+            $(this).hide();
+          }"
+        evt-showTable="$(this).show();">
+        <% cols.each do |col| %>
+        <td style="<%= "width: #{col[:w]}px;" if col[:w].present?%> <%= col[:style] %>">
+          <%= col[:v].call(resource, index) %>    
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="<%= cols.length %>" align="center">無任何資料</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if local_assigns[:total_resources_count].present? %>
+<div id="pagination_kam" class="alignC pb3">
+  <%= paginate(resources) %>
+</div>
+<% end %>
+</div>
+
+<% if iframe_id %>
+<%=
+  option = {}
+  option[:id] = iframe_id
+  option[:class] = "iframe mt10"
+  option[:src] = ""
+  option["evt-loadIframe"] = "$(this).attr('src', event.url)"
+  option["scrolling"] = "no"
+  option["style"] = local_assigns[:row][:style]
+  if local_assigns[:row].present? && local_assigns[:row][:iframe_resize] == true
+    option[:style] = "height: auto; width: 100%;"
+    option[:onload] ="resizeIframe(this)"
+  end
+  r = content_tag(:iframe, "", option)
+  r.html_safe
+%>
+<% end %>
