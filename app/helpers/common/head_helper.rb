@@ -1,7 +1,7 @@
 module Common::HeadHelper
 
 	def head_image_url
-		@head_image_url ||= common_static_image_url(:logo_s)
+		@head_image_url ||= ""
 		@head_image_url
 	end
 

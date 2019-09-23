@@ -10,4 +10,13 @@ Rails.application.routes.draw do
 	  	
   end
 
+  namespace :admin do
+  	resources :clinics
+  	resources :doctors
+  	resources :members
+  	resources :events
+  	resources :patients
+  	resources :services
+  end
+
 end

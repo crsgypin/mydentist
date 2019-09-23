@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <%= render_relative_partial "common/head" %>
@@ -6,11 +5,11 @@
   	<% if @embedded == 1 %>
   	  <%= yield %>
   	<% else %>
-  	<%= render_relative_partial "admin_digggest/navbar" %>
+  	<%= render_relative_partial "admin/navbar" %>
   	<div class="container" style="min-height: 600px; padding-bottom: 40px;">
   	  <%= yield %>
   	</div>
-    <%= render_relative_partial "common/footer" %>
+    <%# render_relative_partial "common/footer" %>
   	<% end %>
   </body>
 </html>

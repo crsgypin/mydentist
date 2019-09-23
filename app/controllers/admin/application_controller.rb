@@ -1,5 +1,5 @@
 class Admin::ApplicationController < ApplicationController
-  layout 'admin_digggest'
+  layout 'admin'
 
   include JsCrudConcern
 
