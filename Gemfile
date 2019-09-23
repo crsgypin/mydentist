@@ -43,7 +43,7 @@ gem 'capistrano-rails', :group => :development
 gem 'capistrano-passenger', :group => :development
 gem 'carrierwave'
 gem 'rmagick'
-gem 'fog'
+# gem 'fog'
 gem 'rspec-rails', :group => [:development, :test]
 gem 'mysql2', '~> 0.3.18'
 gem "nested_form"

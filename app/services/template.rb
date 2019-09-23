@@ -10,23 +10,23 @@ class Template
 			base_dir: "admin",
 			resources: [
 				{
-					class_name: "clinics",
+					class_name: "Clinic",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
-					# associated_resources: [
-					# 	{
-					# 		associated_name: "member_notifications",
-					# 		index_columns: %w(id),
-					# 		except_show_columns: [],
-					# 		# associated_resources: [
-					# 		# 	{
-					# 		# 		associated_name: "details",
-					# 		# 		index_columns: %w(id status),
-					# 		# 		except_show_columns: []
-					# 		# 	}
-					# 		# ]
-					# 	},
-					# ]
+					associated_resources: [
+						{
+							associated_name: "",
+							index_columns: %w(id),
+							except_show_columns: [],
+							# associated_resources: [
+							# 	{
+							# 		associated_name: "details",
+							# 		index_columns: %w(id status),
+							# 		except_show_columns: []
+							# 	}
+							# ]
+						},
+					]
 				},
 				# {
 				# 	class_name: "Tp::Post",
