@@ -3,4 +3,7 @@ class Member < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  enum role: {clinic_admin: 10, doctor: 20}
+  validates_inclusion_of level: [0, 100, 200]
+
 end

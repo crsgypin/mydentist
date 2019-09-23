@@ -6,12 +6,14 @@ class DeviseCreateMembers < ActiveRecord::Migration[5.1]
       t.integer :clinic_id, index: true
 
       ## Database authenticatable
+      t.string :account
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
+      t.integer :role, limit: 1
       t.integer :level
 
       ## Rememberable

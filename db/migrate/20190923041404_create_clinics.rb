@@ -1,6 +1,7 @@
 class CreateClinics < ActiveRecord::Migration[5.1]
   def change
     create_table :clinics do |t|
+    	t.string :friendly_id
 	    t.string :name, limit: 100
 	    t.string :name_en, limit: 100
 	    t.string :phone, limit: 100
