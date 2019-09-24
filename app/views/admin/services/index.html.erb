@@ -2,7 +2,9 @@
   id: "services",
   resources: @services,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "區間", v: proc{|a| a.duration }},
   ],
   row: {
 	  default_sel_index: 0,

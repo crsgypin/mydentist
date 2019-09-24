@@ -60,14 +60,16 @@ ActiveRecord::Schema.define(version: 20190923150920) do
   end
 
   create_table "doctors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "friendly_id"
     t.integer "clinic_id"
     t.integer "status", limit: 1, default: 1
     t.string "name", limit: 100
     t.string "title"
-    t.text "intro"
-    t.integer "gender", limit: 1
     t.text "experience"
     t.string "pro"
+    t.text "intro"
+    t.string "photo"
+    t.integer "gender", limit: 1
     t.string "web_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -135,11 +137,11 @@ ActiveRecord::Schema.define(version: 20190923150920) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_members_on_clinic_id"
-    t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "friendly_id"
     t.integer "clinic_id"
     t.integer "profile_status", limit: 1, default: 0
     t.string "name", limit: 100

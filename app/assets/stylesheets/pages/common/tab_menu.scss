@@ -1,0 +1,30 @@
+.tab_menu{
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #dee2e6;
+  >li{
+    margin-bottom: -1px;
+    box-sizing: border-box;
+    >a{
+      display: block;
+      padding: 4px 8px;
+      border: 1px solid #dee2e6;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      background-color: #cacaca;
+      color: #000;
+    }
+    &.select{
+      >a{
+        border-color: #dee2e6 #dee2e6 #fff #dee2e6;
+        background-color: #fff;
+      }
+    }
+    &:hover{
+      >a{
+        border-color: #dee2e6 #dee2e6 #fff #dee2e6;
+        background-color: #fff;
+      }
+    }
+  }
+}

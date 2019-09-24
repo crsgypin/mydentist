@@ -1,0 +1,25 @@
+class_name: "Clinic"
+primary_key: "friendly_id"
+data:
+  - primary_key: 
+      id: 1
+    attributes:
+      friendly_id: "cfv"
+      name: "宏麗牙醫" 
+      phone: "02-2555-3285"
+      address: "台北市中山區南京西路65號2樓"
+      description: "美麗自信笑容，盡在宏麗牙醫"
+      name_en: "cfv"
+      channel_secret: ""
+      channel_token: ""
+  - primary_key:
+      id: 2
+    attributes:
+      friendly_id: "dentist"
+      name: "無想牙醫" 
+      phone: "02-7722-4433"
+      address: "台北市中山區忠孝東路一段"
+      description: "快樂美麗，盡在無想"
+      name_en: "dentist"
+      channel_secret: ""
+      channel_token: ""

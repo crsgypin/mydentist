@@ -1,4 +1,5 @@
 class Admin::MembersController < Admin::ApplicationController
+  before_action -> {@embedded = 1}, only: [:show]
   before_action -> {
     access_config({
       variable_name: "member",

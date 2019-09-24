@@ -2,7 +2,10 @@
   id: "doctors",
   resources: @doctors,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "職稱", v: proc{|a| a.title }},
+    {t: "主治", v: proc{|a| short_string(a.pro, 20) }},
   ],
   row: {
 	  default_sel_index: 0,

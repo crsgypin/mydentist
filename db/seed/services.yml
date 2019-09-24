@@ -1,0 +1,47 @@
+class_name: "Service"
+data:
+  - primary_key:
+      name: "檢查牙齒"
+    attributes:
+      clinic_id: 1
+      duration: 15
+  - primary_key:
+      name: "洗牙"
+    attributes:
+      clinic_id: 1
+      duration: 15
+  - primary_key:
+      name: "兒童牙齒"
+    attributes:
+      clinic_id: 1
+      duration: 30
+  - primary_key:
+      name: "牙齒矯正"
+    attributes:
+      clinic_id: 1
+      duration: 30
+  - primary_key:
+      name: "拔智齒"
+    attributes:
+      clinic_id: 1
+      duration: 30
+  - primary_key:
+      name: "檢查牙齒"
+    attributes:
+      clinic_id: 2
+      duration: 15
+  - primary_key:
+      name: "洗牙"
+    attributes:
+      clinic_id: 2
+      duration: 15
+  - primary_key:
+      name: "兒童牙齒"
+    attributes:
+      clinic_id: 2
+      duration: 30
+  - primary_key:
+      name: "牙齒矯正"
+    attributes:
+      clinic_id: 2
+      duration: 30
