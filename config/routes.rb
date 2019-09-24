@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   end
 
   namespace :linebot do
-	  	
+    post "webhook", to: "webhook#create"
+    resources :events	  	
   end
 
   namespace :admin do
