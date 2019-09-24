@@ -1,6 +1,7 @@
 class CreatePatients < ActiveRecord::Migration[5.1]
   def change
     create_table :patients do |t|
+      t.string :friendly_id
     	t.integer :clinic_id
       t.integer :profile_status, limit: 1, default: 0
     	t.string :name, limit: 100
