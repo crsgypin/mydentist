@@ -1,8 +1,4 @@
-module WebhookHandler
-	include HandleClinics
-	include HandleDoctors
-	include HandleEvents
-	include HandlePatients
+module LinebotWebhookConcern
 
 	def handle_message(line_account, message)
 		if message[:type] == "follow"

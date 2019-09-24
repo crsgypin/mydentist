@@ -1,4 +1,4 @@
-class LineBot::Clinics::ApplicationController < LineBot::ApplicationController
+class Linebot::Clinics::ApplicationController < Linebot::ApplicationController
 	before_action :set_clinic
 
 	def set_clinic

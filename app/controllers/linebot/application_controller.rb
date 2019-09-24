@@ -1,3 +1,3 @@
-class LineBot::ApplicationController < ApplicationController
+class Linebot::ApplicationController < ApplicationController
 
 end	

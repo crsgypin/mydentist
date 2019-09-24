@@ -1,5 +1,9 @@
-class LineBot::Clinics::WebhookController < LineBot::Clinics::ApplicationController
-	include WebhookHandler
+class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationController
+	include LinebotWebhookConcern
+	include LinebotWebhookClinics
+	include LinebotWebhookDoctors
+	include LinebotWebhookEvents
+	include LinebotWebhookPatients
 
 	def create
 		params['events'].each do |e|
@@ -15,10 +19,10 @@ class LineBot::Clinics::WebhookController < LineBot::Clinics::ApplicationControl
 		if params[:test] == '1'
 			return render json: data.to_json
 		end
-    linebot ||= Line::Bot::Client.new{ |config|
+    linebot ||= Line::Bot::Client.new do |config|
       config.channel_secret = clinic.channel_secret
       config.channel_token = clinic.channel_token
-    }
+    end
     linebot.reply_message(@reply_token, data)
     render json: {}
 	end
@@ -38,7 +42,7 @@ class LineBot::Clinics::WebhookController < LineBot::Clinics::ApplicationControl
 			}
 		elsif event["type"] == "follow"
 			r = {
-				type: "follow"
+				type: "follow",
 				content: nil
 			}
 		end

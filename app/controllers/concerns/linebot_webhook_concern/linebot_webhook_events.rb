@@ -1,4 +1,4 @@
-module HandleDoctors
+module LinebotWebhookEvents
 
 	def event_create
 		

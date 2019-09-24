@@ -1,4 +1,4 @@
-module HandleClinics
+module LinebotWebhookClinics
 
 	def clinc_show
 
