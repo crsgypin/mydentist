@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(version: 20190923150920) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_members_on_clinic_id"
-    t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 

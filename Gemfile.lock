@@ -354,6 +354,7 @@ DEPENDENCIES
   font-awesome-sass (= 4.7.0)
   geocoder
   jbuilder (~> 2.5)
+  jquery-rails
   jquery-ui-rails
   kaminari
   koala

@@ -8,4 +8,15 @@ class Member < ApplicationRecord
   validates_inclusion_of :level, in: [0, 100, 200, 500]
   has_one :doctor
 
+  def email_required?
+    #for devised, noted at 2019/9/16
+    false
+  end
+
+  def email_changed?
+    #for devised, noted at 2019/9/16
+    false
+  end
+
+
 end

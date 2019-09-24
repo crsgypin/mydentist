@@ -1,7 +1,8 @@
-<%= render :partial => "common/tabs_iframe", locals: {
+<%= render :partial => "admin/common/tabs_iframe", locals: {
   id: "patient",
   sel_tab_index: 0,
   tabs: [
+    {name: "info", url: admin_clinic_patient_info_path(@clinic,@patient)},
     {name: "events", url: admin_clinic_patient_events_path(@clinic,@patient)}
   ]
  } %>

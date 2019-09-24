@@ -1,0 +1,33 @@
+class_name: "Patient"
+data:
+  - primary_key:
+      friendly_id: "cfv_p1"
+    attributes:
+      clinic_id: 1
+      name: "王大明"
+      phone: "0912345678"
+      birthday: "1984/2/1"
+  - primary_key:
+      friendly_id: "cfv_p2" 
+    attributes:
+      clinic_id: 1
+      name: "李小文" 
+      phone: "0914434678" 
+      birthday: "1988/12/1"
+  - primary_key:
+      friendly_id: "cfv_p3" 
+    belongs_to:
+      - clinic:
+          friendly_id: "cfv"
+    attributes:
+      name: "陳文安" 
+      phone: "0915534678" 
+      birthday: "1981/3/28"
+  - primary_key:
+      friendly_id: "cfv_p4" 
+    belongs_to:
+      - clinic:
+          friendly_id: "Michael Jordan" 
+    attributes:
+      phone: "0932534678" 
+      birthday: "1981/3/28"

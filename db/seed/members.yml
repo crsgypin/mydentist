@@ -1,0 +1,27 @@
+class_name: "Member"
+data:
+  - primary_key:
+      account: "admin"
+    attributes:
+      password: "qwerty1234"
+      username: '管理員'
+      level: 500
+  - primary_key:
+      account: "cfvadmin"
+    attributes:
+      clinic_id: 1
+      password: "qwerty1234"
+      username: '管理帳號'
+      level: 200
+  - primary_key:
+      account: "dentistadmin"
+    attributes:
+      clinic_id: 2
+      password: "qwerty1234"
+      username: '管理帳號'
+      level: 200
+
+
+
+
+

@@ -1,0 +1,39 @@
+#pagination_kam{
+	display:inline-block;
+	nav{
+		display: block;
+		width: 100%;
+
+		span{
+			display: inline-block;
+			margin-right: 2px;
+			border: 1px solid #f3f3f3;
+			color: #ccc;
+			text-align: center;
+			a {
+				padding: 2px 5px 2px 5px;
+			}
+			&.page {
+				width: 30px;
+			}
+			&.gap{
+				display: none;
+			}
+
+			&.current{
+				margin-right: 2px;
+				border: 1px solid #B2E05D;
+				font-weight: bold;
+				background-color: rgb(31, 170, 59)	;
+				color: #FFF;
+			}
+			&:hover {
+				border: 1px solid #85BD1E;
+				color: #638425;
+				background-color: #F1FFD6;
+			}
+		}
+	}
+}
+
+

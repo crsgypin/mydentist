@@ -2,7 +2,12 @@
   id: "clinics",
   resources: @clinics,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "英文名稱", v: proc{|a| a.name_en }},
+    {t: "電話", v: proc{|a| a.phone }},
+    {t: "地址", v: proc{|a| a.address }},
+    {t: "描述", v: proc{|a| a.description }},
   ],
   row: {
 	  default_sel_index: 0,
