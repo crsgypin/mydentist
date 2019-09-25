@@ -58,4 +58,12 @@ module LinebotWebhook
 		})
 	end
 
+	def handle_follow
+		line_account.udpate(status: "follow")
+		reply_message({
+      type: 'text',
+      text: "歡迎加入無想牙醫診所小助手"
+		})
+	end
+
 end
