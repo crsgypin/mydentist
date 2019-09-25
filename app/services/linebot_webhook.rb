@@ -1,4 +1,11 @@
-module LinebotWebhookConcern
+module LinebotWebhook
+	extend ActiveSupport::Concern
+  included do
+		include LinebotWebhook::Clinics
+		include LinebotWebhook::Doctors
+		include LinebotWebhook::Events
+		include LinebotWebhook::Patients
+  end
 
 	def handle_message(line_account, message)
 		if message[:type] == "follow"

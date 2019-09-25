@@ -1,4 +1,4 @@
-module LinebotWebhookEvents
+module LinebotWebhook::Events
 
 	def event_create
 		

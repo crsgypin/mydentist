@@ -1,0 +1,3 @@
+module LinebotWebhook::Patients
+
+end

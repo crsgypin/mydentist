@@ -1,4 +1,5 @@
 class Line::Account < ApplicationRecord
+	self.table_name = "line_accounts"
 	belongs_to :patient, optional: true
 	enum status: {"follow" => 1, "unfollow" => 2}
 	enum dialog_status: {"無" => nil, "預約掛號" => 1, "項目選擇" => 2, }

@@ -1,4 +1,0 @@
-module LinebotWebhookPatients
-	
-
-end

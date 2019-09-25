@@ -1,8 +1,14 @@
 
 <div id="linebot" class="pv4">
-	<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post" do %>
+	<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
 	<div class="pv4">
-		<%= text_field_tag "" %>
+		<%= select_field_tag "events[][type]", "message", ["message", "postback"] %>
+		<%= hidden_field_tag "events[][replyToken]", "test_token" %>
+		<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
+		<label><%= text_field_tag "events[][message][text]", "掛號" %></label>
+	</div>
+	<div class="pv4">
+		<%= submit_tag "測試" %>
 	</div>
 	<% end %>
 </div>

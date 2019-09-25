@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   namespace :linebot do
-    resources :clinics, only: [] do
+    resources :clinics, only: [], module: :clinics do
       post "webhook", to: "webhook#create"
     end
     resources :events	  	
