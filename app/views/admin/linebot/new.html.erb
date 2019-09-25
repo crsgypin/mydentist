@@ -48,6 +48,16 @@
 			<%= hidden_field_tag "events[][replyToken]", "test_token" %>
 			<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
 			<label><%= text_field_tag "events[][message][text]", "", id: "message_input" %></label>
+			<% [
+				"預約掛號",
+				"查詢掛號",
+				"醫師介紹",
+				"衛教資訊",
+				"診所資訊",
+				"個人設定"
+			].each do |a| %>
+			<%= link_to a, "javascript: $('#message_input').val('#{a}')", class: "btn1" %>
+			<% end %>
 		</div>
 		<div class="pv4">
 			<%= submit_tag "測試" %>

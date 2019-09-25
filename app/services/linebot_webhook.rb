@@ -26,7 +26,7 @@ module LinebotWebhook
 			if t == "message"
 				if c == "預約掛號"
 					event_create
-				elsif c == "查詢/取消掛號"
+				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
 					doctors_index
