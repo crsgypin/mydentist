@@ -8,8 +8,8 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
       event_type = event['type']
       data = convert_message_data(event)
       Rails.logger.info "converting_data: #{line_user_id} ,#{@reply_token}, #{event_type}, #{data}"
-      line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
-      handle_message(line_account, data)
+      @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
+      handle_message(data)
 		end
 	end
 
@@ -40,8 +40,11 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 			}
 		elsif event["type"] == "follow"
 			r = {
-				type: "follow",
-				content: nil
+				type: "follow"
+			}
+		elsif event["type"] == "unfollow"
+			r = {
+				type: "unfollow"
 			}
 		end
 	end

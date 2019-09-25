@@ -21,6 +21,25 @@
 		</div>
 		<% end %>
 	</div>
+	<div class="border pv5 ph5">
+		使用者進入
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<div class="pv4">
+			type: <%= text_field_tag "events[][type]", "follow", readonly: true %>
+			reply_token: <%= text_field_tag "events[][replyToken]", "xxxxx" %>
+		</div>
+		<div class="pv4">
+			soruce
+			type <%= text_field_tag "events[][source][type]", "user" %> 
+			userId <%= text_field_tag "events[][source][userId]", "Udeadbeefdeadbeefdeadbeefdeadbeef" %>
+		</div>
+		<div class="pv4">
+		</div>
+		<div class="pv4">
+			<%= submit_tag "測試" %>
+		</div>
+		<% end %>
+	</div>
 	<div class="pv4">
 		Message
 		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
@@ -41,3 +60,14 @@
 {"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}], "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}]}}
 
 %>
+
+<%# welcome message
+Parameters: {"events"=>[{"type"=>"follow", "replyToken"=>"4f8e97403c054eabbaff0bf36df514e8", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569380477042}], "destination"=>"xxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"follow", "replyToken"=>"xxx", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569380477042}], "destination"=>"U22a90ec00e2a9d294814219275d87358"}}
+
+%>
+
+<%# unfollowd message
+{"events"=>[{"type"=>"unfollow", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569380475929}], "destination"=>"xxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"unfollow", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569380475929}], "destination"=>"xxxx"}}
+
+%>
+

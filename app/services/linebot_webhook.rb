@@ -7,7 +7,7 @@ module LinebotWebhook
 		include LinebotWebhook::Patients
   end
 
-	def handle_message(line_account, message)
+	def handle_message(message)
 		if message[:type] == "follow"
 			handle_follow
 			return
@@ -15,6 +15,10 @@ module LinebotWebhook
 		t = message[:type]
 		c = message[:content]
 
+		if t == "unfollow"
+			return handle_unfollow
+		end
+		@line_account.update(status: "follow") if @line_account.status != "follow" #always set to follow except for unfollow
 		if t == "follow"
 			return handle_follow
 		end
@@ -22,7 +26,7 @@ module LinebotWebhook
 			return handle_verify
 		end
 
-		if line_account.dialog_status == "無"
+		if @line_account.dialog_status == "無"
 			if t == "message"
 				if c == "預約掛號"
 					event_create
@@ -38,15 +42,15 @@ module LinebotWebhook
 					patient_edit
 				end
 			end
-		elsif line_account.dialog_status == "選擇項目"
+		elsif @line_account.dialog_status == "選擇項目"
 			if t == "postback"
 				
 			end
-		elsif line_account.dialog_status == "選擇時間"
+		elsif @line_account.dialog_status == "選擇時間"
 
-		elsif line_account.dialog_status == "預約確認"
+		elsif @line_account.dialog_status == "預約確認"
 
-		elsif line_account.dialog_status == "個人設定"
+		elsif @line_account.dialog_status == "個人設定"
 
 		end
 	end
@@ -59,11 +63,14 @@ module LinebotWebhook
 	end
 
 	def handle_follow
-		line_account.udpate(status: "follow")
 		reply_message({
       type: 'text',
       text: "歡迎加入無想牙醫診所小助手"
 		})
+	end
+
+	def handle_unfollow
+		@line_account.update(status: "unfollow")
 	end
 
 end
