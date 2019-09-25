@@ -23,7 +23,11 @@ module LinebotWebhook::Events
         }
 			}
 		end
-		reply_message(m)
+		reply_message({
+      type: "text",
+      text: "請選擇服務項目",
+      quickReply: m			
+		})
 		# reply_message({
   #     type: 'text',
   #     text: "歡迎加入無想牙醫診所小助手"
