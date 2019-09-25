@@ -18,7 +18,7 @@ module LinebotWebhook::Events
         action: {
           type: "postback",
           label: service.name,
-          data: service.name,
+          data: "預約項目: #{service.name}",
           displayText: service.name,
         }
 			}
