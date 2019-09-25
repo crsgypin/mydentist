@@ -8,10 +8,6 @@ module LinebotWebhook
   end
 
 	def handle_message(message)
-		if message[:type] == "follow"
-			handle_follow
-			return
-		end
 		t = message[:type]
 		c = message[:content]
 
