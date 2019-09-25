@@ -1,14 +1,43 @@
 
 <div id="linebot" class="pv4">
-	<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
-	<div class="pv4">
-		<%= select_field_tag "events[][type]", "message", ["message", "postback"] %>
-		<%= hidden_field_tag "events[][replyToken]", "test_token" %>
-		<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
-		<label><%= text_field_tag "events[][message][text]", "掛號" %></label>
+	<div class="border pv5 ph5">
+		驗證
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<div class="pv4">
+			type: <%= text_field_tag "events[][type]", "message", readonly: true %>
+			reply_token: <%= text_field_tag "events[][replyToken]", "00000000000000000000000000000000" %>
+		</div>
+		<div class="pv4">
+			soruce
+			type <%= text_field_tag "events[][source][type]", "user" %> 
+			userId <%= text_field_tag "events[][source][userId]", "Udeadbeefdeadbeefdeadbeefdeadbeef" %>
+		</div>
+		<div class="pv4">
+			訊息
+			<label><%= text_field_tag "events[][message][text]", "Hello, world" %></label>
+		</div>
+		<div class="pv4">
+			<%= submit_tag "測試" %>
+		</div>
+		<% end %>
 	</div>
 	<div class="pv4">
-		<%= submit_tag "測試" %>
+		Message
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<div class="pv4">
+			<%= text_field_tag "events[][type]", "message", readonly: true %>
+			<%= hidden_field_tag "events[][replyToken]", "test_token" %>
+			<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
+			<label><%= text_field_tag "events[][message][text]", "掛號" %></label>
+		</div>
+		<div class="pv4">
+			<%= submit_tag "測試" %>
+		</div>
+		<% end %>
 	</div>
-	<% end %>
 </div>
+
+<%# verify message:
+{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}], "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}]}}
+
+%>

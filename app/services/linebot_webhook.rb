@@ -14,6 +14,14 @@ module LinebotWebhook
 		end
 		t = message[:type]
 		c = message[:content]
+
+		if t == "follow"
+			return handle_follow
+		end
+		if c == "Hello, world"
+			return handle_verify
+		end
+
 		if line_account.dialog_status == "無"
 			if t == "message"
 				if c == "預約掛號"
@@ -41,6 +49,13 @@ module LinebotWebhook
 		elsif line_account.dialog_status == "個人設定"
 
 		end
+	end
+
+	def handle_verify
+		reply_message({
+      type: 'text',
+      text: "verify"
+		})
 	end
 
 end
