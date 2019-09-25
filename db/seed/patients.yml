@@ -16,18 +16,14 @@ data:
       birthday: "1988/12/1"
   - primary_key:
       friendly_id: "cfv_p3" 
-    belongs_to:
-      - clinic:
-          friendly_id: "cfv"
     attributes:
+      clinic_id: 2
       name: "陳文安" 
       phone: "0915534678" 
       birthday: "1981/3/28"
   - primary_key:
       friendly_id: "cfv_p4" 
-    belongs_to:
-      - clinic:
-          friendly_id: "Michael Jordan" 
     attributes:
+      clinic_id: 2
       phone: "0932534678" 
       birthday: "1981/3/28"
