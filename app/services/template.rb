@@ -5,6 +5,19 @@ class Template
 	include Template::IndexView
 	include Template::ShowView
 
+	def self.load1
+		Template.new({
+			base_dir: "admin",
+			resources: [
+				{
+					class_name: "Line::Account",
+					index_columns: %w(id),
+					except_show_columns: %w(uploaded_at)
+				}
+			]
+		})
+	end
+
 	def self.load
 		Template.new({
 			base_dir: "admin",

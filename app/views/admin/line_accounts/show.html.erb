@@ -1,0 +1,16 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "line_account",
+  resource: @line_account,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "對話狀態", v: proc{|a| a.dialog_status }},
+    {t: "LINE ID", v: proc{|a| a.line_user_id }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "名稱", v: proc{|a| a.display_name }},
+    {t: "圖片", v: proc{|a| a.picture_url && image_tag(a.picture_url, style: "width: 150px") }},
+    {t: "訊息文", v: proc{|a| a.status_message }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

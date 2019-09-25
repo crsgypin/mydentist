@@ -1,0 +1,17 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "line_accounts",
+  resources: @line_accounts,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "對話狀態", v: proc{|a| a.dialog_status }},
+    {t: "LINE ID", v: proc{|a| a.line_user_id }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "名稱", v: proc{|a| a.display_name }},
+    {t: "圖片", v: proc{|a| a.picture_url && image_tag(a.picture_url, style: "width: 150px") }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

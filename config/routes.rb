@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       resources :events      
     end
   	resources :services
+    resources :line_accounts
     resource :linebot, only: [:new, :create], controller: :linebot #for linebot test
   end
 
