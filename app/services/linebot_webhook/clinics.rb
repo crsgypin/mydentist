@@ -1,6 +1,6 @@
 module LinebotWebhook::Clinics
 
-	def clinc_show
+	def clinic_show
 
 	end
 

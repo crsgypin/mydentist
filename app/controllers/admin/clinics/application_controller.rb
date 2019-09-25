@@ -3,6 +3,6 @@ class Admin::Clinics::ApplicationController < Admin::ApplicationController
   before_action :find_clinic
 
   def find_clinic
-    @clinic = Clinic.find(params[:clinic_id])
+    @clinic = Clinic.find_by(friendly_id: params[:clinic_id])
   end
 end

@@ -22,7 +22,7 @@ module LinebotWebhook
 			return handle_verify
 		end
 
-		if @line_account.dialog_status == "無"
+		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
 					event_create
@@ -33,9 +33,11 @@ module LinebotWebhook
 				elsif c == "衛教資訊"
 					
 				elsif c == "診所資訊"
-					clinc_show
+					clinic_show
 				elsif c == "個人設定"
 					patient_edit
+				else
+					handle_unknown_message
 				end
 			end
 		elsif @line_account.dialog_status == "選擇項目"
@@ -48,6 +50,8 @@ module LinebotWebhook
 
 		elsif @line_account.dialog_status == "個人設定"
 
+		else
+			handle_unknown_message
 		end
 	end
 
@@ -67,6 +71,13 @@ module LinebotWebhook
 
 	def handle_unfollow
 		@line_account.update(status: "unfollow")
+	end
+
+	def handle_unknown_message
+		reply_message({
+			type: "text",
+			text: "抱歉，無法判斷您的訊息"
+		})
 	end
 
 end

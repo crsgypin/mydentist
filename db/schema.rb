@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190923150920) do
+ActiveRecord::Schema.define(version: 20190925032536) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20190923150920) do
     t.integer "doctor_id"
     t.integer "patient_id"
     t.integer "service_id"
+    t.integer "line_account_id"
     t.integer "status", limit: 1
     t.date "date"
     t.integer "hour", limit: 1
@@ -101,11 +102,13 @@ ActiveRecord::Schema.define(version: 20190923150920) do
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_events_on_clinic_id"
     t.index ["doctor_id"], name: "index_events_on_doctor_id"
+    t.index ["line_account_id"], name: "index_events_on_line_account_id"
     t.index ["patient_id"], name: "index_events_on_patient_id"
     t.index ["service_id"], name: "index_events_on_service_id"
   end
 
   create_table "line_accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
     t.integer "patient_id"
     t.integer "dialog_status", limit: 1
     t.string "line_user_id"

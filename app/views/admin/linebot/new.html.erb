@@ -1,8 +1,8 @@
 
 <div id="linebot" class="pv4">
-	<div class="border pv5 ph5">
+	<div class="border mb5 pv5 ph5">
 		驗證
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true do %>
 		<div class="pv4">
 			type: <%= text_field_tag "events[][type]", "message", readonly: true %>
 			reply_token: <%= text_field_tag "events[][replyToken]", "00000000000000000000000000000000" %>
@@ -21,9 +21,9 @@
 		</div>
 		<% end %>
 	</div>
-	<div class="border pv5 ph5">
+	<div class="border mb5 pv5 ph5">
 		使用者進入
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true do %>
 		<div class="pv4">
 			type: <%= text_field_tag "events[][type]", "follow", readonly: true %>
 			reply_token: <%= text_field_tag "events[][replyToken]", "xxxxx" %>
@@ -40,21 +40,41 @@
 		</div>
 		<% end %>
 	</div>
-	<div class="pv4">
+	<div class="border mb5 ph5 pv5">
 		Message
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first), method: "post", remote:true do %>
+		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true, id: "message_form" do %>
 		<div class="pv4">
 			<%= text_field_tag "events[][type]", "message", readonly: true %>
 			<%= hidden_field_tag "events[][replyToken]", "test_token" %>
 			<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
-			<label><%= text_field_tag "events[][message][text]", "掛號" %></label>
+			<label><%= text_field_tag "events[][message][text]", "", id: "message_input" %></label>
 		</div>
 		<div class="pv4">
 			<%= submit_tag "測試" %>
 		</div>
 		<% end %>
 	</div>
+	<div class="border mb5 ph5 pv5">
+		結果
+		<div id="result">
+
+		</div>
+	</div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		var m = window.localStorage.getItem('line_message');
+		if(m){
+			$("#message_input").val(m);
+		} else {
+			$("#message_input").val("掛號");
+		}
+		$("form#message_form").on("submit", function(e){
+			var m = $("#message_input").val();
+			window.localStorage.setItem("line_message", m);
+		});
+	});
+</script>
 
 <%# verify message:
 {"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}], "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}]}}
