@@ -26,7 +26,9 @@ module LinebotWebhook::Events
 		reply_message({
       type: "text",
       text: "請選擇服務項目",
-      quickReply: m			
+      quickReply: {
+      	items: m
+      }
 		})
 		# reply_message({
   #     type: 'text',
