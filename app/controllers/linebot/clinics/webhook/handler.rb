@@ -17,6 +17,7 @@ module Linebot::Clinics::Webhook::Handler
       data = convert_message_data(event)
       Rails.logger.info "converting_data: #{line_user_id} ,#{@reply_token}, #{event_type}, #{data}"
       @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
+      @line_account.update(clinic: @clinic)
       handle_message(data)
 		end
 	end

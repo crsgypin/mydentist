@@ -2,6 +2,8 @@
 <html>
   <%= render_relative_partial "common/head" %>
   <body id="admin" class="fs12">
+    <link rel="stylesheet" type="text/css" href="/admin/jquery.json-view.min.css">
+    <script type="text/javascript" src="/admin/jquery.json-view.min.js"></script>
   	<% if @embedded == 1 %>
   	  <%= yield %>
   	<% else %>
