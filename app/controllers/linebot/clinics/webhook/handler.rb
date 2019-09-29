@@ -7,6 +7,7 @@ module Linebot::Clinics::Webhook::Handler
 		include Linebot::Clinics::Webhook::Handler::Patients
 		include Linebot::Clinics::Webhook::Handler::Follow
 		include Linebot::Clinics::Webhook::Handler::Other
+		include Linebot::Clinics::Webhook::Handler::DataHelper
   end
 
   def handle_messages(events)
@@ -14,8 +15,7 @@ module Linebot::Clinics::Webhook::Handler
       line_user_id = event['source']['userId']
       @reply_token = event['replyToken']
       event_type = event['type']
-      data = convert_message_data(event)
-      Rails.logger.info "converting_data: #{line_user_id} ,#{@reply_token}, #{event_type}, #{data}"
+      data = parse_message_data(event)
       @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
       @line_account.update(clinic: @clinic)
       handle_message(data)
@@ -42,7 +42,7 @@ module Linebot::Clinics::Webhook::Handler
 		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
-					event_create
+					event_new
 				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
@@ -72,26 +72,5 @@ module Linebot::Clinics::Webhook::Handler
 		end
 	end
 
-	def convert_message_data(event)
-		if event["type"] == "message"
-			r = {
-				type: "message",
-				content: event['message']['text']
-			}
-		elsif event["type"] == "postback"
-			r = {
-				type: "postback",
-				content: ['postback']['data']
-			}
-		elsif event["type"] == "follow"
-			r = {
-				type: "follow"
-			}
-		elsif event["type"] == "unfollow"
-			r = {
-				type: "unfollow"
-			}
-		end
-	end
 
 end

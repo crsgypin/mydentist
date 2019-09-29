@@ -12,8 +12,8 @@ class Admin::LinebotController < Admin::ApplicationController
 
 	def reply_message(data)
 		@data = {
-			line_account: @line_account.inspect.to_json,
-			reply_message: data
+			reply_message: data,
+			line_account: @line_account.attributes,
 		}
 	end
 
