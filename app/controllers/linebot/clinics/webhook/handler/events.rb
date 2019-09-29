@@ -1,4 +1,4 @@
-module LinebotWebhook::Events
+module Linebot::Clinics::Webhook::Handler::Events
 
 	def event_index
 		@patient = @line_account.patient

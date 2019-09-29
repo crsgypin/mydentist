@@ -1,4 +1,4 @@
-module LinebotWebhook::Doctors
+module Linebot::Clinics::Webhook::Handler::Doctors
 	
 	def doctors_index
 		@doctors = @clinic.doctors

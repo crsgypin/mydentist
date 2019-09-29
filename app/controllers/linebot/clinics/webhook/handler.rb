@@ -1,10 +1,10 @@
-module LinebotWebhook
+module Linebot::Clinics::Webhook::Handler
 	extend ActiveSupport::Concern
   included do
-		include LinebotWebhook::Clinics
-		include LinebotWebhook::Doctors
-		include LinebotWebhook::Events
-		include LinebotWebhook::Patients
+		include Linebot::Clinics::Webhook::Handler::Clinics
+		include Linebot::Clinics::Webhook::Handler::Doctors
+		include Linebot::Clinics::Webhook::Handler::Events
+		include Linebot::Clinics::Webhook::Handler::Patients
   end
 
 	def handle_message(message)

@@ -1,5 +1,5 @@
 class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationController
-	include LinebotWebhook
+	include Linebot::Clinics::Webhook::Handler
 
 	def create
 		params['events'].each do |event|
