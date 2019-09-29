@@ -5,7 +5,23 @@ module Linebot::Clinics::Webhook::Handler
 		include Linebot::Clinics::Webhook::Handler::Doctors
 		include Linebot::Clinics::Webhook::Handler::Events
 		include Linebot::Clinics::Webhook::Handler::Patients
+		include Linebot::Clinics::Webhook::Handler::Follow
+		include Linebot::Clinics::Webhook::Handler::Other
   end
+
+  def handle_messages(events)
+		events.each do |event|
+      line_user_id = event['source']['userId']
+      @reply_token = event['replyToken']
+      event_type = event['type']
+      data = convert_message_data(event)
+      Rails.logger.info "converting_data: #{line_user_id} ,#{@reply_token}, #{event_type}, #{data}"
+      @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
+      handle_message(data)
+		end
+	end
+
+	private
 
 	def handle_message(message)
 		t = message[:type]
@@ -55,29 +71,26 @@ module Linebot::Clinics::Webhook::Handler
 		end
 	end
 
-	def handle_verify
-		reply_message({
-      type: 'text',
-      text: "verify"
-		})
-	end
-
-	def handle_follow
-		reply_message({
-      type: 'text',
-      text: "歡迎加入無想牙醫診所小助手"
-		})
-	end
-
-	def handle_unfollow
-		@line_account.update(status: "unfollow")
-	end
-
-	def handle_unknown_message
-		reply_message({
-			type: "text",
-			text: "抱歉，無法判斷您的訊息"
-		})
+	def convert_message_data(event)
+		if event["type"] == "message"
+			r = {
+				type: "message",
+				content: event['message']['text']
+			}
+		elsif event["type"] == "postback"
+			r = {
+				type: "postback",
+				content: ['postback']['data']
+			}
+		elsif event["type"] == "follow"
+			r = {
+				type: "follow"
+			}
+		elsif event["type"] == "unfollow"
+			r = {
+				type: "unfollow"
+			}
+		end
 	end
 
 end

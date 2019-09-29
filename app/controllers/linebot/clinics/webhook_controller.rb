@@ -2,15 +2,7 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	include Linebot::Clinics::Webhook::Handler
 
 	def create
-		params['events'].each do |event|
-      line_user_id = event['source']['userId']
-      @reply_token = event['replyToken']
-      event_type = event['type']
-      data = convert_message_data(event)
-      Rails.logger.info "converting_data: #{line_user_id} ,#{@reply_token}, #{event_type}, #{data}"
-      @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
-      handle_message(data)
-		end
+		handle_messages(params["events"])
 	end
 
 	def reply_message(data)
@@ -27,27 +19,6 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 
 	private
 
-	def convert_message_data(event)
-		if event["type"] == "message"
-			r = {
-				type: "message",
-				content: event['message']['text']
-			}
-		elsif event["type"] == "postback"
-			r = {
-				type: "postback",
-				content: ['postback']['data']
-			}
-		elsif event["type"] == "follow"
-			r = {
-				type: "follow"
-			}
-		elsif event["type"] == "unfollow"
-			r = {
-				type: "unfollow"
-			}
-		end
-	end
 
 end
 
