@@ -1,103 +1,12 @@
 
 <div id="linebot" class="pv4">
-	<div class="border mb5 pv5 ph5">
-		驗證
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true do %>
-		<div class="pv4">
-			type: <%= text_field_tag "events[][type]", "message", readonly: true %>
-			reply_token: <%= text_field_tag "events[][replyToken]", "00000000000000000000000000000000" %>
-		</div>
-		<div class="pv4">
-			soruce
-			type <%= text_field_tag "events[][source][type]", "user" %> 
-			userId <%= text_field_tag "events[][source][userId]", "Udeadbeefdeadbeefdeadbeefdeadbeef" %>
-		</div>
-		<div class="pv4">
-			訊息
-			<label><%= text_field_tag "events[][message][text]", "Hello, world" %></label>
-		</div>
-		<div class="pv4">
-			<%= submit_tag "測試" %>
-		</div>
-		<% end %>
-	</div>
-	<div class="border mb5 pv5 ph5">
-		使用者進入
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true do %>
-		<div class="pv4">
-			type: <%= text_field_tag "events[][type]", "follow", readonly: true %>
-			reply_token: <%= text_field_tag "events[][replyToken]", "xxxxx" %>
-		</div>
-		<div class="pv4">
-			soruce
-			type <%= text_field_tag "events[][source][type]", "user" %> 
-			userId <%= text_field_tag "events[][source][userId]", "Udeadbeefdeadbeefdeadbeefdeadbeef" %>
-		</div>
-		<div class="pv4">
-		</div>
-		<div class="pv4">
-			<%= submit_tag "測試" %>
-		</div>
-		<% end %>
-	</div>
-	<div class="border mb5 ph5 pv5">
-		Message
-		<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true, id: "message_form" do %>
-		<div class="pv4">
-			<%= text_field_tag "events[][type]", "message", readonly: true %>
-			<%= hidden_field_tag "events[][replyToken]", "test_token" %>
-			<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
-			<label><%= text_field_tag "events[][message][text]", "", id: "message_input" %></label>
-			<% [
-				"預約掛號",
-				"查詢掛號",
-				"醫師介紹",
-				"衛教資訊",
-				"診所資訊",
-				"個人設定"
-			].each do |a| %>
-			<%= link_to a, "javascript: $('#message_input').val('#{a}')", class: "btn1" %>
-			<% end %>
-		</div>
-		<div class="pv4">
-			<%= submit_tag "測試" %>
-		</div>
-		<% end %>
-	</div>
+	<%= render_relative_partial "new/message_form" %>
+	<%# render_relative_partial "new/verification_form" %>
+	<%# render_relative_partial "new/welcome_form" %>
 	<div class="border mb5 ph5 pv5">
 		結果
 		<div id="result">
-
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$(function(){
-		var m = window.localStorage.getItem('line_message');
-		if(m){
-			$("#message_input").val(m);
-		} else {
-			$("#message_input").val("掛號");
-		}
-		$("form#message_form").on("submit", function(e){
-			var m = $("#message_input").val();
-			window.localStorage.setItem("line_message", m);
-		});
-	});
-</script>
-
-<%# verify message:
-{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}], "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"replyToken"=>"00000000000000000000000000000000", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100001", "type"=>"text", "text"=>"Hello, world"}}, {"replyToken"=>"ffffffffffffffffffffffffffffffff", "type"=>"message", "timestamp"=>1569375372823, "source"=>{"type"=>"user", "userId"=>"Udeadbeefdeadbeefdeadbeefdeadbeef"}, "message"=>{"id"=>"100002", "type"=>"sticker", "packageId"=>"1", "stickerId"=>"1"}}]}}
-
-%>
-
-<%# welcome message
-Parameters: {"events"=>[{"type"=>"follow", "replyToken"=>"4f8e97403c054eabbaff0bf36df514e8", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569380477042}], "destination"=>"xxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"follow", "replyToken"=>"xxx", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569380477042}], "destination"=>"U22a90ec00e2a9d294814219275d87358"}}
-
-%>
-
-<%# unfollowd message
-{"events"=>[{"type"=>"unfollow", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569380475929}], "destination"=>"xxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"unfollow", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569380475929}], "destination"=>"xxxx"}}
-
-%>
 
