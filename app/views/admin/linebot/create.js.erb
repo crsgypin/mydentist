@@ -1,0 +1,5 @@
+
+$('#result .response .text').html('<%= @data[:reply_message].to_json.html_safe %>')
+$('#result .account .text').html('<%= @data[:line_account].to_json.html_safe %>')
+
+

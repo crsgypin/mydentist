@@ -4,7 +4,7 @@ class Line::Account < ApplicationRecord
 	belongs_to :patient, optional: true
 	has_many :events, class_name: "Event"
 	enum status: {"follow" => 1, "unfollow" => 2}
-	enum dialog_status: {"預約掛號" => 1, "項目選擇" => 2, }
+	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id
 	before_save :get_and_set_profle_for_validation
 	# after_create :create_or_update_richmenu_to_user #over 1000, so depreciated at 2019/7/4

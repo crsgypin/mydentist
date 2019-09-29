@@ -1,0 +1,48 @@
+<div class="border mb5 ph5 pv5">
+	Message
+	<%= form_tag url_for(action: :create), method: "post", remote:true, id: "message_form" do %>
+	<div class="pv4">
+		<div>
+			<%= select_field_tag "clinic_id", @clinic.try(:friendly_id), Clinic.all.map{|a| [a.friendly_id, a.name]} %>
+		</div>
+		<%= text_field_tag "events[][type]", "message", readonly: true %>
+		<%= hidden_field_tag "events[][replyToken]", "test_token" %>
+		<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
+		<label><%= text_field_tag "events[][message][text]", "", id: "message_input" %></label>
+		<% [
+			"預約掛號",
+			"查詢掛號",
+			"醫師介紹",
+			"衛教資訊",
+			"診所資訊",
+			"個人設定"
+		].each do |a| %>
+		<%= link_to a, "javascript: $('#message_input').val('#{a}')", class: "btn1" %>
+		<% end %>
+	</div>
+	<div class="pv4">
+		<%= submit_tag "測試" %>
+	</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var m = window.localStorage.getItem('line_message');
+		if(m){
+			$("#message_input").val(m);
+		} else {
+			$("#message_input").val("掛號");
+		}
+		$("form#message_form").on("submit", function(e){
+			var m = $("#message_input").val();
+			window.localStorage.setItem("line_message", m);
+		});
+	});
+</script>
+
+<%# postback
+{"events"=>[{"type"=>"postback", "replyToken"=>"xxxx", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569777786439, "postback"=>{"data"=>"{\"key\":\"event_create\",\"service_name\":\"檢查牙齒\"}"}}], "destination"=>"xxxxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"postback", "replyToken"=>"xxxx", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569777786439, "postback"=>{"data"=>"{\"key\":\"event_create\",\"service_name\":\"檢查牙齒\"}"}}], "destination"=>"xxxx"}}
+%>
+
+

@@ -1,11 +1,28 @@
-module LinebotWebhook
+module Linebot::Clinics::Webhook::Handler
 	extend ActiveSupport::Concern
   included do
-		include LinebotWebhook::Clinics
-		include LinebotWebhook::Doctors
-		include LinebotWebhook::Events
-		include LinebotWebhook::Patients
+		include Linebot::Clinics::Webhook::Handler::Clinics
+		include Linebot::Clinics::Webhook::Handler::Doctors
+		include Linebot::Clinics::Webhook::Handler::Events
+		include Linebot::Clinics::Webhook::Handler::Patients
+		include Linebot::Clinics::Webhook::Handler::Follow
+		include Linebot::Clinics::Webhook::Handler::Other
+		include Linebot::Clinics::Webhook::Handler::DataHelper
   end
+
+  def handle_messages(events)
+		events.each do |event|
+      line_user_id = event['source']['userId']
+      @reply_token = event['replyToken']
+      event_type = event['type']
+      data = parse_message_data(event)
+      @line_account = ::Line::Account.find_or_create_by(line_user_id: line_user_id)
+      @line_account.update(clinic: @clinic)
+      handle_message(data)
+		end
+	end
+
+	private
 
 	def handle_message(message)
 		t = message[:type]
@@ -25,7 +42,7 @@ module LinebotWebhook
 		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
-					event_create
+					event_new
 				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
@@ -55,29 +72,5 @@ module LinebotWebhook
 		end
 	end
 
-	def handle_verify
-		reply_message({
-      type: 'text',
-      text: "verify"
-		})
-	end
-
-	def handle_follow
-		reply_message({
-      type: 'text',
-      text: "歡迎加入無想牙醫診所小助手"
-		})
-	end
-
-	def handle_unfollow
-		@line_account.update(status: "unfollow")
-	end
-
-	def handle_unknown_message
-		reply_message({
-			type: "text",
-			text: "抱歉，無法判斷您的訊息"
-		})
-	end
 
 end
