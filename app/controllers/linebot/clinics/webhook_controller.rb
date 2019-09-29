@@ -6,9 +6,6 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	end
 
 	def reply_message(data)
-		if params[:test] == '1'
-			return render js: "$('#result').html('#{data.to_json}')"
-		end
     linebot ||= Line::Bot::Client.new do |config|
       config.channel_secret = Rails.application.config_for('api_key')["line"]["channel_secret"]
       config.channel_token = Rails.application.config_for('api_key')["line"]["channel_access_token"]
@@ -16,9 +13,6 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
     linebot.reply_message(@reply_token, data)
     render json: {}
 	end
-
-	private
-
 
 end
 

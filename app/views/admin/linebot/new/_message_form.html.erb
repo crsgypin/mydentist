@@ -1,7 +1,10 @@
 <div class="border mb5 ph5 pv5">
 	Message
-	<%= form_tag linebot_clinic_webhook_path(Clinic.first, test: 1), method: "post", remote:true, id: "message_form" do %>
+	<%= form_tag url_for(action: :create), method: "post", remote:true, id: "message_form" do %>
 	<div class="pv4">
+		<div>
+			<%= select_field_tag "clinic_id", @clinic.try(:friendly_id), Clinic.all.map{|a| [a.friendly_id, a.name]} %>
+		</div>
 		<%= text_field_tag "events[][type]", "message", readonly: true %>
 		<%= hidden_field_tag "events[][replyToken]", "test_token" %>
 		<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
