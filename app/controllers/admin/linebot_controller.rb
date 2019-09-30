@@ -18,5 +18,4 @@ class Admin::LinebotController < Admin::ApplicationController
 		@data = @data.first
 	end
 
-
 end
