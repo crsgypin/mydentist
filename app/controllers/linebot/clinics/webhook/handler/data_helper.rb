@@ -75,7 +75,7 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 	def convert_carousel(data)
 		r = {
 			type: "template",
-			altText: data[:title],
+			altText: data[:text],
 			template: {
 				type: "carousel",
 				columns: data[:columns].map do |c|
@@ -93,8 +93,8 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 					r[:title] = column[:title]
 					r[:actions] = {
 						typee: "postback",
-						label: item[:name],
-						data: item[:data].to_json
+						label: column[:name],
+						data: column[:data].to_query
 					}
 					r
 				end

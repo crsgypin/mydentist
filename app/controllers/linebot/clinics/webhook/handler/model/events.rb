@@ -32,8 +32,6 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 			text: "請選擇服務項目",
 			items: @clinic.services.map do |service|
 				r = {
-					dialog_status: "預約掛號",
-					dialog_status_step: 1,
 					name: service.name,
 					data: {
 						service_name: service.name
@@ -62,12 +60,11 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 			dialog_status_step: 2,
 		})
 		reply_message({
-			type: "quick_reply_buttons",
+			type: "carousel",
 			text: "請選擇醫生",
-			items: @clinic.doctors.map do |doctor|
+			columns: @clinic.doctors.map do |doctor|
 				r = {
-					dialog_status: "預約掛號",
-					dialog_status_step: 1,
+					title: "標題 doctor",
 					name: doctor.name,
 					data: {
 						doctor_name: doctor.name
