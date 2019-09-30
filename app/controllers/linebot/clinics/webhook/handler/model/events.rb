@@ -94,6 +94,7 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 	end
 
 	def event_new_select_datetime(message)
+		raise "invalid_status"
 		reply_message({
 			type: "text",
 			text: "預約時間"
