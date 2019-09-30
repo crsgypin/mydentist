@@ -32,7 +32,8 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		}
 	end
 
-	def convert_quick_reply_buttons(data) #to be removed
+	def convert_quick_reply_buttons(data)
+		#to be removed
 		r = {
 	      type: "text",
 	      text: data[:text],
@@ -63,7 +64,15 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 			template: {
 				type: "confirm",
 				text: data[:text],
-				actions: data[:actions]
+				actions: data[:actions].map do |action|
+					action.map do |key, value|
+						if key.to_sym == :data
+							[key, value.to_query]
+						else
+							[key, value]
+						end
+					end.to_h
+				end
 			}
 		}
 	end

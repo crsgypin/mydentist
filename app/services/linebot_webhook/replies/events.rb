@@ -66,7 +66,7 @@ module LinebotWebhook::Replies::Events
 	def reply_event_abort_or_select_services
 		reply_message({
 			type: "confirm",
-			alt_text: "取消或繼續預約"
+			alt_text: "取消或繼續預約",
 			text: "您目前還在預約掛號中，是否繼續預約?",
 			actions: [
 				{

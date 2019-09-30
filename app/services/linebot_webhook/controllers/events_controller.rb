@@ -6,6 +6,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	end
 
 	def create
+		puts "ggp #{@message}, #{@clinic}" 
 		if @message[:type] == "message"
 			if @message[:text] == "預約掛號"
 				@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
@@ -45,7 +46,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 		if booking_event.present?
 			booking_event.update(status: "預約中取消")
 		end
-
+		reply_event_aborted
 	end
 
 	def services

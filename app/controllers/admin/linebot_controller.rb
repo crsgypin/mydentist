@@ -1,5 +1,4 @@
 class Admin::LinebotController < Admin::ApplicationController
-	include Linebot::Clinics::Webhook::Handler
 
 	def new
 		@clinic = Clinic.first
@@ -7,14 +6,17 @@ class Admin::LinebotController < Admin::ApplicationController
 
 	def create
 		@clinic = Clinic.find_by(friendly_id: params[:clinic_id])
-		handle_messages(params["events"])
+		linebot_webhook =  LinebotWebhook.new(params["events"], @clinic)
+		messages = linebot_webhook.parse
+		@line_account = linebot_webhook.line_account
+		@data = messages.map do |message|
+			r = {
+				reply_message: message,
+				line_account: @line_account.attributes,
+			}
+		end
+		@data = @data.first
 	end
 
-	def reply_message(data)
-		@data = {
-			reply_message: convert_reply_message(data),
-			line_account: @line_account.attributes,
-		}
-	end
 
 end

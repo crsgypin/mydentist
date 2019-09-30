@@ -5,12 +5,12 @@ module LinebotWebhook::Helper::ClientMessageHelper
 		if event["type"] == "message"
 			r = {
 				type: "message",
-				content: event['message']['text']
+				text: event['message']['text']
 			}
 		elsif event["type"] == "postback"
 			r = {
 				type: "postback",
-				content: proc do 
+				data: proc do 
 					data = event['postback']['data']
 					r = CGI.parse(data).map{|k,v| [k,v.first]}.to_h.symbolize_keys
 				end.call
