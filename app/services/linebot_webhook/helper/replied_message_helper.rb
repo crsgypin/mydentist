@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Helper::RepliedMessageHelper
+module LinebotWebhook::Helper::RepliedMessageHelper
 
 	#for server-side message
 	def convert_reply_message(data, option = {})

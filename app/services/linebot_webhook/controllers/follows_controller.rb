@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Controllers::FollowsController
+module LinebotWebhook::Controllers::FollowsController
 
 	def follow_create
 		replies_follows_create

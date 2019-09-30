@@ -1,13 +1,13 @@
-module Linebot::Clinics::Webhook::WebhookRoutes
+module LinebotWebhook::WebhookRoutes
 	extend ActiveSupport::Concern
   included do
-		include Linebot::Clinics::Webhook::Handler::Model::Clinics
-		include Linebot::Clinics::Webhook::Handler::Model::Doctors
-		include Linebot::Clinics::Webhook::Handler::Model::Events
-		include Linebot::Clinics::Webhook::Handler::Model::Patients
-		include Linebot::Clinics::Webhook::Handler::Follow
-		include Linebot::Clinics::Webhook::Handler::Other
-		include Linebot::Clinics::Webhook::Handler::DataHelper
+		include LinebotWebhook::Handler::Model::Clinics
+		include LinebotWebhook::Handler::Model::Doctors
+		include LinebotWebhook::Handler::Model::Events
+		include LinebotWebhook::Handler::Model::Patients
+		include LinebotWebhook::Handler::Follow
+		include LinebotWebhook::Handler::Other
+		include LinebotWebhook::Handler::DataHelper
   end
 
   def handle_messages(events)

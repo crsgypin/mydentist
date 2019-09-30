@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Replies::Events
+module LinebotWebhook::Replies::Events
 
 	def reply_event_services
 		reply_message({

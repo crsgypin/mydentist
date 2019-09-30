@@ -1,10 +1,10 @@
-module Linebot::Clinics::Webhook::Controllers::EventsController
+class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controllers::ApplicationController
 
-	def event_index
-
+	def index
+		
 	end
 
-	def event_create
+	def create
 		if @message[:type] == "message"
 			if @message[:text] == "預約掛號"
 				@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
@@ -16,7 +16,7 @@ module Linebot::Clinics::Webhook::Controllers::EventsController
 		end
 	end
 
-	def event_create_service
+	def create_service
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
 		@service = @clinic.services.find_by(id: @message[:data][:service_id])
 		if !@service
@@ -26,11 +26,11 @@ module Linebot::Clinics::Webhook::Controllers::EventsController
 		if @booking_event.doctor.nil?
 			replies_event_doctors
 		else
-			
+
 		end
 	end
 
-	def event_create_doctor
+	def create_doctor
 
 	end
 

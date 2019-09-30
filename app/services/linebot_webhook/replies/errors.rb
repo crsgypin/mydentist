@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Replies::Errors
+module LinebotWebhook::Replies::Errors
 
 	def reply_error_postback_no_action
 		reply_message({

@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler::DataHelper
+module LinebotWebhook::Handler::DataHelper
 
 	#for client-side message
 	def parse_message_data(event)

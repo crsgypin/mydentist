@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler::Model::Events
+module LinebotWebhook::Handler::Model::Events
 	include Common::StringHelper
 
 	def event_index

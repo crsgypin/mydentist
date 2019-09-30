@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler::Follow
+module LinebotWebhook::Handler::Follow
 
 	def handle_follow
 		reply_message({
