@@ -8,6 +8,22 @@
 
 #admin
 begin
+	module ClinicFid
+		def clinic_friendly_id=(fid)
+			self.clinic = Clinic.find_by!(friendly_id: fid)
+		end
+
+		def clinic_friendly_id
+			self.clinic.try(:friendly_id)
+		end
+
+		def photo_url=(path)
+			self.photo = File.open(path)
+		end
+	end
+
+	Doctor.include(ClinicFid)
+
 	[
 		"clinics",
 		"doctors",
@@ -15,6 +31,7 @@ begin
 		"patients",
 		"services",
 	].each do |filename|
+		puts "load: #{filename}"
 		path = File.join("db", "seed", "#{filename}.yml")
 
 		content = YAML.load_file(path)
@@ -27,7 +44,6 @@ begin
 			resource = c.find_or_initialize_by(primary_key)
 			resource.assign_attributes(attributes)
 			resource.save!
-			puts "#{resource.inspect}"
 		end	
 	end
 

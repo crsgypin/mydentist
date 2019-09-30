@@ -24,3 +24,4 @@
 /config/database.yml
 /config/secrets.yml
 /config/api_key.yml
+/public/uploads/*
