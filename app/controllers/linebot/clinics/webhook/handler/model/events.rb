@@ -93,7 +93,7 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 		})
 	end
 
-	def event_new_select_datetime
+	def event_new_select_datetime(message)
 		reply_message({
 			type: "text",
 			text: "預約時間"
