@@ -16,6 +16,8 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 			event_new_select_services(message)
 		elsif @line_account.dialog_status_step == 1
 			event_new_select_doctors(message)
+		elsif @line_account.dialog_status_step == 2
+			event_new_select_datetime(message)
 		else
 			raise "invalid_status"
 		end
@@ -88,6 +90,13 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 					]
 				}
 			end
+		})
+	end
+
+	def event_new_select_datetime
+		reply_message({
+			type: "text",
+			text: "預約時間"
 		})
 	end
 
