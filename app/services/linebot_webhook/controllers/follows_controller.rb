@@ -1,12 +1,13 @@
-module LinebotWebhook::Controllers::FollowsController
+class LinebotWebhook::Controllers::FollowsController < LinebotWebhook::Controllers::ApplicationController
+	include LinebotWebhook::Replies::Follows
 
-	def follow_create
-		replies_follows_create
+	def create
+		reply_follows_create
 	end
 
-	def follow_destroy
+	def destroy
 		@line_account.update(status: "unfollow")
-		replies_follows_destroy
+		reply_follows_destroy
 	end
 
 end

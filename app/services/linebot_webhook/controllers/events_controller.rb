@@ -1,4 +1,5 @@
 class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controllers::ApplicationController
+	include LinebotWebhook::Replies::Events
 
 	def index
 		
@@ -9,32 +10,37 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 			if @message[:text] == "預約掛號"
 				@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
 				@line_account.update(dialog_status: "預約掛號")
-				replies_event_services
+				reply_event_services
 			else
-				replies_event_abort_or_select_services
+				reply_event_abort_or_select_services
 			end
 		end
 	end
 
-	def create_service
+	def update_service
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
 		@service = @clinic.services.find_by(id: @message[:data][:service_id])
 		if !@service
-			return replies_event_no_servie
+			return reply_event_no_servie
 		end
 		@booking_event.update(service: @service)
 		if @booking_event.doctor.nil?
-			replies_event_doctors
+			reply_event_doctors
 		else
 
 		end
 	end
 
-	def create_doctor
+	def update_doctor
+		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
+		@doctor = @clinic.services.find_by(id: @message[:data][:doctor_id])
+		if !@service
+			return replies
+		end
 
 	end
 
-	def event_destroy(message)
+	def destroy
 		booking_event = @line_account.events.find_by(status: "預約中")
 		if booking_event.present?
 			booking_event.update(status: "預約中取消")
@@ -42,7 +48,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 
 	end
 
-	def event_select_doctors(message)
+	def services
 
 	end
 

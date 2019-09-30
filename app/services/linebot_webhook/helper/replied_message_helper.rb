@@ -1,15 +1,15 @@
 module LinebotWebhook::Helper::RepliedMessageHelper
 
 	#for server-side message
-	def convert_reply_message(data, option = {})
+	def reply_message(data, option = {})
 		if data[:type] == "text"
-			convert_message(data)
+			reply_message_text(data)
 		elsif data[:type] == "quick_reply_buttons"
-			convert_quick_reply_buttons(data)
+			reply_message_quick_replies(data)
 		elsif data[:type] == "confirm"
-			convert_confirm_template(data)
+			reply_message_confirm(data)
 		elsif data[:type] == "carousel"
-			convert_carousel(data)
+			reply_message_carousel(data)
 		else
 			raise "invalid type: #{data[:type]}"
 		end
@@ -17,14 +17,22 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 
 	private
 
-	def convert_message(data)
+	def reply_message_text(data)
 		r = {
       type: 'text',
       text: data[:text]
 		}
 	end
 
-	def convert_quick_reply_buttons(data)
+	def reply_message_quick_replies(data)
+		r = {
+			type: "text",
+			text: data[:text],
+			quickReply: data[:quick_replies]
+		}
+	end
+
+	def convert_quick_reply_buttons(data) #to be removed
 		r = {
 	      type: "text",
 	      text: data[:text],
@@ -48,7 +56,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 			}
 	end
 
-	def convert_confirm_template(data)
+	def reply_message_confirm(data)
 		r = {
 			type: "template",
 			altText: data[:alt_text],
@@ -60,7 +68,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		}
 	end
 
-	def convert_carousel(data)
+	def reply_message_carousel(data)
 		r = {
 			type: "template",
 			altText: data[:text],
@@ -88,7 +96,6 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 				end
 			}
 		}
-		Rails.logger.info "carousel: #{r}"
 		r
 	end
 

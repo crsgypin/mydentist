@@ -8,8 +8,8 @@ module LinebotWebhook::Replies::Events
 				r = {
 					name: service.name,
 					data: {
-						event: "event_create"
-						action: "service",
+						controller: "events",
+						action: "update_service",
 						service_id: service.id
 					}
 				}
@@ -31,8 +31,8 @@ module LinebotWebhook::Replies::Events
 						type: "postback",
 						label: doctor.name,
 						data: {
-							# controller: "events",
-							action: "event_create_doctor",
+							controller: "events",
+							action: "update_doctor",
 							doctor_id: doctor.id
 						}
 					},
@@ -46,8 +46,8 @@ module LinebotWebhook::Replies::Events
 							type: "postback",
 							label: "預約",
 							data: {
-								# controller: "events",
-								action: "event_create_doctor",
+								controller: "events",
+								action: "update_doctor",
 								doctor_id: doctor.id
 							}
 						}
@@ -74,7 +74,7 @@ module LinebotWebhook::Replies::Events
 					label: "否，取消預約",
 					data: {
 						controller: "events",
-						action: "event_destroy",
+						action: "destroy",
 					}
 				},
 				{
@@ -82,7 +82,7 @@ module LinebotWebhook::Replies::Events
 					label: "是，繼續預約",
 					data: {
 						controller: "events",
-						action: "event_select_services",
+						action: "services",
 					}
 				}
 			]
