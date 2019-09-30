@@ -1,8 +1,10 @@
 
 <div id="linebot" class="pv4">
-	<%= render_relative_partial "new/message_form" %>
-	<%# render_relative_partial "new/verification_form" %>
-	<%# render_relative_partial "new/welcome_form" %>
+	<%= render_relative_partial "new/tabs" %>
+	<%= render_relative_partial "new/message_form" if !params[:t].present? %>
+	<%= render_relative_partial "new/postback_form" if params[:t] == "postback" %>
+	<%= render_relative_partial "new/follow_form" if params[:t] == "follow" %>
+	<%= render_relative_partial "new/verification_form" if params[:t] == "verification" %>
 	<div class="border mb5 ph5 pv5">
 		結果
 		<div id="result">

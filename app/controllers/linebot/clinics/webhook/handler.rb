@@ -1,10 +1,10 @@
 module Linebot::Clinics::Webhook::Handler
 	extend ActiveSupport::Concern
   included do
-		include Linebot::Clinics::Webhook::Handler::Clinics
-		include Linebot::Clinics::Webhook::Handler::Doctors
-		include Linebot::Clinics::Webhook::Handler::Events
-		include Linebot::Clinics::Webhook::Handler::Patients
+		include Linebot::Clinics::Webhook::Handler::Model::Clinics
+		include Linebot::Clinics::Webhook::Handler::Model::Doctors
+		include Linebot::Clinics::Webhook::Handler::Model::Events
+		include Linebot::Clinics::Webhook::Handler::Model::Patients
 		include Linebot::Clinics::Webhook::Handler::Follow
 		include Linebot::Clinics::Webhook::Handler::Other
 		include Linebot::Clinics::Webhook::Handler::DataHelper
@@ -43,7 +43,7 @@ module Linebot::Clinics::Webhook::Handler
 		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
-					event_new({step: 0})
+					event_new(message)
 				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
@@ -64,7 +64,7 @@ module Linebot::Clinics::Webhook::Handler
 			handle_unknown_message
 		end
 		rescue Exception => e
-			if e.to_s == "invalid_status"
+			if e.to_s.include? "invalid_status"
 				handle_invalid_status(message)
 			else
 				raise e
