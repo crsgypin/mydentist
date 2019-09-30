@@ -92,6 +92,11 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 					r[:thumbnailImageUrl] = column[:image_url] if column[:image_url].present?
 					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
 					r[:title] = column[:title]
+					r[:defaultAction] = {
+            type: "uri",
+            label: "View detail",
+            uri: "https://dentist.gypin.life"
+          }
 					r[:actions] = [{
 						type: "postback",
 						label: column[:name],
