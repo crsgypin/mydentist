@@ -34,7 +34,7 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 		      "type": "carousel",
 		      "columns": [
 		          {
-		            "thumbnailImageUrl": "https://s1.yimg.com/rz/d/yahoo_frontpage_zh-Hant-TW_s_f_p_bestfit_frontpage_2x.png",,
+		            "thumbnailImageUrl": "https://s1.yimg.com/rz/d/yahoo_frontpage_zh-Hant-TW_s_f_p_bestfit_frontpage_2x.png",
 		            "imageBackgroundColor": "#FFFFFF",
 		            "title": "this is menu",
 		            "text": "description",
