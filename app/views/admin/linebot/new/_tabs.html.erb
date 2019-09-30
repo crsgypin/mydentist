@@ -1,0 +1,18 @@
+
+<ul class="pb10	">
+	<% [
+		{name: "訊息", link: url_for },
+		{name: "postback", link: url_for(t: "postback") },
+		{name: "verification", link: url_for(t: "verification") },
+		{name: "follow", link: url_for(t: "follow") },
+		].each do |tab| %>
+	<li class="inline_block">
+		<% if request.fullpath == tab[:link]  %>
+		<%= link_to tab[:name], tab[:link], class: "btn1" %>
+		<% else %>
+		<%= link_to tab[:name], tab[:link], class: "btn2" %>
+		<% end %>
+	</li>
+	<% end %>
+</ul>
+

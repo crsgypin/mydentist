@@ -12,7 +12,7 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 				type: "postback",
 				content: proc do 
 					data = event['postback']['data']
-					r = JSON.parse(data).symbolize_keys rescue {}
+					r = CGI.parse(data).map{|k,v| [k,v.first]}.to_h.symbolize_keys
 				end.call
 			}
 		elsif event["type"] == "follow"
@@ -29,57 +29,76 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 	#for server-side message
 	def convert_reply_message(data, option = {})
 		if data[:type] == "text"
-			r = {
-	      type: 'text',
-	      text: data[:text]
-			}
+			convert_message(data)
 		elsif data[:type] == "quick_reply_buttons"
-			r = {
+			convert_quick_reply_buttons(data)
+		elsif data[:type] == "carousel"
+			convert_carousel(data)
+		else
+			raise "invalid type: #{data[:type]}"
+		end
+	end
+
+	private
+
+	def convert_message(data)
+		r = {
+      type: 'text',
+      text: data[:text]
+		}
+	end
+
+	def convert_quick_reply_buttons(data)
+		r = {
 	      type: "text",
 	      text: data[:text],
 	      quickReply: {
-	      	items: data[:items].map do |item|
+	      	items: data[:items].map do |i|
+	      		item = {
+	      			name: i[:name],
+	      			data: i[:data]
+	      		}
 	      		r = {
 							type: "action",
 							action: {
 								type: "postback",
 								label: item[:name],
-								data: item[:data].to_json,
+								data: item[:data].to_query,
 								displayText: item[:name]
 							}      			
 	      		}
 	      	end
 	      }
 			}
-		else
-			raise "invalid type: #{data[:type]}"
-		end
 	end
 
-	def convert_message(message)
+	def convert_carousel(data)
 		r = {
-      type: 'text',
-      text: message
-		}
-	end
-
-	def convert_postback_buttons(data)
-		{
-      type: "text",
-      text: data[:text],
-      quickReply: {
-      	items: data[:items].map do |item|
-      		r = {
-						type: "action",
-						action: {
-							type: "postback",
-							label: item[:name],
-							data: item[:data].to_json,
-							displayText: item[:name]
-						}      			
-      		}
-      	end
-      }
+			type: "template",
+			altText: data[:title],
+			template: {
+				type: "carousel",
+				columns: data[:columns].map do |c|
+					column = {
+						image_url: c[:image_url],
+						bg_color: c[:bg_color],
+						title: c[:title],
+						name: c[:name],
+						data: c[:data]
+					}
+					#convert
+					r = {}
+					r[:thumbnailImageUrl] = column[:image_url] if column[:image_url].present?
+					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
+					r[:title] = column[:title]
+					r[:actions] = {
+						typee: "postback",
+						label: item[:name],
+						data: item[:data].to_json
+					}
+					r
+				end
+			}
 		}
 	end
 

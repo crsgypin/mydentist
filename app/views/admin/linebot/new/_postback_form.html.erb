@@ -1,0 +1,49 @@
+<div class="border mb5 ph5 pv5">
+	Message
+	<%= form_tag url_for(action: :create), method: "post", remote:true, id: "postback_form" do %>
+	<div class="pv4">
+		<div>
+			<%= select_field_tag "clinic_id", @clinic.try(:friendly_id), Clinic.all.map{|a| [a.friendly_id, a.name]} %>
+		</div>
+		<div class="pv4">
+			<label>Type: <%= text_field_tag "events[][type]", "postback", readonly: true %></label>
+		</div>
+		<%= hidden_field_tag "events[][replyToken]", "test_token" %>
+		<%= hidden_field_tag "events[][source][userId]", "test_user_id" %>
+		<div class="pv4">
+			<label>postback[data]: <%= text_field_tag "events[][postback][data]", "", id: "service_name_input", style: "width: 400px;" %></label>
+		</div>
+	</div>
+	<div class="pv4">
+		<%= submit_tag "測試" %>
+	</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var names = [
+			"service_name_input"
+		];
+		names.forEach(function(name){
+			var m = window.localStorage.getItem(name);
+			if(m){
+				$("#" + name).val(m);
+			}			
+		})
+		$("form#postback_form").on("submit", function(e){
+			names.forEach(function(name){
+				var m = $("#" + name).val();
+				window.localStorage.setItem(name, m);				
+			})
+		});
+	});
+</script>
+
+<%# postback
+{"events"=>[{"type"=>"postback", "replyToken"=>"xxxx", "source"=>{"userId"=>"xxxx", "type"=>"user"}, "timestamp"=>1569777786439, "postback"=>{"data"=>"{\"key\":\"event_create\",\"service_name\":\"檢查牙齒\"}"}}], "destination"=>"xxxxx", "clinic_id"=>"cfv", "webhook"=>{"events"=>[{"type"=>"postback", "replyToken"=>"xxxx", "source"=>{"userId"=>"xxx", "type"=>"user"}, "timestamp"=>1569777786439, "postback"=>{"data"=>"{\"key\":\"event_create\",\"service_name\":\"檢查牙齒\"}"}}], "destination"=>"xxxx"}}
+%>
+
+
+
+
