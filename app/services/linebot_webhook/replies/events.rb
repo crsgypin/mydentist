@@ -5,7 +5,7 @@ module LinebotWebhook::Replies::Events
 		reply_message({
 			type: "quick_reply_buttons",
 			text: "請選擇服務項目",
-			quick_replies: @clinic.services.map do |service|
+			items: @clinic.services.map do |service|
 				r = {
 					type: "postback",
 					label: service.name,
