@@ -9,6 +9,7 @@ module LinebotWebhook::Replies::Events
 				r = {
 					type: "postback",
 					label: service.name,
+					displayText: service.name,
 					data: {
 						controller: "events",
 						action: "update_service",
