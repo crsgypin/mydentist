@@ -43,7 +43,7 @@ module Linebot::Clinics::Webhook::Handler
 		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
-					event_new(message)
+					event_create(message)
 				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
@@ -59,7 +59,7 @@ module Linebot::Clinics::Webhook::Handler
 				end
 			end
 		elsif @line_account.dialog_status == "預約掛號"
-			event_new(message)
+			event_create(message)
 		else
 			handle_unknown_message
 		end

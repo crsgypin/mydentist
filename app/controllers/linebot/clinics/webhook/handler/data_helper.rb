@@ -32,6 +32,8 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 			convert_message(data)
 		elsif data[:type] == "quick_reply_buttons"
 			convert_quick_reply_buttons(data)
+		elsif data[:type] == "confirm"
+			convert_confirm_template(data)
 		elsif data[:type] == "carousel"
 			convert_carousel(data)
 		else
@@ -70,6 +72,18 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 	      	end
 	      }
 			}
+	end
+
+	def convert_confirm_template(data)
+		r = {
+			type: "template",
+			altText: data[:alt_text],
+			template: {
+				type: "confirm",
+				text: data[:text],
+				actions: data[:actions]
+			}
+		}
 	end
 
 	def convert_carousel(data)
