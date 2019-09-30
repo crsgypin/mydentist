@@ -3,16 +3,18 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	#for server-side message
 	def reply_message(data, option = {})
 		if data[:type] == "text"
-			reply_message_text(data)
+			r = reply_message_text(data)
 		elsif data[:type] == "quick_reply_buttons"
-			reply_message_quick_replies(data)
+			r = reply_message_quick_replies(data)
 		elsif data[:type] == "confirm"
-			reply_message_confirm(data)
+			r = reply_message_confirm(data)
 		elsif data[:type] == "carousel"
-			reply_message_carousel(data)
+			r = reply_message_carousel(data)
 		else
 			raise "invalid type: #{data[:type]}"
 		end
+		Rails.logger.info("reply_message: #{r}")
+		r
 	end
 
 	private
