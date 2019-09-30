@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190925032536) do
+ActiveRecord::Schema.define(version: 20190929183323) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -110,9 +110,10 @@ ActiveRecord::Schema.define(version: 20190925032536) do
   create_table "line_accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
-    t.integer "dialog_status", limit: 1
     t.string "line_user_id"
     t.integer "status"
+    t.integer "dialog_status", limit: 1
+    t.integer "dialog_status_step", limit: 1
     t.string "display_name"
     t.string "picture_url"
     t.text "status_message"

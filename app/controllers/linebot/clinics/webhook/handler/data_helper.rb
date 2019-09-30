@@ -1,5 +1,6 @@
 module Linebot::Clinics::Webhook::Handler::DataHelper
 
+	#for client-side message
 	def parse_message_data(event)
 		if event["type"] == "message"
 			r = {
@@ -22,6 +23,36 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 			r = {
 				type: "unfollow"
 			}
+		end
+	end
+
+	#for server-side message
+	def convert_reply_message(data, option = {})
+		if data[:type] == "text"
+			r = {
+	      type: 'text',
+	      text: data[:text]
+			}
+		elsif data[:type] == "quick_reply_buttons"
+			r = {
+	      type: "text",
+	      text: data[:text],
+	      quickReply: {
+	      	items: data[:items].map do |item|
+	      		r = {
+							type: "action",
+							action: {
+								type: "postback",
+								label: item[:name],
+								data: item[:data].to_json,
+								displayText: item[:name]
+							}      			
+	      		}
+	      	end
+	      }
+			}
+		else
+			raise "invalid type: #{data[:type]}"
 		end
 	end
 

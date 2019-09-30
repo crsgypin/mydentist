@@ -10,7 +10,7 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
       config.channel_secret = Rails.application.config_for('api_key')["line"]["channel_secret"]
       config.channel_token = Rails.application.config_for('api_key')["line"]["channel_access_token"]
     end
-    linebot.reply_message(@reply_token, data)
+    linebot.reply_message(@reply_token, convert_reply_message(data))
     render json: {}
 	end
 

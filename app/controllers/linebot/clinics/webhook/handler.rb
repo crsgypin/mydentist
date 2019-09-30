@@ -39,10 +39,11 @@ module Linebot::Clinics::Webhook::Handler
 			return handle_verify
 		end
 
+		begin
 		if @line_account.dialog_status.nil?
 			if t == "message"
 				if c == "預約掛號"
-					event_new
+					event_new({step: 0})
 				elsif c == "查詢掛號"
 					event_index
 				elsif c == "醫師介紹"
@@ -57,20 +58,18 @@ module Linebot::Clinics::Webhook::Handler
 					handle_unknown_message
 				end
 			end
-		elsif @line_account.dialog_status == "選擇項目"
-			if t == "postback"
-				
-			end
-		elsif @line_account.dialog_status == "選擇時間"
-
-		elsif @line_account.dialog_status == "預約確認"
-
-		elsif @line_account.dialog_status == "個人設定"
-
+		elsif @line_account.dialog_status == "預約掛號"
+			event_new(message)
 		else
 			handle_unknown_message
 		end
+		rescue Exception => e
+			if e.to_s == "invalid_status"
+				handle_invalid_status(message)
+			else
+				raise e
+			end
+		end
 	end
-
 
 end
