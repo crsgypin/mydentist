@@ -1,5 +1,4 @@
 class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationController
-	include Linebot::Clinics::Webhook::WebhookRoutes
 
 	def create
 		reply_messages = LinebotWebhook.new(params["events"])
