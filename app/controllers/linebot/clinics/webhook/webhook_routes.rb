@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler
+module Linebot::Clinics::Webhook::WebhookRoutes
 	extend ActiveSupport::Concern
   included do
 		include Linebot::Clinics::Webhook::Handler::Model::Clinics
@@ -25,38 +25,57 @@ module Linebot::Clinics::Webhook::Handler
 	private
 
 	def handle_message(message)
-		t = message[:type]
-		c = message[:content]
-
-		if t == "unfollow"
-			return handle_unfollow
+		@message = message
+		if message[:type] == "unfollow"
+			follow_destroy
+			return
 		end
 		@line_account.update(status: "follow") if @line_account.status != "follow" #always set to follow except for unfollow
-		if t == "follow"
-			return handle_follow
-		end
-		if c == "Hello, world"
+		if message[:type] == "follow"
+			follow_create
+		elsif message[:type] == "message"
+			if c == "預約掛號"
+				event_create
+			elsif c == "查詢掛號"
+
+			elsif c == "醫師介紹"
+
+			elsif c == "衛教資訊"
+
+			elsif c == "診所資訊"
+
+			elsif c == "個人設定"
+
+			elsif c == "Hello, world"
+
 			return handle_verify
+
+			end
+		elsif message[:type] == "postback"
+			data = message[:data]
+			return reply_error_postback_no_action if data[:action]
+			eval(data[:action])
+		else
+			raise "unknown type: #{message[:type]}"
 		end
 
+
 		begin
-		if @line_account.dialog_status.nil?
-			if t == "message"
-				if c == "預約掛號"
-					event_create(message)
-				elsif c == "查詢掛號"
-					event_index
-				elsif c == "醫師介紹"
-					doctors_index
-				elsif c == "衛教資訊"
-					
-				elsif c == "診所資訊"
-					clinic_show
-				elsif c == "個人設定"
-					patient_edit
-				else
-					handle_unknown_message
-				end
+		if t == "message"
+			if c == "預約掛號"
+				event_create(message)
+			elsif c == "查詢掛號"
+				event_index
+			elsif c == "醫師介紹"
+				doctors_index
+			elsif c == "衛教資訊"
+				
+			elsif c == "診所資訊"
+				clinic_show
+			elsif c == "個人設定"
+				patient_edit
+			else
+				handle_unknown_message
 			end
 		elsif @line_account.dialog_status == "預約掛號"
 			event_create(message)
