@@ -80,6 +80,7 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 				type: "carousel",
 				columns: data[:columns].map do |c|
 					column = {
+						thumbnailImageUrl: "https://s1.yimg.com/rz/d/yahoo_frontpage_zh-Hant-TW_s_f_p_bestfit_frontpage_2x.png",
 						image_url: c[:image_url],
 						bg_color: c[:bg_color],
 						title: c[:title],
@@ -91,15 +92,17 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 					r[:thumbnailImageUrl] = column[:image_url] if column[:image_url].present?
 					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
 					r[:title] = column[:title]
-					r[:actions] = {
-						typee: "postback",
+					r[:actions] = [{
+						type: "postback",
 						label: column[:name],
 						data: column[:data].to_query
-					}
+					}]
 					r
 				end
 			}
 		}
+		Rails.logger.info "carousel: #{r}"
+		r
 	end
 
 #ex: postback
