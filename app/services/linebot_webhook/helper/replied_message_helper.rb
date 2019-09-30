@@ -79,7 +79,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	end
 
 	def reply_message_carousel(data)
-		r = {
+ 		r = {
 			type: "template",
 			altText: data[:text],
 			template: {
@@ -100,7 +100,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
 					r[:title] = column[:title]
 					r[:text] = column[:text]
-					r[:defaultAction] = column[:default_action]
+					r[:defaultAction] = filter_action(column[:default_action]),
 					r[:actions] = column[:actions].map{|a| filter_action(a)}
 					r
 				end

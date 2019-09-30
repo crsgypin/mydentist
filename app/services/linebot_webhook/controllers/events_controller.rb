@@ -34,7 +34,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 		if @booking_event.doctor.nil?
 			reply_event_doctors
 		else
-
+			reply_event_doctors
 		end
 	end
 
