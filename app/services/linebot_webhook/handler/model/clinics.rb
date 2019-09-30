@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler::Model::Clinics
+module LinebotWebhook::Handler::Model::Clinics
 
 	def clinic_show
 		reply_message({

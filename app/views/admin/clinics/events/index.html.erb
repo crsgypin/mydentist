@@ -2,7 +2,14 @@
   id: "events",
   resources: @events,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "醫生", v: proc{|a| a.doctor.try(:name) }},
+    {t: "病患", v: proc{|a| a.patient.try(:name) }},
+    {t: "項目", v: proc{|a| a.service.try(:name) }},
+    {t: "LINE", v: proc{|a| 
+    	"#{a.line_account.try(:id)} - #{a.line_account.try(:display_name)}"
+    }},
+    {t: "狀態", v: proc{|a| a.status }}
   ],
   row: {
 	  default_sel_index: 0,

@@ -3,9 +3,10 @@
   resource: @event,
   fields: [
     {k: "id", v: proc{|a| a.id }},
-    {k: "doctor_id", v: proc{|a| a.doctor_id }},
-    {k: "patient_id", v: proc{|a| a.patient_id }},
-    {k: "service_id", v: proc{|a| a.service_id }},
+    {t: "醫生", v: proc{|a| a.doctor.try(:name) }},
+    {t: "病患", v: proc{|a| a.patient.try(:name) }},
+    {t: "LINE", v: proc{|a| a.line_account.try(:display_name) }},
+    {t: "項目", v: proc{|a| a.service.try(:name) }},
     {k: "status", v: proc{|a| a.status }},
     {k: "date", v: proc{|a| a.date }},
     {k: "hour", v: proc{|a| a.hour }},

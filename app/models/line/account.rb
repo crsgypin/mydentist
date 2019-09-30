@@ -2,7 +2,7 @@ class Line::Account < ApplicationRecord
 	self.table_name = "line_accounts"
 	belongs_to :clinic, optional: true #temporarily optional
 	belongs_to :patient, optional: true
-	has_many :events, class_name: "Event"
+	has_many :events, class_name: "Event", foreign_key: :line_account_id
 	enum status: {"follow" => 1, "unfollow" => 2}
 	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id
@@ -25,17 +25,25 @@ class Line::Account < ApplicationRecord
 	end
 
 	def get_profile
-		client = Line::Bot::Client.new do |config|
-		  config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
-		  config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+		begin
+			client = Line::Bot::Client.new do |config|
+			  config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
+			  config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+			end
+		  response = client.get_profile(self.line_user_id)
+			result = JSON.parse(response.body)
+			r = {
+				display_name: result["displayName"],
+				picture_url: result["pictureUrl"],
+				status_message: result["statusMessage"]
+			}
+		rescue
+			r = {
+				display_name: "",
+				picture_url: "",
+				status_message: ""	
+			}
 		end
-	  response = client.get_profile(self.line_user_id)
-		result = JSON.parse(response.body)
-		r = {
-			display_name: result["displayName"],
-			picture_url: result["pictureUrl"],
-			status_message: result["statusMessage"]
-		}
 	end
 
 	def create_or_update_richmenu_to_user

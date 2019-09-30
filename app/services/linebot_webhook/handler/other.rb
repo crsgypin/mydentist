@@ -1,4 +1,4 @@
-module Linebot::Clinics::Webhook::Handler::Other
+module LinebotWebhook::Handler::Other
 
 	def handle_verify
 		reply_message({
