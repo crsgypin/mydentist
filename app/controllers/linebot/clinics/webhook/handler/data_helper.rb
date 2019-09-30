@@ -63,7 +63,7 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 							action: {
 								type: "postback",
 								label: item[:name],
-								data: item[:data].to_query,
+								data: URI.decode(item[:data].to_query),
 								displayText: item[:name]
 							}      			
 	      		}
@@ -80,11 +80,12 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 				type: "carousel",
 				columns: data[:columns].map do |c|
 					column = {
-						thumbnailImageUrl: "https://s1.yimg.com/rz/d/yahoo_frontpage_zh-Hant-TW_s_f_p_bestfit_frontpage_2x.png",
 						image_url: c[:image_url],
 						bg_color: c[:bg_color],
 						title: c[:title],
+						text: c[:text],
 						name: c[:name],
+						default_action: c[:default_action],
 						data: c[:data]
 					}
 					#convert
@@ -92,17 +93,9 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 					r[:thumbnailImageUrl] = column[:image_url] if column[:image_url].present?
 					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
 					r[:title] = column[:title]
-					r[:text] = column[:description]
-					r[:defaultAction] = {
-            type: "uri",
-            label: "View detail",
-            uri: "https://dentist.gypin.life"
-          }
-					r[:actions] = [{
-						type: "postback",
-						label: column[:name],
-						data: column[:data].to_query
-					}]
+					r[:text] = column[:text]
+					r[:defaultAction] = column[:default_action]
+					r[:actions] = column[:actions]
 					r
 				end
 			}
@@ -110,6 +103,14 @@ module Linebot::Clinics::Webhook::Handler::DataHelper
 		Rails.logger.info "carousel: #{r}"
 		r
 	end
+
+	#action
+	#uri
+	# {
+	# 	type: "uri",
+	# 	label: "xxx",
+	# 	uri: "xxx"
+	# }
 
 #ex: postback
 	# {"events"=>[{

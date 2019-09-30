@@ -6,6 +6,7 @@ class Doctor < ApplicationRecord
 	before_validation :set_friendly_id, on: :create
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id
+	mount_uploader :photo, PhotoUploader
 
   private
 

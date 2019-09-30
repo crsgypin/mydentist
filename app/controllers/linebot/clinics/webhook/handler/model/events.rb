@@ -1,4 +1,5 @@
 module Linebot::Clinics::Webhook::Handler::Model::Events
+	include Common::StringHelper
 
 	def event_index
 		@patient = @line_account.patient
@@ -64,12 +65,27 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 			text: "請選擇醫生",
 			columns: @clinic.doctors.map do |doctor|
 				r = {
-					title: "標題 doctor",
+					image_url: doctor.image.url,
+					title: "#{doctor.name} #{doctor.title}",
+					text: short_string(doctor.pro, 39),
 					name: doctor.name,
-					description: doctor.name,
-					data: {
-						doctor_name: doctor.name
-					}
+					default_action: {
+						type: "postback",
+						label: doctor.name,
+						data: {doctor_id: doctor.id}
+					},
+					actions: [
+						{
+							type: "uri",
+							label: "查詢醫生資訊",
+							uri: "https://dentist.gypin.life"
+						},
+						{
+							type: "postback",
+							label: "預約",
+							data: {doctor_id: doctor.id}
+						}
+					]
 				}
 			end
 		})
