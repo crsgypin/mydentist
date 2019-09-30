@@ -28,7 +28,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		r = {
 			type: "text",
 			text: data[:text],
-			quickReply: data[:quick_replies]
+			quickReply: data[:quick_replies].map{|a| filter_action(a)}
 		}
 	end
 
@@ -64,15 +64,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 			template: {
 				type: "confirm",
 				text: data[:text],
-				actions: data[:actions].map do |action|
-					action.map do |key, value|
-						if key.to_sym == :data
-							[key, value.to_query]
-						else
-							[key, value]
-						end
-					end.to_h
-				end
+				actions: data[:actions].map{|a| filter_action(a)}
 			}
 		}
 	end
@@ -91,7 +83,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 						text: c[:text],
 						name: c[:name],
 						default_action: c[:default_action],
-						data: c[:data]
+						actions: c[:actions]
 					}
 					#convert
 					r = {}
@@ -100,12 +92,22 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 					r[:title] = column[:title]
 					r[:text] = column[:text]
 					r[:defaultAction] = column[:default_action]
-					r[:actions] = column[:actions]
+					r[:actions] = column[:actions].map{|a| filter_action(a)}
 					r
 				end
 			}
 		}
 		r
+	end
+
+	def filter_action(action)
+		action.map do |key, value|
+			if key.to_sym == :data
+				[key, value.to_query]
+			else
+				[key, value]
+			end
+		end.to_h
 	end
 
 	#action

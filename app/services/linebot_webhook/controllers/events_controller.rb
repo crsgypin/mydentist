@@ -6,11 +6,17 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	end
 
 	def create
-		puts "ggp #{@message}, #{@clinic}" 
 		if @message[:type] == "message"
 			if @message[:text] == "預約掛號"
 				@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
-				@line_account.update(dialog_status: "預約掛號")
+				@booking_event.assign_attributes({
+					clinic: @clinic
+				})
+				@line_account.dialog_status = "預約掛號"
+				if !@line_account.save
+					puts "gogoge: #{@line_account}"
+					raise @line_account.errors.full_messages.join("-")
+				end
 				reply_event_services
 			else
 				reply_event_abort_or_select_services
@@ -34,11 +40,9 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 
 	def update_doctor
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
-		@doctor = @clinic.services.find_by(id: @message[:data][:doctor_id])
-		if !@service
-			return replies
-		end
-
+		@doctor = @clinic.doctors.find_by(id: @message[:data][:doctor_id])
+		@booking_event.update(doctor: @doctor)
+		reply_event_times
 	end
 
 	def destroy

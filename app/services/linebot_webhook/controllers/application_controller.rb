@@ -3,7 +3,7 @@ class LinebotWebhook::Controllers::ApplicationController
 
 	def initialize(clinic, line_account, message)
 		raise "no clinic" if clinic.nil?
-		@client = clinic
+		@clinic = clinic
 		@line_account = line_account
 		@message = message
 	end	

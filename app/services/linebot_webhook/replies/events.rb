@@ -1,12 +1,14 @@
 module LinebotWebhook::Replies::Events
+	include Common::StringHelper
 
 	def reply_event_services
 		reply_message({
 			type: "quick_reply_buttons",
 			text: "請選擇服務項目",
-			items: @clinic.services.map do |service|
+			quick_replies: @clinic.services.map do |service|
 				r = {
-					name: service.name,
+					type: "postback",
+					label: service.name,
 					data: {
 						controller: "events",
 						action: "update_service",
@@ -23,7 +25,7 @@ module LinebotWebhook::Replies::Events
 			text: "請選擇醫生",
 			columns: @clinic.doctors.map do |doctor|
 				r = {
-					image_url: doctor.image.url,
+					image_url: doctor.photo.url,
 					title: "#{doctor.name} #{doctor.title}",
 					text: short_string(doctor.pro, 39),
 					name: doctor.name,
@@ -59,7 +61,8 @@ module LinebotWebhook::Replies::Events
 
 	def reply_event_times
 		reply_message({
-
+			type: "text",
+			text: "已預約"
 		})
 	end
 

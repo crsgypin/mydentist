@@ -25,17 +25,25 @@ class Line::Account < ApplicationRecord
 	end
 
 	def get_profile
-		client = Line::Bot::Client.new do |config|
-		  config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
-		  config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+		begin
+			client = Line::Bot::Client.new do |config|
+			  config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
+			  config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+			end
+		  response = client.get_profile(self.line_user_id)
+			result = JSON.parse(response.body)
+			r = {
+				display_name: result["displayName"],
+				picture_url: result["pictureUrl"],
+				status_message: result["statusMessage"]
+			}
+		rescue
+			r = {
+				display_name: "",
+				picture_url: "",
+				status_message: ""	
+			}
 		end
-	  response = client.get_profile(self.line_user_id)
-		result = JSON.parse(response.body)
-		r = {
-			display_name: result["displayName"],
-			picture_url: result["pictureUrl"],
-			status_message: result["statusMessage"]
-		}
 	end
 
 	def create_or_update_richmenu_to_user
