@@ -28,7 +28,12 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		r = {
 			type: "text",
 			text: data[:text],
-			quickReply: data[:quick_replies].map{|a| filter_action(a)}
+			quickReply: data[:quick_replies].map do |a| 
+				r = {
+					type: "action",
+					action: filter_action(a)
+				}
+			end
 		}
 	end
 
