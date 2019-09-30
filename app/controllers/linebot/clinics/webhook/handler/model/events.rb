@@ -66,6 +66,7 @@ module Linebot::Clinics::Webhook::Handler::Model::Events
 				r = {
 					title: "標題 doctor",
 					name: doctor.name,
+					description: doctor.name,
 					data: {
 						doctor_name: doctor.name
 					}
