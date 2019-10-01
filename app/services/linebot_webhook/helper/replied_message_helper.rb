@@ -92,7 +92,8 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	      imageBackgroundColor: "#FFFFFF",
 	      title: data[:title],
 	      text: data[:text],
-	      defaultAction: filter_action(data[:default_action])
+	      defaultAction: filter_action(data[:default_action]),
+				actions: data[:actions].map{|a| filter_action(a)}
 			}
 		}
 	end

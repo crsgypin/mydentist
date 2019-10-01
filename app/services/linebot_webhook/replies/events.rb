@@ -61,6 +61,7 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
+		url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		r = reply_message({
 			type: "reply_button",
 			alt_text: "選擇時間",
@@ -70,8 +71,15 @@ module LinebotWebhook::Replies::Events
 			default_action: {
         type: "uri",
         label: "醫生",
-        uri: Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
-			}
+        uri: url
+			},
+			actions: [
+				{
+					type: "postback",
+					label: "選擇時間",
+					uri: url
+				}
+			]
 		})
 		Rails.logger.info "reply_event_times: #{r}"
 		r
