@@ -21,7 +21,7 @@ module LinebotWebhook::Replies::Events
 		})
 	end
 
-	def reply_event_doctors
+	def reply_event_doctors		
 		reply_message({
 			type: "carousel",
 			text: "請選擇醫生",
@@ -31,30 +31,39 @@ module LinebotWebhook::Replies::Events
 					title: "#{doctor.name} #{doctor.title}",
 					text: short_string(doctor.pro, 39),
 					name: doctor.name,
-					default_action: {
-						type: "postback",
-						label: doctor.name,
-						data: {
-							controller: "events",
-							action: "update_doctor",
-							doctor_id: doctor.id
-						}
-					},
+					# default_action: {
+					# 	type: "postback",
+					# 	label: doctor.name,
+					# 	data: {
+					# 		controller: "events",
+					# 		action: "update_doctor",
+					# 		doctor_id: doctor.id
+					# 	}
+					# },
 					actions: [
 						{
 							type: "uri",
 							label: "查詢醫生資訊",
 							uri: "https://dentist.gypin.life"
 						},
-						{
-							type: "postback",
-							label: "預約",
-							data: {
-								controller: "events",
-								action: "update_doctor",
-								doctor_id: doctor.id
+						proc do {
+							host = Rails.application.config_for(:api_key)["base_domain"]
+							url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
+							r = {
+								type: "uri",
+								label: "預約",
+								uri: url
 							}
-						}
+						}.call
+						# {
+						# 	type: "postback",
+						# 	label: "預約",
+						# 	data: {
+						# 		controller: "events",
+						# 		action: "update_doctor",
+						# 		doctor_id: doctor.id
+						# 	}
+						# }
 					]
 				}
 			end
@@ -62,6 +71,7 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
+		# current not used, noted at 2019/10/1
 		# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		url = liff_line_event_url(@clinic, @line_account)
 		r = reply_message({
