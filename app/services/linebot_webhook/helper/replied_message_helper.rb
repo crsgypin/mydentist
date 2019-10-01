@@ -120,7 +120,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 					r[:imageBackgroundColor] = column[:bg_color] || "#FFFFFF"
 					r[:title] = column[:title]
 					r[:text] = column[:text]
-					r[:defaultAction] = filter_action(column[:default_action])
+					r[:defaultAction] = filter_action(column[:default_action]) if r[:defaultAction]
 					r[:actions] = column[:actions].map{|a| filter_action(a)}
 					r
 				end
