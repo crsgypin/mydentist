@@ -61,7 +61,7 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
-		reply_button({
+		r = reply_button({
 			alt_text: "選擇時間",
 			tilte: "選擇時間",
 			text: "點選內容，選擇時間",
@@ -71,6 +71,8 @@ module LinebotWebhook::Replies::Events
         uri: Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 			}
 		})
+		Rails.logger.info "reply_event_times: #{r}"
+		r
 	end
 
 	def reply_event_abort_or_select_services
