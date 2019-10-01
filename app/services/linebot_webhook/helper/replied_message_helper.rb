@@ -78,6 +78,27 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		}
 	end
 
+	def reply_button(data)
+		r = {
+			type: "template",
+			altText: data[:alt_text],
+			template: {
+				type: "buttons",
+				thumbnailImageUrl: data[:image_url],
+				imageAspectRatio: "rectangle",
+	      imageSize: "cover",
+	      imageBackgroundColor: "#FFFFFF",
+	      title: "Menu",
+	      text: "Please select",
+	      defaultAction: {
+	          type: "uri",
+	          label: "View detail",
+	          uri: "http://example.com/page/123"
+	      },
+			}
+		}
+	end
+
 	def reply_message_carousel(data)
  		r = {
 			type: "template",

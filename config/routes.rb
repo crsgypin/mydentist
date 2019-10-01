@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :linebot do
     resources :clinics, only: [], module: :clinics do
       post "webhook", to: "webhook#create"
+      resource :event, only: [:show, :update], controller: :event
     end
     resources :events	  	
   end

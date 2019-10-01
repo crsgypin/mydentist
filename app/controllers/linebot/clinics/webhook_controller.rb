@@ -1,4 +1,5 @@
 class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationController
+  skip_before_action :verify_authenticity_token, raise: false
 
 	def create
 		linebot_webhook =  LinebotWebhook.new(params["events"], @clinic)
