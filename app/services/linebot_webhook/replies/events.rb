@@ -46,7 +46,7 @@ module LinebotWebhook::Replies::Events
 							label: "查詢醫生資訊",
 							uri: "https://dentist.gypin.life"
 						},
-						proc do {
+						proc do
 							host = Rails.application.config_for(:api_key)["base_domain"]
 							url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
 							r = {
@@ -54,7 +54,7 @@ module LinebotWebhook::Replies::Events
 								label: "預約",
 								uri: url
 							}
-						}.call
+						end.call
 						# {
 						# 	type: "postback",
 						# 	label: "預約",
