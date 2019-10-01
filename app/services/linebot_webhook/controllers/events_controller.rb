@@ -41,7 +41,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	def update_doctor
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
 		@doctor = @clinic.doctors.find_by(id: @message[:data][:doctor_id])
-		@booking_event.update(doctor: @doctor)
+		@booking_event.update!(doctor: @doctor)
 		reply_event_times
 	end
 
