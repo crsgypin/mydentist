@@ -1,9 +1,93 @@
 
 
-linbot event
-<div>
+<div id="linebot_event_show">
+	<div class="navbar">
+		<div class="image_box">
+			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);">
+			</div>
+			<p><%= @doctor.name %></p>
+		</div>
+		<div class="title">
+			選擇日期與時間
+		</div>
+	</div>
+	<div class="month_box">
+		<ul>
+			<% (-6..6).each do |i| %>
+			<li>
+				<% d = Date.today + i.month %>
+				<%= "#{d.year}年 #{d.month}月" %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="wday_box">
+		<ul>
+		<% [
+			{name: "週日", number: 0},
+			{name: "週一", number: 1},
+			{name: "週二", number: 2},
+			{name: "週三", number: 3},
+			{name: "週四", number: 4},
+			{name: "週五", number: 5},
+			{name: "週六", number: 6},
+		].each do |wday| %>
+			<li class="<%= 'select' if wday[:number] == Date.today.wday %>">
+				<%= link_to wday[:name], "javascript:" %>
+			</li>	
+		<% end %>
+		</ul>
+	</div>
+	<div class="day_box">
+		<ul>
+			<% sunday = Date.today - Date.today.wday.day %>
+			<% (0..6).each do |i| %>
+			<% day = (sunday + i.day).day %> 
+			<li class="<%= 'select' if day == Date.today.day %>">
+				<%= link_to "#{day}日", "javascript:" %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="time_box">
+		<% [
+			{name: "上午診", hours: (10..11)},
+			{name: "下午診", hours: (15..17)},
+			{name: "晚上診", hours: (19..21)},
+		].each do |segment| %>
+		<div class="segment_box">
+			<div class="title">
+				<%= segment[:name] %>
+			</div>
+			<% segment[:hours].each do |hour| %>
+			<ul class="hours_box">
+				<% [0, 15, 30, 45].each do |minute| %>
+				<li>
+					<%= link_to "#{hour}#{sprintf('%02d', minute)}" %>
+				</li>
+				<% end %>
+			</ul>
+			<% end %>
+		</div>
+		<% end %>
+	</div>
 	<%= @line_account.id %>
 </div>
 <div>
 	<%= @line_account.display_name %>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$(".month_box ul").slick({
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows: true,
+      dots: false,
+      arrow: true,
+      autoplay: false,
+      focusOnSelect: true,
+      variableWidth: true
+    })		
+	})
+</script>

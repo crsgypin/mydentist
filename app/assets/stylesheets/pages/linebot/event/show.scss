@@ -1,0 +1,98 @@
+
+#linebot_event_show {
+	margin: 0 auto;
+	max-width: 500px;
+	.navbar {
+		padding-bottom: 5px;
+		display: flex;
+		width: 100%;
+		.image_box {
+			width: 60px;
+		}
+		.title{
+			width: calc(100% - 60px);
+			text-align: center;
+			font-weight: bold;
+			font-size: $fs_21p;
+		}
+		border-bottom: 1px solid $colorGy_m;
+	}
+	.month_box {
+		padding: 10px 0px;
+		ul {
+			li {
+				margin: 0 20px;
+			}
+		}
+		.slick-slider {
+			button {
+				&:before {
+					color: $colorBl;
+				}
+			}		
+		}
+	}
+	.wday_box {
+		padding: 10px 0px;
+		ul {
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			li {
+				width: calc(100% / 7);
+				text-align: center;				
+				a {
+					display: inline-block;
+				}
+				&.select {
+					a {
+						color: $colorGy_l;		
+					}
+				}
+			}
+		}
+	}
+	.day_box {
+		ul {
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			li {
+				width: calc(100% / 7);
+				text-align: center;
+				a {
+					display: inline-block;
+					width: 50px;
+					height: 50px;
+					line-height: 50px;
+				}
+				&.select {
+					a {
+						color: $colorW;
+						background: $colorBl;
+						border-radius: 50%;						
+					}
+				}				
+			}
+		}
+	}
+	.time_box {
+		.segment_box {
+			color: $colorBu;
+			.title {
+				font-size: fs_21p;
+				line-height: lh_26p;
+				padding: 10px 0;
+				text-align: center;
+			}
+			ul.hours_box {
+				display: flex;
+				justify-content: space-between;
+				li {
+					text-align: center;
+					
+				}
+			}
+		}
+	}
+}

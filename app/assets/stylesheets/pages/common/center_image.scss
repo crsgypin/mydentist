@@ -1,0 +1,32 @@
+
+.center_image {
+  overflow: hidden;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  img {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+    -webkit-transform: translate(-50%,-50%);
+  }
+  &.round {
+		border-radius: 50%;
+		border: 1px solid rgba(0,0,0,0.3);
+  }
+}
+
+.bg_center_image {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: 50%;
+  &.round {
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.3);
+  }
+}
