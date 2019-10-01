@@ -61,9 +61,10 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
-		r = reply_button({
+		r = reply_message({
+			type: "reply_button",
 			alt_text: "選擇時間",
-			tilte: "選擇時間",
+			title: "選擇時間",
 			text: "點選內容，選擇時間",
 			default_action: {
         type: "uri",

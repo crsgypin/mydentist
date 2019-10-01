@@ -10,6 +10,8 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 			r = reply_message_confirm(data)
 		elsif data[:type] == "carousel"
 			r = reply_message_carousel(data)
+		elsif data[:type] == "reply_button"
+			r = reply_button(data)
 		else
 			raise "invalid type: #{data[:type]}"
 		end
