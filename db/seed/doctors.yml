@@ -8,7 +8,7 @@ data:
       title: "院長" 
       pro: "全⼝口重建、咬合重建、植牙專科、美容牙科、數位全瓷美學重建、雷射治療、⿒齒顎矯正、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/01.jpg"
+      photo_url: "db/seed/doctors/rectangular/01.jpg"
   - primary_key:
       friendly_id: "cfv_d2" 
     attributes:
@@ -17,7 +17,7 @@ data:
       title: "副院長" 
       pro: "全⼝口重建、咬合重建、植牙專科、美容牙科、數位全瓷美學重建、雷射治療、⿒齒顎矯正、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/02.jpg"
+      photo_url: "db/seed/doctors/rectangular/02.jpg"
   - primary_key:
       friendly_id: "cfv_d3" 
     attributes:
@@ -26,7 +26,7 @@ data:
       title: "主治醫⽣" 
       pro: "全⼝口重建、咬合重建、數位微笑設計、全瓷美學重建、陶瓷貼片、陶瓷嵌體"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/03.jpg"
+      photo_url: "db/seed/doctors/rectangular/03.jpg"
   - primary_key:
       friendly_id: "cfv_d4" 
     attributes:
@@ -35,7 +35,7 @@ data:
       title: "主治醫⽣" 
       pro: "數位全瓷美學、美容牙科、微笑曲線設計、家庭牙科"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/04.jpg"
+      photo_url: "db/seed/doctors/rectangular/04.jpg"
   - primary_key:
       friendly_id: "cfv_d5" 
     attributes:
@@ -44,7 +44,7 @@ data:
       title: "主治醫⽣" 
       pro: "活動假牙、數位全瓷美學、活動假牙、家庭牙科、兒童牙科、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/05.jpg"
+      photo_url: "db/seed/doctors/rectangular/05.jpg"
   - primary_key:
       friendly_id: "dentist_d1"
     attributes:
@@ -53,7 +53,7 @@ data:
       title: "院長" 
       pro: "全⼝口重建、咬合重建、植牙專科、美容牙科、數位全瓷美學重建、雷射治療、⿒齒顎矯正、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/06.jpg"
+      photo_url: "db/seed/doctors/rectangular/06.jpg"
   - primary_key:
       friendly_id: "dentist_d2" 
     attributes:
@@ -62,7 +62,7 @@ data:
       title: "副院長" 
       pro: "全⼝口重建、咬合重建、植牙專科、美容牙科、數位全瓷美學重建、雷射治療、⿒齒顎矯正、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/07.jpg"
+      photo_url: "db/seed/doctors/rectangular/07.jpg"
   - primary_key:
       friendly_id: "dentist_d3" 
     attributes:
@@ -71,7 +71,7 @@ data:
       title: "主治醫⽣" 
       pro: "全⼝口重建、咬合重建、數位微笑設計、全瓷美學重建、陶瓷貼片、陶瓷嵌體"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/05.jpg"
+      photo_url: "db/seed/doctors/rectangular/05.jpg"
   - primary_key:
       friendly_id: "dentist_d4" 
     attributes:
@@ -80,5 +80,5 @@ data:
       title: "主治醫⽣" 
       pro: "美容牙科、數位全瓷冠、植牙、牙周治療"
       experience: "台北醫學⼤大學牙醫學⼠士\n台灣⼤大學臨臨床牙醫研究所牙周病組碩⼠士\n台⼤大醫院牙科部牙周病牙科部主治醫師\n輔仁⼤大學附醫院牙科部主治醫師\n中華⺠民國⼝口腔植體學會會員醫師\n中華⺠民國植牙醫學會會員醫師\n台灣牙周病醫學會會員醫師\n中華⺠民國家庭牙醫學會專科醫師"
-      photo_url: "db/seed/doctors/ori/07.jpg"
+      photo_url: "db/seed/doctors/rectangular/07.jpg"
 
