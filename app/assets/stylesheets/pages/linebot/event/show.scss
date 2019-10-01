@@ -2,6 +2,7 @@
 #linebot_event_show {
 	margin: 0 auto;
 	max-width: 500px;
+	padding: 20px;
 	.navbar {
 		padding-bottom: 5px;
 		display: flex;
@@ -90,7 +91,7 @@
 				justify-content: space-between;
 				li {
 					text-align: center;
-					
+					width: 25%;
 				}
 			}
 		}
