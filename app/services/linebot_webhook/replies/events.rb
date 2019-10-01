@@ -75,7 +75,7 @@ module LinebotWebhook::Replies::Events
 			},
 			actions: [
 				{
-					type: "postback",
+					type: "uri",
 					label: "選擇時間",
 					uri: url
 				}
