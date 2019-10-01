@@ -13,12 +13,14 @@ module Common::LineShareHelper
 		"https://line.me/R/msg/text/?#{m}"
 	end
 
-	def liff_line_event_url(clinic, line_account)
+	def liff_line_event_url(clinic, line_account, doctor = nil)
 		if Rails.env.production?
-			"#{Rails.application.config_for(:api_key)["liff"]["linebot_event_path"]}?line_account_id=#{line_account.id}"
+			path = "#{Rails.application.config_for(:api_key)["liff"]["linebot_event_path"]}?line_account_id=#{line_account.id}"
 		else
-			Rails.application.routes.url_helpers.linebot_clinic_event_url(clinic, line_account_id: line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
+			path = Rails.application.routes.url_helpers.linebot_clinic_event_url(clinic, line_account_id: line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		end	
+		path += "&doctor_id=#{doctor.id}" if doctor.present?
+		path
 	end
 
 end

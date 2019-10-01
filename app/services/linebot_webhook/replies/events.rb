@@ -47,12 +47,12 @@ module LinebotWebhook::Replies::Events
 							uri: "https://dentist.gypin.life"
 						},
 						proc do
-							host = Rails.application.config_for(:api_key)["base_domain"]
-							url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
+							# host = Rails.application.config_for(:api_key)["base_domain"]
+							# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
 							r = {
 								type: "uri",
 								label: "預約",
-								uri: url
+								uri: liff_line_event_url(@clinic, @line_account, doctor)
 							}
 						end.call
 						# {

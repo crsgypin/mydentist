@@ -14,7 +14,6 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 				})
 				@line_account.dialog_status = "預約掛號"
 				if !@line_account.save
-					puts "gogoge: #{@line_account}"
 					raise @line_account.errors.full_messages.join("-")
 				end
 				reply_event_services
