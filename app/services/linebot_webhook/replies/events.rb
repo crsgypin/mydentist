@@ -1,5 +1,6 @@
 module LinebotWebhook::Replies::Events
 	include Common::StringHelper
+	include Common::LineShareHelper
 
 	def reply_event_services
 		reply_message({
@@ -61,7 +62,8 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
-		url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
+		# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
+		url = liff_line_event_url(@clinic, @line_account)
 		r = reply_message({
 			type: "reply_button",
 			alt_text: "選擇時間",
@@ -81,7 +83,6 @@ module LinebotWebhook::Replies::Events
 				}
 			]
 		})
-		Rails.logger.info "reply_event_times: #{r}"
 		r
 	end
 
