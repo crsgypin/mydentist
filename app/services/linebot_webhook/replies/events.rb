@@ -66,10 +66,10 @@ module LinebotWebhook::Replies::Events
 			alt_text: "選擇時間",
 			title: "選擇時間",
 			text: "點選內容，選擇時間",
+      image_url: @doctor.photo.url,
 			default_action: {
         type: "uri",
         label: "醫生",
-        image_url: @doctor.photo.url,
         uri: Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 			}
 		})
