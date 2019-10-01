@@ -69,6 +69,7 @@ module LinebotWebhook::Replies::Events
 			default_action: {
         type: "uri",
         label: "醫生",
+        image_url: @doctor.photo.url,
         uri: Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 			}
 		})
