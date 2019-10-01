@@ -88,13 +88,9 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 				imageAspectRatio: "rectangle",
 	      imageSize: "cover",
 	      imageBackgroundColor: "#FFFFFF",
-	      title: "Menu",
-	      text: "Please select",
-	      defaultAction: {
-	          type: "uri",
-	          label: "View detail",
-	          uri: "http://example.com/page/123"
-	      },
+	      title: data[:title],
+	      text: data[:text],
+	      defaultAction: filter_action(data[:default_action])
 			}
 		}
 	end

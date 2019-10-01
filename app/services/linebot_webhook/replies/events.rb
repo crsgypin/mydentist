@@ -61,9 +61,15 @@ module LinebotWebhook::Replies::Events
 	end
 
 	def reply_event_times
-		reply_message({
-			type: "text",
-			text: "已預約"
+		reply_button({
+			alt_text: "選擇時間",
+			tilte: "選擇時間",
+			text: "點選內容，選擇時間",
+			default_action: {
+        type: "uri",
+        label: "醫生",
+        uri: Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
+			}
 		})
 	end
 
