@@ -51,7 +51,7 @@ module LinebotWebhook::Replies::Doctors
 				r = []
 				r << @doctor.name
 				r << "主治: #{@doctor.pro}"
-				r << "學經歷: #{doctor.experience}"
+				r << "學經歷: #{@doctor.experience}"
 				r.join("\n")
 			end.call
 		})
