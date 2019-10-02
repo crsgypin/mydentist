@@ -1,6 +1,4 @@
 module LinebotWebhook::Replies::Events
-	include Common::StringHelper
-	include Common::LineShareHelper
 
 	def reply_event_services
 		reply_message({
