@@ -3,20 +3,21 @@
 	display: inline-block;
 	border: solid 1px #eee;
 	color: $colorW;
-	background-color: $colorGn;
+	background-color: $colorBu;
 	border-radius: 10px;
 	padding: 3px 10px;
 	line-height: 1.5;
 	text-align: center;
-	&:hover { background-color: $colorBu; }
+	&:hover { background-color: $colorW; }
 }
 
 .btn2 {
 	display: inline-block;
 	line-height: 1.5;
-	border: solid 1px $colorGn;
+	border: solid 1px $colorBu;
 	border-radius: 10px;
-	color: $colorGn;
+	color: $colorBu;
+	background-color: $colorW;
 	padding: 3px 10px;
 	text-align: center;
 	&:hover { 
@@ -29,7 +30,7 @@
 	display: inline-block;
 	line-height: 1.5;
 	border-radius: 10px;
-	color: $colorGn;
+	color: $colorBu;
 	background: $colorW;
 	padding: 3px 4px;
 	text-align: center;
@@ -39,7 +40,7 @@
 	&.select {
 		border: 1px solid $colorW;
 		color: $colorW;
-		background: $colorGn;
+		background: $colorBu;
 		&:hover {
 			background: $colorBu;
 		}
@@ -47,8 +48,8 @@
 }
 
 .btn_cancel, .btn_edit, input.btn_submit {
-	border: solid 1px $colorGn;
-	color: $colorGn;
+	border: solid 1px $colorBu;
+	color: $colorBu;
 	background-color: $colorW;
 	border-radius: 20px;
 	padding: 5px 15px;

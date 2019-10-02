@@ -1,25 +1,20 @@
 
 
 <div id="linebot_event_show">
+	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
 	<div class="navbar">
 		<div class="image_box">
-			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);">
+			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
 			</div>
-			<p><%= @doctor.name %></p>
+			<p><%= select_field_tag "event[doctor_id]", @doctor.id, @clinic.doctors.map{|a| [a.id, a.name]}, id: "doctor_select" %></p>
 		</div>
 		<div class="title">
 			選擇日期與時間
 		</div>
 	</div>
 	<div class="month_box">
-		<ul>
-			<% (-6..6).each do |i| %>
-			<li>
-				<% d = Date.today + i.month %>
-				<%= "#{d.year}年 #{d.month}月" %>
-			</li>
-			<% end %>
-		</ul>
+		<% d = Date.today %>
+		<%= select_field_tag "", "#{d.year}-#{d.month}", (0..12).map{|t| d1 = d + t.month; ["#{d1.year}-#{d1.month}", "#{d1.year}年 #{d1.month}月"]}, class: "form-control alignC", id: "year_month_input" %>
 	</div>
 	<div class="wday_box">
 		<ul>
@@ -42,14 +37,16 @@
 		<ul>
 			<% sunday = Date.today - Date.today.wday.day %>
 			<% (0..6).each do |i| %>
-			<% day = (sunday + i.day).day %> 
-			<li class="<%= 'select' if day == Date.today.day %>">
-				<%= link_to "#{day}日", "javascript:" %>
+			<% date = (sunday + i.day) %> 
+			<li>
+				<%= radio_button_tag "event[day]", date.strftime('%Y/%m/%d'), Date.today.day == date.day %>
+				<%= link_to "#{date.day}日", "javascript:", id: "day_input", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 			</li>
 			<% end %>
 		</ul>
 	</div>
 	<div class="time_box">
+		<% disabled_time = ["1000", "1015", "1130", "1500", "1545", "1600", "1615", "1745", "1930", "1945", "2000", "2130"] %>
 		<% [
 			{name: "上午診", hours: (10..11)},
 			{name: "下午診", hours: (15..17)},
@@ -63,7 +60,9 @@
 			<ul class="hours_box">
 				<% [0, 15, 30, 45].each do |minute| %>
 				<li>
-					<%= link_to "#{hour}#{sprintf('%02d', minute)}" %>
+					<% name = "#{hour}#{sprintf('%02d', minute)}" %>
+					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: disabled_time.include?(name) %>
+					<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 				</li>
 				<% end %>
 			</ul>
@@ -71,7 +70,10 @@
 		</div>
 		<% end %>
 	</div>
-	<%= @line_account.id %>
+	<div class="submit_box">
+		<%= submit_tag "確定", class: "btn2" %>
+	</div>
+	<% end %>
 </div>
 <div>
 	<%= @line_account.display_name %>
@@ -79,15 +81,24 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".month_box ul").slick({
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      arrows: true,
-      dots: false,
-      arrow: true,
-      autoplay: false,
-      focusOnSelect: true,
-      variableWidth: true
-    })		
+
+		$("#doctor_select").on("change", function(e){
+			var doctorId = this.value;
+			var imageUrl = $("#doctor_img").data("image_urls")[doctorId];
+			$("#doctor_img").css("background-image", "url(" + imageUrl + ")");
+		});
+
+		function slick(){
+			$(".month_box ul").slick({
+	      slidesToShow: 3,
+	      slidesToScroll: 3,
+	      arrows: true,
+	      dots: false,
+	      arrow: true,
+	      autoplay: false,
+	      focusOnSelect: true,
+	      variableWidth: true
+	    });			
+		}
 	})
 </script>
