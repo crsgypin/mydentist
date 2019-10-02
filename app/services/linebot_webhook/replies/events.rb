@@ -40,9 +40,13 @@ module LinebotWebhook::Replies::Events
 					# },
 					actions: [
 						{
-							type: "uri",
+							type: "postback",
 							label: "查詢醫生資訊",
-							uri: "https://dentist.gypin.life"
+							data: {
+								controller: "doctors",
+								action: "show",
+								doctor_id: doctor.id
+							}
 						},
 						proc do
 							# host = Rails.application.config_for(:api_key)["base_domain"]
