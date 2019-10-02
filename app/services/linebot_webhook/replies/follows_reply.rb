@@ -1,4 +1,4 @@
-module LinebotWebhook::Replies::Follows
+module LinebotWebhook::Replies::FollowsReply
 
 	def reply_follows_create
 		reply_message({

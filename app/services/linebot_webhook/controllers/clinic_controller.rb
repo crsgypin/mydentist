@@ -1,5 +1,5 @@
 class LinebotWebhook::Controllers::ClinicController < LinebotWebhook::Controllers::ApplicationController
-	include LinebotWebhook::Replies::Clinic
+	include LinebotWebhook::Replies::ClinicReply
 
 	def show
 		if @message[:type] == "message"

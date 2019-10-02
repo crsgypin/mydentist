@@ -1,4 +1,4 @@
-module LinebotWebhook::Replies::Doctors
+module LinebotWebhook::Replies::DoctorsReply
 
 	def reply_doctors
 		reply_message({

@@ -1,4 +1,4 @@
-module LinebotWebhook::Replies::Clinic
+module LinebotWebhook::Replies::ClinicReply
 
 
 	def reply_clinic_info_selectors

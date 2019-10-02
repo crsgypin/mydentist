@@ -1,5 +1,5 @@
 class LinebotWebhook::Controllers::FollowsController < LinebotWebhook::Controllers::ApplicationController
-	include LinebotWebhook::Replies::Follows
+	include LinebotWebhook::Replies::FollowsReply
 
 	def create
 		reply_follows_create

@@ -30,20 +30,35 @@ class LinebotWebhook
 		if @message[:type] == "follow"
 			controller("follows_controller").create
 		elsif @message[:type] == "message"
+			if @message[:text] == "00"
+				return controller("errors_controller").clear_status
+			end
+
+			if @line_account.dialog_status == "預約掛號"
+				return controller("events_controller").update
+			elsif @line_account.dialog_status == "填寫個人資料"
+				return controller("patient_controller").update
+			end
+
 			if @message[:text] == "預約掛號"
 				controller("events_controller").create
+
 			elsif @message[:text] == "查詢掛號"
 				controller("events_controller").index
+
 			elsif @message[:text] == "醫師介紹"
 				controller("doctors_controller").index
+
 			elsif @message[:text] == "衛教資訊"
 
 			elsif @message[:text] == "診所資訊"
 				controller("clinic_controller").show
-			elsif @message[:text] == "個人設定"
-				controller("line_account_controller").show
-			elsif @message[:text] == "Hello, world"
 
+			elsif @message[:text] == "個人設定"
+				controller("patient_controller").show
+
+			elsif @message[:text] == "Hello, world"
+				# controller("patient_controller").show
 			return handle_verify
 
 			end

@@ -1,5 +1,5 @@
 class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controllers::ApplicationController
-	include LinebotWebhook::Replies::Events
+	include LinebotWebhook::Replies::EventsReply
 
 	def index
 		

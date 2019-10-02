@@ -1,5 +1,5 @@
 class LinebotWebhook::Controllers::DoctorsController < LinebotWebhook::Controllers::ApplicationController
-	include LinebotWebhook::Replies::Doctors
+	include LinebotWebhook::Replies::DoctorsReply
 
 	def index
 		@doctors = @clinic.doctors
