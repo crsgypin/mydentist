@@ -95,6 +95,7 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	      r[:text] = data[:text]
 	      r[:defaultAction] = filter_action(data[:default_action]) if data[:default_action]
 				r[:actions] = data[:actions].map{|a| filter_action(a)}
+				r
 			end.call
 		}
 	end
