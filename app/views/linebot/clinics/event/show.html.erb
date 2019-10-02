@@ -2,6 +2,7 @@
 
 <div id="linebot_event_show">
 	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
+	<%= hidden_field_tag "line_account_id", params[:line_account_id] %>
 	<div class="navbar">
 		<div class="image_box">
 			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
@@ -39,7 +40,7 @@
 			<% (0..6).each do |i| %>
 			<% date = (sunday + i.day) %> 
 			<li>
-				<%= radio_button_tag "event[day]", date.strftime('%Y/%m/%d'), Date.today.day == date.day %>
+				<%= radio_button_tag "event[date]", date.strftime('%Y/%m/%d'), Date.today.day == date.day %>
 				<%= link_to "#{date.day}日", "javascript:", id: "day_input", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 			</li>
 			<% end %>
