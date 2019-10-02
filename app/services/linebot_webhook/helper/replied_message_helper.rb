@@ -84,17 +84,18 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		r = {
 			type: "template",
 			altText: data[:alt_text],
-			template: {
-				type: "buttons",
-				thumbnailImageUrl: data[:image_url],
-				imageAspectRatio: "rectangle",
-	      imageSize: "cover",
-	      imageBackgroundColor: "#FFFFFF",
-	      title: data[:title],
-	      text: data[:text],
-	      defaultAction: filter_action(data[:default_action]),
-				actions: data[:actions].map{|a| filter_action(a)}
-			}
+			template: proc do
+				r = {}
+				r[:type] = "buttons"
+				r[:thumbnailImageUrl] = data[:image_url]
+				r[:imageAspectRatio] = "rectangle"
+	      r[:imageSize] = "cover"
+	      r[:imageBackgroundColor] = "#FFFFFF"
+	      r[:title] = data[:title]
+	      r[:text] = data[:text]
+	      r[:defaultAction] = filter_action(data[:default_action]) if data[:default_action]
+				r[:actions] = data[:actions].map{|a| filter_action(a)}
+			end.call
 		}
 	end
 

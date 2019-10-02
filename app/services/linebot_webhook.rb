@@ -39,7 +39,7 @@ class LinebotWebhook
 			elsif @message[:text] == "衛教資訊"
 
 			elsif @message[:text] == "診所資訊"
-				controller("clinics_controller").show
+				controller("clinic_controller").show
 			elsif @message[:text] == "個人設定"
 				controller("line_account_controller").show
 			elsif @message[:text] == "Hello, world"

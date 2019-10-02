@@ -10,5 +10,6 @@ class LinebotWebhook::Controllers::ApplicationController
 		@message = message
 	end	
 
+
 end
 
