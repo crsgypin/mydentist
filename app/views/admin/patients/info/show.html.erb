@@ -4,10 +4,10 @@
   fields: [
     {k: "id", v: proc{|a| a.id }},
     {k: "profile_status", v: proc{|a| a.profile_status }},
-    {k: "name", v: proc{|a| a.name }},
-    {k: "phone", v: proc{|a| a.phone }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "電話", v: proc{|a| a.phone }},
+    {t: "出生日期", v: proc{|a| a.birthday }},
     {k: "person_id", v: proc{|a| a.person_id }},
-    {k: "birthday", v: proc{|a| a.birthday }},
     {k: "gender", v: proc{|a| a.gender }},
     {k: "skill", v: proc{|a| a.skill }},
     {k: "photo", v: proc{|a| a.photo }},

@@ -2,6 +2,7 @@
   id: "patient",
   sel_tab_index: 0,
   tabs: [
-    {name: "events", url: admin_patient_events_path(@patient)}
+    {name: "基本資料", url: admin_patient_info_path(@patient)},
+    {name: "掛號", url: admin_patient_events_path(@patient)}
   ]
  } %>

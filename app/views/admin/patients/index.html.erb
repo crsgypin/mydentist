@@ -2,7 +2,17 @@
   id: "patients",
   resources: @patients,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "電話", v: proc{|a| a.phone }},
+    {t: "出生日期", v: proc{|a| a.birthday }},
+    {t: "LINE", v: proc{|a| 
+    	if a.line_account
+	    	r = "#{a.line_account.try(:id)}-#{a.line_account.try(:display_name)}"
+	    else
+	    	"無"
+	    end
+	   }},
   ],
   row: {
 	  default_sel_index: 0,
