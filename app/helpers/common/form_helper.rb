@@ -47,6 +47,7 @@ module Common::FormHelper
 	end
 
 	def select_field_tag(name, value, options, option={})
+		puts "select: #{name}, #{value}, #{options}"
 		s = ""
 		s += "<select name=\"#{name}\" class=\"#{option[:class]}\" onchange=\"#{option[:onchange]}\" id=\"#{option[:id]}\" #{"disabled='true'" if option[:disabled] == true} >"
 		options.each do |v, t|
