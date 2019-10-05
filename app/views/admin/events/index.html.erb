@@ -1,6 +1,7 @@
 <%= render partial: "admin/common/index_table" , locals: {
   id: "events",
   resources: @events,
+  total_resources_count: @events.total_count,
   cols: [
     {k: "id", v: proc{|a| a.id }}
   ],

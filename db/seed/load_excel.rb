@@ -14,7 +14,7 @@ def load_excel
 	title_row_index = 2
 	primary_col_index = 0
 
-	seed_file = Roo::Spreadsheet.open("db/seed/seed.xlsx")
+	seed_file = Roo::Spreadsheet.open("db/seed/load_excel/seed.xlsx")
 	(0..(seed_file.sheets.length-1)).each do |index|
 		sheet = seed_file.sheet(index)
 		class_name = sheet.row(class_row_index)[0]
@@ -40,3 +40,4 @@ def load_excel
 	puts "done!!"
 end
 
+load_excel

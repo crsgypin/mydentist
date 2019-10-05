@@ -3,7 +3,7 @@ def doctor_durations
 	#doctor duration
 	id = 1
 	Doctor.includes(:clinic).each_with_index do |doctor, index|
-		puts "doctor_duration: #{doctor.id}"
+		puts "#{doctor.id}'s doctor_durations"
 		doctor.doctor_durations.destroy_all
 		wdays = [
 			[0,1,2,3,5],
@@ -26,3 +26,4 @@ def doctor_durations
 	end
 end
 
+doctor_durations

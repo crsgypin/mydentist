@@ -45,3 +45,4 @@ def clinic_durations
 
 end
 
+clinic_durations

@@ -14,8 +14,7 @@
 		</div>
 	</div>
 	<div class="month_box">
-		<% d = Date.today %>
-		<%= select_field_tag "", "#{d.year}-#{d.month}", (0..12).map{|t| d1 = d + t.month; ["#{d1.year}-#{d1.month}", "#{d1.year}年 #{d1.month}月"]}, class: "form-control alignC", id: "year_month_input" %>
+		<%= select_field_tag "", "#{@date.year}-#{@date.month}", (0..12).map{|t| d1 = @date + t.month; ["#{d1.year}-#{d1.month}", "#{d1.year}年 #{d1.month}月"]}, class: "form-control alignC", id: "year_month_input" %>
 	</div>
 	<div class="wday_box">
 		<ul>
@@ -28,7 +27,7 @@
 			{name: "週五", number: 5},
 			{name: "週六", number: 6},
 		].each do |wday| %>
-			<li class="<%= 'select' if wday[:number] == Date.today.wday %>">
+			<li class="<%= 'select' if wday[:number] == @date.wday %>">
 				<%= link_to wday[:name], "javascript:" %>
 			</li>	
 		<% end %>
@@ -36,11 +35,11 @@
 	</div>
 	<div class="day_box">
 		<ul>
-			<% sunday = Date.today - Date.today.wday.day %>
+			<% sunday = @date - @date.wday.day %>
 			<% (0..6).each do |i| %>
 			<% date = (sunday + i.day) %> 
 			<li>
-				<%= radio_button_tag "event[date]", date.strftime('%Y/%m/%d'), Date.today.day == date.day %>
+				<%= radio_button_tag "event[date]", date.strftime('%Y/%m/%d'), @date.day == date.day %>
 				<%= link_to "#{date.day}日", "javascript:", id: "day_input", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 			</li>
 			<% end %>
@@ -49,8 +48,8 @@
 	<div class="time_box">
 		<% disabled_time = ["1000", "1015", "1130", "1500", "1545", "1600", "1615", "1745", "1930", "1945", "2000", "2130"] %>
 		<% [
-			{name: "上午診", hours: (10..11)},
-			{name: "下午診", hours: (15..17)},
+			{name: "上午診", hours: (9..11)},
+			{name: "下午診", hours: (13..18)},
 			{name: "晚上診", hours: (19..21)},
 		].each do |segment| %>
 		<div class="segment_box">
@@ -58,11 +57,12 @@
 				<%= segment[:name] %>
 			</div>
 			<% segment[:hours].each do |hour| %>
+			<% next if @doctor_event_durations.map{|a| a.hour}.include?(hour) %>
 			<ul class="hours_box">
 				<% [0, 15, 30, 45].each do |minute| %>
 				<li>
 					<% name = "#{hour}#{sprintf('%02d', minute)}" %>
-					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: disabled_time.include?(name) %>
+					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: @doctor_events.find{|e| e.hour == hour && e.minute == minute} %>
 					<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 				</li>
 				<% end %>
