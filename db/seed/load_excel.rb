@@ -35,7 +35,7 @@ def load_excel
 			end
 		end
 
-		puts "done for #{class_name}"
+		puts "done for #{class_name}, count: #{eval(class_name).count}"
 	end
 	puts "done!!"
 end

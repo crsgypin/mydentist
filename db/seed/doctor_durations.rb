@@ -20,6 +20,9 @@ def doctor_durations
 			end
 		end
 	end
-	puts "doctor_durations done!!"
+	puts "doctor_durations done!"
+	Doctor.all.each do |doctor|
+		puts "#{doctor.id}'s doctor_durations_count: #{doctor.doctor_durations.count}"
+	end
 end
 

@@ -12,7 +12,7 @@ begin
 	require Rails.root.join("db/seed/clinic_durations.rb").to_s
 	require Rails.root.join("db/seed/doctor_durations.rb").to_s
 
-	# load_excel
+	load_excel
 	clinic_durations
 	doctor_durations
 

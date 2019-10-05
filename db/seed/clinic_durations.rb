@@ -39,6 +39,9 @@ def clinic_durations
 		end
 	end
 	puts "clinic_durations done!!"
+	Clinic.all.each do |clinic|
+		puts "#{clinic.id}'s clinic_durations_count: #{clinic.clinic_durations.count}"
+	end
 
 end
 
