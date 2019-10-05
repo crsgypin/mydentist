@@ -22,92 +22,92 @@ class Template
 		Template.new({
 			base_dir: "admin",
 			resources: [
-				{
-					class_name: "Clinic",
-					index_columns: %w(id),
-					except_show_columns: %w(uploaded_at),
-					associated_resources: [
-						{
-							associated_name: "members",
-							index_columns: %w(id),
-							except_show_columns: [],
-						},
-						{
-							associated_name: "doctors",
-							index_columns: %w(id),
-							except_show_columns: [],
-							associated_resources: [
-								{
-									associated_name: "events",
-									index_columns: %w(id status),
-									except_show_columns: []
-								}
-							]
-						},
-						{
-							associated_name: "services",
-							index_columns: %w(id),
-							except_show_columns: []
-						},
-						{
-							associated_name: "patients",
-							index_columns: %w(id),
-							except_show_columns: [],
-							associated_resources: [
-								{
-									associated_name: "events",
-									index_columns: %w(id status),
-									except_show_columns: []
-								}
-							]
-						},
-						{
-							associated_name: "events",
-							index_columns: %w(id),
-							except_show_columns: []
-						}
-					]
-				},
-				{
-					class_name: "Member",
-					index_columns: %w(id),
-					except_show_columns: %w(uploaded_at),
-					# associated_resources: []
-				},
+				# {
+				# 	class_name: "Clinic",	
+				# 	index_columns: %w(id),
+				# 	except_show_columns: %w(uploaded_at),
+				# 	associated_resources: [
+				# 		{
+				# 			associated_name: "members",
+				# 			index_columns: %w(id),
+				# 			except_show_columns: [],
+				# 		},
+				# 		{
+				# 			associated_name: "doctors",
+				# 			index_columns: %w(id),
+				# 			except_show_columns: [],
+				# 			associated_resources: [
+				# 				{
+				# 					associated_name: "events",
+				# 					index_columns: %w(id status),
+				# 					except_show_columns: []
+				# 				}
+				# 			]
+				# 		},
+				# 		{
+				# 			associated_name: "services",
+				# 			index_columns: %w(id),
+				# 			except_show_columns: []
+				# 		},
+				# 		{
+				# 			associated_name: "patients",
+				# 			index_columns: %w(id),
+				# 			except_show_columns: [],
+				# 			associated_resources: [
+				# 				{
+				# 					associated_name: "events",
+				# 					index_columns: %w(id status),
+				# 					except_show_columns: []
+				# 				}
+				# 			]
+				# 		},
+				# 		{
+				# 			associated_name: "events",
+				# 			index_columns: %w(id),
+				# 			except_show_columns: []
+				# 		}
+				# 	]
+				# },
+				# {
+				# 	class_name: "Member",
+				# 	index_columns: %w(id),
+				# 	except_show_columns: %w(uploaded_at),
+				# 	# associated_resources: []
+				# },
 				{
 					class_name: "Doctor",
 					index_columns: %w(id),
 					except_show_columns: [],
 					associated_resources: [
 						{
-							associated_name: "events",
-							index_columns: %w(id status),
-							# except_show_columns: []
+							associated_name: "doctor_durations",
+							index_columns: %w(id),
+							except_show_columns: []
 						}
 					]
 				},
-				{
-					class_name: "Service",
-					index_columns: %w(id),
-					except_show_columns: []
-				},
-				{
-					class_name: "Patient",
-					index_columns: %w(id),
-					except_show_columns: [],
-					associated_resources: [
-						{
-							associated_name: "events",
-							index_columns: %w(id status),
-							# except_show_columns: []
-						}
-					]
-				},
-				{
-					class_name: "Event",
-					index_columns: %w(id),
-					# except_show_columns: []
-				}
+				# {
+				# 	class_name: "Service",
+				# 	index_columns: %w(id),
+				# 	except_show_columns: []
+				# },
+				# {
+				# 	class_name: "Patient",
+				# 	index_columns: %w(id),
+				# 	except_show_columns: [],
+				# 	associated_resources: [
+				# 		{
+				# 			associated_name: "events",
+				# 			index_columns: %w(id status),
+				# 			# except_show_columns: []
+				# 		}
+				# 	]
+				# },
+				# {
+				# 	class_name: "Event",
+				# 	index_columns: %w(id),
+				# 	# except_show_columns: []
+				# }
 				# {
 				# 	class_name: "Tp::Post",
 				# 	index_columns: %w(id source title),

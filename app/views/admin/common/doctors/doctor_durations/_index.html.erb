@@ -1,0 +1,18 @@
+<%= @doctor_durations.total_count %>
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "doctor_durations",
+  resources: @doctor_durations,
+  total_resources_count: @doctor_durations.total_count,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "星期", v: proc{|a| a.wday }},
+    {t: "時", v: proc{|a| a.hour }},
+    {t: "分", v: proc{|a| a.minute }},
+    {t: "區間", v: proc{|a| a.duration }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

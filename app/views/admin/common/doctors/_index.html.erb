@@ -1,0 +1,15 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "doctors",
+  resources: @doctors,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "職稱", v: proc{|a| a.title }},
+    {t: "主治", v: proc{|a| short_string(a.pro, 20) }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>
