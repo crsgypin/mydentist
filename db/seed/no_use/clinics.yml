@@ -22,4 +22,4 @@ data:
       description: "快樂美麗，盡在無想"
       name_en: "dentist"
       channel_secret: ""
-      channel_token: ""
+      channel_token: "" 
