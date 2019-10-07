@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :members
+  devise_for :members, controllers: {}, module: :accounts, path: :accounts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :main do 
