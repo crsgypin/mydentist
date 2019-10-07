@@ -1,4 +1,4 @@
-class Admin::Doctors::EventsController < Admin::Doctors::ApplicationController
+class Admin::Dentists::Doctors::EventsController < Admin::Dentists::Doctors::ApplicationController
   before_action -> { @embedded = 1}
   before_action -> {
     access_config({

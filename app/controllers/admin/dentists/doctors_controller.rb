@@ -1,4 +1,4 @@
-class Admin::DoctorsController < Admin::ApplicationController
+class Admin::Dentists::DoctorsController < Admin::Dentists::ApplicationController
   before_action -> { @embedded = 1}, only: [:show, :edit]
   before_action -> {
     access_config({

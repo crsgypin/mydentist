@@ -1,4 +1,4 @@
-class Admin::Clinics::Doctors::DoctorDurationsController < Admin::Clinics::Doctors::ApplicationController
+class Admin::Dentists::Clinics::Doctors::DoctorDurationsController < Admin::Dentists::Clinics::Doctors::ApplicationController
   before_action -> {
     access_config({
       variable_name: "doctor_duration",

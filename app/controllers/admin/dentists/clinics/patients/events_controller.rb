@@ -1,4 +1,4 @@
-class Admin::Clinics::Patients::EventsController < Admin::Clinics::Patients::ApplicationController
+class Admin::Dentists::Clinics::Patients::EventsController < Admin::Dentists::Clinics::Patients::ApplicationController
   before_action -> {
     access_config({
       variable_name: "event",

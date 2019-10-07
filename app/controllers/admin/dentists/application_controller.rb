@@ -1,4 +1,4 @@
-class Admin::ApplicationController < Admin::ApplicationController
+class Admin::Dentists::ApplicationController < Admin ::ApplicationController
 
 
 end

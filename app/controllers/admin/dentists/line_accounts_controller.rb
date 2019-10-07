@@ -1,4 +1,4 @@
-class Admin::LineAccountsController < Admin::ApplicationController
+class Admin::Dentists::LineAccountsController < Admin::Dentists::ApplicationController
   before_action -> {@embedded = 1}, only: [:show]
   before_action -> {
     access_config({

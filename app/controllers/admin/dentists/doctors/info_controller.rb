@@ -1,4 +1,4 @@
-class Admin::Doctors::InfoController < Admin::Doctors::ApplicationController
+class Admin::Dentists::Doctors::InfoController < Admin::Dentists::Doctors::ApplicationController
   before_action -> {
     access_config({
       variable_name: "doctor",

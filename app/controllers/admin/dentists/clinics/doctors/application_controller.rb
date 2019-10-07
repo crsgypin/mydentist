@@ -1,4 +1,4 @@
-class Admin::Clinics::Doctors::ApplicationController < Admin::Clinics::ApplicationController
+class Admin::Dentists::Clinics::Doctors::ApplicationController < Admin::Dentists::Clinics::ApplicationController
   before_action {@embedded = 1}
   before_action :find_doctor
 
