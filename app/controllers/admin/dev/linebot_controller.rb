@@ -1,4 +1,4 @@
-class Admin::Dentists::LinebotController < Admin::Dentists::ApplicationController
+class Admin::Dev::LinebotController < Admin::Dev::ApplicationController
 
 	def new
 		@clinic = Clinic.first

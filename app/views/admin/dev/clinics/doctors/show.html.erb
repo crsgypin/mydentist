@@ -1,0 +1,9 @@
+<%= render :partial => "admin/common/tabs_iframe", locals: {
+  id: "doctor",
+  sel_tab_index: 0,
+  tabs: [
+    {name: "基本資料", url: admin_clinic_doctor_info_path(@clinic,@doctor)},
+    {name: "工作區間", url: admin_clinic_doctor_doctor_durations_path(@clinic,@doctor)},
+    {name: "掛號", url: admin_clinic_doctor_events_path(@clinic,@doctor)}
+  ]
+ } %>

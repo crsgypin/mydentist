@@ -1,0 +1,20 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "clinic",
+  resource: @clinic,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {k: "friendly_id", v: proc{|a| a.friendly_id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "英文名稱", v: proc{|a| a.name_en }},
+    {t: "電話", v: proc{|a| a.phone }},
+    {t: "地址", v: proc{|a| a.address }},
+    {t: "描述", v: proc{|a| a.description }},
+    {t: "channel_secret", v: proc{|a| a.channel_secret }},
+    {t: "channel_token", v: proc{|a| a.channel_token }},
+    {t: "recommend", v: proc{|a| a.recommend }},
+    {t: "photo", v: proc{|a| a.photo }},
+    {t: "created_at", v: proc{|a| a.created_at }},
+    {t: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

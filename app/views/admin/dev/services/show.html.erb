@@ -1,0 +1,12 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "service",
+  resource: @service,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "區間", v: proc{|a| a.duration }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>
