@@ -4,25 +4,27 @@ $colors: (
 	colorBl: #000,
 	colorGy: #5B5B5B, /*灰色*/
 	colorGy_l: #ADADAD, /*中淺灰*/
+	colorGy_m: #989898,
 	colorR: #f7535e,
 	colorR_l: #f7535e,
-	/*colorGn: #2a923f,*/
 	colorGn: #0052BC, /*湖水藍綠*/
 	colorBn: #A0522D, /*褐色*/
 	colorBu: #6495ED, /*冷寶藍色*/ 
 	colorBu_l: #B0C4DE,
+	colorY: #da9021
 );
 $colorW: #fff;
 $colorBl: #000;
 $colorGy: #5B5B5B; /*灰色*/
-$colorGy_l: #ADADAD, /*中淺灰*/
+$colorGy_l: #ADADAD; /*中淺灰*/
+$colorGy_m: #989898;
 $colorR: #f7535e;
 $colorR_l: #f7535e;
-/*$colorGn: #2a923f;*/
 $colorGn: #0052BC; /*湖水藍綠*/
 $colorBn: #A0522D; /*褐色*/
 $colorBu: #6495ED; /*冷寶藍色*/ 
 $colorBu_l: #B0C4DE; /*冷寶藍色*/ 
+$colorY: #da9021;
 
 
 @each $key, $color in $colors {
