@@ -1,4 +1,5 @@
 class Admin::Doctors::EventsController < Admin::Doctors::ApplicationController
+  before_action -> { @embedded = 1}
   before_action -> {
     access_config({
       variable_name: "event",

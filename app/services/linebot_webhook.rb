@@ -63,7 +63,6 @@ class LinebotWebhook
 
 			end
 		elsif @message[:type] == "postback"
-			puts "eeee; #{@message}"
 			data = @message[:data]
 			controller("#{data[:controller]}_controller").send(data[:action])
 		else

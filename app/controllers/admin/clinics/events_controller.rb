@@ -10,6 +10,7 @@ class Admin::Clinics::EventsController < Admin::Clinics::ApplicationController
 
   def index
     @events = @clinic.events.includes(:doctor, :patient, :line_account)
+    @events = @events.order(id: :desc)
     @events = @events.page(params[:page]).per(20)
   end
 

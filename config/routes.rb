@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :doctors
       resources :doctors, only: [], module: :doctors do
         resource :info, only: [:show, :edit, :update], controller: :info        
+        resources :doctor_durations, only: [:index, :show]
         resources :events
       end
       resources :members
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   	resources :doctors
     resources :doctors, only: [], module: :doctors do
       resource :info, only: [:show, :edit, :update], controller: :info
+      resources :doctor_durations, only: [:index, :show]
       resources :events
     end
   	resources :members

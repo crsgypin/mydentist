@@ -1,12 +1,2 @@
-<%= render partial: "admin/common/index_table" , locals: {
-  id: "events",
-  resources: @events,
-  cols: [
-    {k: "id", v: proc{|a| a.id }}
-  ],
-  row: {
-	  default_sel_index: 0,
-  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
-  }
-}
-%>
+
+<%= render_relative_partial "../common/events/index" %>

@@ -25,3 +25,4 @@
 /config/secrets.yml
 /config/api_key.yml
 /public/uploads/*
+/db/seed/~$seed.xlsx
