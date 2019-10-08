@@ -17,6 +17,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
 		@booking_event.clinic = @clinic
 		@booking_event.patient = @line_account.patient
+		@booking_event.status = "已預約"
 		if !@booking_event.update(event_params)
 			 return @error_message = @booking_event.errors.full_messages.join("-")
 		end
