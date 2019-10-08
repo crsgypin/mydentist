@@ -8,6 +8,13 @@
     {t: "狀態", v: proc{|a| a.status }},
     {t: "名稱", v: proc{|a| a.display_name }},
     {t: "圖片", v: proc{|a| a.picture_url && image_tag(a.picture_url, style: "width: 50px") }},
+    {t: "病患", v: proc{|a| 
+        if a.patient.present?
+          a.patient.name
+        else
+          "<span class='colorGy'>無</span>".html_safe
+        end
+     }},
   ],
   row: {
 	  default_sel_index: 0,

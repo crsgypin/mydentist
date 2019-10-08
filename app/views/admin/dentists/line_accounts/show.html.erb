@@ -10,7 +10,14 @@
     {t: "圖片", v: proc{|a| a.picture_url && image_tag(a.picture_url, style: "width: 150px") }},
     {t: "訊息文", v: proc{|a| a.status_message }},
     {k: "created_at", v: proc{|a| a.created_at }},
-    {k: "updated_at", v: proc{|a| a.updated_at }}
+    {k: "updated_at", v: proc{|a| a.updated_at }},
+    {t: "病患", v: proc{|a| 
+        if a.patient.present?
+          a.patient.name
+        else
+          "<span class='colorGy'>無</span>".html_safe
+        end
+     }},
   ]
 }
 %>
