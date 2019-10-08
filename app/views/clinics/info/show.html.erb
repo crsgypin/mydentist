@@ -1,0 +1,40 @@
+
+<div id="clinic-info">
+  <h1>診所基本資料</h1>
+
+  <div>
+    <img src="<%= @clinic.photo.url %>" onclick="showUploadModal()">
+    <span>請上傳 200 * 200 px 以上的照片</span>
+    <%= render_relative_partial "common/table" %>
+  </div>
+</div>
+
+<%# render :partial => "share/upload_img_modal" %>
+
+<script>
+  function setMode(mode, dom){
+    if(mode == "show"){
+      $("#clinic-info").find("table tr .show").removeClass("hidden");
+      $("#clinic-info").find("table tr .edit").addClass("hidden");
+    } else if(mode == "edit") {
+      setMode("show");
+      $(dom).closest("tr").find(".show").addClass("hidden");
+      $(dom).closest("tr").find(".edit").removeClass("hidden");
+    }
+  }
+
+  function editInfo(e, name) {
+    let form = document.getElementById(`clinic-${name}`);
+    let old_inputs = document.querySelectorAll(`#clinic-${name} input[name="${name}"]`);
+    old_inputs.forEach((old) => {
+      old.remove();
+    });
+
+    let input = document.createElement("INPUT");
+    input.type = 'hidden';
+    input.name = name;
+    input.value = e.target.value;
+    form.appendChild(input);
+  }
+</script>
+

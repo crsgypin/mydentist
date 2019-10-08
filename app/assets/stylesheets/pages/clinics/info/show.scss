@@ -1,0 +1,117 @@
+#clinic-info {
+  & > h1 {
+    font-size: 36px;
+    color: #4a4a4a;
+    letter-spacing: 2px;
+    background-color: #eef1f7;
+    margin: 0;
+    text-align: center;
+    line-height: 100px;
+  }
+
+  & > div img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    vertical-align: middle;
+    margin: 25px 0 0 50px;
+    cursor: pointer;
+  }
+
+  & > div > span {
+    font-size: 20px;
+    color: #9b9b9b;
+    vertical-align: middle;
+    margin-top: 53px;
+    display: inline-block;
+    letter-spacing: 1.1px;
+  }
+
+  & table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+  }
+
+  & table tr {
+    border-top: 1px solid #8c96ab;
+    height: 64px;
+  }
+
+  & table tr:first-child {
+    border-top: none;
+  }
+
+  & table td {
+    padding: 0;
+  }
+
+  & table td:first-child {
+    font-size: 20px;
+    color: #9b9b9b;
+    width: 135px;
+    padding-left: 50px;
+    vertical-align: middle;
+  }
+
+  & table td:nth-child(2) {
+    font-size: 20px;
+    padding-left: 31px;
+    width: 65%;
+  }
+
+  & .service-hours-text {
+    padding: 15px;
+  }
+
+  & input:not(.update-clinic-info) {
+    width: 95%;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 15px;
+    outline: none;
+    border-radius: 2px;
+    border: solid 1px #979797;
+    background-color: rgba(218, 223, 234, 0.27);
+  }
+
+  & textarea {
+    width: 95%;
+    height: 100%;
+    resize: none;
+    font-size: 20px;
+    display: block;
+    outline: none;
+    border-radius: 2px;
+    border: solid 1px #979797;
+    background-color: rgba(218, 223, 234, 0.27);
+  }
+}
+
+.edit-clinic-info {
+  width: 169px;
+  height: 36px;
+  background-color: #8c96ab;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.21);
+  display: block;
+  line-height: 36px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.update-clinic-info {
+  width: 169px;
+  height: 36px;
+  background-color: #60cdff;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.21);
+  display: block;
+  line-height: 36px;
+  text-align: center;
+  text-decoration: none;
+}

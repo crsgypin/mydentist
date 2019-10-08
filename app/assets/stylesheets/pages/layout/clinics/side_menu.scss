@@ -1,4 +1,77 @@
 
-.side_menu {
+#clinic_side_menu {
+  width: 100px;
+  height: 100vh;
+  background-color: #d8d8d8;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+	& > div {
+	  text-align: center;
+	}
+
+	& > div img {
+	  width: 60px;
+	  height: 60px;
+	  border-radius: 30px;
+	  margin-top: 15px;
+	}
+
+	& > div p {
+	  margin: 5px 0 0;
+	  font-size: 10px;
+	}
+
+	& > #nav-tabs {
+	  width: 100px;
+	  height: 500px;
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	  position: absolute;
+	  bottom: calc((100vh - 500px) / 2);
+	}
+
+	& > #nav-tabs a {
+	  height: 100px;
+	  border-bottom: 1px solid #979797;
+	  font-size: 14px;
+	  display: block;
+	}
+
+	& > #nav-tabs a.selected {
+	  background-color: rgba(140, 150, 171, 0.3);
+	}
+
+	& > #nav-tabs a:first-child {
+	  border-top: 1px solid #979797;
+	}
+
+	& > #nav-tabs a:before {
+	  content: '';
+	  display: inline-block;
+	  height: 100%;
+	  vertical-align: middle;
+	}
+
+	& > #nav-tabs a div {
+	  display: inline-block;
+	  vertical-align: middle;
+	  color: #000;
+	}
+
+	& > p {
+	  position: absolute;
+	  bottom: 25px;
+	  left: 0;
+	  right: 0;
+	  margin: 0;
+	  font-size: 12px;
+	  color: #8c96ab;
+	  cursor: pointer;
+	}
+
 	
 }

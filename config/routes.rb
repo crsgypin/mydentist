@@ -14,6 +14,13 @@ Rails.application.routes.draw do
     resources :events	  	
   end
 
+  resources :clinics, only: [], module: :clinics do
+    resources :events
+    resources :patients
+    resources :doctors
+    resource :info, only: [:show, :edit, :update], controller: :info
+  end
+
   namespace :admin do
     namespace :dentists do
     	resources :clinics

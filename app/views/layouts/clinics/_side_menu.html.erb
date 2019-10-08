@@ -1,0 +1,34 @@
+<sidemenu id="clinic_side_menu">
+  <div>
+    <img src="<%= @clinic.photo.url ? @clinic.photo.url : "https://via.placeholder.com/100x100.png?text=photo" %>">
+    <p>牙醫診所</p>
+  </div>
+  
+  <div id="nav-tabs">
+    <% [
+      {name: "看診日曆", link: clinic_events_path},
+      {name: "病患管理", link: clinic_patients_path},
+      {name: "診所管理", link: clinic_info_path},
+      {name: "醫師管理", link: clinic_doctors_path},
+      ].each do |elm| %>
+      <% if request.fullpath.include?(elm[:link]) %>
+        <%= link_to elm[:name], elm[:link], class: "selected" %>
+      <% else %>
+        <%= link_to elm[:name], elm[:link] %>
+      <% end %>
+    <% end %>
+  </div>
+  <p onclick="showLogOutModal()">登出</p>
+</sidemenu>
+
+<script type="text/javascript">
+  function showLogOutModal() {
+    let logOut = document.getElementById('log-out-modal');
+    logOut.style.display = 'block';
+  }
+
+  function dontShowLogOutModal() {
+    let modal = document.getElementById('log-out-modal');
+    modal.style.display = 'none';
+  }
+</script>
