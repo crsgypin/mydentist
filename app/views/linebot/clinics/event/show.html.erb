@@ -57,7 +57,7 @@
 				<%= segment[:name] %>
 			</div>
 			<% segment[:hours].each do |hour| %>
-			<% next if @doctor_event_durations.map{|a| a.hour}.include?(hour) %>
+			<% next if @doctor_durations.map{|a| a.hour}.include?(hour) %>
 			<ul class="hours_box">
 				<% [0, 15, 30, 45].each do |minute| %>
 				<li>

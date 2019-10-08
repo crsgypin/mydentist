@@ -7,7 +7,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@doctor = @clinic.doctors.find_by(id: params[:doctor_id]) || @clinic.doctors.first
 
 		@date = Date.today + 1
-		@doctor_event_durations = @doctor.doctor_durations.where(wday: @date.wday)
+		@doctor_durations = @doctor.doctor_durations.where(wday: @date.wday)
 		@doctor_events = @doctor.events.where(date: @date)
 	end
 
