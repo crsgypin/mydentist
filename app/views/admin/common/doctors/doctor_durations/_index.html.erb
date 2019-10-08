@@ -9,6 +9,12 @@
     {t: "時", v: proc{|a| a.hour }},
     {t: "分", v: proc{|a| a.minute }},
     {t: "區間", v: proc{|a| a.duration }},
+    {t: "今日掛號", v: proc{|a|
+      e = @doctor.events.find{|e| e.date == Date.today && e.date.wday == a.wday && e.hour == a.hour && e.minute == a.minute}
+      if e.present?
+        "#{e.id} #{e.patient.try(:name)}"
+      end
+    }},
   ],
   row: {
 	  default_sel_index: 0,

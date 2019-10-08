@@ -1,3 +1,7 @@
 
-alert('掛號已完成');
+<% if @error_message.present? %>
+	alert("<%= @error_message.html_safe %>");
+<% else %>
+	alert('掛號已完成');
+<% end %>
 

@@ -10,6 +10,7 @@ class Admin::Dentists::Clinics::Doctors::EventsController < Admin::Dentists::Cli
 
   def index
     @events = @doctor.events
+    @events = @events.order(id: :desc)
     @events = @events.page(params[:page]).per(20)
   end
 

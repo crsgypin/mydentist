@@ -13,6 +13,9 @@
 			選擇日期與時間
 		</div>
 	</div>
+	<div class="service_box">
+		<%= select_field_tag "event[service_id]", @booking_event.service_id, @clinic.services.map{|a| [a.id, a.name]}, class: "form-control" %>
+	</div>
 	<div class="month_box">
 		<%= select_field_tag "", "#{@date.year}-#{@date.month}", (0..12).map{|t| d1 = @date + t.month; ["#{d1.year}-#{d1.month}", "#{d1.year}年 #{d1.month}月"]}, class: "form-control alignC", id: "year_month_input" %>
 	</div>
@@ -57,7 +60,7 @@
 				<%= segment[:name] %>
 			</div>
 			<% segment[:hours].each do |hour| %>
-			<% next if @doctor_durations.map{|a| a.hour}.include?(hour) %>
+			<% next if !@doctor_durations.map{|a| a.hour}.include?(hour) %>
 			<ul class="hours_box">
 				<% [0, 15, 30, 45].each do |minute| %>
 				<li>
@@ -85,8 +88,16 @@
 
 		$("#doctor_select").on("change", function(e){
 			var doctorId = this.value;
-			var imageUrl = $("#doctor_img").data("image_urls")[doctorId];
-			$("#doctor_img").css("background-image", "url(" + imageUrl + ")");
+			var url = window.location.href;
+			if(url.indexOf('doctor_id') == -1){
+				url = url + "&doctor_id=" + doctorId;
+			} else {
+				var value = url.split("doctor_id=")[1].split("&")[0];
+				url = url.replace("doctor_id=" + value, "doctor_id=" + doctorId);
+			}
+			window.location.href = url;
+			// var imageUrl = $("#doctor_img").data("image_urls")[doctorId];
+			// $("#doctor_img").css("background-image", "url(" + imageUrl + ")");
 		});
 
 		function slick(){
