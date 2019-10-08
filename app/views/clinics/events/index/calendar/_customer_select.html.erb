@@ -1,0 +1,29 @@
+<div id="custom-select">
+  <div id="select-area" onclick="clickCustomSelect()"></div>
+  <div class="options">
+    <div class="option">
+      <%= link_to "" do %>
+        <input type="radio" name="doctor" value="" id="doctor-" <%= "checked" if !(request.original_url.include?("/calendar")) %> />
+        <label for="doctor-">
+          <img src="http://placehold.it/22/ffffff/ffffff" alt="" /> 所有醫師
+        </label>
+      <% end %>
+    </div>
+    <% doctors.each do |doctor| %>
+      <div class="option">
+        <%= link_to "" do %>
+          <input type="radio" name="doctor" value="<%= doctor.id %>" id="doctor-<%= doctor.id %>" <%= "checked" if (request.original_url.include?("/calendar")) && (request.path_parameters[:id] == "#{ doctor.id }" ) %> />
+          <label for="doctor-<%= doctor.id %>">
+            <img src="<%= doctor.photo.url ? doctor.photo.url : "https://via.placeholder.com/100x100.png?text=photo" %>"> <%= doctor.name %>醫師
+          </label>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function clickCustomSelect() {
+    document.getElementById('custom-select').className = "clicked";
+  }
+</script>

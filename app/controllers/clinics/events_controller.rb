@@ -11,6 +11,9 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def index
     @events = @clinic.events
     @events = @events.page(params[:page]).per(20)
+
+    @doctors = @clinic.doctors
+    @date = Date.parse(params[:date]) rescue Date.today
   end
 
 end
