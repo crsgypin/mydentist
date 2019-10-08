@@ -1,0 +1,16 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "colors",
+  resources: @colors,
+  cols: [
+    {t: "keys", v: proc{|a| a[:key] }},
+    {t: "RGB", v: proc{|a| a[:rgb] }},
+    {t: "", v: proc{|a| 
+      r = "<div style='background: #{a[:rgb]}; width: 100px; height: 10px; margin: 5px 0;'></div>".html_safe
+    }},
+  ],
+  # row: {
+	 #  default_sel_index: 0,
+  # 	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  # }
+}
+%>

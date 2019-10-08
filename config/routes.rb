@@ -85,6 +85,12 @@ Rails.application.routes.draw do
       resources :services
       resources :line_accounts
       resource :linebot, only: [:new, :create], controller: :linebot #for linebot test
+      get "styles", to: redirect("/admin/dev/style/colors")
+      namespace :style do
+        resources :colors, only: [:index, :show]
+        resources :buttons, only: [:index, :show]
+        resources :lightboxes, only: [:index, :show]
+      end
     end
   end
 

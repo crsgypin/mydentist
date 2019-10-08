@@ -1,20 +1,77 @@
 
 .btnBu {
-
+	color: $colorW;
+	background-color: $colorBu;
+	display: inline-block;
+	border: solid 1px #eee;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { 
+		color: $colorW;
+		background-color: $colorBu_l; 
+	}	
 }
 
 .btnBu_l {
+	color: $colorW;
+	background-color: $colorBu_l;
+	display: inline-block;
+	border: solid 1px #eee;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { 
+		color: $colorW;
+		background-color: $colorBu; 
+	}		
+}
 
+.btnGy_d {
+	color: $colorW;
+	background-color: $colorGy_d;
+	display: inline-block;
+	border: solid 1px #eee;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { 
+		color: $colorBl;
+		background-color: $colorGy; 
+	}			
 }
 
 .btnW {
-	
+	color: $colorGy_d;
+	background-color: $colorW;
+	display: inline-block;
+	border: solid 1px #eee;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { 
+		color: $colorGy_l;
+		background-color: $colorGy; 
+	}			
 }
 
-.btn_tab {
-
+.btnR {
+	color: $colorW;
+	background-color: $colorR;
+	display: inline-block;
+	border: solid 1px #eee;
+	border-radius: 10px;
+	padding: 3px 10px;
+	line-height: 1.5;
+	text-align: center;
+	&:hover { 
+		color: $colorW;
+		background-color: $colorR_l; 
+	}			
 }
-
-
 
 

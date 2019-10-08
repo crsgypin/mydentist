@@ -1,0 +1,18 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "buttons",
+  resources: @buttons,
+  cols: [
+    {t: "name", v: proc{|a| a[:class_name] }},
+    {t: "", v: proc{|a| 
+      r = "<div class='pv5'>"
+      r += link_to "按鈕", "javascript:", class: a[:class_name]
+      r += "</div>"
+      r.html_safe
+    }},
+  ],
+  # row: {
+	 #  default_sel_index: 0,
+  # 	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  # }
+}
+%>
