@@ -1,18 +1,2 @@
-<%= render partial: "admin/common/show_table" , locals: {
-  id: "event",
-  resource: @event,
-  fields: [
-    {k: "id", v: proc{|a| a.id }},
-    {k: "doctor_id", v: proc{|a| a.doctor_id }},
-    {k: "patient_id", v: proc{|a| a.patient_id }},
-    {k: "service_id", v: proc{|a| a.service_id }},
-    {k: "status", v: proc{|a| a.status }},
-    {k: "date", v: proc{|a| a.date }},
-    {k: "hour", v: proc{|a| a.hour }},
-    {k: "minute", v: proc{|a| a.minute }},
-    {k: "duration", v: proc{|a| a.duration }},
-    {k: "created_at", v: proc{|a| a.created_at }},
-    {k: "updated_at", v: proc{|a| a.updated_at }}
-  ]
-}
-%>
+
+<%= render_relative_partial "../../../../common/events/show" %>
