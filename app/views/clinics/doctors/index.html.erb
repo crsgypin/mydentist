@@ -1,12 +1,24 @@
-<%= render partial: "admin/common/index_table" , locals: {
-  id: "doctors",
-  resources: @doctors,
-  cols: [
-    {k: "id", v: proc{|a| a.id }}
-  ],
-  row: {
-	  default_sel_index: 0,
-  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
-  }
-}
-%>
+<div id="doctors-index">
+	<h1>醫師列表</h1>
+	<%= render_relative_partial "index/table" , locals: {
+	  id: "doctors",
+	  resources: @doctors,
+	  cols: [
+	    {t: "", v: proc{|a|
+	    	image_tag a.photo.url, alt: a.name
+	    }},
+	    {t: "名稱", v: proc{|a| a.name }},
+	    {t: "職銜", v: proc{|a| a.title }},
+	    {t: "經歷", v: proc{|a| short_string(a.experience, 10) }},
+	    {t: "主治", v: proc{|a| short_string(a.pro, 10) }},
+	  ],
+	  row: {
+		  default_sel_index: 0,
+	  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+	  }
+	}
+	%>
+	<div class="button-box">
+		<%= link_to "新增醫師資料", url_for(action: :new), class: "btnBu" %>
+	</div>
+</div>
