@@ -1,11 +1,16 @@
 
 
-<div id="log-out-modal">
-  <div class="modal-inner">
-    <p>確定登出？</p>
-    
-    <button class="cancel" onclick="dontShowLogOutModal()">取消</button>
-    <button class="confirm">確定</button>
+<div id="log-out-modal" class="lightbox style_red">
+  <div class="inbox">
+  	<div class="header_box">
+  		確定登出？
+  	</div>
+  	<div class="content_box">
+  	</div>
+  	<div class="buttons_box">
+  		<%= link_to "取消", "javascript: dontShowLogOutModal();", class: "cancel btnW" %>
+  		<%= link_to "確定", "", class: "submit btnR" %>
+  	</div>
   </div>
 </div>
 

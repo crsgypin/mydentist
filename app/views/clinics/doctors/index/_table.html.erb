@@ -8,7 +8,7 @@
 		<% end %>
 	</tr>
 	<% resources.each do |resource|%>
-	<tr>
+	<tr data-url="<%= row[:link].call(resource) if local_assigns[:row].present? %>" onclick="$(this).data('url') && (window.location.href=$(this).data('url'));">
 		<% cols.each do |col| %>
 		<td>
 			<%= col[:v].call(resource) %>

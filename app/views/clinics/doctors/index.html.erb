@@ -13,8 +13,7 @@
 	    {t: "主治", v: proc{|a| short_string(a.pro, 10) }},
 	  ],
 	  row: {
-		  default_sel_index: 0,
-	  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+	  	link: proc {|a| url_for(action: :show, id: a)}
 	  }
 	}
 	%>
@@ -22,3 +21,4 @@
 		<%= link_to "新增醫師資料", url_for(action: :new), class: "btnBu" %>
 	</div>
 </div>
+
