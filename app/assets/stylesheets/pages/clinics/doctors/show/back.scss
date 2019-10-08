@@ -1,0 +1,22 @@
+#doctors-show {
+	.back {
+		height: 100px;
+    position: absolute;
+    top: 0;
+    left: 130px;
+    font-size: 18px;
+    color: #4a4a4a;
+    line-height: 100px;
+    p {
+    	margin: 0;
+    	display: inline-block;
+    	vertical-align: middle;
+    }
+    i {
+	    font-size: 41px;
+	    color: #60b8b7;
+	    vertical-align: middle;
+	    margin-right: 18px;
+    }
+	}
+}

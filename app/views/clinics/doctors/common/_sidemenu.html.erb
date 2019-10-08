@@ -1,0 +1,21 @@
+
+<aside id="doctor-sidemenu">
+	<%= image_tag @doctor.photo.url, alt: @doctor.name %>
+  <img src="https://via.placeholder.com/100x100.png?text=photo">
+  <p>醫師姓名</p>
+	<ul>
+	<% [
+		{name: "基本資料", selected: true},
+		{name: "看診時間"},
+		{name: "診療時程"},
+		{name: "請假異動"},
+	].each do |elm| %>
+		<% if elm[:selected] %>
+    <li class="selected"><%= elm[:name] %></li>
+		<% else %>
+    <li><%= elm[:name] %></li>
+		<% end %>
+	<% end %>
+  </ul>		
+</aside>
+
