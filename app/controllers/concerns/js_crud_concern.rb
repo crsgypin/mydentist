@@ -1,4 +1,5 @@
 module JsCrudConcern
+  include JsConcern
 
 	def access_config(option)
     @variable_name = option[:variable_name]

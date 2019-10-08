@@ -14,7 +14,10 @@
     {t: "LINE", v: proc{|a| 
     	"#{a.line_account.try(:id)} - #{a.line_account.try(:display_name)}"
     }},
-    {t: "狀態", v: proc{|a| a.status }}
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "", v: proc{|a| 
+      link_to "刪除", url_for(action: :destroy, id: a), method: "delete", data: {confirm: "確定移除?"}, remote: true
+    }}
   ],
   row: {
 	  default_sel_index: 0,
