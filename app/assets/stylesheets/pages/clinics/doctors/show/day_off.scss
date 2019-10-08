@@ -1,0 +1,142 @@
+#doctors-show {
+	#day-off {
+    font-size: 0!Important;
+  }
+  #day-off > div {
+    display: inline-block;
+    vertical-align: top;
+    height: calc(100vh - 100px);
+    overflow: scroll;
+    font-size: 20px;
+  }
+  #day-off .edit-days {
+    width: 70%;
+  }
+  #day-off .edit-days > button:not(.confirm):not(.cancel) {
+    width: 169px;
+    height: 56px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: #60cdff;
+    color: #fff;
+    font-size: 20px;
+    margin: 25px 20px;
+  }
+  #day-off hr {
+    border-top: solid 1px #979797;
+    margin-bottom: 0;
+  }
+  #day-off .details {
+    border-bottom: solid 1px #979797;
+    padding: 10px 5%;
+  }
+  #day-off .details.hide {
+    display: none;
+  }
+  #day-off .details > p {
+    font-size: 24px;
+    margin: 0;
+  }
+  #day-off .details > div > span {
+    color: #b6bed0;
+    font-size: 20px;
+  }
+  #day-off .details > div:not(.options) {
+    width: 90%;
+  }
+  #day-off .details .from span,#day-off .details .from div {
+    display: inline-block;
+  }
+  #day-off .details input {
+    width: 210px;
+    height: 39px;
+    border-radius: 4px;
+    background-color: rgba(140, 150, 171, 0.3);
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    color: #4a4a4a;
+  }
+  #day-off .details > .from {
+    margin: 0 auto 10px;
+    position: relative;
+  }
+  #day-off .details > .from .prevent-click,#day-off .details > .to .prevent-click {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  #day-off .details .from div {
+    width: 39%;
+    text-align: center;
+    margin: 0 5px;
+  }
+  #day-off .details .from div input {
+    display: block;
+    width: 100%;
+  }
+  #day-off .details > .to {
+    margin: 0 auto 20px;
+    position: relative;
+  }
+
+  #edit-doctoe #day-off .details .to span, #day-off .details .to input  {
+    vertical-align: middle;
+  }
+  #day-off .details .to input {
+    width: 39%;
+    margin: 0 5px;
+  }
+  #day-off .details > div:nth-child(4) {
+    margin: 0 auto;
+  }
+  #day-off .options {
+    text-align: right;
+  }
+  #day-off .details > div > .edit {
+    font-size: 20px;
+    color: #b6bed0;
+    text-decoration:undeerline;
+    margin-right: 20px;
+    cursor: pointer;
+    text-decoration: underline;
+    border: none;
+  }
+  #day-off .details > div > .delete {
+    font-size: 20px;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  #day-off .cancel {
+    width: 169px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: #c0c8cb;
+    display: inline-block;
+    margin: 40px 0 20px calc(100% - 370px);
+    color: #fff;
+  }
+  #day-off .confirm {
+    width: 169px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: #60cdff;
+    display: inline-block;
+    margin: 40px 0 20px 5px;
+  }
+  #day-off #day-off-form {
+    display: none;
+  }
+  #day-off .patients {
+    width: 30%;
+  }
+}

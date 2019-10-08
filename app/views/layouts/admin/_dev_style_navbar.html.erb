@@ -1,0 +1,19 @@
+<% elms = [
+	{name: "顏色", link: admin_dev_style_colors_path},
+	{name: "按鈕", link: admin_dev_style_buttons_path},
+	{name: "燈箱", link: admin_dev_style_lightboxes_path}
+] %>
+
+<div class="container">
+	<ul class="flx">
+		<% elms.each do |a| %>
+		<li class="mr10">
+			<% if request.fullpath == a[:link] %>
+			<%= link_to a[:name], a[:link], class: "btnBu" %>		
+			<% else %>
+			<%= link_to a[:name], a[:link], class: "btnBu_l" %>	
+			<% end %>
+		</li>
+		<% end %>
+	</ul>
+</div>

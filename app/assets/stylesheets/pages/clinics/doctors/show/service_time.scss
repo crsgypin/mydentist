@@ -1,0 +1,99 @@
+#doctors-show {
+  #service-time {
+    padding: 20px 3%;
+    > div {
+      width: 100%;
+      border-radius: 4px;
+      border: solid 2px rgba(151, 151, 151, 0.25);
+      padding-bottom: 80px;
+      > div {
+        display: flex;
+        text-align: center;
+        border-bottom: solid 1px #e5e5e5;
+        height: 60px;
+        align-items: center;
+        margin: 0 10px;
+      }
+       > .service.hide {
+        display: none;
+      }
+    }
+  }
+  #service-time > div > div label:first-child,#service-time > div > div input:first-child {
+    flex: 2;
+  }
+  #service-time > div > div label:nth-child(2),#service-time > div > div input:nth-child(2) {
+    flex: 1;
+  }
+  #service-time > div > div label:last-child,#service-time > div > div button{
+    flex: 1;
+  }
+  #service-time > div > div:first-child {
+    height: 70px;
+    line-height: 70px;
+    background-color: #f6f7fa;
+    font-size: 20px;
+    color: #4a4a4a;
+    margin: 0;
+  }
+  #service-time > div input {
+    width: 100%;
+    height: 46px;
+    border-radius: 2px;
+    border: solid 1px rgba(151, 151, 151, 0.5);
+    background-color: rgba(218, 223, 234, 0.1);
+    font-size: 18px;
+    padding: 0 2%;
+    margin: 0 3px;
+  }
+  #service-time > div > div .red {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 2px;
+    background-color: #e56277;
+
+    i {
+      width: 100%;
+      color: #fff;
+      background-color: #e56277;
+      font-size: 20px;
+    }
+  }
+  #service-time > div > .service .blue {
+    display: none;
+  }
+  #service-time > div > div .blue {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    opacity: 0.5;
+    border-radius: 2px;
+    background-color: #60cdff;
+
+    i {
+      background-color: #60cdff;
+      color: #fff;
+      width: 100%;
+      font-size: 20px;
+    }
+  }
+  #service-time > div > div:last-child input::placeholder {
+    color: #b6bed0;
+    font-size: 18px;
+  }
+  #service-time .confirm {
+    width: 169px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-color: #60cdff;
+    display: block;
+    margin: 30px 0 20px calc(100% - 169px);
+  }
+  #service-form {
+    display: none;
+  }
+}

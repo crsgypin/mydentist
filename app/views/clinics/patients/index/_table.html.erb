@@ -1,0 +1,19 @@
+
+<table id="patients_table">
+	<tr>
+		<% cols.each do |col| %>
+		<th>
+			<%= col[:t] %>
+		</th>
+		<% end %>
+	</tr>
+	<% resources.each do |resource|%>
+	<tr>
+		<% cols.each do |col| %>
+		<td>
+			<%= col[:v].call(resource) %>
+		</td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>

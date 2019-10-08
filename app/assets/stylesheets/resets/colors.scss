@@ -1,0 +1,49 @@
+	
+$colors: (
+	colorW: #fff,
+	colorBl: #000,
+	colorGy_d: #8c96ab,
+	colorGy: #d8d8d8, 
+	colorGy_l: rgb(240, 240, 240), 
+	colorR_d: rgb(190, 50, 50),
+	colorR: #e56277,
+	colorR_l: rgb(210, 150, 150),
+	colorGn: rgb(100, 200, 160),
+	colorGn_l: rgb(184, 233, 134),
+	colorBu_d: rgb(100, 150, 240),
+	colorBu: #60cdff,
+	colorBu_l: rgb(220, 250, 250),
+	colorY: #da9021
+);
+$colorW: #fff;
+$colorBl: #000;
+$colorGy_d: #8c96ab;
+$colorGy: #d8d8d8; 
+$colorGy_l: rgb(240, 240, 240); 
+$colorR_d: rgb(190, 50, 50);
+$colorR: #e56277;
+$colorR_l: rgb(210, 150, 150);
+$colorGn: rgb(100, 200, 160);
+$colorGn_l: rgb(184, 233, 134);
+$colorBu_d: rgb(100, 150, 240);
+$colorBu: #60cdff; 
+$colorBu_l: rgb(200, 225, 240); 
+$colorY: #da9021;
+
+
+@each $key, $color in $colors {
+	.#{$key}, .#{$key} a { color: $color; } 
+	.hover_#{$key}:hover { color: $color; } 
+	.bg_#{$key} { background-color: $color; } 
+	.hover_bg_#{$key}:hover { background-color: $color; } 
+	.border_#{key} { border-color: $color; }
+};
+
+.border {
+	border: solid 1px #eee;	
+}
+a:hover {
+	color: $colorGn;  
+}
+
+

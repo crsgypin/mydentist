@@ -1,0 +1,26 @@
+<% items = [
+  {name: "診所", link: admin_dentists_clinics_path},
+  {name: "醫生", link: admin_dentists_doctors_path},
+  {name: "會員", link: admin_dentists_members_path},
+  {name: "病患", link: admin_dentists_patients_path},
+  {name: "項目", link: admin_dentists_services_path},
+  {name: "掛號", link: admin_dentists_events_path},
+  {name: "LINE帳號", link: admin_dentists_line_accounts_path},
+] %>
+
+<div id="admin_navbar" style="position: fixed; top: 0; width: 100%;" class="bg_colorGn">
+	<ul class="inbox" style="width: 100%; text-align: center;">
+		<% items.each do |item| %>
+		<% if request.path == item[:link] %>
+		<li style="display: inline-block; margin: 0 10px;">
+			<%= link_to item[:name], item[:link], class: "colorY" %>
+		</li>
+		<% else %>
+		<li style="display: inline-block; margin: 0 10px;">
+			<%= link_to item[:name], item[:link], class: "colorW" %>
+		</li>
+		<% end %>
+		<% end %>
+	</ul>
+</div>
+<div class="admin_navbar_padding" style="height: 40px; margin-bottom: 40px"></div>

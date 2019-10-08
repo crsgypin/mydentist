@@ -1,0 +1,31 @@
+
+#accounts {
+	.container {
+		padding-top: 100px;
+		text-align: center;
+		h1 {
+			font-size: $fs_36p;
+			color: $colorGy_d;
+			font-weight: bold;
+			margin-bottom: 100px;
+		}
+	}
+	.field {
+		padding: 10px 0;
+		width: 300px;
+		margin: 0 auto;
+	}
+	.actions {
+		width: 300px;
+		padding: 10px 0;
+		text-align: right;
+		margin: 0 auto;
+	}
+	input[type="email"], input[type="password"] {
+		border-radius: 5px;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+		width: 100%;
+		padding: 0 5px;
+		font-size: $fs_16p;
+	}
+}

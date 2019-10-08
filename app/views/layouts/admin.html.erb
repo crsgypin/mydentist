@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <%= render_relative_partial "common/head" %>
-  <body id="admin" class="fs12">
+  <head>
+    <%= render_relative_partial "common/head" %>
     <link rel="stylesheet" type="text/css" href="/admin/jquery.json-view.min.css">
     <script type="text/javascript" src="/admin/jquery.json-view.min.js"></script>
+  </head>
+  <body id="admin" class="fs12">
   	<% if @embedded == 1 %>
   	  <%= yield %>
   	<% else %>
-  	<%= render_relative_partial "admin/navbar" %>
+  	<%= render_relative_partial "admin/dentists_navbar" if params[:controller].include?("admin/dentists") %>
+    <%= render_relative_partial "admin/dev_navbar" if params[:controller].include?("admin/dev") %>
+    <%= render_relative_partial "admin/dev_style_navbar" if params[:controller].include?("admin/dev/style") %>
   	<div class="container" style="min-height: 600px; padding-bottom: 40px;">
   	  <%= yield %>
   	</div>

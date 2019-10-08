@@ -7,14 +7,31 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "admin",
+			base_dir: "",
 			resources: [
 				{
-					class_name: "Line::Account",
+					class_name: "Clinic",
 					index_columns: %w(id),
-					except_show_columns: %w(uploaded_at)
+					except_show_columns: %w(uploaded_at),
+					associated_resources: [
+						{
+							associated_name: "events",
+							index_columns: %w(id),
+							except_show_columns: [],
+						},
+						{
+							associated_name: "doctors",
+							index_columns: %w(id),
+							except_show_columns: [],
+						},
+						{
+							associated_name: "patients",
+							index_columns: %w(id),
+							except_show_columns: [],
+						},
+					]
 				}
-			]
+			],
 		})
 	end
 

@@ -1,0 +1,57 @@
+#events-index #calendar {
+	padding: 0 20px;
+	.day_box {
+		padding: 10px 0;
+		ul {
+			display: flex;
+			li {
+				margin-right: 20px;
+			}
+		}
+	}
+	table {
+		width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-bottom: 30px;	
+    tr {
+    	&.border1 {
+		    border-bottom: 1px solid #8c96ab;
+    	}
+    	&.border2 {
+				border-bottom: 1px solid #dadfea;
+    	}
+    	&.border3 {
+		    border-bottom: 1px dashed #dadfea;
+    	}
+    	td, th {
+				height: 38px;
+				vertical-align: middle;
+				&.hour {
+					width: 60px;
+				}
+    	}
+    }
+    .patient_event {
+    	vertical-align: middle;
+    	padding: 2px 5px;
+    	margin: 2px 0;
+    	border-radius: 5px;
+    	border: 1px solid $colorGn;
+			color: $colorGy_d;
+			display: inline-block;
+			cursor: pointer;
+			&:hover {
+				color: $colorGn;
+			}
+			.patient {
+				font-size: $fs_16p;
+				line-height: 1.2;
+			}
+			.service {
+				font-size: $fs_12p;
+				line-height: 1.2;
+			}
+    }
+  }
+}

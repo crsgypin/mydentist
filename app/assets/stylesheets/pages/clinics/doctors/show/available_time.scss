@@ -1,0 +1,31 @@
+
+#doctors-show {
+  #available-time{
+    padding: 20px 2%;
+    > div{
+      text-align: right;
+    }
+    .cancel {
+      width: 169px;
+      height: 56px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: #c0c8cb;
+      font-size: 20px;
+      color: #fff;
+      margin-right: 15px;
+    }
+    .confirm {
+      width: 169px;
+      height: 56px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+      background-color: #60cdff;
+      font-size: 20px;
+      color: #fff;
+    }
+    #submit-form {
+      display: inline-block;
+    }
+  }
+}

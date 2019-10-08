@@ -1,0 +1,17 @@
+
+
+<div id="log-out-modal" class="lightbox style_red">
+  <div class="inbox">
+  	<div class="header_box">
+  		確定登出？
+  	</div>
+  	<div class="content_box">
+  	</div>
+  	<div class="buttons_box">
+  		<%= link_to "取消", "javascript: dontShowLogOutModal();", class: "cancel btnW" %>
+  		<%= link_to "確定", destroy_member_session_path, class: "submit btnR", method: "delete" %>
+  	</div>
+  </div>
+</div>
+
+

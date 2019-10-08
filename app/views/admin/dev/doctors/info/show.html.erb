@@ -1,0 +1,20 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "doctor",
+  resource: @doctor,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {k: "friendly_id", v: proc{|a| a.friendly_id }},
+    {k: "status", v: proc{|a| a.status }},
+    {k: "name", v: proc{|a| a.name }},
+    {k: "title", v: proc{|a| a.title }},
+    {k: "experience", v: proc{|a| a.experience }},
+    {k: "pro", v: proc{|a| a.pro }},
+    {k: "intro", v: proc{|a| a.intro }},
+    {k: "photo", v: proc{|a| a.photo }},
+    {k: "gender", v: proc{|a| a.gender }},
+    {k: "web_link", v: proc{|a| a.web_link }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

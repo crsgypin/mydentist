@@ -1,76 +1,61 @@
-.lightbox{
-  position: fixed;
+
+.lightbox {
+  position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 90001;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.6);
-  opacity: 0;
-  visibility: hidden;
-  .inbox{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    max-width: #{10 * $base_size * 3}px;
-    width: 90%;
-    background-color: $colorW;
-    border-radius: #{0.2 * $base_size * 3}px;
-    box-shadow: 2px 1px 2px 1px $colorBl;
-    max-height: 96vh;
-    .header_box{
-      display: flex;
-      align-items: center;
-      height: #{1.5 * $base_size * 3}px;
-      width: 90%;
-      margin-right: auto;
-      margin-left: auto;
-      box-sizing: content-box;
-      position: relative;
-      .title{
-        left: #{0.2 * $base_size * 3}px;
-        position: absolute;
-        font-size: #{0.5 * $base_size * 3}px;
-      }
-      .close_box{
-        right: #{0.2 * $base_size * 3}px;
-        position: absolute;
-        >a{
-          color: $colorGy;
-          &:hover{
-            color: $colorGn;
-          }
-        }
-      }
+  background-color: rgba(0, 0, 0, 0.45);
+  text-align: center;
+  display: none;
+  z-index: 10;	
+  &:before {
+		content: '';
+    height: 100vh;
+    display: inline-block;
+    vertical-align: middle;  	
+  }
+
+  .inbox {
+  	display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+    min-height: 30vh;
+    box-shadow: 0 2px 24px 0 rgba(0, 0, 0, 0.2);
+    border: solid 3px $colorBu;
+    background-color: $colorGy_l;
+    border-radius: 16px;
+
+    .header_box {
+			margin: 10px 0 3px;
+	    font-size: 42px;
+	    color: #4a4a4a;
     }
-    .content_box{
-      width: 90%;
-      margin-right: auto;
-      margin-left: auto;
-      >input{
-        height: #{0.8 * $base_size * 3}px;
-      }
+
+    .content_box {
+			min-height: calc(30vh - 13px - 13px);
     }
-    .close_btn {
-      position: absolute;
-      top: 12px;
-      right: 15px;
-      font-size: 20px;
-      z-index: 100;
-      >a{
-        color: $colorGy;
-        &:hover{
-          color: $colorGn;
-        }
-      }    
+
+    .buttons_box {
+			margin: 3px 0 10px;
+			a {
+				font-size: $fs_18p;
+				width: 200px;
+				padding: 5px;
+				&.cancel {
+					margin-right: 10px;
+				}
+				&.submit {
+					margin-left: 10px;
+				}
+			}
     }
   }
-  &.select{
-    opacity: 1;
-    visibility: visible;
+
+  &.style_red {
+  	.inbox {
+  		border: solid 3px #e56277;
+  	}
   }
 }
+

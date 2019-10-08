@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :members
+  devise_for :members, controllers: {}, module: :accounts, path: :accounts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :main do 
@@ -14,41 +14,91 @@ Rails.application.routes.draw do
     resources :events	  	
   end
 
+  resources :clinics, only: [], module: :clinics do
+    resources :events
+    resources :patients
+    resources :doctors
+    resource :info, only: [:show, :edit, :update], controller: :info
+  end
+
   namespace :admin do
-  	resources :clinics
-    resources :clinics, only: [], module: :clinics do
-      resource :info, only: [:show, :edit, :update], controller: :info
+    namespace :dentists do
+    	resources :clinics
+      resources :clinics, only: [], module: :clinics do
+        resource :info, only: [:show, :edit, :update], controller: :info
+        resources :doctors
+        resources :doctors, only: [], module: :doctors do
+          resource :info, only: [:show, :edit, :update], controller: :info        
+          resources :doctor_durations, only: [:index, :show]
+          resources :events
+        end
+        resources :members
+        resources :services
+        resources :events
+        resources :patients
+        resources :patients, only: [], module: :patients do
+          resource :info, only: [:show, :edit, :update], controller: :info        
+          resources :events
+        end
+      end
+    	resources :doctors
+      resources :doctors, only: [], module: :doctors do
+        resource :info, only: [:show, :edit, :update], controller: :info
+        resources :doctor_durations, only: [:index, :show]
+        resources :events
+      end
+    	resources :members
+    	resources :events
+    	resources :patients
+      resources :patients, only: [], module: :patients do
+        resource :info, only: [:show, :edit, :update], controller: :info
+        resources :events      
+      end
+    	resources :services
+      resources :line_accounts
+    end
+    namespace :dev do
+      resources :clinics
+      resources :clinics, only: [], module: :clinics do
+        resource :info, only: [:show, :edit, :update], controller: :info
+        resources :doctors
+        resources :doctors, only: [], module: :doctors do
+          resource :info, only: [:show, :edit, :update], controller: :info        
+          resources :doctor_durations, only: [:index, :show]
+          resources :events
+        end
+        resources :members
+        resources :services
+        resources :events
+        resources :patients
+        resources :patients, only: [], module: :patients do
+          resource :info, only: [:show, :edit, :update], controller: :info        
+          resources :events
+        end
+      end
       resources :doctors
       resources :doctors, only: [], module: :doctors do
-        resource :info, only: [:show, :edit, :update], controller: :info        
+        resource :info, only: [:show, :edit, :update], controller: :info
         resources :doctor_durations, only: [:index, :show]
         resources :events
       end
       resources :members
-      resources :services
       resources :events
       resources :patients
       resources :patients, only: [], module: :patients do
-        resource :info, only: [:show, :edit, :update], controller: :info        
-        resources :events
+        resource :info, only: [:show, :edit, :update], controller: :info
+        resources :events      
+      end
+      resources :services
+      resources :line_accounts
+      resource :linebot, only: [:new, :create], controller: :linebot #for linebot test
+      get "styles", to: redirect("/admin/dev/style/colors")
+      namespace :style do
+        resources :colors, only: [:index, :show]
+        resources :buttons, only: [:index, :show]
+        resources :lightboxes, only: [:index, :show]
       end
     end
-  	resources :doctors
-    resources :doctors, only: [], module: :doctors do
-      resource :info, only: [:show, :edit, :update], controller: :info
-      resources :doctor_durations, only: [:index, :show]
-      resources :events
-    end
-  	resources :members
-  	resources :events
-  	resources :patients
-    resources :patients, only: [], module: :patients do
-      resource :info, only: [:show, :edit, :update], controller: :info
-      resources :events      
-    end
-  	resources :services
-    resources :line_accounts
-    resource :linebot, only: [:new, :create], controller: :linebot #for linebot test
   end
 
 end

@@ -1,0 +1,33 @@
+<table>
+  <% [
+    {title: "診所名稱", form_name: "clinic[name]", value: @clinic.name},
+    {title: "電話", form_name: "clinic[phone]", value: @clinic.phone},
+    {title: "地址", form_name: "clinic[address]", value: @clinic.address},
+    {title: "營業時間", form_name: "clinic[business_hours]", value: nil},
+    {title: "休診日期", form_name: "clinic[clinic_vacation]", value: nil},
+    {title: "交通方式", form_name: "clinic[traffic]", value: nil}
+  ].each do |elm| %>
+  <tr>
+    <td>
+      <%= elm[:title] %>
+    </td>
+    <td>
+      <div class="show"><%= elm[:value] %></div>
+      <div class="edit hidden">
+        <%= form_tag url_for(action: :update), method: "patch", remote: true do %>
+        <%= text_field_tag elm[:form_name], elm[:value] %>
+        <% end %>
+      </div>
+    </td>
+    <td>
+      <span class="show">
+        <%= link_to "編輯", "", onclick: "event.preventDefault(); setMode('edit', this);", class: "btnGy_d" %>
+      </span>
+      <span class="edit hidden">
+        <%= link_to "取消", "", onclick: "event.preventDefault(); setMode('show');", class: "btnW" %>
+        <%= link_to "確認", "", onclick: "event.preventDefault(); $(this).closest('tr').find('form').submit();", class: "btnBu" %>
+      </span>
+    </td>
+  </tr>
+  <% end%>
+</table>
