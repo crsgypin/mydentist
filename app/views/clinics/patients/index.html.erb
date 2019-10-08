@@ -1,12 +1,40 @@
-<%= render partial: "admin/common/index_table" , locals: {
-  id: "patients",
-  resources: @patients,
-  cols: [
-    {k: "id", v: proc{|a| a.id }}
-  ],
-  row: {
-	  default_sel_index: 0,
-  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
-  }
-}
-%>
+<div id="patients-index">
+  <div class="title">
+    <div>
+      <p class="selected" onclick="changeTab(0)">病患資料表</p><p onclick="changeTab(1)">推薦列表</p>
+    </div>
+  </div>
+	<div id="patients-list">
+		<div>
+			<div class="search">
+        <i class="fas fa-search"></i>
+        <%= text_field_tag "", "", placeholder: "輸入病患姓名/身分證字號/生日", onkeyup: "pickPatient(this)" %>
+			</div>
+	    <%= form_tag url_for, remote: true, id: 'pick-patient-form' do %>
+        <%= hidden_field_tag :name %>
+        <%= submit_tag '完成', class: 'confirm' %>
+      <% end %>
+		  <%= link_to '新增病患資料', url_for(action: :new), class: "" %>  		  
+		</div>
+		<%= render_relative_partial "index/table" , locals: {
+		  id: "patients",
+		  resources: @patients,
+		  cols: [
+		    {t: "姓名", v: proc{|a| a.name }},
+		    {t: "電話", v: proc{|a| a.phone }},
+		    {t: "身分證字號", v: proc{|a| a.person_id }},
+		    {t: "生日", v: proc{|a| a.birthday }},
+		    {t: "性別", v: proc{|a| a.gender }},
+		    {t: "LINE", v: proc{|a| 
+		    	a.line_account.present? ? icon_tag(:check_circle, class: "colorGn_l") : icon_tag(:check_circle, class: "colorGy") 
+		    }},
+		    {t: "推薦", v: proc{|a|  }},
+		    {t: "", v: proc{|a| 
+		    	link_to "詳細#{icon_tag(:angle_right)}".html_safe, url_for(action: :show, id: a)
+		    }
+		  },
+		  ]
+		}
+		%>
+	</div>
+</div>

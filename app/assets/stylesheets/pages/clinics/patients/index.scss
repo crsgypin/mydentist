@@ -1,1 +1,189 @@
+#patients-index {
+	.title, #keywords .title {
+	  width: 100%;
+	  height: 100px;
+	  line-height: 100px;
 
+	  & > div {
+		  width: 50%;
+		  height: 60px;
+		  background-color: rgba(151, 179, 206, 0.15);
+		  border-radius: 6px;
+		  margin: 0 auto;
+		  line-height: 60px;
+		  display: inline-block;	  	
+	  }
+	  p {
+		  width: 50%;
+		  height: 100%;
+		  font-size: 20px;
+		  line-height: 60px;
+		  vertical-align: top;
+		  display: inline-block;
+		  margin: 0;
+
+		  &:nth-child(1) {
+			  border-radius: 6px 0 0 6px;
+		  }
+		  &:nth-child(2) {
+			  border-radius: 0 6px 6px 0;
+			}
+	  }
+	  .selected {
+		  background-color: #fff;
+	  }
+	}
+
+	#recommendation, #sort-patients-form {
+	  display: none;
+	}
+
+	#patients-list > div {
+	  width: 100%;
+	  text-align: right;
+	  height: 100px;
+	  line-height: 100px;
+	  background-color: #f8fafc;
+	  a {
+		  background-color: #60cdff;
+		}
+
+		i {
+		  font-size: 29px;
+		  color: #8c96ab;
+		  vertical-align: middle;
+		}
+
+	  .search {
+		  width: 50%;
+		  height: 56px;
+		  line-height: 56px;
+		  margin-right: 5px; 
+		  border-radius: 10px;
+		  border: solid 1px #dadfea;
+		  display: inline-block;
+		  vertical-align: middle;
+		  background-color: #fff;
+		  text-align: left;
+		  padding-left: 1%; 	  	
+	  }
+
+	  input {
+		  width: calc(96% - 30px);
+		  height: 54px;
+		  border: none;
+		  border-radius: 10px;
+		  vertical-align: top;
+		  font-size: 18px;	  	
+	  }
+
+	  input::placeholder {
+		  font-size: 18px;
+		  color: #8c96ab;
+		  vertical-align: middle;
+		}
+
+		#pick-patient-form {
+		  display: none;
+		}
+
+		a {
+		  width: 200px;
+		  height: 56px;
+		  line-height: 56px;
+		  border-radius: 6px;
+		  background-color: #8c96ab;
+		  font-size: 18px;
+		  color: #fff;
+		  display: inline-block;
+		  text-align: center;
+		  vertical-align: middle;
+		  margin-right: 3%;
+		}
+	}
+
+	#patients-list table {
+	  width: 100%;
+	  border-collapse: collapse;
+	  color: #4a4a4a;
+	  font-size: 18px;
+
+		tr {
+		  height: 60px;
+		  border-bottom: solid 0.5px #8c96ab;
+			&:hover {
+			  background-color: rgba(140, 150, 171, 0.15);
+			}
+
+			&:first-child {
+			  border-top: solid 1px #8c96ab;
+			  background-color: #f8fafc;
+			  height: 70px;
+			}
+
+			&.no-reply {
+			  color: rgba(74, 74, 74, 0.45);
+			}
+
+		  th {
+			  position: relative;
+			  text-align: center;
+			  vertical-align: middle;
+
+			  &.recent-appointment:after {
+				  content:"▼";
+				  width: 20px;
+				  height: 70px;
+				  line-height: 70px;
+				  font-size: 12px;
+				  color: #60cdff;
+				  text-align: center;
+				  margin-left: 5px;
+				  position: absolute;
+				  top: 0;
+				}
+			}
+			td {
+			  text-align: center;
+			  vertical-align: middle;
+
+				&:last-child {
+				  font-size: 17px;
+				  color: #8f8e94;
+
+				  a {
+					  color: #8f8e94;
+					}
+				}
+
+
+		  	form {
+			    input[type="checkbox"], input[type="submit"] {
+			      display: none;
+			    }
+
+			    input[type="checkbox"] + label {
+			      height: 40px;
+			      line-height: 40px;
+			      border-radius: 10px;
+			      border: solid 1px #979797;
+			      font-size: 14px;
+			      color: #9b9b9b;
+			      display: inline-block;
+			      padding: 0 10px;
+
+			      i {
+			        margin-right: 10px;
+			      }
+			    }
+
+			    input[type="checkbox"]:checked + label {
+			      background-color: #8c96ab;
+			      color: #fff;
+			    }
+				}
+			}
+
+		}
+	}
+}
