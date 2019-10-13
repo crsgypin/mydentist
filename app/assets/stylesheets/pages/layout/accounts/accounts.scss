@@ -1,15 +1,57 @@
 
 #accounts {
-	.container {
-		padding-top: 100px;
-		text-align: center;
-		h1 {
-			font-size: $fs_36p;
-			color: $colorGy_d;
-			font-weight: bold;
-			margin-bottom: 100px;
-		}
-	}
+  background-image: linear-gradient(126deg, #36c2dc, #44a2e7);
+  .account_lightbox {
+  	position: fixed;
+	  top: 50px; 
+	  left: 50%; 
+	  transform: translate(-50%,0); 
+	  -webkit-transform: translate(-50%,0);
+	  h1 {
+	  	text-align: center;
+			font-size: 40px;
+			line-height: 56px;
+			color: $colorW;
+			padding-bottom: 44px;
+	  }  	
+	  .inbox {
+	  	width: 560px;
+	  	padding: 0 60px;
+		  box-shadow: 0 4px 30px 0 rgba(94, 94, 94, 0.5);
+		  background-color: #ffffff;
+	    border-radius: 10px;
+	    .login-box {
+	    	padding: 10px 0;
+	    	.field {
+	    		padding-top: 44px;
+	    		label {
+	    			font-size: $fs_14p;
+	    			color: $colorGy_l;
+	    			padding-bottom: 6px;
+	    		}
+    			input[type=email], input[type=password] {
+    				font-size: $fs_20p;
+    				width: 100%;
+    				padding-bottom: 11px;
+    				border: none;
+    				box-shadow: none;
+    				border-bottom: 1px solid $colorBu;
+    				background: $colorW;
+    			}
+	    	}
+	    	.actions {
+	    		padding-top: 80px;
+					input {
+						display: block;
+						width: 240px;
+						font-size: $fs_20p;
+						line-height: 50px;
+						margin: 0 auto;
+					}
+	    	}
+	    }
+	  }  	
+  }
 	.field {
 		padding: 10px 0;
 		width: 300px;
@@ -21,11 +63,11 @@
 		text-align: right;
 		margin: 0 auto;
 	}
-	input[type="email"], input[type="password"] {
+/*	input[type="email"], input[type="password"] {
 		border-radius: 5px;
 		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 		width: 100%;
 		padding: 0 5px;
 		font-size: $fs_16p;
 	}
-}
+*/}
