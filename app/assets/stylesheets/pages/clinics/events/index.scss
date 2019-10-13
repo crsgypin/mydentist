@@ -1,12 +1,11 @@
 
 #events-index {
-	.content_box {
-		display: flex;
-		#calendar {
-			width: 70%;
-		}	
-		#calendar-detail {
-			width: 30%;
-		}
+	display: flex;
+	.main-box {
+		width: 70%;
+		padding: 25px;
+	}
+	.side-box {
+		width: 30%;
 	}
 }

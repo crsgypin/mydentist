@@ -1,0 +1,4 @@
+
+<div id="doctors-nav">
+	<%= select_field_tag "doctor_id", params[:doctor_id], [[nil, "診所醫生"]] + @clinic.doctors.map{|d| [d.id, d.name]} %>
+</div>

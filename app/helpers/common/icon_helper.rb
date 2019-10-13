@@ -48,6 +48,7 @@ module Common::IconHelper
 			star_fill: "fas fa-star",
 			cancel: "fas fa-times",
 			dolor: "fas fa-dollar-sign",
+			bell: "fas fa-bell",
 			map_marker: "fas fa-map-marker-alt",
 			bars: "fas fa-bars",
 			landmark: "fas fa-landmark",

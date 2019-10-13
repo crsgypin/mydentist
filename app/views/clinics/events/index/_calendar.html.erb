@@ -1,24 +1,6 @@
 <div id="calendar">
   <div class="header">
   </div>
-  <div class="day_box">
-    <ul>
-      <% [
-        {name: "整日", hours: (6..22), selected: true},
-        {name: "早上", hours: (6..12)},
-        {name: "下午", hours: (12..18)},
-        {name: "晚上", hours: (18..22)},
-      ].each do |elm| %>
-      <li>
-        <% if elm[:selected] %>
-        <%= link_to elm[:name], "", class: "day_btn btnBu", data: {start: elm[:hours].first, end: elm[:hours].last} %>
-        <% else %>
-        <%= link_to elm[:name], "", class: "day_btn", data: {start: elm[:hours].first, end: elm[:hours].last} %>
-        <% end %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
   <div class="table_box">
     <table>
       <tr class="border1">
@@ -27,7 +9,7 @@
         <th><%= doctor.name %></th>
         <% end %>
       </tr>
-      <% (6..22).each do |hour| %>
+      <% (6..24).each do |hour| %>
       <% [0, 15, 30, 45].each do |minute| %>
       <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
       <tr class="hour_minute_tr <%= border_style %>" data-hour="<%= hour %>">
@@ -59,8 +41,8 @@
     $(".day_btn").on("click", function(e){
       e.preventDefault();
       //btn
-      $(".day_box .day_btn").removeClass("btnBu");
-      $(this).addClass('btnBu');
+      $(".day_btn").removeClass("selected");
+      $(this).addClass('selected');
       //table
       var s = $(this).data("start");
       var e = $(this).data("end");

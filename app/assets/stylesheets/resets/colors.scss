@@ -12,8 +12,8 @@ $colors: (
 	colorGn_l: rgb(184, 233, 134),
 	colorBu_d: #1d506d,
 	colorBu: #12a7fb,
-	colorBu_l: rgb(220, 250, 250),
-	colorY: #da9021
+	colorBu_l: #e7f2f8,
+	colorY: #f5a623
 );
 $colorW: #fff;
 $colorBl: #000;
@@ -27,8 +27,8 @@ $colorGn: rgb(100, 200, 160);
 $colorGn_l: rgb(184, 233, 134);
 $colorBu_d: #1d506d;
 $colorBu: #12a7fb; 
-$colorBu_l: rgb(200, 225, 240); 
-$colorY: #da9021;
+$colorBu_l: #e7f2f8;
+$colorY: #f5a623;
 
 
 @each $key, $color in $colors {
