@@ -1,0 +1,19 @@
+
+<div id="date-search-nav">
+  <ul class="date-select">
+    <% [
+      {name: "整日", hours: (6..22), selected: true},
+      {name: "早上", hours: (6..12)},
+      {name: "下午", hours: (12..18)},
+      {name: "晚上", hours: (18..22)},
+    ].each do |elm| %>
+    <li>
+      <% if elm[:selected] %>
+      <%= link_to elm[:name], "", class: "day_btn selected", data: {start: elm[:hours].first, end: elm[:hours].last} %>
+      <% else %>
+      <%= link_to elm[:name], "", class: "day_btn", data: {start: elm[:hours].first, end: elm[:hours].last} %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+</div>

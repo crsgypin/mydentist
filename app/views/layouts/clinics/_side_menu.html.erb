@@ -1,10 +1,8 @@
+
 <sidemenu id="clinic_sidemenu">
-  <div>
-    <img src="<%= @clinic.photo.url ? @clinic.photo.url : "https://via.placeholder.com/100x100.png?text=photo" %>">
-    <p>牙醫診所</p>
+  <div class="info">
   </div>
-  
-  <div id="nav-tabs">
+  <ul>
     <% [
       {name: "看診日曆", link: clinic_events_path},
       {name: "病患管理", link: clinic_patients_path},
@@ -12,12 +10,20 @@
       {name: "醫師管理", link: clinic_doctors_path},
       ].each do |elm| %>
       <% if request.fullpath.include?(elm[:link]) %>
-        <%= link_to elm[:name], elm[:link], class: "selected" %>
+      <li class="selected">
+        <%= link_to elm[:link] do %>
+          <%= icon_tag(:star) %><%= elm[:name] %>
+        <% end %>
+      </li>
       <% else %>
-        <%= link_to elm[:name], elm[:link] %>
+      <li>
+        <%= link_to elm[:link] do %>
+          <%= icon_tag(:star) %><%= elm[:name] %>
+        <% end %>
+      </li>
       <% end %>
     <% end %>
-  </div>
+  </ul>  
   <p onclick="showLogOutModal()">登出</p>
 </sidemenu>
 

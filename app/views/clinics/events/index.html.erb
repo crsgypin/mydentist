@@ -1,7 +1,10 @@
 <div id="events-index">
-	<%= render_relative_partial "common/navbar" %>
-	<div class="content_box">
+	<div class="main-box">
+		<%= render_relative_partial "index/doctors_nav" %>
+		<%= render_relative_partial "index/date_search_nav" %>
 		<%= render_relative_partial "index/calendar" %>
-		<%= render_relative_partial "index/calendar_detail" %>
+	</div>
+	<div class="side-box">
+		<%= render_relative_partial "index/calendar_detail" %>		
 	</div>
 </div>
