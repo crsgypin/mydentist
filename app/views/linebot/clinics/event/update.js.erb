@@ -3,5 +3,10 @@
 	alert("<%= @error_message.html_safe %>");
 <% else %>
 	alert('掛號已完成');
+	if(window.hasLiff){
+		liff.closeWindow();
+	} else {
+		window.location.reload();
+	}
 <% end %>
 

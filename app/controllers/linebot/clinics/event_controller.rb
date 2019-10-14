@@ -16,6 +16,9 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	end
 
 	def update
+		if !params[:event][:hour_minute].present?
+			return @error_message = "您尚未選擇時間"
+		end
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
 		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
@@ -26,7 +29,6 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 			 return @error_message = @booking_event.errors.full_messages.join("-")
 		end
 	end
-
 
 	private
 
