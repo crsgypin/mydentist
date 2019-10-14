@@ -1,0 +1,27 @@
+<div class="time_box">
+	<% disabled_time = ["1000", "1015", "1130", "1500", "1545", "1600", "1615", "1745", "1930", "1945", "2000", "2130"] %>
+	<% [
+		{name: "上午診", hours: (9..11)},
+		{name: "下午診", hours: (13..18)},
+		{name: "晚上診", hours: (19..21)},
+	].each do |segment| %>
+	<div class="segment_box">
+		<div class="title">
+			<%= segment[:name] %>
+		</div>
+		<% segment[:hours].each do |hour| %>
+		<% next if !@doctor_durations.map{|a| a.hour}.include?(hour) %>
+		<ul class="hours_box">
+			<% [0, 15, 30, 45].each do |minute| %>
+			<li>
+				<% name = "#{hour}#{sprintf('%02d', minute)}" %>
+				<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: @doctor_events.find{|e| e.hour == hour && e.minute == minute} %>
+				<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
+			</li>
+			<% end %>
+		</ul>
+		<% end %>
+	</div>
+	<% end %>
+</div>
+

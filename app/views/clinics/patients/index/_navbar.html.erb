@@ -1,0 +1,14 @@
+
+<div id="patients-nav">
+	<ul>
+		<% [
+			{name: "病患列表", link: url_for},
+			{name: "回診推播列表", link: url_for(key: "round")},
+			].each do |elm|  %>
+		<li class="<%= "selected" if request.fullpath == elm[:link] %>">
+			<%= link_to elm[:name], elm[:link] %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+

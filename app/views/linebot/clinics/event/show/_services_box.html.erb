@@ -1,0 +1,4 @@
+
+<div class="services_box">
+	<%= select_field_tag "event[service_id]", @booking_event.service_id, @clinic.services.map{|a| [a.id, a.name]}, class: "form-control" %>
+</div>

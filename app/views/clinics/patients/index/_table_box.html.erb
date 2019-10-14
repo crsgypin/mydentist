@@ -1,0 +1,22 @@
+<div id="table-box">
+<%= render_relative_partial "index/table" , locals: {
+  id: "patients",
+  resources: @patients,
+  cols: [
+    {t: "姓名", v: proc{|a| a.name }},
+    {t: "電話", v: proc{|a| a.phone }},
+    {t: "身分證字號", v: proc{|a| a.person_id }},
+    {t: "生日", v: proc{|a| a.birthday }},
+    {t: "性別", v: proc{|a| a.gender }},
+    {t: "LINE", v: proc{|a| 
+    	a.line_account.present? ? icon_tag(:check_circle, class: "colorGn_l") : icon_tag(:check_circle, class: "colorGy") 
+    }},
+    {t: "推薦", v: proc{|a|  }},
+    {t: "", v: proc{|a| 
+    	link_to "詳細#{icon_tag(:angle_right)}".html_safe, url_for(action: :show, id: a)
+    }
+  },
+  ]
+}
+%>
+</div>

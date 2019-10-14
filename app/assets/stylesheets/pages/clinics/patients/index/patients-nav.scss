@@ -1,0 +1,25 @@
+#patients-index {
+	#patients-nav {
+		background: $colorW;
+		ul {
+			display: flex;
+			margin-left: 150px;
+			li {
+				width: 200px;
+				margin-right: 10px;
+				a {
+					display: block;
+					color: #ccc;
+					font-size: $fs_16p;
+					text-align: center;						
+				}
+				&.selected {
+					a {
+						color: $colorBu;
+						border-bottom: 2px solid $colorBu;
+					}
+				}
+			}
+		}
+	}
+}
