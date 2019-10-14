@@ -1,5 +1,53 @@
 module LinebotWebhook::Replies::EventsReply
 
+	def reply_events
+		reply_message({
+			type: "carousel",
+			text: "您的診療紀錄",
+			columns: @events.map do |event|
+				r = {
+					title: event.date.strftime("%Y/%m/%d"),
+					text: "有預約",
+					name: "有預約",
+					# default_action: {
+					# 	type: "postback",
+					# 	label: doctor.name,
+					# 	data: {
+					# 		controller: "events",
+					# 		action: "update_doctor",
+					# 		doctor_id: doctor.id
+					# 	}
+					# },
+					actions: [
+						{
+							type: "uri",
+							label: "預約",
+							uri: liff_line_event_url(@clinic, @line_account, doctor)
+						}
+						{
+							type: "postback",
+							label: "變更約診",
+							data: {
+								controller: "doctors",
+								action: "show",
+								doctor_id: doctor.id
+							}
+						},
+						# {
+						# 	type: "postback",
+						# 	label: "預約",
+						# 	data: {
+						# 		controller: "events",
+						# 		action: "update_doctor",
+						# 		doctor_id: doctor.id
+						# 	}
+						# }
+					]
+				}
+			end
+		})
+	end
+
 	def reply_event_services
 		reply_message({
 			type: "quick_reply_buttons",
@@ -48,15 +96,11 @@ module LinebotWebhook::Replies::EventsReply
 								doctor_id: doctor.id
 							}
 						},
-						proc do
-							# host = Rails.application.config_for(:api_key)["base_domain"]
-							# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
-							r = {
-								type: "uri",
-								label: "預約",
-								uri: liff_line_event_url(@clinic, @line_account, doctor)
-							}
-						end.call
+						{
+							type: "uri",
+							label: "預約",
+							uri: liff_line_event_url(@clinic, @line_account, doctor)
+						}
 						# {
 						# 	type: "postback",
 						# 	label: "預約",
@@ -110,6 +154,7 @@ module LinebotWebhook::Replies::EventsReply
 					data: {
 						controller: "events",
 						action: "destroy",
+						status: "預約中"
 					}
 				},
 				{
@@ -124,7 +169,35 @@ module LinebotWebhook::Replies::EventsReply
 		})
 	end
 
-	def reply_event_aborted
+	def reply_confirm_destroy
+		reply_message({
+			type: "confirm",
+			alt_text: "確認取消？",
+			text: "你是否取消預約？",
+			actions: [
+				{
+					type: "postback",
+					label: "否",
+					data: {
+						controller: "events",
+						action: "index",
+					}
+				},
+				{
+					type: "postback",
+					label: "是",
+					data: {
+						controller: "events",
+						action: "destroy",
+						status: "已預約",
+						id: @event.id
+					}
+				}
+			]
+		})
+	end
+
+	def reply_event_destroyed
 		reply_message({
 			type: "text",
 			text: "預約已取消"

@@ -2,7 +2,8 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	include LinebotWebhook::Replies::EventsReply
 
 	def index
-		
+		@events = @line_account.events.where(status: "已預約")
+		reply_events
 	end
 
 	def create
@@ -44,12 +45,20 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 		reply_event_times
 	end
 
+	def confirm_destroy
+		reply_confirm_destroy
+	end
+
 	def destroy
-		booking_event = @line_account.events.find_by(status: "預約中")
+		if @message[:data][:status] == "預約中"
+			booking_event = @line_account.events.find_by(status: "預約中")
+		elsif @message[:data][:status] == "已預約"
+			booking_event = @line_account.events.find_by(status: "已預約", id: @message[:data][:id])
+		end
 		if booking_event.present?
 			booking_event.update(status: "預約中取消")
 		end
-		reply_event_aborted
+		reply_event_destroyed
 	end
 
 	def services
