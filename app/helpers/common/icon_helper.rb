@@ -71,10 +71,10 @@ module Common::IconHelper
 			check_circle: "fas fa-check-circle",
 			link_external: "fas fa-external-link-square-alt",
 			mobile: "fa fa-mobile",
-			angle_right: "fas fa-angle-right",
 			eye: "fas fa-eye",
 			fix: "fas fa-wrench",
 			globe: "fas fa-globe",
+			angle_right: "fas fa-angle-right",
 			angle_left: "fas fa-angle-left",
 			edit: "fas fa-edit",
 			images: "fas fa-images"

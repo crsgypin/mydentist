@@ -4,82 +4,79 @@
 	max-width: 500px;
 	padding: 20px;
 	margin-bottom: 100px;
-	.doctors_box {
-		padding-bottom: 5px;
-		display: flex;
-		width: 100%;
-		.image_box {
-			width: 60px;
+	#form-box {
+		.doctors_box {
+			padding-bottom: 5px;
+			display: flex;
+			width: 100%;
+			.image_box {
+				width: 60px;
+			}
+			.title{
+				width: calc(100% - 60px);
+				text-align: center;
+				font-weight: bold;
+				font-size: $fs_21p;
+			}
+			border-bottom: 1px solid $colorGy_d;
 		}
-		.title{
-			width: calc(100% - 60px);
-			text-align: center;
-			font-weight: bold;
-			font-size: $fs_21p;
-		}
-		border-bottom: 1px solid $colorGy_d;
-	}
-	.services_box {
+		.services_box {
 
-	}
-	.date_box {
-		.month_box {
-			padding: 10px 0px;
-			ul {
-				li {
-					margin: 0 20px;
-				}
-			}
-			.slick-slider {
-				button {
-					&:before {
-						color: $colorBl;
-					}
-				}		
-			}
 		}
-		.wday_box {
-			padding: 10px 0px;
-			ul {
+		.date_box {
+			.month_box {
+				padding: 10px 0px;
 				display: flex;
-				width: 100%;
 				justify-content: space-between;
-				li {
-					width: calc(100% / 7);
-					text-align: center;				
-					a {
-						display: inline-block;
-					}
-					&.select {
+			}
+			.wday_box {
+				padding: 10px 0px;
+				ul {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					li {
+						width: calc(100% / 7);
+						text-align: center;				
 						a {
-							color: $colorGy_l;		
+							display: inline-block;
+						}
+						&.select {
+							a {
+								color: $colorGy_l;		
+							}
 						}
 					}
 				}
-			}
-		}		
-		.day_box {
-			padding: 10px 0px;
-			ul {
-				display: flex;
-				width: 100%;
-				justify-content: space-between;
-				li {
-					width: calc(100% / 7);
-					text-align: center;
-					input {
-						display: none;
-					}
-					a {
-						display: inline-block;
-						width: 50px;
-						height: 50px;
-						line-height: 50px;
-					}
-					input:checked + a {
-						color: $colorW;
-						background: $colorBl;
-						border-radius: 50%;											
+			}		
+			.day_box {
+				padding: 10px 0px;
+				ul {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					li {
+						width: calc(100% / 7);
+						text-align: center;
+						input {
+							display: none;
+						}
+						a {
+							display: inline-block;
+							width: 50px;
+							height: 50px;
+							line-height: 50px;
+						}
+						a.today {
+							border: 1px solid $colorBl;
+							border-radius: 50%;							
+						}
+						input:checked + a {
+							color: $colorW;
+							background: $colorBl;
+							border-radius: 50%;
+							border: none;											
+						}
 					}
 				}
 			}

@@ -3,21 +3,65 @@
 <div id="linebot_event_show">
 	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
 	<%= hidden_field_tag "line_account_id", params[:line_account_id] %>
-	<%= render_relative_partial "show/doctors_box" %>
-	<%= render_relative_partial "show/services_box" %>
-	<%= render_relative_partial "show/date_box" %>
-	<%= render_relative_partial "show/time_box" %>
+	<%= render_relative_partial "show/form_box" %>
 	<div class="submit_box">
 		<%= submit_tag "確定", class: "btn2" %>
 	</div>
 	<% end %>
 </div>
-<div>
-	<%= @line_account.display_name %>
-</div>
 
 <script type="text/javascript">
 	$(function(){
+		var container = $("#linebot_event_show");
+
+		container.on("change", "#doctor_select", function(e){
+			reloadForm();
+		});
+
+		container.on("change", "#service_select", function(){
+			reloadForm();
+		});
+
+		container.on("click", "#last_week", function(e){
+			e.preventDefault();
+			var d = new Date($("[name='event[date]']:checked").val());
+			d = new Date(d.getTime() - 7 * 24 * 60 * 60 * 1000);
+			reloadForm({
+				date: d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()
+			})
+		});
+
+		container.on("click", "#next_week", function(e){
+			e.preventDefault();
+			var d = new Date($("[name='event[date]']:checked").val());
+			d = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
+			reloadForm({
+				date: d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()
+			})
+		});
+
+		container.on("click", ".day_box a", function(e){
+			reloadForm();
+		});
+
+		function reloadForm(args){
+			var args = args || {};
+			var line_account_id = "<%= params[:line_account_id] %>";
+			var doctorId = $("#doctor_select").val();
+			var serviceId = $("#service_select").val();
+			date = args.date || $("[name='event[date]']:checked").val();
+			$.ajax({
+				url: "<%= url_for %>",
+				method: "get",
+				dataType: "script",
+				data: {
+					line_account_id,
+					date: date,
+					doctor_id: doctorId,
+					service_id: serviceId,
+				}
+			});
+		}
 
 		function slick(){
 			$(".month_box ul").slick({
