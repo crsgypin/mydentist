@@ -5,20 +5,27 @@
 		width: 100%;
 	}
 	.info-box {
-		top: 250px;
+		top: 220px;
 		width: 100%;
 		position: fixed;
 		max-width: calc(500px - 40px);
 		.title-box {
-			height: 130px;
+			height: 100px;
 			background: $colorW;
 			text-align: center;
-			padding: 20px 0;
-			border-top-left-radius: 100px;
-			border-top-right-radius: 100px;
+			padding: 10px 0;
+			border-top-left-radius: 50px;
+			border-top-right-radius: 50px;
+			h1 {
+				font-size: $fs_36p;
+				font-weight: bold;
+			}
+			h2 {
+				font-size: $fs_18p;
+			}
 		}
 		.detail-box {
-			height: calc(100vh - 250px - 130px);
+			height: calc(100vh - 220px - 100px);
 			background: $colorW;
 			padding: 10px 20px;
 			overflow: scroll;
