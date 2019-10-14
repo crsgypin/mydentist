@@ -1,8 +1,5 @@
 
 #linebot_event_show {
-	margin: 0 auto;
-	max-width: 500px;
-	padding: 20px;
 	margin-bottom: 100px;
 	#form-box {
 		.doctors_box {
@@ -124,6 +121,11 @@
 		}
 	}
 	.submit_box {
+		position: fixed;
+		bottom: 0;
+		padding-top: 20px;
+		width: 100%;
+		max-width: 500px;
 		input {
 			width: 100%;
 			height: 60px;

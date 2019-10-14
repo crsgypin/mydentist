@@ -12,14 +12,18 @@ module LinebotWebhook::Replies::DoctorsReply
 					name: doctor.name,
 					actions: [
 						{
-							type: "postback",
+							type: "uri",
 							label: "查詢醫生資訊",
-							data: {
-								controller: "doctors",
-								action: "show",
-								doctor_id: doctor.id
-							}
 						},
+						# {
+						# 	type: "postback",
+						# 	label: "查詢醫生資訊",
+						# 	data: {
+						# 		controller: "doctors",
+						# 		action: "show",
+						# 		doctor_id: doctor.id
+						# 	}
+						# },
 						proc do
 							# host = Rails.application.config_for(:api_key)["base_domain"]
 							# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
@@ -44,17 +48,17 @@ module LinebotWebhook::Replies::DoctorsReply
 		})		
 	end
 	
-	def reply_doctor
-		reply_message({
-			type: "text",
-			text: proc do
-				r = []
-				r << @doctor.name
-				r << "主治: #{@doctor.pro}"
-				r << "學經歷: #{@doctor.experience}"
-				r.join("\n")
-			end.call
-		})
-	end
+	# def reply_doctor
+	# 	reply_message({
+	# 		type: "text",
+	# 		text: proc do
+	# 			r = []
+	# 			r << @doctor.name
+	# 			r << "主治: #{@doctor.pro}"
+	# 			r << "學經歷: #{@doctor.experience}"
+	# 			r.join("\n")
+	# 		end.call
+	# 	})
+	# end
 
 end
