@@ -7,8 +7,8 @@ class LinebotWebhook::Controllers::DoctorsController < LinebotWebhook::Controlle
 	end
 
 	def show
-		@doctor = @clinic.doctors.find_by(id: @message[:data][:doctor_id])
-		reply_doctor
+		# @doctor = @clinic.doctors.find_by(id: @message[:data][:doctor_id])
+		# reply_doctor
 	end
 
 end

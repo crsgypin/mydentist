@@ -12,49 +12,41 @@ module LinebotWebhook::Replies::DoctorsReply
 					name: doctor.name,
 					actions: [
 						{
-							type: "postback",
+							type: "uri",
 							label: "查詢醫生資訊",
-							data: {
-								controller: "doctors",
-								action: "show",
-								doctor_id: doctor.id
-							}
+							uri: liff_doctor_url(@clinic, doctor)
 						},
-						proc do
-							# host = Rails.application.config_for(:api_key)["base_domain"]
-							# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, doctor_id: doctor.id, host: host)
-							r = {
-								type: "uri",
-								label: "預約",
-								uri: liff_line_event_url(@clinic, @line_account, doctor)
-							}
-						end.call
 						# {
 						# 	type: "postback",
-						# 	label: "預約",
+						# 	label: "查詢醫生資訊",
 						# 	data: {
-						# 		controller: "events",
-						# 		action: "update_doctor",
+						# 		controller: "doctors",
+						# 		action: "show",
 						# 		doctor_id: doctor.id
 						# 	}
-						# }
+						# },
+						{
+							type: "uri",
+							label: "預約",
+							uri: liff_line_event_url(@clinic, @line_account, doctor)
+						}
 					]
 				}
 			end
 		})		
 	end
 	
-	def reply_doctor
-		reply_message({
-			type: "text",
-			text: proc do
-				r = []
-				r << @doctor.name
-				r << "主治: #{@doctor.pro}"
-				r << "學經歷: #{@doctor.experience}"
-				r.join("\n")
-			end.call
-		})
-	end
+	# def reply_doctor
+	# 	reply_message({
+	# 		type: "text",
+	# 		text: proc do
+	# 			r = []
+	# 			r << @doctor.name
+	# 			r << "主治: #{@doctor.pro}"
+	# 			r << "學經歷: #{@doctor.experience}"
+	# 			r.join("\n")
+	# 		end.call
+	# 	})
+	# end
 
 end

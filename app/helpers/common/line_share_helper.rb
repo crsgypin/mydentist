@@ -15,12 +15,21 @@ module Common::LineShareHelper
 
 	def liff_line_event_url(clinic, line_account, doctor = nil)
 		if Rails.env.production?
-			path = "#{Rails.application.config_for(:api_key)["liff"]["linebot_event_path"]}?line_account_id=#{line_account.id}"
+			url = "#{Rails.application.config_for(:api_key)["liff"]["linebot_event_path"]}?line_account_id=#{line_account.id}"
 		else
-			path = Rails.application.routes.url_helpers.linebot_clinic_event_url(clinic, line_account_id: line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
+			url = Rails.application.routes.url_helpers.linebot_clinic_event_url(clinic, line_account_id: line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		end	
-		path += "&doctor_id=#{doctor.id}" if doctor.present?
-		path
+		url += "&doctor_id=#{doctor.id}" if doctor.present?
+		url
+	end
+
+	def liff_doctor_url(clinic, doctor)
+		if Rails.env.production?
+			url = "#{Rails.application.config_for(:api_key)["liff"]["linebot_doctor_path"]}?doctor_id=#{doctor.id}"
+		else
+			url = Rails.application.routes.url_helpers.linebot_clinic_doctor_url(clinic, doctor_id: doctor.id, host: Rails.application.config_for(:api_key)["base_domain"])
+		end	
+		url
 	end
 
 end

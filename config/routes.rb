@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     resources :clinics, only: [], module: :clinics do
       post "webhook", to: "webhook#create"
       resource :event, only: [:show, :update], controller: :event
+      resource :doctor, only: [:show], controller: :doctor
     end
-    resources :events	  	
+    resources :events
   end
 
   resources :clinics, only: [], module: :clinics do

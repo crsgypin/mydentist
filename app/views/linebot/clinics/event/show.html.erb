@@ -3,102 +3,65 @@
 <div id="linebot_event_show">
 	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
 	<%= hidden_field_tag "line_account_id", params[:line_account_id] %>
-	<div class="navbar">
-		<div class="image_box">
-			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
-			</div>
-			<p><%= select_field_tag "event[doctor_id]", @doctor.id, @clinic.doctors.map{|a| [a.id, a.name]}, id: "doctor_select" %></p>
-		</div>
-		<div class="title">
-			選擇日期與時間
-		</div>
-	</div>
-	<div class="service_box">
-		<%= select_field_tag "event[service_id]", @booking_event.service_id, @clinic.services.map{|a| [a.id, a.name]}, class: "form-control" %>
-	</div>
-	<div class="month_box">
-		<%= select_field_tag "", "#{@date.year}-#{@date.month}", (0..12).map{|t| d1 = @date + t.month; ["#{d1.year}-#{d1.month}", "#{d1.year}年 #{d1.month}月"]}, class: "form-control alignC", id: "year_month_input" %>
-	</div>
-	<div class="wday_box">
-		<ul>
-		<% [
-			{name: "週日", number: 0},
-			{name: "週一", number: 1},
-			{name: "週二", number: 2},
-			{name: "週三", number: 3},
-			{name: "週四", number: 4},
-			{name: "週五", number: 5},
-			{name: "週六", number: 6},
-		].each do |wday| %>
-			<li class="<%= 'select' if wday[:number] == @date.wday %>">
-				<%= link_to wday[:name], "javascript:" %>
-			</li>	
-		<% end %>
-		</ul>
-	</div>
-	<div class="day_box">
-		<ul>
-			<% sunday = @date - @date.wday.day %>
-			<% (0..6).each do |i| %>
-			<% date = (sunday + i.day) %> 
-			<li>
-				<%= radio_button_tag "event[date]", date.strftime('%Y/%m/%d'), @date.day == date.day %>
-				<%= link_to "#{date.day}日", "javascript:", id: "day_input", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
-			</li>
-			<% end %>
-		</ul>
-	</div>
-	<div class="time_box">
-		<% disabled_time = ["1000", "1015", "1130", "1500", "1545", "1600", "1615", "1745", "1930", "1945", "2000", "2130"] %>
-		<% [
-			{name: "上午診", hours: (9..11)},
-			{name: "下午診", hours: (13..18)},
-			{name: "晚上診", hours: (19..21)},
-		].each do |segment| %>
-		<div class="segment_box">
-			<div class="title">
-				<%= segment[:name] %>
-			</div>
-			<% segment[:hours].each do |hour| %>
-			<% next if !@doctor_durations.map{|a| a.hour}.include?(hour) %>
-			<ul class="hours_box">
-				<% [0, 15, 30, 45].each do |minute| %>
-				<li>
-					<% name = "#{hour}#{sprintf('%02d', minute)}" %>
-					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: @doctor_events.find{|e| e.hour == hour && e.minute == minute} %>
-					<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
-				</li>
-				<% end %>
-			</ul>
-			<% end %>
-		</div>
-		<% end %>
-	</div>
+	<%= render_relative_partial "show/form_box" %>
 	<div class="submit_box">
-		<%= submit_tag "確定", class: "btn2" %>
+		<%= submit_tag "確定", class: "btnW" %>
 	</div>
 	<% end %>
-</div>
-<div>
-	<%= @line_account.display_name %>
 </div>
 
 <script type="text/javascript">
 	$(function(){
+		var container = $("#linebot_event_show");
 
-		$("#doctor_select").on("change", function(e){
-			var doctorId = this.value;
-			var url = window.location.href;
-			if(url.indexOf('doctor_id') == -1){
-				url = url + "&doctor_id=" + doctorId;
-			} else {
-				var value = url.split("doctor_id=")[1].split("&")[0];
-				url = url.replace("doctor_id=" + value, "doctor_id=" + doctorId);
-			}
-			window.location.href = url;
-			// var imageUrl = $("#doctor_img").data("image_urls")[doctorId];
-			// $("#doctor_img").css("background-image", "url(" + imageUrl + ")");
+		container.on("change", "#doctor_select", function(e){
+			reloadForm();
 		});
+
+		container.on("change", "#service_select", function(){
+			reloadForm();
+		});
+
+		container.on("click", "#last_week", function(e){
+			e.preventDefault();
+			var d = new Date($("[name='event[date]']:checked").val());
+			d = new Date(d.getTime() - 7 * 24 * 60 * 60 * 1000);
+			reloadForm({
+				date: d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()
+			})
+		});
+
+		container.on("click", "#next_week", function(e){
+			e.preventDefault();
+			var d = new Date($("[name='event[date]']:checked").val());
+			d = new Date(d.getTime() + 7 * 24 * 60 * 60 * 1000);
+			reloadForm({
+				date: d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()
+			})
+		});
+
+		container.on("click", ".day_box a", function(e){
+			reloadForm();
+		});
+
+		function reloadForm(args){
+			var args = args || {};
+			var line_account_id = "<%= params[:line_account_id] %>";
+			var doctorId = $("#doctor_select").val();
+			var serviceId = $("#service_select").val();
+			date = args.date || $("[name='event[date]']:checked").val();
+			$.ajax({
+				url: "<%= url_for %>",
+				method: "get",
+				dataType: "script",
+				data: {
+					line_account_id,
+					date: date,
+					doctor_id: doctorId,
+					service_id: serviceId,
+				}
+			});
+		}
 
 		function slick(){
 			$(".month_box ul").slick({

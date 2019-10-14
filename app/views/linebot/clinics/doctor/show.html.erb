@@ -1,0 +1,32 @@
+
+
+<div id="linebot-doctors-show">
+	<div class="image_box">
+		<%= image_tag @doctor.photo.url, alt: @doctor.name %>
+	</div>
+	<div class="info-box">
+		<div class="title-box">
+			<h2><%= @doctor.title %></h2>
+			<h1><%= @doctor.name %></h1>
+		</div>
+		<div class="detail-box">
+			<ul>
+				<% [
+					{name: "主治", content: @doctor.pro},
+					{name: "學經歷", content: @doctor.experience},
+					{name: "看診時間", content: "週二全天"},
+					].each do |elm| %>
+				<li>
+					<h3 class="title">
+						<%= elm[:name] %>
+					</h3>
+					<p>
+						<%= elm[:content] %>
+					</p>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+

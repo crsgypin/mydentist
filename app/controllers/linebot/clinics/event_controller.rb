@@ -6,9 +6,13 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 		@doctor = @clinic.doctors.find_by(id: params[:doctor_id]) || @clinic.doctors.first
 
-		@date = Date.today
+		@date = Date.parse(params[:date]) rescue Date.today
 		@doctor_durations = @doctor.doctor_durations.where(wday: @date.wday)
 		@doctor_events = @doctor.events.where(date: @date)
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
 
 	def update

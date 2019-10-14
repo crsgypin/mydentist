@@ -1,0 +1,40 @@
+
+#linebot-doctors-show {
+	img {
+		display: block;
+		width: 100%;
+	}
+	.info-box {
+		top: 250px;
+		width: 100%;
+		position: fixed;
+		max-width: calc(500px - 40px);
+		.title-box {
+			height: 130px;
+			background: $colorW;
+			text-align: center;
+			padding: 20px 0;
+			border-top-left-radius: 100px;
+			border-top-right-radius: 100px;
+		}
+		.detail-box {
+			height: calc(100vh - 250px - 130px);
+			background: $colorW;
+			padding: 10px 20px;
+			overflow: scroll;
+			ul {
+				li {
+					padding-bottom: 20px;
+					h3 {
+						font-size: $fs_20p;
+						color: $colorBl;
+					}
+					p {
+						font-size: $fs_14p;
+						color: $colorGy_l;
+					}
+				}
+			}
+		}
+	}
+}
