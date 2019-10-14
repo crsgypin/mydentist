@@ -7,7 +7,12 @@ module LinebotWebhook::Replies::EventsReply
 			columns: @events.map do |event|
 				r = {
 					title: event.date.strftime("%Y/%m/%d"),
-					text: "有預約",
+					text: proc do 
+						r = "醫生: #{event.doctor.name}\n"
+						r += "項目: #{event.service.name}\n"
+						r += "時段: #{event.hour}:#{event.minute}"
+						r
+					end.call,
 					name: "有預約",
 					# default_action: {
 					# 	type: "postback",
