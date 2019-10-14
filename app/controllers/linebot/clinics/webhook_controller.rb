@@ -12,7 +12,8 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	      config.channel_token = Rails.application.config_for('api_key')["line"]["channel_access_token"]
 	    end
 	    @reply_token = params["events"][0]["replyToken"]
-	    linebot.reply_message(@reply_token, reply_message)
+	    response = linebot.reply_message(@reply_token, reply_message)
+	    Rails.logger.info "line response: #{response}"
 	  end
     render json: {}
 	end
