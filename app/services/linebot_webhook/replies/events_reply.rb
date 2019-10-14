@@ -21,16 +21,16 @@ module LinebotWebhook::Replies::EventsReply
 					actions: [
 						{
 							type: "uri",
-							label: "預約",
-							uri: liff_line_event_url(@clinic, @line_account, doctor)
-						}
+							label: "變更約診",
+							uri: liff_line_event_url(@clinic, @line_account)
+						},
 						{
 							type: "postback",
-							label: "變更約診",
+							label: "取消約診",
 							data: {
-								controller: "doctors",
-								action: "show",
-								doctor_id: doctor.id
+								controller: "events",
+								action: "confirm_destroy",
+								id: event.id
 							}
 						},
 						# {

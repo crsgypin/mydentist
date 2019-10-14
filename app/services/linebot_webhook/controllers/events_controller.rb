@@ -46,6 +46,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	end
 
 	def confirm_destroy
+		@event = @line_account.events.find_by(id: @message[:data][:id])
 		reply_confirm_destroy
 	end
 
