@@ -1,8 +1,14 @@
 
 #linebot-doctors-show {
-	img {
-		display: block;
-		width: 100%;
+	.image_box {
+		text-align: center;
+		background: #e6e6e6;
+		min-height: 300px;
+		line-height: 200px;
+		img {
+			display: block;
+			width: 100%;
+		}		
 	}
 	.info-box {
 		top: 220px;
@@ -41,6 +47,19 @@
 						color: $colorGy_l;
 					}
 				}
+			}
+		}
+		.not-found-box {
+			text-align: center;
+			h4 {
+				font-size: 60px;
+				line-height: 100px;
+				font-weight: bold;
+				color: $colorBu;
+			}
+			p {
+				font-size: $fs_24p;
+				color: $colorBu_l;
 			}
 		}
 	}

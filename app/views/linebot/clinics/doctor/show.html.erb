@@ -1,5 +1,5 @@
 
-
+<% if @doctor.present? %>
 <div id="linebot-doctors-show">
 	<div class="image_box">
 		<%= image_tag @doctor.photo.url, alt: @doctor.name %>
@@ -30,3 +30,20 @@
 	</div>
 </div>
 
+<% else %>
+
+<div id="linebot-doctors-show">
+	<div class="image_box">
+		No doctor
+	</div>
+	<div class="info-box">
+		<div class="title-box">
+		</div>
+		<div class="not-found-box">
+			<h4>404</h4>
+			<p>找不到該醫生資訊</p>
+		</div>
+	</div>
+</div>
+
+<% end %>
