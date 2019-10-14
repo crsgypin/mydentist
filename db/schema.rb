@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929183323) do
+ActiveRecord::Schema.define(version: 20191014144315) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20190929183323) do
     t.string "display_name"
     t.string "picture_url"
     t.text "status_message"
+    t.string "reply_token"
+    t.datetime "reply_token_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_line_accounts_on_patient_id"

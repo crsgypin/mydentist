@@ -4,7 +4,7 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	def create
 		linebot_webhook =  LinebotWebhook.new(params["events"], @clinic)
 		reply_messages = linebot_webhook.parse
-		# @line_account = linebot_webhook.line_account
+		@line_account = linebot_webhook.line_account
 			
 		reply_messages.each do |reply_message|
 	    linebot ||= Line::Bot::Client.new do |config|
@@ -12,6 +12,8 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	      config.channel_token = Rails.application.config_for('api_key')["line"]["channel_access_token"]
 	    end
 	    @reply_token = params["events"][0]["replyToken"]
+	    @line_account.update(reply_token: @reply_token)
+
 	    response = linebot.reply_message(@reply_token, reply_message)
 	    Rails.logger.info "line response, code: #{response.code}, body: #{response.body}"
 	  end

@@ -7,6 +7,7 @@ class Line::Account < ApplicationRecord
 	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id
 	before_save :get_and_set_profle_for_validation
+	before_save :check_reply_token
 	# after_create :create_or_update_richmenu_to_user #over 1000, so depreciated at 2019/7/4
 	include ApplicationHelper
 
@@ -56,6 +57,13 @@ class Line::Account < ApplicationRecord
 
 	def remove_richmenu
 		_remove_richmenu
+	end
+
+	def check_reply_token
+		if changes[:reply_token].present? && self.reply_token.present?
+			self.reply_token_time = Time.now
+		end
+		true
 	end
 
 	private	
