@@ -1,8 +1,8 @@
 
 <% if @event.status == "報到" %>
-$("#check_id_<%= @event.id %>").addClass("selected");
-$("#break_<%= @event.id %>").removeClass("selected");
+$("[id=check_id_<%= @event.id %>]").addClass("selected");
+$("[id=break_<%= @event.id %>]").removeClass("selected");
 <% else %>
-$("#check_id_<%= @event.id %>").removeClass("selected");
-$("#break_<%= @event.id %>").addClass("selected");
+$("[id=check_id_<%= @event.id %>]").removeClass("selected");
+$("[id=break_<%= @event.id %>]").addClass("selected");
 <% end %>

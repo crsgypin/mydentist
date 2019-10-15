@@ -40,11 +40,11 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :check_in_source)
+    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :source)
   end
 
   def patient_params
-    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :month, :day)
+    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :month, :day, :source)
   end
 
 end

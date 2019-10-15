@@ -29,8 +29,8 @@
           <div class="patient"><%= event.patient.name %></div>
           <div class="service"><%= event.service.name %></div>
           <div class="status">
-            <div class="check_in <%= "selected" if event.status == "報到" %>"><%= icon_tag(:check_circle) %></div>
-            <div class="break <%= "selected" if event.status == "爽約" %>"><%= icon_tag(:check_circle) %></div>
+            <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
+            <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
           </div>
         </div>
         <% end %>

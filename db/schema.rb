@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191015133126) do
+ActiveRecord::Schema.define(version: 20191014144315) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.integer "service_id"
     t.integer "line_account_id"
     t.integer "status", limit: 1
-    t.integer "check_in_source", limit: 1, default: 1
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1

@@ -5,8 +5,8 @@ class Event < ApplicationRecord
 	belongs_to :doctor, optional: true
 	belongs_to :service, optional: true
 	enum status: {"預約中" => 5, "已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "預約中取消" => 40, "已預約取消" => 45}
-	enum check_in_source: {"網路" => 1, "現場" => 2}
-	before_validation :check_for_check_in_source, on: :create
+	enum source: {"網路" => 1, "現場" => 2}
+	before_validation :check_for_source, on: :create
 	before_save :check_duration
 
 	def hour_minute=(v)
@@ -27,8 +27,8 @@ class Event < ApplicationRecord
 		true
 	end
 
-	def check_for_check_in_source
-		if self.check_in_source == "現場"
+	def check_for_source
+		if self.source == "現場"
 			if self.doctor.nil?						
 				self.errors.add("請選擇醫生","")
 				return false
@@ -39,6 +39,10 @@ class Event < ApplicationRecord
 			end
 			if self.service.nil?
 				self.errors.add("請選擇項目","")
+				return false
+			end
+			if self.date.nil?
+				self.errors.add("請選擇日期", "")
 				return false
 			end
 		end
