@@ -1,29 +1,41 @@
 #events-index #calendar-day {
 	padding: 0 20px;
-	table {
+	.table_box {
 		width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     margin-bottom: 30px;	
-    tr {
-    	&.border1 {
-		    border-bottom: 1px solid #8c96ab;
-    	}
-    	&.border2 {
-				border-bottom: 1px solid #dadfea;
-    	}
-    	&.border3 {
-		    border-bottom: 1px dashed #dadfea;
-    	}
-    	td, th {
-				height: 38px;
+  	display: flex;
+  	justify-content: space-between;
+    .d-col {
+    	.d-row {
+    		min-width: 100px;
+    		text-align: center;
+				height: 40px;
 				vertical-align: middle;
+	    	&.border1 {
+			    border-bottom: 1px solid #8c96ab;
+	    	}
+	    	&.border2 {
+					border-bottom: 1px solid #dadfea;
+	    	}
+	    	&.border3 {
+			    border-bottom: 1px dashed #dadfea;
+	    	}
 				&.hour {
 					width: 60px;
 				}
     	}
+    	&:first-child {
+    		.d-row {
+					border-bottom: none;
+					position: relative;
+					top: 20px;
+    		}
+    	}
     }
     .patient_event {
+    	position: relative;
     	vertical-align: middle;
     	padding: 2px 5px;
     	margin: 2px 0;
@@ -36,12 +48,31 @@
 				color: $colorGn;
 			}
 			.patient {
-				font-size: $fs_16p;
+				font-size: $fs_14p;
 				line-height: 1.2;
 			}
 			.service {
 				font-size: $fs_12p;
 				line-height: 1.2;
+			}
+			.status {
+				position: absolute;
+				right: 0px;
+				bottom: -7px;
+				.check_in {
+					color: $colorGn;
+					display: none;
+					&.selected {
+						display: block;
+					}
+				}
+				.break {
+					color: $colorR;
+					display: none;
+					&.selected {
+						display: block;
+					}
+				}				
 			}
     }
   }

@@ -1,40 +1,47 @@
 <div id="calendar-day">
+  <%= hidden_field_tag "", @segment, id: "segment_input" %>
   <div class="header">
   </div>
   <div class="table_box">
-    <table>
-      <tr class="border1">
-        <th></th>
-        <% @doctors.each do |doctor| %>
-        <th><%= doctor.name %></th>
-        <% end %>
-      </tr>
+    <div class="d-col">
+      <div class="d-row">
+      </div>
       <% (6..24).each do |hour| %>
       <% [0, 15, 30, 45].each do |minute| %>
       <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-      <tr class="hour_minute_tr <%= border_style %>" data-hour="<%= hour %>">
+      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>">
         <% if minute%30 == 0 %>
-        <td class="hour"><%= hour_minute_format(hour, minute) %></td>
-        <% else %>
-        <td class="hour"> </td>
-        <% end %>
-        <% @doctors.each do |doctor| %>
-        <% event = doctor.events.find{|a| a.date == @date && a.hour == hour && a.minute == minute} %>
-        <td class="">
-          <% if event.present? %>
-          <div class="patient_event">
-            <div class="patient"><%= event.patient.name %></div>
-            <div class="service"><%= event.service.name %></div>
+        <%= hour_minute_format(hour, minute) %>
+        <% end %>      
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+    <% @doctors.each do |doctor| %>
+    <% next if @doctor.present? &&  @doctor.to_i != doctor.id %>
+    <div class="d-col">
+      <div class="d-row"><%= doctor.name  %></div>
+      <% (6..24).each do |hour| %>
+      <% [0, 15, 30, 45].each do |minute| %>
+      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
+      <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.hour == hour && a.minute == minute} %>
+      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px;">
+        <% if event.present? %>
+        <div class="patient_event">
+          <div class="patient"><%= event.patient.name %></div>
+          <div class="service"><%= event.service.name %></div>
+          <div class="status">
+            <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
+            <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
           </div>
-          <% end %>
-        </td>
+        </div>
         <% end %>
-      </tr>
+      </div>
       <% end %>
       <% end %>
-    </table>
+    </div>
+    <% end %>
   </div>
-
 </div>
 <script type="text/javascript">
   $(function(){

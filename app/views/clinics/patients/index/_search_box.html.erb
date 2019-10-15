@@ -1,2 +1,8 @@
 
+<div id="search-box">
+	<%= form_tag url_for, method: "get" do %>
+	<%= text_field_tag "key", params[:key] %>
+	<%= submit_tag "搜尋", class: "btnW" %>
+	<% end %>
+</div>
 

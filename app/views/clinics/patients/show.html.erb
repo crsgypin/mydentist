@@ -1,20 +1,26 @@
-<%= render partial: "admin/common/show_table" , locals: {
-  id: "patient",
-  resource: @patient,
-  fields: [
-    {k: "id", v: proc{|a| a.id }},
-    {k: "friendly_id", v: proc{|a| a.friendly_id }},
-    {k: "profile_status", v: proc{|a| a.profile_status }},
-    {t: "姓名", v: proc{|a| a.name }},
-    {t: "電話", v: proc{|a| a.phone }},
-    {t: "身分證字號", v: proc{|a| a.person_id }},
-    {t: "生日", v: proc{|a| a.birthday }},
-    {t: "性別", v: proc{|a| a.gender }},
-    {t: "LINE", v: proc{|a| a.line_account.present? ? "1" : "0" }},
-    {k: "photo", v: proc{|a| a.photo }},
-    {k: "address", v: proc{|a| a.address }},
-    {k: "created_at", v: proc{|a| a.created_at }},
-    {k: "updated_at", v: proc{|a| a.updated_at }}
-  ]
-}
-%>
+<div id="patients-show">
+  <%= render_relative_partial "show/navbar" %>
+  <div class="patient-main-box">
+    <div class="title">
+      病患個人資料
+    </div>
+    <%= render partial: "admin/common/show_table" , locals: {
+      id: "patient",
+      resource: @patient,
+      fields: [
+        {k: "id", v: proc{|a| a.id }},
+        {t: "姓名", v: proc{|a| a.name }},
+        {t: "電話", v: proc{|a| a.phone }},
+        {t: "身分證字號", v: proc{|a| a.person_id }},
+        {t: "生日", v: proc{|a| a.birthday }},
+        {t: "性別", v: proc{|a| a.gender }},
+        {t: "LINE", v: proc{|a| a.line_account.present? ? "1" : "0" }},
+        {k: "photo", v: proc{|a| a.photo }},
+        {k: "address", v: proc{|a| a.address }},
+        {k: "created_at", v: proc{|a| a.created_at }},
+        {k: "updated_at", v: proc{|a| a.updated_at }}
+      ]
+    }
+    %>
+  </div>
+</div>

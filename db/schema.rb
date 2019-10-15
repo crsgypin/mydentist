@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191014144315) do
+ActiveRecord::Schema.define(version: 20191015133126) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20191014144315) do
     t.integer "service_id"
     t.integer "line_account_id"
     t.integer "status", limit: 1
+    t.integer "source", limit: 1, default: 1
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
@@ -150,6 +151,7 @@ ActiveRecord::Schema.define(version: 20191014144315) do
     t.string "friendly_id"
     t.integer "clinic_id"
     t.integer "profile_status", limit: 1, default: 0
+    t.integer "source", limit: 1, default: 1
     t.string "name", limit: 100
     t.string "phone", limit: 100
     t.string "person_id", limit: 100

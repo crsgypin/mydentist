@@ -29,7 +29,6 @@ module Common::IconHelper
 			circle_up: "fas fa-arrow-alt-circle-up",
 			copy: "fas fa-copy",
 			share: "fas fa-share-alt",
-			close: "fas fa-times",
 			trash: "fas fa-trash",
 			comment: "far fa-comment",
 			thumb: "far fa-thumbs-up",
@@ -69,6 +68,8 @@ module Common::IconHelper
 			question_circle: "fas fa-question-circle",
 			dots: "fas fa-ellipsis-h", #or more
 			check_circle: "fas fa-check-circle",
+			close: "fas fa-times",
+			close_circle: "fas fa-times-circle",
 			link_external: "fas fa-external-link-square-alt",
 			mobile: "fa fa-mobile",
 			eye: "fas fa-eye",

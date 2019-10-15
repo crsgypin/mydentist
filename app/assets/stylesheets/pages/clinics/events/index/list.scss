@@ -1,20 +1,55 @@
 
 #events-index #list {
 	.title {
-
+		font-size: $fs-16p;
+		font-weight: bold;
 	}	
+	.note {
+		text-align: right;
+		border-bottom: 1px solid $colorGy;
+	}
 	.table_box {
+		.title-row {
+			font-size: $fs_12p;
+		}
 		.e-row {
 			display: flex;
 			width: 100%;
 			.e-col {
 				width: 68px;
+				text-align: center;
 			}
 		}
 		.segment {
-			background: $colorW;
-			.e-row {
-				border: 1px solid $colorGy;
+			.title {
+				font-size: $fs_12p;
+				color: $colorGy;
+			}
+			.content {
+				background: $colorW;
+				.e-row {
+					font-size: $fs_14p;
+					&:first-child {
+						border-top: 1px solid $colorGy;	
+					}
+					border-left: 1px solid $colorGy;
+					border-right: 1px solid $colorGy;
+					border-bottom: 1px solid $colorGy;
+					.e-col {
+						.check_in {
+							color: #d8d8d8;
+							&.selected {
+								color: $colorGn;
+							}
+						}
+						.break {
+							color: #d8d8d8;
+							&.selected {
+								color: $colorR;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
