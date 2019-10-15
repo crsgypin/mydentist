@@ -1,12 +1,4 @@
 class ::Clinics::EventsController < ::Clinics::ApplicationController
-  before_action -> {
-    access_config({
-      variable_name: "event",
-      new_resource: proc { @clinic.events.new},
-      find_resource: proc { @clinic.events.find(params[:id])},
-      resource_params: proc { params.require(:event).permit(@event.class.accessable_atts)}
-    })
-  }
 
   def index
     @events = @clinic.events
@@ -14,6 +6,17 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
 
     @doctors = @clinic.doctors
     @date = Date.parse(params[:date]) rescue Date.today
+  end
+
+  def update
+    @event = @clinic.events.find_by(id: params[:id])
+    @event.update(event_params)
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:status)
   end
 
 end

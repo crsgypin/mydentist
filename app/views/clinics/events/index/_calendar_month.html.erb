@@ -1,11 +1,52 @@
 
 <div id="calendar-month">
-	<div id="calender-view">
-	</div>
+  <div class="title">
+    行事曆
+  </div>
+  <div id="calender-view-container">
+    <div class="header">
+      <h3><%= roc_format(@date,2) %></h3>
+      <div class="month-box">
+        <%= link_to icon_tag(:angle_left), "", id: "month-last" %>
+        <div>
+          民國<span class="year"><%= roc_year(@date) %></span>年
+          <span class="month"><%= @date.month %></span>月
+        </div>
+        <%= link_to icon_tag(:angle_right), "", id: "month-next" %>
+      </div>
+    </div>
+  	<div id="calender-view"></div>
+  </div>
 </div>
 
 <script type="text/javascript">
 	$(function(){
+    var container = $("#calendar-month");
+    container.find("#month-last").click(function(e){
+      e.preventDefault();
+      $('.dp-prev').click();
+      changeMonth("last");
+    });
+    container.find("#month-next").click(function(e){
+      e.preventDefault();
+      $('.dp-next').click();
+      changeMonth("next");
+    });
+
+    function changeMonth(category){
+      var year = parseInt(container.find(".month-box .year").text());
+      var month = parseInt(container.find(".month-box .month").text());
+      if(category == "last"){
+        month -= 1;
+        if(month == 0){month = 12; year -= 1}
+      } else if(category == "next"){
+        month += 1;
+        if(month == 13){month = 1; year += 1}        
+      }
+      container.find(".month-box .year").text(year);
+      container.find(".month-box .month").text(month);
+    }
+
 		var t = TinyDatePicker("#calender-view", {
       format(date) {
         return date.toLocaleDateString('zh-Hans-CN');
@@ -13,7 +54,10 @@
       mode: 'dp-permanent'
     });
     t.open();
-    t.on('select', (_, dp) => {
+    t.on('select', function(_, dp){
+aaa = _;
+bbb = dp;
+console.log('selectedDate', dp.state.selectedDate)
       let form = document.querySelector(FORM_META[i].form);
       let input = document.getElementById(FORM_META[i].input)
       input.value = dp.state.selectedDate.toLocaleDateString('zh-Hans-CN');

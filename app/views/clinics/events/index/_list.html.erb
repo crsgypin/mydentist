@@ -4,17 +4,17 @@
 	<div class="title">
 		今日看診名單
 	</div>
+	<div class="note">
+		<span><%= icon_tag(:check_circle, class: "colorGn") %>報到</span>
+		<span><%= icon_tag(:close, class: "colorR") %>爽約</span>
+	</div>
 	<div class="table_box">
-		<div class="e-row">
+		<div class="e-row title-row">
 			<div class="e-col">狀態</div>
 			<div class="e-col">病患</div>
 			<div class="e-col">項目</div>
 			<div class="e-col">醫生</div>
 			<div class="e-col">預約時間</div>
-		</div>
-		<div class="e-row">
-			<span>報到</span>
-			<span>爽約</span>
 		</div>
 		<% segment_events = [
 				{name: "上午診", hours: (6..12)},
@@ -30,19 +30,24 @@
 			end
 		%>
 		<% segment_events.each do |segment| %>
-		<div class="colorGy alignC">
-			<%= segment[:name] %>
-		</div>
 		<div class="segment">
-			<% segment[:events].each do |event| %>
-			<div class="e-row">
-				<div class="e-col"><%= event.status %></div>
-				<div class="e-col"><%= event.patient.name %></div>
-				<div class="e-col">定檢</div>
-				<div class="e-col"><%= event.doctor.name %></div>
-				<div class="e-col"><%= hour_minute_format(event.hour, event.minute) %></div>
+			<div class="title alignC">
+				<%= segment[:name] %>
 			</div>
-			<% end %>
+			<div class="content">
+				<% segment[:events].each do |event| %>
+				<div class="e-row">
+					<div class="e-col">
+						<%= link_to icon_tag(:check_circle), clinic_event_path(@clinic, event, event: {status: "報到"}), remote: true, method: "patch", class: "check_in #{"selected" if event.status == "報到"}", id: "check_id_#{event.id}" %>
+						<%= link_to icon_tag(:close_circle), clinic_event_path(@clinic, event, event: {status: "爽約"}), remote: true, method: "patch", class: "break #{"selected" if event.status == "爽約"}", id: "break_#{event.id}" %>
+					</div>
+					<div class="e-col"><%= event.patient.name %></div>
+					<div class="e-col"><%= event.service.name %></div>
+					<div class="e-col"><%= event.doctor.name %></div>
+					<div class="e-col"><%= hour_minute_format(event.hour, event.minute) %></div>
+				</div>
+				<% end %>
+			</div>
 		</div>
 		<% end %>
 		</div>

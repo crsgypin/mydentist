@@ -1,24 +1,53 @@
 
-#events-index #calendar-month {
+#events-index #calendar-month{ 
   background-color: rgba(218, 223, 234, 0.1);
-  #calender-view {
-	  width: 80%;
-	  margin: 0 auto;
-	}
-	#pick-date-form-1 {
-	  display: none;
-	}
-	.dp-permanent .dp {
-	  border: none;
-	  background-color: transparent;
-	}
-	.dp-permanent header {
-	  background-color: transparent;
-	}
-	.dp-prev, .dp-next {
-	  color: #60b8b7;
-	}
-	.dp-permanent footer {
-	  display: none;
+  padding-bottom: 40px;
+  .title {
+  	line-height: 40px;
+  	font-size: $fs_16p;
+  	border-bottom: 1px solid $colorGy;
+  }
+	#calender-view-container {
+		.header {
+			h3 {
+				font-size: $fs_22p;
+				font-weight: bold;
+				padding: 15px 0;
+				text-align-last: justify;
+			}
+			.month-box {
+				display: flex;
+				justify-content: space-between;				
+				font-size: $fs_14p;
+				i {
+					font-size: $fs_24p;
+				}
+			}
+		}
+	  .dp-cal-header  {
+			display: none;
+	  }
+	  .dp-cal {
+			min-height: auto;
+	  }
+	  .dp-day {
+	  	padding: 3px;
+	  }
+		#pick-date-form-1 {
+		  display: none;
+		}
+		.dp-permanent .dp {
+		  border: none;
+		  background-color: transparent;
+		}
+		.dp-permanent header {
+		  background-color: transparent;
+		}
+		.dp-prev, .dp-next {
+		  color: #60b8b7;
+		}
+		.dp-permanent footer {
+		  display: none;
+		}
 	}
 }
