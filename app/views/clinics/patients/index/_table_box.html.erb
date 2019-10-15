@@ -3,15 +3,15 @@
   id: "patients",
   resources: @patients,
   cols: [
-    {t: "姓名", v: proc{|a| a.name }},
-    {t: "電話", v: proc{|a| a.phone }},
-    {t: "身分證字號", v: proc{|a| a.person_id }},
-    {t: "生日", v: proc{|a| a.birthday }},
-    {t: "性別", v: proc{|a| a.gender }},
-    {t: "LINE", v: proc{|a| 
-    	a.line_account.present? ? icon_tag(:check_circle, class: "colorGn_l") : icon_tag(:check_circle, class: "colorGy") 
-    }},
-    {t: "推薦", v: proc{|a|  }},
+    {t: "病患姓名", v: proc{|a| a.name }},
+    {t: "性別", v: proc{|a| a.phone }},
+    {t: "出生年月日", v: proc{|a| a.person_id }},
+    {t: "身分證號碼", v: proc{|a| a.birthday }},
+    {t: "聯絡電話", v: proc{|a| a.gender }},
+    {t: "看診醫生", v: proc{|a| a.gender }},
+    {t: "已可洗牙", v: proc{|a| a.gender }},
+    {t: "下次就診日期", v: proc{|a| a.gender }},
+    {t: "加入推播狀態", v: proc{|a| a.gender }},
     {t: "", v: proc{|a| 
     	link_to "詳細#{icon_tag(:angle_right)}".html_safe, url_for(action: :show, id: a)
     }
