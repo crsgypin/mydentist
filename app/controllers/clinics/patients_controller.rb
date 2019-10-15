@@ -10,6 +10,9 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
 
   def index
     @patients = @clinic.patients
+    if params[:key].present?
+      @patients = @patients.where("name like ?", "%#{params[:key]}%")
+    end
     @patients = @patients.page(params[:page]).per(20)
   end
 

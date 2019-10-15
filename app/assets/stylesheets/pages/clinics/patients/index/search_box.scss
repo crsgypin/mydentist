@@ -1,0 +1,14 @@
+
+#search-box {
+	padding: 20px 0;
+	form {
+		display: flex;
+		justify-content: space-between;
+		input[type=text] {
+			width: calc(100% - 150px);
+		}
+		input[type=submit] {
+			width: 100px;
+		}		
+	}
+}
