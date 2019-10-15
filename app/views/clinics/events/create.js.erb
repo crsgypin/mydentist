@@ -1,0 +1,7 @@
+
+<% if @error_message.present? %>
+	alert("<%= @error_message.html_safe %>");
+<% else %>
+	alert('ok');
+<% end %>
+

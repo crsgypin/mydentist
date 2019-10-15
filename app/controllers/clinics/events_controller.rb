@@ -14,7 +14,22 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def create
-    @patient = @clinic.
+    begin
+    ActiveRecord::Base.transaction do 
+      @patient = @clinic.patients.new(patient_params)
+      if !@patient.save
+        raise @patient.errors.full_messages.join(",")
+      end
+      @event = @clinic.events.new(event_params)
+      @event.patient = @patient
+      if !@event.save
+        raise @event.errors.full_messages.join(",")
+      end
+    end
+    rescue Exception => e
+      Rails.logger.info "fail to create event: #{e.to_s}, #{e.backtrace.first(10)}"
+      @error_message = e.to_s
+    end
   end
 
   def update
@@ -25,11 +40,11 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:status)
+    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :check_in_source)
   end
 
   def patient_params
-    params.require(:patient).permit(:name, :phone, :person_id, :gender)
+    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :month, :day)
   end
 
 end

@@ -5,15 +5,17 @@
 			<%= link_to icon_tag(:close), "", onclick: "event.preventDefault(); $(this).closest('.lightbox').remove();" %>
 		</div>
 		<%= form_tag url_for(action: :create), method: "post", remote: true do %>
+		<%= hidden_field_tag "event[check_in_source]", "現場" %>
+		<%= hidden_field_tag "event[status]", "已預約" %>
 		<div class="content_box">
 			<div class="e-row">
 				<div class="field">
-					<%= text_field_tag "patient[name]", "", placeholder: "病患姓名" %>
+					<%= text_field_tag "patient[name]", "", placeholder: "病患姓名", autofocus: true %>
 				</div>
 			</div>
 			<div class="e-row">
 				<div class="field">
-					<%= select_field_tag "event[service]", "", [[nil, "診療項目"]] + @clinic.services.map{|a| [a.id, a.name]} %>
+					<%= select_field_tag "event[service_id]", "", [[nil, "診療項目"]] + @clinic.services.map{|a| [a.id, a.name]} %>
 				</div>
 				<div class="field">
 					<%= text_field_tag "patient[phone]", "", placeholder: "病患電話" %>
@@ -21,7 +23,7 @@
 			</div>
 			<div class="e-row">
 				<div class="field">
-					<%= select_field_tag "event[doctor]", "", [[nil, "看診醫生"]] + @clinic.doctors.map{|a| [a.id, a.name]} %>
+					<%= select_field_tag "event[doctor_id]", "", [[nil, "看診醫生"]] + @clinic.doctors.map{|a| [a.id, a.name]} %>
 				</div>
 				<div class="field">
 					<%= text_field_tag "patient[person_id]", "", placeholder: "身分證號碼" %>
