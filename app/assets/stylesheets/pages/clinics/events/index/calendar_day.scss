@@ -1,11 +1,13 @@
 #events-index #calendar-day {
 	padding: 0 20px;
-	table {
+	.table_box {
 		width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
     margin-bottom: 30px;	
-    tr {
+    .d-row {
+    	display: flex;
+    	justify-content: space-between;
     	&.border1 {
 		    border-bottom: 1px solid #8c96ab;
     	}
@@ -15,7 +17,9 @@
     	&.border3 {
 		    border-bottom: 1px dashed #dadfea;
     	}
-    	td, th {
+    	.d-col {
+    		min-width: 100px;
+    		text-align: center;
 				height: 38px;
 				vertical-align: middle;
 				&.hour {
@@ -36,7 +40,7 @@
 				color: $colorGn;
 			}
 			.patient {
-				font-size: $fs_16p;
+				font-size: $fs_14p;
 				line-height: 1.2;
 			}
 			.service {
