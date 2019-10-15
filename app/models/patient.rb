@@ -2,6 +2,7 @@ class Patient < ApplicationRecord
 	belongs_to :clinic
 	has_many :events
   has_one :line_account, class_name: "Line::Account"
+  enum :gender => {"難" => 1, "女" => 2}
 	before_validation :set_friendly_id, on: :create
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id

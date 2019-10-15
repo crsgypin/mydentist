@@ -3,6 +3,9 @@
 <div id="list">
 	<div class="title">
 		今日看診名單
+		<div class="float_r">
+			<%= link_to "新增預約", url_for(action: :new), remote: true, class: "btnBu" %>
+		</div>
 	</div>
 	<div class="note">
 		<span><%= icon_tag(:check_circle, class: "colorGn") %>報到</span>
