@@ -1,0 +1,24 @@
+
+#events-index #calendar-month {
+  background-color: rgba(218, 223, 234, 0.1);
+  #calender-view {
+	  width: 80%;
+	  margin: 0 auto;
+	}
+	#pick-date-form-1 {
+	  display: none;
+	}
+	.dp-permanent .dp {
+	  border: none;
+	  background-color: transparent;
+	}
+	.dp-permanent header {
+	  background-color: transparent;
+	}
+	.dp-prev, .dp-next {
+	  color: #60b8b7;
+	}
+	.dp-permanent footer {
+	  display: none;
+	}
+}

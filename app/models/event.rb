@@ -15,6 +15,11 @@ class Event < ApplicationRecord
 		end
 	end
 
+	def hour_minute
+		"#{self.hour}:#{sprintf('%02d', self.minute)}"
+		# "#{self.hour}:#{self.minute}"
+	end
+
 	def check_duration
 		self.duration = 15 if self.duration.nil?
 		true

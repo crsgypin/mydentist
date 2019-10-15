@@ -26,4 +26,8 @@ module Common::DateHelper
 		end
 	end
 
+	def hour_minute_format(hour, minute)
+		"#{hour}:#{sprintf('%02d', minute)}"
+	end
+
 end

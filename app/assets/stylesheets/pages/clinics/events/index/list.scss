@@ -1,0 +1,23 @@
+
+#events-index #list {
+	.title {
+
+	}	
+	.table_box {
+		.e-row {
+			display: flex;
+			width: 100%;
+			.e-col {
+				width: 68px;
+			}
+		}
+		.segment {
+			background: $colorW;
+			.e-row {
+				border: 1px solid $colorGy;
+			}
+		}
+	}
+}
+
+

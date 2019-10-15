@@ -2,10 +2,13 @@
 #events-index {
 	display: flex;
 	.main-box {
-		width: 70%;
+		width: calc(100% - 360px);
 		padding: 25px;
 	}
 	.side-box {
-		width: 30%;
+		width: 360px;
+		padding-left: 10px;
+		padding-right: 10px;
+		background: $colorGy_l;
 	}
 }
