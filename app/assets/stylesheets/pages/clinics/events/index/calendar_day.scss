@@ -35,6 +35,7 @@
     	}
     }
     .patient_event {
+    	position: relative;
     	vertical-align: middle;
     	padding: 2px 5px;
     	margin: 2px 0;
@@ -53,6 +54,25 @@
 			.service {
 				font-size: $fs_12p;
 				line-height: 1.2;
+			}
+			.status {
+				position: absolute;
+				right: 0px;
+				bottom: -7px;
+				.check_in {
+					color: $colorGn;
+					display: none;
+					&.selected {
+						display: block;
+					}
+				}
+				.break {
+					color: $colorR;
+					display: none;
+					&.selected {
+						display: block;
+					}
+				}				
 			}
     }
   }

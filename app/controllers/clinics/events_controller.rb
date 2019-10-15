@@ -1,10 +1,10 @@
 class ::Clinics::EventsController < ::Clinics::ApplicationController
 
   def index
-    @events = @clinic.events
-    @events = @events.page(params[:page]).per(20)
-
-    @doctors = @clinic.doctors
+    @date = Date.parse(params[:date]) rescue  Date.today
+    @events = @clinic.events.where(date: @date).includes(:doctor, :service, :patient)
+    
+    @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
     @date = Date.parse(params[:date]) rescue Date.today
   end
 
