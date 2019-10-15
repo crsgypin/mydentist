@@ -2,6 +2,41 @@
   <div class="header">
   </div>
   <div class="table_box">
+    <div class="d-col">
+      <div class="d-row">
+      </div>
+      <% (6..24).each do |hour| %>
+      <% [0, 15, 30, 45].each do |minute| %>
+      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
+      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>">
+        <% if minute%30 == 0 %>
+        <%= hour_minute_format(hour, minute) %>
+        <% end %>      
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+    <% @doctors.each do |doctor| %>
+    <div class="d-col">
+      <div class="d-row"><%= doctor.name  %></div>
+      <% (6..24).each do |hour| %>
+      <% [0, 15, 30, 45].each do |minute| %>
+      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
+      <% event = doctor.events.find{|a| a.date == @date && a.hour == hour && a.minute == minute} %>
+      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px;">
+        <% if event.present? %>
+        <div class="patient_event">
+          <div class="patient"><%= event.patient.name %></div>
+          <div class="service"><%= event.service.name %></div>
+        </div>
+        <% end %>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+    <% end %>
+
+    <% if false %>
     <div class="d-row border1">
       <div class="d-col"></div>
       <% @doctors.each do |doctor| %>
@@ -30,6 +65,7 @@
       </div>
       <% end %>
     </div>
+    <% end %>
     <% end %>
     <% end %>
   </div>

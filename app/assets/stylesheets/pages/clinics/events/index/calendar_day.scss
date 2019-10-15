@@ -5,26 +5,33 @@
     border-collapse: collapse;
     margin: 0 auto;
     margin-bottom: 30px;	
-    .d-row {
-    	display: flex;
-    	justify-content: space-between;
-    	&.border1 {
-		    border-bottom: 1px solid #8c96ab;
-    	}
-    	&.border2 {
-				border-bottom: 1px solid #dadfea;
-    	}
-    	&.border3 {
-		    border-bottom: 1px dashed #dadfea;
-    	}
-    	.d-col {
+  	display: flex;
+  	justify-content: space-between;
+    .d-col {
+    	.d-row {
     		min-width: 100px;
     		text-align: center;
-				height: 38px;
+				height: 40px;
 				vertical-align: middle;
+	    	&.border1 {
+			    border-bottom: 1px solid #8c96ab;
+	    	}
+	    	&.border2 {
+					border-bottom: 1px solid #dadfea;
+	    	}
+	    	&.border3 {
+			    border-bottom: 1px dashed #dadfea;
+	    	}
 				&.hour {
 					width: 60px;
 				}
+    	}
+    	&:first-child {
+    		.d-row {
+					border-bottom: none;
+					position: relative;
+					top: 20px;
+    		}
     	}
     }
     .patient_event {
