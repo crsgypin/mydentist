@@ -1,12 +1,9 @@
 
-#calendar-details,
-#appointment-calendar-details {
-  width: 30%;
+#calendar-details {
   background-color: rgba(218, 223, 234, 0.1);
 }
 
-#calendar-details .month-calendar,
-#appointment-calendar-details .month-calendar {
+#calendar-details #calender-view {
   width: 80%;
   margin: 0 auto;
 }
@@ -15,60 +12,20 @@
   display: none;
 }
 
-#calendar-details .dp-permanent .dp,
-#appointment-calendar-details .dp-permanent .dp {
+#calendar-details .dp-permanent .dp {
   border: none;
   background-color: transparent;
 }
 
-#calendar-details .dp-permanent header,
-#appointment-calendar-details .dp-permanent header {
+#calendar-details .dp-permanent header {
   background-color: transparent;
 }
 
-#calendar-details .dp-prev, #calendar-details .dp-next,
-#appointment-calendar-details .dp-prev, #calendar-details .dp-next {
+#calendar-details .dp-prev, #calendar-details .dp-next {
   color: #60b8b7;
 }
 
-#calendar-details .dp-permanent footer,
-#appointment-calendar-details .dp-permanent footer {
+#calendar-details .dp-permanent footer {
   display: none;
 }
 
-#calendar-details .patients,
-#appointment-calendar-details .patients {
-  max-height: 46vh;
-  overflow: scroll;
-}
-
-#calendar-details .patients > p,
-#appointment-calendar-details .patients > p {
-  font-size: 18px;
-  font-weight: 600;
-  color: #8c96ab;
-  border-bottom: 2px solid #97b3ce;
-  text-align: center;
-  padding: 0 0 10px;
-  width: 80%;
-  margin: 5px auto 0;
-}
-
-#calendar-details .patients ul,
-#appointment-calendar-details .patients ul {
-  width: 85%;
-  margin: 10px auto;
-  text-align: left;
-  color: #4a4a4a;
-  padding-inline-start: 30px;
-}
-
-#calendar-details .patients ul li,
-#appointment-calendar-details .patients ul li {
-  margin: 5px 0;
-}
-
-#calendar-details .blue-btn,
-#appointment-calendar-details .blue-btn {
-  margin: 30px auto 20px;
-}

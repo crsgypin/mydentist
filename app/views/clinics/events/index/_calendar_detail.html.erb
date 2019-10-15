@@ -1,0 +1,23 @@
+
+<div id="calendar-details">
+	<div id="calender-view">
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var t = TinyDatePicker("#calender-view", {
+      format(date) {
+        return date.toLocaleDateString('zh-Hans-CN');
+      },
+      mode: 'dp-permanent'
+    });
+    t.open();
+    t.on('select', (_, dp) => {
+      let form = document.querySelector(FORM_META[i].form);
+      let input = document.getElementById(FORM_META[i].input)
+      input.value = dp.state.selectedDate.toLocaleDateString('zh-Hans-CN');
+      document.querySelector(`${FORM_META[i].form} .confirm`).click();
+    });
+	});
+</script>
