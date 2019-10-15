@@ -55,13 +55,12 @@
     });
     t.open();
     t.on('select', function(_, dp){
-aaa = _;
-bbb = dp;
-console.log('selectedDate', dp.state.selectedDate)
-      let form = document.querySelector(FORM_META[i].form);
-      let input = document.getElementById(FORM_META[i].input)
-      input.value = dp.state.selectedDate.toLocaleDateString('zh-Hans-CN');
-      document.querySelector(`${FORM_META[i].form} .confirm`).click();
+      var date = rr.state.selectedDate.toLocaleDateString('zh')
+      
+      // let form = document.querySelector(FORM_META[i].form);
+      // let input = document.getElementById(FORM_META[i].input)
+      // input.value = dp.state.selectedDate.toLocaleDateString('zh-Hans-CN');
+      // document.querySelector(`${FORM_META[i].form} .confirm`).click();
     });
 	});
 </script>

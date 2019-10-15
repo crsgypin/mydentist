@@ -5,7 +5,12 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @events = @clinic.events.where(date: @date).includes(:doctor, :service, :patient)
     
     @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
-    @date = Date.parse(params[:date]) rescue Date.today
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def new
@@ -40,7 +45,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :source)
+    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :source, :date)
   end
 
   def patient_params
