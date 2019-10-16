@@ -1,16 +1,54 @@
 
 <div id="clinic-info">
-  <h1>診所基本資料</h1>
-
-  <div>
-    <img src="<%= @clinic.photo.url %>" onclick="showUploadModal()">
-    <span>請上傳 200 * 200 px 以上的照片</span>
-    <%= render_relative_partial "common/table" %>
+  <%= form_tag url_for(action: :update), method: "patch" do %>
+  <div class="inbox">
+    <div class="content-box">
+      <% if false %>
+      <img src="<%= @clinic.photo.url %>" onclick="showUploadModal()">
+      <span>請上傳 200 * 200 px 以上的照片</span>
+      <% end %>
+      <%= render_relative_partial "common/table" , locals: {
+        id: "clinic-info-table",
+        resource: @clinic,
+        fields: [
+          {t: "照片", v: proc{ |a| 
+            if @clinic.photo.present?
+              r = image_tag @clinic.photo.url
+            end
+            # 請上傳 200 * 200 px 以上的照片
+          }},
+          {t: "診所名稱", v: proc{|a| 
+            text_field_tag "clinic[name]", a.name
+          }},
+          # {t: "clinic_duration_id", v: proc{|a| a.clinic_duration_id }},
+          {t: "診所電話", v: proc{|a| 
+            text_field_tag "clinic[phone]", a.phone
+          }},
+          {t: "診所地址", v: proc{|a| 
+            text_field_tag "clinic[address]", a.address
+          }},
+          {t: "營業時間", v: proc{|a| 
+            link_to "選取診所營業時間","" 
+          }},
+          {t: "休診時間", v: proc{|a| 
+            link_to "選取休診時間", "" 
+          }},
+          {k: "描述", v: proc{|a| 
+            text_field_tag "clinic[address]", a.address
+          }},
+        ]
+      }
+      %>
+    </div>
+    <div class="buttons-box">
+      <%= submit_tag "儲存", class: "btnBu" %>
+    </div>
   </div>
+  <% end %>
 </div>
 
 <%# render :partial => "share/upload_img_modal" %>
-
+<%#
 <script>
   function setMode(mode, dom){
     if(mode == "show"){
@@ -38,3 +76,4 @@
   }
 </script>
 
+%>

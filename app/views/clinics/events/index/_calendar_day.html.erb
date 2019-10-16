@@ -1,12 +1,13 @@
+
+
 <div id="calendar-day">
-  <%= hidden_field_tag "", @segment, id: "segment_input" %>
   <div class="header">
   </div>
   <div class="table_box">
     <div class="d-col">
       <div class="d-row">
       </div>
-      <% (6..24).each do |hour| %>
+      <% segment_hours(@segment).each do |hour| %>
       <% [0, 15, 30, 45].each do |minute| %>
       <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
       <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>">
@@ -21,7 +22,7 @@
     <% next if @doctor.present? &&  @doctor.to_i != doctor.id %>
     <div class="d-col">
       <div class="d-row"><%= doctor.name  %></div>
-      <% (6..24).each do |hour| %>
+      <% segment_hours(@segment).each do |hour| %>
       <% [0, 15, 30, 45].each do |minute| %>
       <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
       <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.hour == hour && a.minute == minute} %>

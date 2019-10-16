@@ -1,33 +1,44 @@
-<table>
-  <% [
-    {title: "診所名稱", form_name: "clinic[name]", value: @clinic.name},
-    {title: "電話", form_name: "clinic[phone]", value: @clinic.phone},
-    {title: "地址", form_name: "clinic[address]", value: @clinic.address},
-    {title: "營業時間", form_name: "clinic[business_hours]", value: nil},
-    {title: "休診日期", form_name: "clinic[clinic_vacation]", value: nil},
-    {title: "交通方式", form_name: "clinic[traffic]", value: nil}
-  ].each do |elm| %>
-  <tr>
-    <td>
-      <%= elm[:title] %>
-    </td>
-    <td>
-      <div class="show"><%= elm[:value] %></div>
-      <div class="edit hidden">
-        <%= form_tag url_for(action: :update), method: "patch", remote: true do %>
-        <%= text_field_tag elm[:form_name], elm[:value] %>
-        <% end %>
-      </div>
-    </td>
-    <td>
-      <span class="show">
-        <%= link_to "編輯", "", onclick: "event.preventDefault(); setMode('edit', this);", class: "btnGy_d" %>
-      </span>
-      <span class="edit hidden">
-        <%= link_to "取消", "", onclick: "event.preventDefault(); setMode('show');", class: "btnW" %>
-        <%= link_to "確認", "", onclick: "event.preventDefault(); $(this).closest('tr').find('form').submit();", class: "btnBu" %>
-      </span>
-    </td>
-  </tr>
-  <% end%>
+<%# required: resource, fields %>
+<% mode = local_assigns[:mode] || "show" %>
+<% table_class = local_assigns[:table_class] || "" %>
+<% table_style = local_assigns[:table_style] || "" %>
+<% title_class = local_assigns[:title_class] || "" %>
+<% title_style = local_assigns[:title_style] || "" %>
+<% value_class = local_assigns[:value_class] || "" %>
+<% value_style = local_assigns[:value_style] || "" %>
+<% fields_per_row = local_assigns[:fields_per_row] || 1 %>
+
+<%# variable: mode, trs %>
+<table class="table table-sm <%= table_class %>" style="<%= table_style %>">
+<% fields.each_with_index do |field, index| %>
+	<% next if mode == "edit" && !field.keys.include?(:e) %>
+	<%= "<tr>".html_safe if index % fields_per_row == 0 %>
+		<td class="<%= title_class %>" style="<%= title_style %>">
+			<% if field.keys.include?(:t) %>
+				<%= field[:t] %>
+			<% else %>
+				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
+			<% end %>
+		</td>
+		<% if mode == "show" %>
+		<td class="<%= value_class %>" style="<%= value_style %>">
+			<% if field.keys.include?(:v) %>
+				<%= field[:v].call(resource) %>
+			<% else %>
+				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
+			<% end %>
+		</td>
+		<% elsif mode == "edit" %>
+		<td class="<%= value_class %>" style="<%= value_style %>">
+			<% if field.keys.include?(:e) %>
+				<%= field[:e].call(resource) %>
+			<% end %>
+		</td>
+		<% end %>
+	<%= "</tr>".html_safe if ((index + 1) % fields_per_row == 0) || (fields.lenth == index + 1)  %>
+	</tr>
+<% end %>
 </table>
+
+
+

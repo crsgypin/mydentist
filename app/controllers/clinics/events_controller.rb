@@ -3,7 +3,8 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def index
     @doctor = params[:doctor]
     @date = Date.parse(params[:date]) rescue  Date.today
-    @segment = params[:segment]
+  
+    @segment = params[:segment] || "整日"
     @events = @clinic.events.where(date: @date).includes(:doctor, :service, :patient)
     
     @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])

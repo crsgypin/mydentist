@@ -18,9 +18,9 @@
 			<div class="e-col">預約時間</div>
 		</div>
 		<% segment_events = [
-				{name: "上午診", hours: (6..12)},
-				{name: "下午診", hours: (12..18)},
-				{name: "晚上診", hours: (18..24)},
+				{name: "上午診", segment_key: "早上", hours: segment_hours("早上")},
+				{name: "下午診", segment_key: "下午", hours: segment_hours("下午")},
+				{name: "晚上診", segment_key: "晚上", hours: segment_hours("晚上")},
 			].map do |segment|
 				segment[:events] = @events.select do |event|
 					event.hour >= segment[:hours].first && event.hour < segment[:hours].last
@@ -28,6 +28,12 @@
 					(a.hour * 60 + a.minute) - (b.hour * 60 + b.minute)
 				end
 				segment
+			end
+
+			if @segment != "整日"
+				segment_events = segment_events.select do |segment_event|
+					segment_event[:segment_key] == @segment
+				end
 			end
 		%>
 		<% segment_events.each do |segment| %>

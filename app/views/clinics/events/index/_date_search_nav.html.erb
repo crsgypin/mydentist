@@ -1,19 +1,15 @@
 
 <div id="date-search-nav">
+  <%= hidden_field_tag "", @segment, id: "segment_input" %>
   <ul class="date-select">
-    <% [
-      {name: "整日", hours: (6..22), selected: true},
-      {name: "早上", hours: (6..12)},
-      {name: "下午", hours: (12..18)},
-      {name: "晚上", hours: (18..22)},
-    ].each do |elm| %>
+    <% segments.each do |segment| %>
     <li>
-      <% if elm[:selected] %>
-      <%= link_to elm[:name], "", class: "day_btn selected", data: {start: elm[:hours].first, end: elm[:hours].last} %>
-      <% else %>
-      <%= link_to elm[:name], "", class: "day_btn", data: {start: elm[:hours].first, end: elm[:hours].last} %>
-      <% end %>
+      <%= link_to segment[:name], "", 
+        class: "day_btn #{"selected" if segment[:name] == @segment}", 
+        data: {start: segment[:hours].first, end: segment[:hours].last}, 
+        onclick: "event.preventDefault(); $('#segment_input').val('#{segment[:name]}'); window.reloadFrame();" %>
     </li>
     <% end %>
   </ul>
 </div>
+

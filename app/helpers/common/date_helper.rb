@@ -1,5 +1,20 @@
 module Common::DateHelper
 
+	def segments
+		[
+      {name: "整日", hours: (6..22)},
+      {name: "早上", hours: (6..12)},
+      {name: "下午", hours: (12..18)},
+      {name: "晚上", hours: (18..22)}
+    ]
+	end
+
+	def segment_hours(k = "整日")
+		segments.find do |a|
+    	a[:name] == k
+    end[:hours]
+	end
+
 	def datetime_format(datetime, type = 1)
 		if datetime.present?
 			if type == 1
