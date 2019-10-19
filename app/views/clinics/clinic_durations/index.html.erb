@@ -1,6 +1,4 @@
 
-
-
 <div id="clinic-durations-index">
 	<div class="title-box">
 	</div>
@@ -10,7 +8,9 @@
 			<tr class="title">
 				<th></th>
 				<% [1,2,3,4,5,6,0].each do |wd| %>
-				<th><%= ch_wday(wd) %></th>
+				<th>
+					<div class="btnGy_d"><%= ch_wday(wd) %></div>
+				</th>
 				<% end %>
 			</tr>
 			<% row = 0 %>
@@ -52,10 +52,9 @@
 		tableBox.find("tr.content td.content .reveal").on("mousedown", function(e){
 			var row = $(this).data('row');
 			var col = $(this).data('col');
-			var checked = $(this).siblings("input")[0].checked;
 			selecting = {
 				mode: "selecting",
-				selectedToTrue: !checked,
+				selectedToTrue: !$(this).siblings("input")[0].checked,
 				startPoint: {row: row, col: col},
 				endPoint: {row: row, col: col}
 			}
@@ -70,7 +69,7 @@
 				updateSelectingReveal();
 			}
 		});
-		tableBox.find("tr.content td.content .reveal").on("mouseup", function(e){
+		$(document).on("mouseup", function(e){
 			tableBox.find(".selecting_to_true").each(function(i, elm){
 				$(elm).siblings("input")[0].checked = true;
 			});
