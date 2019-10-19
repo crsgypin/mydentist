@@ -46,10 +46,8 @@
 		var selecting = {
 			mode: "idle",
 			selectedToTrue: null,
-			startRow: null,
-			startCol: null,
-			endRow: null,
-			endCol: null
+			startPoint: null,
+			endPoint: null
 		};
 		tableBox.find("tr.content td.content .reveal").on("mousedown", function(e){
 			var row = $(this).data('row');
@@ -58,10 +56,8 @@
 			selecting = {
 				mode: "selecting",
 				selectedToTrue: !checked,
-				startRow: row,
-				startCol: col,
-				endRow: row,
-				endCol: col
+				startPoint: {row: row, col: col},
+				endPoint: {row: row, col: col}
 			}
 			updateSelectingReveal();
 		});
@@ -70,8 +66,7 @@
 			if(selecting.mode == "selecting"){
 				var row = $(this).data('row');
 				var col = $(this).data('col');
-				selecting.endRow = row;
-				selecting.endCol = col;
+				selecting.endPoint = {row: row, col: col};
 				updateSelectingReveal();
 			}
 		});
@@ -85,16 +80,14 @@
 			selecting = {
 				mode: "idle",
 				selectedToTrue: null,
-				startRow: null,
-				startCol: null,
-				endRow: null,
-				endCol: null
+				startPoint: null,
+				endPoint: null
 			}
 			clearSelectingReveal();
 		});
 		var updateSelectingReveal = function(){
 			if(selecting.mode == "selecting"){
-				var ranges = getSelectingRange(selecting.startRow, selecting.startCol, selecting.endRow, selecting.endCol);
+				var ranges = getSelectingRange(selecting.startPoint, selecting.endPoint);
 				var ids = ranges.map(function(range){
 					return "reveal-" + range.row + "-" + range.col;
 				});
@@ -111,13 +104,13 @@
 		var clearSelectingReveal = function(){
 			tableBox.find(".reveal").removeClass("selecting_to_true").removeClass("selecting_to_false");
 		};
-		window.getSelectingRange = function(startRow, startCol, endRow, endCol){
+		window.getSelectingRange = function(startPoint, endPoint){
 			var selRanges = [];
-			var r = Math.min(startRow, endRow);
-			var eRow = Math.max(startRow, endRow);
+			var r = Math.min(startPoint.row, endPoint.row);
+			var eRow = Math.max(startPoint.row, endPoint.row);
 			do {
-				var c = Math.min(startCol, endCol);
-				var eCol = Math.max(startCol, endCol);
+				var c = Math.min(startPoint.col, endPoint.col);
+				var eCol = Math.max(startPoint.col, endPoint.col);
 				do {
 					selRanges.push({
 						row: r,
