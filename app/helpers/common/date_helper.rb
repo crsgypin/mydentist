@@ -15,6 +15,22 @@ module Common::DateHelper
     end[:hours]
 	end
 
+	def ch_wdays
+		@ch_wdays ||= {
+			0 => "星期日",
+			1 => "星期一",
+			2 => "星期二",
+			3 => "星期三",
+			4 => "星期四",
+			5 => "星期五",
+			6 => "星期六"
+		}
+	end
+
+	def ch_wday(wday)
+		ch_wdays[wday]
+	end
+
 	def datetime_format(datetime, type = 1)
 		if datetime.present?
 			if type == 1
@@ -42,7 +58,8 @@ module Common::DateHelper
 	end
 
 	def hour_minute_format(hour, minute)
-		"#{hour}:#{sprintf('%02d', minute)}"
+		# "#{hour}:#{sprintf('%02d', minute)}"
+		"#{sprintf('%02d', hour)}:#{sprintf('%02d', minute)}"
 	end
 
 	def roc_format(date, format=1)
@@ -57,6 +74,12 @@ module Common::DateHelper
 
 	def roc_year(date)
 		(date.year - 1911)
+	end
+
+	def duration_include?(durations, wday, hour, minute)
+		durations.find do |d|
+			d.wday == wday && d.hour == hour && d.minute == minute
+		end
 	end
 
 end

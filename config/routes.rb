@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :patients
     resources :doctors
     resource :info, only: [:show, :edit, :update], controller: :info
+    resources :clinic_durations, only: [:index, :create]
   end
 
   namespace :admin do
