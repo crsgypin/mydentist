@@ -19,8 +19,16 @@ Rails.application.routes.draw do
     resources :events
     resources :patients
     resources :doctors
+    resources :doctors, only: [], module: :doctors do
+      resource :info, only: [:show, :edit, :update]
+      resources :doctor_durations, only: [:index, :create]
+      resources :doctor_services
+      resources :doctor_vacations
+    end
     resource :info, only: [:show, :edit, :update], controller: :info
-    resources :clinic_durations, only: [:index, :create]
+    resource :info, only: [], module: :info do
+      resources :clinic_durations, only: [:index, :create]
+    end
   end
 
   namespace :admin do

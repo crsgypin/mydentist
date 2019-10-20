@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191020054957) do
+ActiveRecord::Schema.define(version: 20191020134016) do
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -68,6 +68,25 @@ ActiveRecord::Schema.define(version: 20191020054957) do
     t.datetime "updated_at", null: false
     t.index ["clinic_duration_id"], name: "index_doctor_durations_on_clinic_duration_id"
     t.index ["doctor_id"], name: "index_doctor_durations_on_doctor_id"
+  end
+
+  create_table "doctor_services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "doctor_id"
+    t.integer "service_id"
+    t.integer "duration", default: 15
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_doctor_services_on_doctor_id"
+    t.index ["service_id"], name: "index_doctor_services_on_service_id"
+  end
+
+  create_table "doctor_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "doctor_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_doctor_vacations_on_doctor_id"
   end
 
   create_table "doctors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
