@@ -12,11 +12,12 @@
     {t: "已可洗牙", v: proc{|a| a.gender }},
     {t: "下次就診日期", v: proc{|a| a.gender }},
     {t: "加入推播狀態", v: proc{|a| a.gender }},
-    {t: "", v: proc{|a| 
-    	link_to "詳細#{icon_tag(:angle_right)}".html_safe, url_for(action: :show, id: a)
-    }
-  },
-  ]
+  ],
+  row: {
+    link: proc do |a|
+      url_for(action: :show, id: a)
+    end
+  }
 }
 %>
 </div>
