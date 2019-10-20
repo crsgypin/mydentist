@@ -23,7 +23,9 @@
 				<% [1,2,3,4,5,6,0].each_with_index do |wday, col| %>
 				<td class= "content <%= "#{minute == 0 ? "solid" : "dashed"}" %>">
 					<% wday_hour_minute = wday_hour_minute_format(wday, hour, minute) %>
+					<% next_wday_hour_miniute = wday_hour_minute_format(wday, hour, minute + 15) %>
 					<%= check_box_tag "clinic_durations[][wday_hour_minute]", wday_hour_minute, @clinic_durations.find{|d| d.wday_hour_minute == wday_hour_minute} %>
+					<%= check_box_tag "clinic_durations[][wday_hour_minute]", next_wday_hour_miniute, @clinic_durations.find{|d| d.wday_hour_minute == wday_hour_minute} %>
 					<%= content_tag :div, data: {row: row, col: col}, class: "reveal", id: "reveal-#{row}-#{col}" do %>
 					<% end %>
 				</td>
@@ -54,7 +56,7 @@
 			var col = $(this).data('col');
 			selecting = {
 				mode: "selecting",
-				selectedToTrue: !$(this).siblings("input")[0].checked,
+				selectedToTrue: !$(this).siblings("input[type='checkbox']")[0].checked,
 				startPoint: {row: row, col: col},
 				endPoint: {row: row, col: col}
 			}
@@ -70,35 +72,43 @@
 			}
 		});
 		$(document).on("mouseup", function(e){
-			tableBox.find(".selecting_to_true").each(function(i, elm){
-				$(elm).siblings("input")[0].checked = true;
-			});
-			tableBox.find(".selecting_to_false").each(function(i, elm){
-				$(elm).siblings("input")[0].checked = false;
-			});
+			setSelectingReveal();
+			clearSelectingReveal();
+			resetSelecting();
+		});
+		var resetSelecting = function(){
 			selecting = {
 				mode: "idle",
 				selectedToTrue: null,
 				startPoint: null,
 				endPoint: null
-			}
-			clearSelectingReveal();
-		});
-		var updateSelectingReveal = function(){
-			if(selecting.mode == "selecting"){
-				var ranges = getSelectingRange(selecting.startPoint, selecting.endPoint);
-				var ids = ranges.map(function(range){
-					return "reveal-" + range.row + "-" + range.col;
+			}			
+		}
+		var setSelectingReveal = function(){
+			tableBox.find(".selecting_to_true").each(function(i, elm){
+				$(elm).siblings("input[type='checkbox']").each(function(i, elm){
+					elm.checked = true
 				});
-				clearSelectingReveal();
-				ids.forEach(function(id){
-					if(selecting.selectedToTrue){
-						$("#" + id).addClass("selecting_to_true");
-					} else {
-						$("#" + id).addClass("selecting_to_false");
-					}
-				})
-			}
+			});
+			tableBox.find(".selecting_to_false").each(function(i, elm){
+				$(elm).siblings("input[type='checkbox']").each(function(i, elm){
+					elm.checked = false
+				});
+			});			
+		}
+		var updateSelectingReveal = function(){
+			var ranges = getSelectingRange(selecting.startPoint, selecting.endPoint);
+			var ids = ranges.map(function(range){
+				return "reveal-" + range.row + "-" + range.col;
+			});
+			clearSelectingReveal();
+			ids.forEach(function(id){
+				if(selecting.selectedToTrue){
+					$("#" + id).addClass("selecting_to_true");
+				} else {
+					$("#" + id).addClass("selecting_to_false");
+				}
+			})
 		};
 		var clearSelectingReveal = function(){
 			tableBox.find(".reveal").removeClass("selecting_to_true").removeClass("selecting_to_false");

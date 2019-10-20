@@ -9,9 +9,19 @@ class Clinic < ApplicationRecord
 	has_many :clinic_vacations, class_name: "Clinic::Duration"
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
+	include Common::DateTimeDurationHelper
 
 	def to_param
 		self.friendly_id
 	end
+
+	def update_clinic_durations_note!
+		self.update!(:clinic_durations_note => wday_durations_note(self.clinic_durations))
+	end
+
+	def clinic_durations_note_html
+		self.clinic_durations_note.gsub("\n", "<br>")
+	end
+
 	
 end

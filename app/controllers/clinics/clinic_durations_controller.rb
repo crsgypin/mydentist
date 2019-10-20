@@ -11,6 +11,7 @@ class ::Clinics::ClinicDurationsController < ::Clinics::ApplicationController
 			params[:clinic_durations].each do |clinic_duration|
 				@clinic.clinic_durations.create!(wday_hour_minute: clinic_duration[:wday_hour_minute])
 			end
+			@clinic.update_clinic_durations_note!
 		end
 	end
 

@@ -28,10 +28,15 @@
             text_field_tag "clinic[address]", a.address
           }},
           {t: "營業時間", v: proc{|a| 
-            link_to "選取診所營業時間","" 
+            r = ""
+            r += link_to "選取診所營業時間", clinic_clinic_durations_path(@clinic) 
+            r += "<div>"
+            r += a.clinic_durations_note_html
+            r += "</div>"
+            r.html_safe
           }},
           {t: "休診時間", v: proc{|a| 
-            link_to "選取休診時間", "" 
+            link_to "選取休診時間", ""
           }},
           {k: "描述", v: proc{|a| 
             text_field_tag "clinic[address]", a.address
