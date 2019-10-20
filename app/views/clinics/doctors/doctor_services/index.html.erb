@@ -1,0 +1,15 @@
+
+
+<div id="clinic-doctor-doctor_services-index">
+	<div class="head-box">
+		<%= link_to "新增", url_for(action: :new), remote: true, class: "btnBu" %>
+		<p class="note">註：時程最多10個為上限</p>
+	</div>
+	<div class="content-box">
+		<div id="doctoer-service-table">
+			<% @doctor_services.each do |doctor_service| %>
+			<%= render_relative_partial "common/service_tr", locals: {doctor_service: doctor_service} %>
+			<% end%>
+		</div>
+	</div>
+</div>

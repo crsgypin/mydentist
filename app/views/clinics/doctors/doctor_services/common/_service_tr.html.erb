@@ -1,0 +1,15 @@
+
+<div class="s-row">
+	<div class="s-col">
+		診療項目
+		<%= text_field_tag "doctor_service[][name]", "" %>
+	</div>
+	<div class="s-col">
+		所需時間
+		<%= select_field_tag "doctor_service[][duration]", doctor_service.duration, [15, 30, 45, 60].map {|a| [a, "#{a}分鐘"]} %>
+	</div>
+	<div>
+		
+	</div>
+</div>
+
