@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :patients
     resources :doctors
     resources :doctors, only: [], module: :doctors do
-      resource :info, only: [:show, :edit, :update]
+      resource :info, only: [:show, :edit, :update], controller: :info
       resources :doctor_durations, only: [:index, :create]
       resources :doctor_services
       resources :doctor_vacations

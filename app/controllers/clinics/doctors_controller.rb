@@ -13,4 +13,8 @@ class ::Clinics::DoctorsController < ::Clinics::ApplicationController
     @doctors = @doctors.page(params[:page]).per(20)
   end
 
+  def show
+    redirect_to clinic_doctor_info_path(@clinic, params[:id])
+  end
+
 end

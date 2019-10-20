@@ -1,4 +1,4 @@
-class ::Clinics::Doctors::infoController < ::Clinics::Doctors::ApplicationController
+class ::Clinics::Doctors::InfoController < ::Clinics::Doctors::ApplicationController
 
 	def show
 
