@@ -1,21 +1,19 @@
 
-<table id="clinic-table">
-	<tr>
+<div id="clinic-table">
+	<div class="d-row">
 		<% cols.each do |col| %>
-		<td>
+		<div class="d-col">
 			<%= col[:t] %>
-		</td>
+		</div>
 		<% end %>
-	</tr>
+	</div>
 	<% resources.each do |resource|%>
-	<tr>
+	<div class="d-row">
 		<% cols.each do |col| %>
-		<td>
+		<div class="d-col">
 			<%= col[:v].call(resource) %>
-		</td>
+		</div>
 		<% end %>
-	</tr>
+	</div>
 	<% end %>
-</table>
-
-
+</div>
