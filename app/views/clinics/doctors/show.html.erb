@@ -7,26 +7,37 @@
   <div class="content_box">
     <%= render_relative_partial "common/sidemenu" %>
     <div id="doctors-show-container">
+      <%= form_tag url_for(action: :update), method: :patch, class: "clinic-form" do %>
       <%= render partial: "admin/common/show_table" , locals: {
         id: "doctor",
         resource: @doctor,
         fields: [
-          {k: "id", v: proc{|a| a.id }},
-          {k: "friendly_id", v: proc{|a| a.friendly_id }},
-          {k: "status", v: proc{|a| a.status }},
-          {k: "name", v: proc{|a| a.name }},
-          {k: "title", v: proc{|a| a.title }},
-          {k: "experience", v: proc{|a| a.experience }},
-          {k: "pro", v: proc{|a| a.pro }},
-          {k: "intro", v: proc{|a| a.intro }},
-          {k: "photo", v: proc{|a| a.photo }},
-          {k: "gender", v: proc{|a| a.gender }},
-          {k: "web_link", v: proc{|a| a.web_link }},
-          {k: "created_at", v: proc{|a| a.created_at }},
-          {k: "updated_at", v: proc{|a| a.updated_at }}
+          {t: "醫師姓名", v: proc{|a|
+            r = "<div class='flx'>"
+            r +=  text_field_tag "doctor[name]", a.name 
+            r +=  text_field_tag "doctor[title]", a.title
+            r += "</div>"
+            r.html_safe
+          }},
+          {t: "主治", v: proc{|a| 
+            text_area_tag "doctor[pro]", a.pro 
+          }},
+          {t: "學經歷", v: proc{|a| 
+            text_area_tag "doctor[experience]", a.experience 
+          }},
+          {t: "網頁連結", v: proc{|a| 
+            text_field_tag "doctor[web_link]", a.web_link 
+          }},
+          {t: "聯絡電話", v: proc{|a| 
+            text_field_tag "doctor[phone]", a.phone 
+          }},
+          {t: "備註", v: proc{|a| 
+            text_field_tag "doctor[note]", a.note
+          }},
         ]
       }
       %>
+      <% end %>
     </div>
   </div>
 </div>

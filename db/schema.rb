@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20191020054957) do
     t.text "intro"
     t.string "photo"
     t.integer "gender", limit: 1
+    t.string "phone", limit: 50
+    t.string "note", limit: 500
     t.string "web_link"
     t.string "doctor_durations_note", limit: 500
     t.datetime "created_at", null: false

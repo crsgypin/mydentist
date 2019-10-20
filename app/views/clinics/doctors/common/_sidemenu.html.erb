@@ -6,9 +6,9 @@
 	<ul>
 	<% [
 		{name: "基本資料", selected: true},
-		{name: "看診時間"},
+		{name: "排診時段"},
 		{name: "診療時程"},
-		{name: "請假異動"},
+		{name: "休假日期 "},
 	].each do |elm| %>
 		<% if elm[:selected] %>
     <li class="selected"><%= elm[:name] %></li>

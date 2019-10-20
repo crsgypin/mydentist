@@ -11,6 +11,9 @@
 	    {t: "職銜", v: proc{|a| a.title }},
 	    {t: "經歷", v: proc{|a| short_string(a.experience, 10) }},
 	    {t: "主治", v: proc{|a| short_string(a.pro, 10) }},
+	    {t: "", v: proc{|a|
+	    	link_to "詳細資料", url_for(action: :show, id: a)
+	     }},
 	  ],
 	  row: {
 	  	link: proc {|a| url_for(action: :show, id: a)}

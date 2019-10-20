@@ -7,6 +7,12 @@
 	 	#doctors-show-container {
 	    width: 75%;
 	    font-size: 20px;
-	 	} 	
+	    padding: 20px;
+	    form {
+	    	padding: 10px;
+	    	border: 1px solid $colorGy1;
+	    	border-radius: 10px;
+	    }
+	 	}
 	}
 }
