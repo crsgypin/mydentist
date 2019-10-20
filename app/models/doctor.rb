@@ -7,6 +7,19 @@ class Doctor < ApplicationRecord
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id
 	mount_uploader :photo, PhotoUploader
+	include Common::DateTimeDurationHelper
+
+	def update_doctor_durations_note!
+		self.update!(:doctor_durations_note => wday_durations_note(self.doctor_durations))
+	end
+
+	def doctor_durations_note
+		self[:doctor_durations_note] || ""
+	end
+
+	def doctor_durations_note_html
+		self.doctor_durations_note.gsub("\n", "<br>")
+	end
 
   private
 

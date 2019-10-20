@@ -21,6 +21,10 @@ class Clinic < ApplicationRecord
 		self.update!(:clinic_durations_note => wday_durations_note(self.clinic_durations))
 	end
 
+	def clinic_durations_note
+		self[:clinic_durations_note] || ""
+	end
+
 	def clinic_durations_note_html
 		self.clinic_durations_note.gsub("\n", "<br>")
 	end

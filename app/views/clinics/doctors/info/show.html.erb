@@ -4,7 +4,6 @@
     <i class="fas fa-angle-left"></i><p>返回醫師列表</p>
   <% end %>
   <div class="content_box">
-    <%= render_relative_partial "../common/sidemenu" %>
     <div id="doctors-show-container">
       <%= form_tag url_for(action: :update), method: :patch, class: "clinic-form" do %>
       <%= render partial: "admin/common/show_table" , locals: {

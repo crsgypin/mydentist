@@ -3,62 +3,6 @@
 	.content-box {
 		width: 90%;
 		margin: 0 auto;
-		table#duration-table {
-			width: 100%;
-			text-align: center;
-			tr.title {
-				font-size: $fs_14p;
-				th {
-					padding: 5px 0;
-				}
-			}
-			tr.content {
-				td {
-					height: 15px;
-					
-					&.title {
-						position: relative;
-						width: 40px;
-						span {
-							position: absolute;
-							top: -10px;
-							left: 0;
-							font-size: 10px;
-							user-select: none;
-						}
-					}
-					&.content {
-						min-width: 60px;
-						cursor: pointer;
-						border-left: 1px dashed $colorGy1;
-						&.dashed {
-							border-top: 1px dashed $colorGy1;
-						}
-						&.solid {
-							border-top: 1px solid $colorGy1;
-						}
-						input {
-							display: none;
-						}
-						.reveal {
-							display: block;
-							width: 100%;
-							height: 100%;
-							&.selecting_to_true {
-								background: $colorGn!important;
-							}
-							&.selecting_to_false {
-								background: $colorGy1!important;
-							}
-						}
-						input:checked + .reveal {
-							background: $colorBu;
-							cursor: pointer;
-						}
-					}
-				}
-			}
-		}
 		.buttons-box {
 			text-align: right;
 		}
