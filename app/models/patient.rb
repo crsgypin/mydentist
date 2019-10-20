@@ -2,8 +2,11 @@ class Patient < ApplicationRecord
 	belongs_to :clinic
 	has_many :events
   has_one :line_account, class_name: "Line::Account"
+  has_many :clinic_patient_notifications, class_name: "Clinic::PatientNotification"
+  has_many :patient_notification_clinics, through: :clinic_patient_notifications, source: :clinic
   enum source: {"網路" => 1, "現場" => 2}
   enum :gender => {"男" => 1, "女" => 2}
+  enum notification_list: {"無" => 0, "回診推播" => 1}
 	before_validation :set_friendly_id, on: :create
   before_validation :set_birthday
   before_validation :check_for_source, on: :create

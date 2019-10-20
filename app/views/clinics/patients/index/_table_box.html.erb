@@ -1,5 +1,5 @@
 <div id="table-box">
-<%= render_relative_partial "table_box/table" , locals: {
+<%= render partial: "clinics/common/clinic-table" , locals: {
   id: "patients",
   resources: @patients,
   cols: [

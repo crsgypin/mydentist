@@ -7,6 +7,8 @@ class Clinic < ApplicationRecord
 	has_many :line_accounts, class_name: "Line::Account"
 	has_many :clinic_durations, class_name: "Clinic::Duration"
 	has_many :clinic_vacations, class_name: "Clinic::Duration"
+	has_many :clinic_patient_notifications, class_name: "Clinic::PatientNotification"
+	has_many :clinic_notification_patients, through: :clinic_patient_notifications, source: :patients
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper
