@@ -1,0 +1,34 @@
+
+<% if mode == "show" %>
+<div class="s-row" id="doctor_service-<%= doctor_service.id %>">
+	<div class="s-col">
+		診療項目
+		<span><%= doctor_service.service.name %></span>
+	</div>
+	<div class="s-col">
+		所需時間
+		<span><%= doctor_service.duration %>分鐘</span>
+	</div>
+	<div class="s-col">
+		<%= link_to "編輯", url_for(action: :edit), class: "btnW", remote: true %>
+	</div>
+</div>
+
+<% elsif mode == "edit" %>
+<%= form_tag url_for(action: :update, id: doctor_service), method: :patch, remote: true, class: "s-row" do %>
+	<div class="s-col">
+		診療項目
+		<%= select_field_tag "doctor_service[service_id]", doctor_service.service_id, @clinic.services.map{|s| [s.id, s.name]} %>
+	</div>
+	<div class="s-col">
+		所需時間
+		<%= select_field_tag "doctor_service[duration]", doctor_service.duration, [15, 30, 45, 60].map {|a| [a, "#{a}分鐘"]} %>
+	</div>
+	<div class="s-col">
+		<%= submit_tag "儲存", class: "btnBu" %>
+	</div>
+	<% end %>
+<% end %>
+
+<% end %>
+

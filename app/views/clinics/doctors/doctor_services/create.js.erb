@@ -1,0 +1,7 @@
+
+
+alert("新增成功");
+$("#doctor-service-new").remove();
+$("#doctor-service-table").append("<%= j render_relative_partial 'common/update_service_form', locals: {doctor_service: @doctor_service} %>")
+
+

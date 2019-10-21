@@ -1,4 +1,6 @@
 
 
-$("#doctoer-service-table").append("<%= j render_relative_partial 'common/service_tr', locals: {doctor_service: @doctor_service} %>")
+$("#doctor-service-table").append("<%= j render_relative_partial 'new/service_form', locals: {doctor_service: @doctor_service} %>")
 
+var id = $("#doctor-service-new").find('.s-row').attr("id");
+setEditMode(id);
