@@ -14,9 +14,11 @@ def doctor_services
 
 		services = doctor.clinic.services
 		service_indexes.map do |index|
-			services[index]
-		end.each do |service|
-			doctor.doctor_services.create(service: service)
+			[services[index], index < 3 ? 15 : 30]
+		end.each do |s|
+			service = s[0]
+			duration = s[1]
+			doctor.doctor_services.create(service: service, duration: duration)
 		end
 	end
 	puts "doctor_services done!"

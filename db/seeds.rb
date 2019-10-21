@@ -8,11 +8,11 @@
 
 #admin
 begin
-	require Rails.root.join("db/seed/load_excel.rb").to_s
-	require Rails.root.join("db/seed/clinic_durations.rb").to_s
-	require Rails.root.join("db/seed/doctor_durations.rb").to_s
+	# require Rails.root.join("db/seed/load_excel.rb").to_s
+	# require Rails.root.join("db/seed/clinic_durations.rb").to_s
+	# require Rails.root.join("db/seed/doctor_durations.rb").to_s
 	require Rails.root.join("db/seed/doctor_services.rb").to_s
-	require_relative "./seed/events.rb"
+	# require_relative "./seed/events.rb"
 
 rescue Exception => e
 	puts e.record.errors.full_messages if e.try(:record).present?
