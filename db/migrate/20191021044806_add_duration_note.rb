@@ -1,7 +1,7 @@
 class AddDurationNote < ActiveRecord::Migration[5.1]
   def up
-  	add_column :clinics, :clinic_durations_note, :string, limit: 500, after: :photo
-  	add_column :doctors, :doctor_durations_note, :string, limit: 500, after: :web_link
+  	add_column :clinics, :clinic_durations_note, :string, limit: 500, after: :photo, default: ""
+  	add_column :doctors, :doctor_durations_note, :string, limit: 500, after: :web_link, default: ""
   	add_column :doctors, :phone, :string, limit: 50, after: :gender
   	add_column :doctors, :note, :string, limit: 500, after: :phone
     add_column :clinic_durations, :wday_hour_minute, :string, limit: 50, after: :clinic_id

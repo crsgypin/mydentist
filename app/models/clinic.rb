@@ -21,12 +21,17 @@ class Clinic < ApplicationRecord
 		self.friendly_id
 	end
 
-	def update_clinic_durations_note!
-		self.update!(:clinic_durations_note => wday_durations_note(self.clinic_durations))
+	def wday_segment_hours(wday, segment)
+		default_segment_hours = segment_hours(segment)
+		clinic_durations = self.clinic_durations.where(wday: wday).uniq
+		hours = clinic_durations.map{|d| d.hour}.uniq.select do |hour|
+			default_segment_hours.include?(hour)
+		end
+		hours
 	end
 
-	def clinic_durations_note
-		self[:clinic_durations_note] || ""
+	def update_clinic_durations_note!
+		self.update!(:clinic_durations_note => wday_durations_note(self.clinic_durations))
 	end
 
 	def clinic_durations_note_html

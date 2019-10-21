@@ -8,7 +8,8 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 		@date = Date.parse(params[:date]) rescue Date.today
 		@doctor_durations = @doctor.doctor_durations.where(wday: @date.wday)
-		@doctor_events = @doctor.events.where(date: @date)
+		@doctor_events = @doctor.events.where(date: @date).includes(:events)
+		@doctor_event_durations = @doctor.event_durations.where("events.date = ?", @date)
 		respond_to do |format|
 			format.html
 			format.js

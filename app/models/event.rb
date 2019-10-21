@@ -4,7 +4,7 @@ class Event < ApplicationRecord
 	belongs_to :patient, optional: true
 	belongs_to :doctor, optional: true
 	belongs_to :service, optional: true
-	has_many :event_durations, class_name: "Event::Duration"
+	has_many :event_durations, class_name: "Event::Duration", autosave: true
 	enum status: {"預約中" => 5, "已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "預約中取消" => 40, "已預約取消" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
 	before_validation :check_for_source, on: :create
@@ -19,11 +19,11 @@ class Event < ApplicationRecord
 		(duration / default_duration).times do |index|
 			minute = minute + index * default_duration
 			if minute < 60
-				self.event_durations.create(hour: hour, minute: minute, duration: default_duration)
+				self.event_durations.new(hour: hour, minute: minute, duration: default_duration)
 			else
 				h = hour + 1
 				m = minute - 60
-				self.event_durations.create(hour: h, minute: m, duration: default_duration)
+				self.event_durations.new(hour: h, minute: m, duration: default_duration)
 			end
 		end
 		self.start_hour = hour

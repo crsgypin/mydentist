@@ -5,6 +5,7 @@ class Doctor < ApplicationRecord
 	has_many :doctor_vacations, class_name: "Doctor::Vacation"
 	has_many :services, through: :doctor_services
 	has_many :events
+	has_many :event_durations, through: :events
 	enum status: {"在職" => 1, "離職" => 2}
 	before_validation :set_friendly_id, on: :create
 	validates_presence_of :friendly_id
@@ -14,10 +15,6 @@ class Doctor < ApplicationRecord
 
 	def update_doctor_durations_note!
 		self.update!(:doctor_durations_note => wday_durations_note(self.doctor_durations))
-	end
-
-	def doctor_durations_note
-		self[:doctor_durations_note] || ""
 	end
 
 	def doctor_durations_note_html

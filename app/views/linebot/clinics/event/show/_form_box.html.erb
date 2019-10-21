@@ -22,17 +22,9 @@
 		</div>
 		<div class="wday_box">
 			<ul>
-			<% [
-				{name: "週日", number: 0},
-				{name: "週一", number: 1},
-				{name: "週二", number: 2},
-				{name: "週三", number: 3},
-				{name: "週四", number: 4},
-				{name: "週五", number: 5},
-				{name: "週六", number: 6},
-			].each do |wday| %>
-				<li class="<%= 'select' if wday[:number] == @date.wday %>">
-					<%= link_to wday[:name], "javascript:" %>
+			<% ch_wdays.each do |wday, ch_wday| %>
+				<li class="<%= 'select' if wday == @date.wday %>">
+					<%= link_to ch_wday, "javascript:" %>
 				</li>	
 			<% end %>
 			</ul>
@@ -53,9 +45,9 @@
 
 	<div class="time_box">
 		<% [
-			{name: "上午診", hours: (9..11)},
-			{name: "下午診", hours: (13..18)},
-			{name: "晚上診", hours: (19..21)},
+			{name: "上午診", hours: @clinic.wday_segment_hours(@date.wday, "早上")},
+			{name: "下午診", hours: @clinic.wday_segment_hours(@date.wday, "下午")},
+			{name: "晚上診", hours: @clinic.wday_segment_hours(@date.wday, "晚上")},
 		].each do |segment| %>
 		<div class="segment_box">
 			<div class="title">
@@ -66,10 +58,9 @@
 			<ul class="hours_box">
 				<% [0, 15, 30, 45].each do |minute| %>
 				<li>
-					<% name = "#{hour}#{sprintf('%02d', minute)}" %>
-					<% event_disabled = @date >= Date.today ? @doctor_events.find{|e| e.hour == hour && e.minute == minute} : true %>
+					<% event_disabled = @date >= Date.today ? @doctor_event_durations.find{|e| e.hour == hour && e.minute == minute} : true %>
 					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: event_disabled  %>
-					<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
+					<%= link_to hour_minute_format(hour, minute), "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 				</li>
 				<% end %>
 			</ul>
