@@ -9,7 +9,11 @@ class ::Clinics::Doctors::DoctorServicesController < ::Clinics::Doctors::Applica
 	end
 
 	def create
-		@doctor_service = @doctor.doctor_services.new(doctor_service_params)
+		# @doctor_service = @doctor.doctor_services.new(doctor_service_params)
+		@doctor_service = @doctor.doctor_services.new
+		@doctor_service.service_id = proc do
+			(@clinic.services.map{|a| a.id} - @doctor.services.map{|a| a.id}).last
+		end.call
 		if !@doctor_service.save
 			@error_messages = @doctor_service.errors.full_messages.join(",")
 			return js_render_error @error_messages

@@ -1,4 +1,3 @@
-
 <div class="s-row" id="doctor_service_<%= doctor_service.id %>">
 	<div class="s-col">
 		診療項目: 
@@ -18,7 +17,7 @@
 			<%= select_field_tag "doctor_service[duration]", doctor_service.duration, [15, 30, 45, 60].map {|a| [a, "#{a}分鐘"]} %>
 		</span>
 	</div>
-	<div class="s-col">
+	<div class="s-col alignR">
 		<span class="show-view">
 			<%= link_to "編輯", "", class: "edit-btn btnW" %>
 		</span>

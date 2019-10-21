@@ -2,7 +2,7 @@
 
 <div id="clinic-doctor-doctor_services-index">
 	<div class="head-box">
-		<%= link_to "新增", url_for(action: :new), remote: true, class: "btnBu" %>
+		<%= link_to "新增", url_for(action: :create), remote: true, class: "btnBu", method: "post" %>
 		<p class="note">註：時程最多10個為上限</p>
 	</div>
 	<div class="content-box">
