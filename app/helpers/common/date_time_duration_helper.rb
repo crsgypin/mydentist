@@ -32,15 +32,14 @@ module Common::DateTimeDurationHelper
 	end	
 
 	def hour_minute_format(hour, minute)
-		# "#{hour}:#{sprintf('%02d', minute)}"
 		"#{sprintf('%02d', hour)}:#{sprintf('%02d', minute)}"
 	end
 
 	def parse_hour_minute_format(str)
 		raise "格式錯誤，沒有 : , 原文: #{str}" if !str.include?(":")
 		r = {
-			hour: str.split(":")[0],
-			minute: str.split(":")[1]
+			hour: str.split(":")[0].to_i,
+			minute: str.split(":")[1].to_i
 		}
 	end
 
@@ -53,14 +52,30 @@ module Common::DateTimeDurationHelper
 		raise "格式錯誤，沒有 _ , 原文: #{str}" if !str.include?("_")
 		wday = str.split("_")[0].to_i
 		hour_minute = str.split("_")[1]
-		hour = hour_minute.split(":")[0].to_i
-		minute = hour_minute.split(":")[1].to_i
+		hm = parse_hour_minute_format(hour_minute)
 		r = {
 			wday: wday,
-			hour: hour,
-			minute: minute
+			hour: hm[:hour],
+			minute: hm[:minute]
 		}
 		r
+	end
+
+	def hour_minute_duration_format(hour, minute, duration)
+		hour_minute = hour_minute_format(hour, minute)
+		"#{hour_minute}_#{duration}"
+	end
+
+	def parse_hour_minute_duration_format(str)
+		raise "格式錯誤，沒有 _ , 原文: #{str}" if !str.include?("_")
+		hour_minute = str.split("_")[0]
+		hm = parse_hour_minute_format(hour_minute)
+		duration = str.split("_")[1].to_i
+		r = {
+			hour: hm[:hour],
+			minute: hm[:minute],
+			duration: duration
+		}
 	end
 
 	def wday_durations_note(wday_durations)

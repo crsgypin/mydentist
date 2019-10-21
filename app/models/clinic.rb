@@ -13,6 +13,10 @@ class Clinic < ApplicationRecord
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper
 
+	def self.default_duration
+		15
+	end
+
 	def to_param
 		self.friendly_id
 	end

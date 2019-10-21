@@ -4,27 +4,31 @@ class Event < ApplicationRecord
 	belongs_to :patient, optional: true
 	belongs_to :doctor, optional: true
 	belongs_to :service, optional: true
+	has_many :event_durations, class_name: "Event::Duration"
 	enum status: {"預約中" => 5, "已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "預約中取消" => 40, "已預約取消" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
 	before_validation :check_for_source, on: :create
-	before_save :check_duration
 
-	def hour_minute=(v)
-		if v.include?(":")
-			v1 = v.split(":")
-			self.hour = v1[0]
-			self.minute = v1[1]
+	def hour_minute_duration=(hour_minute_duration)
+		r = parse_hour_minute_duration_format(hour_minute_duration)
+		hour = r[:hour]
+		minute = r[:minute]
+		duration = r[:duration]
+		self.event_durations.destroy_all
+		default_duration = Clinic.default_duration
+		(duration / default_duration).times do |index|
+			minute = minute + index * default_duration
+			if minute < 60
+				self.event_durations.create(hour: hour, minute: minute, duration: default_duration)
+			else
+				h = hour + 1
+				m = minute - 60
+				self.event_durations.create(hour: h, minute: m, duration: default_duration)
+			end
 		end
-	end
-
-	def hour_minute
-		"#{self.hour}:#{sprintf('%02d', self.minute)}"
-		# "#{self.hour}:#{self.minute}"
-	end
-
-	def check_duration
-		self.duration = 15 if self.duration.nil?
-		true
+		self.start_hour = hour
+		self.start_minute = minute
+		self.total_duration = duration
 	end
 
 	def check_for_source
