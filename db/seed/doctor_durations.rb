@@ -13,7 +13,7 @@ def doctor_durations
 
 		wdays.each do |wday|
 			doctor.clinic.clinic_durations.where(wday: wday).each do |clinic_duration|
-				doctor_duration = doctor.doctor_durations.find_or_initialize_by(wday: wday, hour: clinic_duration.hour, minute: clinic_duration.minute)
+				doctor_duration = doctor.doctor_durations.find_or_initialize_by(wday: wday, hour: clinic_duration.hour, minute: clinic_duration.minute, duration: Clinic.default_duration)
 				doctor_duration.id = id
 				doctor_duration.save!
 				id += 1

@@ -1,13 +1,9 @@
 class Doctor::Duration < ApplicationRecord
 	belongs_to :doctor
-	before_create :set_duration
+	validates_presence_of :duration
 	include ClinicDoctorDuration
 
 	private
-
-	def set_duration
-		self.duration = 15
-	end
 	
 	
 end

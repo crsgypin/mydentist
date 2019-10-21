@@ -9,7 +9,7 @@ class ::Clinics::Info::ClinicDurationsController < ::Clinics::ApplicationControl
 			@clinic_durations = @clinic.clinic_durations
 			@clinic_durations.destroy_all
 			params[:clinic_durations].each do |clinic_duration|
-				@clinic.clinic_durations.create!(wday_hour_minute: clinic_duration[:wday_hour_minute])
+				@clinic.clinic_durations.create!(wday_hour_minute: clinic_duration[:wday_hour_minute], duration: Clinic.default_duration)
 			end
 			@clinic.update_clinic_durations_note!
 		end
