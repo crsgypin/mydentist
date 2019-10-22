@@ -14,21 +14,21 @@ class Event < ApplicationRecord
 
 	def hour_minute_duration=(str)
 		t = parse_hour_minute_duration_format(str)
-		self.start_hour = t[:hour]
-		self.start_minute = t[:minute]
-		self.total_duration = t[:duration]
+		self.hour = t[:hour]
+		self.minute = t[:minute]
+		self.duration = t[:duration]
 	end
 
 	def check_hour_minute_duration
-		if self.changes[:start_hour].present? || self.changes[:start_minute].present? || self.changes[:total_duration].present?
+		if self.changes[:hour].present? || self.changes[:minute].present? || self.changes[:duration].present?
 			self.event_durations.destroy_all
 			default_duration = Clinic.default_duration
-			(self.total_duration / default_duration).times do |index|
-				minute = self.start_minute + index * default_duration
+			(self.duration / default_duration).times do |index|
+				minute = self.minute + index * default_duration
 				if minute < 60
-					self.event_durations.create(hour: self.start_hour, minute: minute, duration: default_duration)
+					self.event_durations.create(hour: self.hour, minute: minute, duration: default_duration)
 				else
-					h = self.start_hour + 1
+					h = self.hour + 1
 					m = minute - 60
 					self.event_durations.create(hour: h, minute: m, duration: default_duration)
 				end
@@ -38,7 +38,7 @@ class Event < ApplicationRecord
 	end
 
 	def event_durations_count
-		self.total_duration / Clinic.default_duration
+		self.duration / Clinic.default_duration
 	end
 
 	def check_for_source

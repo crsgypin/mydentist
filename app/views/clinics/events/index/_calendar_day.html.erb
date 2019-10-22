@@ -27,7 +27,7 @@
       <% @clinic.wday_segment_hours(@date.wday, @segment).each do |hour| %>
       <% [0, 15, 30, 45].each do |minute| %>
       <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-      <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.start_hour == hour && a.start_minute == minute} %>
+      <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.hour == hour && a.minute == minute} %>
       <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
         <% if event.present? %>
         <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>

@@ -9,9 +9,9 @@
     {t: "病患", v: proc{|a| a.patient.try(:name) }},
     {t: "項目", v: proc{|a| a.service.try(:name) }},
     {t: "日期", v: proc{|a| a.date.strftime('%Y/%m/%d') if a.date }},
-    {t: "時", v: proc{|a| a.start_hour }},
-    {t: "分", v: proc{|a| a.start_minute }},
-    {t: "區間", v: proc{|a| a.total_duration }},
+    {t: "時", v: proc{|a| a.hour }},
+    {t: "分", v: proc{|a| a.minute }},
+    {t: "區間", v: proc{|a| a.duration }},
     {t: "區間數", v: proc{|a| a.event_durations.length }},
     {t: "LINE", v: proc{|a| 
     	"#{a.line_account.try(:id)} - #{a.line_account.try(:display_name)}"

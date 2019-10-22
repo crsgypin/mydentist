@@ -11,9 +11,7 @@ class AddDurationNote < ActiveRecord::Migration[5.1]
     add_index :doctor_durations, :wday_hour_minute
     add_index :event_durations, :wday_hour_minute
     remove_column :doctor_durations, :clinic_duration_id
-    rename_column :events, :hour, :start_hour
-    rename_column :events, :minute, :start_minute
-    rename_column :events, :duration, :total_duration
+    add_column :events, :event_durations_count, :integer, limit: 1, after: :duration, default: 0
   end
 
   def down
@@ -26,8 +24,6 @@ class AddDurationNote < ActiveRecord::Migration[5.1]
     remove_column :event_durations, :wday_hour_minute
     add_column :doctor_durations, :clinic_duration_id, :integer
     add_index :doctor_durations, :clinic_duration_id
-    rename_column :events, :start_hour, :hour
-    rename_column :events, :start_minute, :minute
-    rename_column :events, :total_duration, :duration
+    remove_column :events, :event_durations_count
   end
 end

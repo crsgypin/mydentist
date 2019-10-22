@@ -9,8 +9,8 @@
     {t: "項目", v: proc{|a| a.service.try(:name) }},
     {k: "狀態", v: proc{|a| a.status }},
     {k: "日期", v: proc{|a| a.date }},
-    {k: "起始時間", v: proc{|a| hour_minute_format(a.start_hour, a.start_minute) }},
-    {k: "總區間", v: proc{|a| a.total_duration }},
+    {k: "起始時間", v: proc{|a| hour_minute_format(a.hour, a.minute) }},
+    {k: "總區間", v: proc{|a| a.duration }},
     {k: "區間", v: proc{|a|
       a.event_durations.map do |ed|
         hour_minute_format(ed.hour, ed.minute)

@@ -23,9 +23,9 @@
 				{name: "晚上診", segment_key: "晚上", hours: segment_hours("晚上")},
 			].map do |segment|
 				segment[:events] = @events.select do |event|
-					event.start_hour >= segment[:hours].first && event.start_hour < segment[:hours].last
+					event.hour >= segment[:hours].first && event.hour < segment[:hours].last
 				end.sort do |a,b|
-					(a.start_hour * 60 + a.start_minute) - (b.start_hour * 60 + b.start_minute)
+					(a.hour * 60 + a.minute) - (b.hour * 60 + b.minute)
 				end
 				segment
 			end
@@ -51,7 +51,7 @@
 					<div class="e-col"><%= event.patient.name %></div>
 					<div class="e-col"><%= event.service.name %></div>
 					<div class="e-col"><%= event.doctor.name %></div>
-					<div class="e-col"><%= hour_minute_format(event.start_hour, event.start_minute) %></div>
+					<div class="e-col"><%= hour_minute_format(event.hour, event.minute) %></div>
 				</div>
 				<% end %>
 			</div>

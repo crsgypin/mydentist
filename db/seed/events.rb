@@ -24,9 +24,9 @@ def event_durations
 						patient: patient, 
 						service: service, 
 						date: date,
-						start_hour: hour,
-						start_minute: minute,
-						total_duration: duration,
+						hour: hour,
+						minute: minute,
+						duration: duration,
 						source: rand(10) > 8 ? "現場" : "網路",
 						status: proc do
 							if date < Date.today

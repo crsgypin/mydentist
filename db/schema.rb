@@ -150,9 +150,10 @@ ActiveRecord::Schema.define(version: 20191022022212) do
     t.integer "status", limit: 1
     t.integer "source", limit: 1, default: 1
     t.date "date"
-    t.integer "start_hour", limit: 1
-    t.integer "start_minute", limit: 1
-    t.integer "total_duration", limit: 1
+    t.integer "hour", limit: 1
+    t.integer "minute", limit: 1
+    t.integer "duration", limit: 1
+    t.integer "event_durations_count", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_events_on_clinic_id"
