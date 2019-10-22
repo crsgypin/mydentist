@@ -60,7 +60,7 @@
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
 				<li class="minutes-box" data-click_duration_count="<%= @service.duration / Clinic.default_duration %>">
-					<%= radio_button_tag "event[hour_minute]", hour_minute_format(hour, minute), false, disabled: !minute_segment[:enabled]  %>
+					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration), false, disabled: !minute_segment[:enabled]  %>
 					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
 					<% i += 1 %>
 				</li>

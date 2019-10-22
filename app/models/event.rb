@@ -10,6 +10,14 @@ class Event < ApplicationRecord
 	validates_presence_of :status, :source
 	before_validation :check_for_source, on: :create
 	after_save :check_hour_minute_duration
+	include Common::DateTimeDurationHelper
+
+	def hour_minute_duration=(str)
+		t = parse_hour_minute_duration_format(str)
+		self.start_hour = t[:hour]
+		self.start_minute = t[:minute]
+		self.total_duration = t[:duration]
+	end
 
 	def check_hour_minute_duration
 		if self.changes[:start_hour].present? || self.changes[:start_minute].present? || self.changes[:total_duration].present?
