@@ -32,7 +32,7 @@ module Common::DateHelper
 			"#{date.year - 1911}年#{date.month}月#{date.day}日"
 		elsif format == 2
 			ch_wday = ["日", "一", "二", "三", "四", "五", "六"]
-			"民國#{date.year - 1911}年#{date.month}月#{date.day}日(#{ch_wday[@date.wday]})"
+			"民國#{date.year - 1911}年#{date.month}月#{date.day}日(#{ch_wday[date.wday]})"
 		end
 	end
 
