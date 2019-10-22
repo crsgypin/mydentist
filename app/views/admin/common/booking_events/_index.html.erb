@@ -1,0 +1,23 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "booking_events",
+  resources: @booking_events,
+  total_resources_count: @booking_events.total_count,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "診所", v: proc{|a| a.clinic.try(:name) }},
+    {t: "醫生", v: proc{|a| a.doctor.try(:name) }},
+    {t: "病患", v: proc{|a| a.patient.try(:name) }},
+    {t: "項目", v: proc{|a| a.service.try(:name) }},
+    {t: "LINE", v: proc{|a| 
+      "#{a.line_account.try(:id)} - #{a.line_account.try(:display_name)}"
+    }},
+    {t: "", v: proc{|a| 
+      link_to "刪除", url_for(action: :destroy, id: a), method: "delete", data: {confirm: "確定移除?"}, remote: true
+    }}
+  ],
+  row: {
+    default_sel_index: 0,
+    iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

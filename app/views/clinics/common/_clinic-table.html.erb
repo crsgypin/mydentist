@@ -1,14 +1,14 @@
 
-<table id="doctors_table">
+<table id="clinic-table">
 	<tr>
 		<% cols.each do |col| %>
-		<th>
+		<td>
 			<%= col[:t] %>
-		</th>
+		</td>
 		<% end %>
 	</tr>
 	<% resources.each do |resource|%>
-	<tr data-url="<%= row[:link].call(resource) if local_assigns[:row].present? %>" onclick="$(this).data('url') && (window.location.href=$(this).data('url'));">
+	<tr onclick="window.location.href= '<%= row[:link].call(resource) %>'">
 		<% cols.each do |col| %>
 		<td>
 			<%= col[:v].call(resource) %>
@@ -17,3 +17,5 @@
 	</tr>
 	<% end %>
 </table>
+
+

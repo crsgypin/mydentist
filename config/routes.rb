@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :linebot do
     resources :clinics, only: [], module: :clinics do
       post "webhook", to: "webhook#create"
-      resource :event, only: [:show, :update], controller: :event
+      resource :event, only: [:show, :create], controller: :event
       resource :doctor, only: [:show], controller: :doctor
     end
     resources :events
@@ -19,7 +19,16 @@ Rails.application.routes.draw do
     resources :events
     resources :patients
     resources :doctors
+    resources :doctors, only: [], module: :doctors do
+      resource :info, only: [:show, :edit, :update], controller: :info
+      resources :doctor_durations, only: [:index, :create]
+      resources :doctor_services
+      resources :doctor_vacations
+    end
     resource :info, only: [:show, :edit, :update], controller: :info
+    resource :info, only: [], module: :info do
+      resources :clinic_durations, only: [:index, :create]
+    end
   end
 
   namespace :admin do
@@ -50,6 +59,7 @@ Rails.application.routes.draw do
       end
     	resources :members
     	resources :events
+      resources :booking_events
     	resources :patients
       resources :patients, only: [], module: :patients do
         resource :info, only: [:show, :edit, :update], controller: :info
@@ -85,6 +95,7 @@ Rails.application.routes.draw do
       end
       resources :members
       resources :events
+      resources :booking_events
       resources :patients
       resources :patients, only: [], module: :patients do
         resource :info, only: [:show, :edit, :update], controller: :info

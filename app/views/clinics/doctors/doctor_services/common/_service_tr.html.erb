@@ -1,0 +1,29 @@
+<div class="s-row" id="doctor_service_<%= doctor_service.id %>">
+	<div class="s-col">
+		診療項目: 
+		<span class="show-view">
+			<%= doctor_service.service.try(:name) %>
+		</span>
+		<span class="edit-view hidden">
+			<%= select_field_tag "doctor_service[service_id]", doctor_service.service_id, @clinic.services.map{|s| [s.id, s.name]} %>
+		</span>
+	</div>
+	<div class="s-col">
+		所需時間
+		<span class="show-view">
+			<%= doctor_service.duration %>分鐘
+		</span>
+		<span class="edit-view hidden">
+			<%= select_field_tag "doctor_service[duration]", doctor_service.duration, [15, 30, 45, 60].map {|a| [a, "#{a}分鐘"]} %>
+		</span>
+	</div>
+	<div class="s-col alignR">
+		<span class="show-view">
+			<%= link_to "編輯", "", class: "edit-btn btnW" %>
+		</span>
+		<span class="edit-view hidden">
+			<%= link_to "取消", "", class: "cancel-btn" %>
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</span>
+	</div>
+</div>

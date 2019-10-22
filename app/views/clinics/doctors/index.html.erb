@@ -1,16 +1,18 @@
 <div id="doctors-index">
-	<h1>醫師列表</h1>
-	<%= render_relative_partial "index/table" , locals: {
+	<%= render partial: "clinics/common/clinic-table" , locals: {
 	  id: "doctors",
 	  resources: @doctors,
 	  cols: [
-	    {t: "", v: proc{|a|
-	    	image_tag a.photo.url, alt: a.name
+	    {t: "圖片", v: proc{|a|
+	    	image_tag a.photo.url, alt: a.name, style: "width: 100px;"
 	    }},
 	    {t: "名稱", v: proc{|a| a.name }},
 	    {t: "職銜", v: proc{|a| a.title }},
 	    {t: "經歷", v: proc{|a| short_string(a.experience, 10) }},
 	    {t: "主治", v: proc{|a| short_string(a.pro, 10) }},
+	    {t: "", v: proc{|a|
+	    	link_to "詳細資料", url_for(action: :show, id: a)
+	     }},
 	  ],
 	  row: {
 	  	link: proc {|a| url_for(action: :show, id: a)}

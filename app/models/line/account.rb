@@ -3,6 +3,7 @@ class Line::Account < ApplicationRecord
 	belongs_to :clinic, optional: true #temporarily optional
 	belongs_to :patient, optional: true
 	has_many :events, class_name: "Event", foreign_key: :line_account_id
+	has_many :booking_events, class_name: "BookingEvent", foreign_key: :line_account_id
 	enum status: {"follow" => 1, "unfollow" => 2}
 	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id

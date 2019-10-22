@@ -7,8 +7,17 @@
   	<%= render_relative_partial "clinics/side_menu" %>
   	<%= render_relative_partial "clinics/navbar" %>
   	<%= render_relative_partial "clinics/logout_lightbox" %>
-  	<div id="clinic_container">
-	    <%= yield %>
+  	<div id="clinic-container">
+      <% if @doctor_sidemenu == 1 %>
+        <div id="doctor-container">
+          <%= render_relative_partial "clinics/doctor_sidemenu" if @doctor_sidemenu == 1 %>
+          <div id="doctor-inbox">
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+  	    <%= yield %>
+      <% end %>
 	  </div>
   </body>
 </html>

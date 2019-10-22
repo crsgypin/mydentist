@@ -1,0 +1,7 @@
+
+<% if @error_messages.present? %>
+	alert("<%= @error_messages.html_safe %>");
+<% else %>
+	alert("修改成功");
+<% end %>
+

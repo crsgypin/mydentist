@@ -1,0 +1,14 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "booking_event",
+  resource: @booking_event,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "醫生", v: proc{|a| a.doctor.try(:name) }},
+    {t: "病患", v: proc{|a| a.patient.try(:name) }},
+    {t: "LINE", v: proc{|a| a.line_account.try(:display_name) }},
+    {t: "項目", v: proc{|a| a.service.try(:name) }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

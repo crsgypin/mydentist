@@ -1,0 +1,16 @@
+
+<aside id="doctor-sidemenu">
+	<%= image_tag @doctor.photo.url, alt: @doctor.name %>
+  <p><%= "#{@doctor.name}#{@doctor.title}" %></p>
+	<ul>
+	<% [
+		{name: "基本資料", link: clinic_doctor_info_path(@clinic, @doctor)},
+		{name: "排診時段", link: clinic_doctor_doctor_durations_path(@clinic, @doctor)},
+		{name: "診療時程", link: clinic_doctor_doctor_services_path(@clinic, @doctor)},
+		{name: "休假日期", link: clinic_doctor_doctor_vacations_path(@clinic, @doctor)},
+	].each do |elm| %>
+    <li class="<%= "selected" if request.fullpath == elm[:link] %>"><%= link_to elm[:name], elm[:link] %></li>
+	<% end %>
+  </ul>		
+</aside>
+

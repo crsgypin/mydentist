@@ -1,6 +1,8 @@
 
-#patients-table {
-	.d-row {
+table#clinic-table {
+	width: 100%;
+	text-align: center;
+	tr {
 		border-left: 1px solid #cccccc;
 		border-right: 1px solid #cccccc;
 		border-bottom: 1px solid #cccccc;
@@ -11,18 +13,13 @@
 			background: $colorBu_l; 
 			border-top: 1px solid #cccccc;
 		}
-		.d-col {			
+		td {	
 			text-align: center;
 			height: 80px;
-			width: 100px;
 			line-height: 20px;
 			padding: 30px 10px;			
-			min-width: 60px;
-
-			&:first-child {width: 100px;}
-			&:nth-child(2) { width: 60px;}
-			&:nth-child(3) { width: 130px;}
-			&:nth-child(4) { width: 130px;}
+			min-width: 50px;
 		}
 	}
 }
+

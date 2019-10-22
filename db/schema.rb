@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191015133126) do
+ActiveRecord::Schema.define(version: 20191022022212) do
+
+  create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.integer "doctor_id"
+    t.integer "patient_id"
+    t.integer "service_id"
+    t.integer "line_account_id"
+    t.integer "event_id"
+    t.date "date"
+    t.integer "hour", limit: 1
+    t.integer "minute", limit: 1
+    t.integer "duration", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_booking_events_on_clinic_id"
+    t.index ["doctor_id"], name: "index_booking_events_on_doctor_id"
+    t.index ["event_id"], name: "index_booking_events_on_event_id"
+    t.index ["line_account_id"], name: "index_booking_events_on_line_account_id"
+    t.index ["patient_id"], name: "index_booking_events_on_patient_id"
+    t.index ["service_id"], name: "index_booking_events_on_service_id"
+  end
 
   create_table "clinic_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
+    t.string "wday_hour_minute", limit: 50
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
@@ -21,6 +43,17 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_durations_on_clinic_id"
+    t.index ["wday_hour_minute"], name: "index_clinic_durations_on_wday_hour_minute"
+  end
+
+  create_table "clinic_patient_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.integer "patient_id"
+    t.integer "category", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_clinic_patient_notifications_on_clinic_id"
+    t.index ["patient_id"], name: "index_clinic_patient_notifications_on_patient_id"
   end
 
   create_table "clinic_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -42,21 +75,41 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.string "channel_token"
     t.text "recommend"
     t.text "photo"
+    t.string "clinic_durations_note", limit: 500, default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "doctor_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "doctor_id"
-    t.integer "clinic_duration_id"
+    t.string "wday_hour_minute", limit: 50
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
     t.integer "duration", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["clinic_duration_id"], name: "index_doctor_durations_on_clinic_duration_id"
     t.index ["doctor_id"], name: "index_doctor_durations_on_doctor_id"
+    t.index ["wday_hour_minute"], name: "index_doctor_durations_on_wday_hour_minute"
+  end
+
+  create_table "doctor_services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "doctor_id"
+    t.integer "service_id"
+    t.integer "duration", default: 15
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_doctor_services_on_doctor_id"
+    t.index ["service_id"], name: "index_doctor_services_on_service_id"
+  end
+
+  create_table "doctor_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "doctor_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_doctor_vacations_on_doctor_id"
   end
 
   create_table "doctors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -70,7 +123,10 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.text "intro"
     t.string "photo"
     t.integer "gender", limit: 1
+    t.string "phone", limit: 50
+    t.string "note", limit: 500
     t.string "web_link"
+    t.string "doctor_durations_note", limit: 500, default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_doctors_on_clinic_id"
@@ -78,6 +134,7 @@ ActiveRecord::Schema.define(version: 20191015133126) do
 
   create_table "event_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "event_id"
+    t.string "wday_hour_minute", limit: 50
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
@@ -85,6 +142,7 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_durations_on_event_id"
+    t.index ["wday_hour_minute"], name: "index_event_durations_on_wday_hour_minute"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -99,6 +157,7 @@ ActiveRecord::Schema.define(version: 20191015133126) do
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
     t.integer "duration", limit: 1
+    t.integer "event_durations_count", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_events_on_clinic_id"

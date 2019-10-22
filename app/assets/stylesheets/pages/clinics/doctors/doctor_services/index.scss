@@ -1,0 +1,22 @@
+
+#clinic-doctor-doctor_services-index {
+	.head-box {
+		padding-bottom: 10px;
+		.note {
+			color: $colorGy1;
+			display: inline-block;
+		}		
+	}
+	#doctor-service-table {
+		width: 100%;
+		.s-row {
+			display: flex;
+			justify-content: space-between;
+			height: 60px;
+			line-height: 60px;
+			.s-col {
+				width: 33%;
+			}
+		}
+	}
+}

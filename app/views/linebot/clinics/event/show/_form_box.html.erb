@@ -10,29 +10,24 @@
 		</div>
 	</div>
 	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @booking_event.service_id, @clinic.services.map{|a| [a.id, a.name]}, class: "form-control", id: "service_select" %>
+		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration}分鐘)" ]}, class: "form-control", id: "service_select" %>
 	</div>
 
 
 	<div class="date_box">
 		<div class="month_box">
 			<%= link_to icon_tag(:angle_left), "", id: "last_week"%>
-			<span><%= @date.month %></span>
+			<span>
+				<span class="year"><%= @date.year  %></span>年
+				<span class="month"><%= @date.month %></span>月
+			</span>
 			<%= link_to icon_tag(:angle_right), "", id: "next_week" %>
 		</div>
 		<div class="wday_box">
 			<ul>
-			<% [
-				{name: "週日", number: 0},
-				{name: "週一", number: 1},
-				{name: "週二", number: 2},
-				{name: "週三", number: 3},
-				{name: "週四", number: 4},
-				{name: "週五", number: 5},
-				{name: "週六", number: 6},
-			].each do |wday| %>
-				<li class="<%= 'select' if wday[:number] == @date.wday %>">
-					<%= link_to wday[:name], "javascript:" %>
+			<% ch_wdays.each do |wday, ch_wday| %>
+				<li class="<%= 'select' if wday == @date.wday %>">
+					<%= link_to ch_wday, "javascript:" %>
 				</li>	
 			<% end %>
 			</ul>
@@ -51,26 +46,23 @@
 		</div>
 	</div>
 
-	<div class="time_box">
-		<% disabled_time = ["1000", "1015", "1130", "1500", "1545", "1600", "1615", "1745", "1930", "1945", "2000", "2130"] %>
-		<% [
-			{name: "上午診", hours: (9..11)},
-			{name: "下午診", hours: (13..18)},
-			{name: "晚上診", hours: (19..21)},
-		].each do |segment| %>
+	<div class="time-box">
+		<% i = 0 %>
+		<% @select_event_durations.each do |segment| %>
 		<div class="segment_box">
 			<div class="title">
 				<%= segment[:name] %>
 			</div>
-			<% segment[:hours].each do |hour| %>
-			<% next if !@doctor_durations.map{|a| a.hour}.include?(hour) %>
-			<ul class="hours_box">
-				<% [0, 15, 30, 45].each do |minute| %>
-				<li>
-					<% name = "#{hour}#{sprintf('%02d', minute)}" %>
-					<% event_disabled = @date >= Date.today ? @doctor_events.find{|e| e.hour == hour && e.minute == minute} : true %>
-					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: event_disabled  %>
-					<%= link_to name, "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
+			<% segment[:hour_segments].each do |hour_segment| %>
+			<% next if !hour_segment[:has_duration] %>
+			<% hour = hour_segment[:hour] %>
+			<ul class="hours-box">
+				<% hour_segment[:minute_segments].each do |minute_segment| %>
+				<% minute = minute_segment[:minute] %>
+				<li class="minutes-box" data-click_duration_count="<%= @service.duration / Clinic.default_duration %>">
+					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration), false, disabled: !minute_segment[:enabled]  %>
+					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
+					<% i += 1 %>
 				</li>
 				<% end %>
 			</ul>
@@ -79,3 +71,6 @@
 		<% end %>
 	</div>
 </div>
+
+
+
