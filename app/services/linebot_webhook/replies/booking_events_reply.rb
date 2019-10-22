@@ -40,13 +40,9 @@ module LinebotWebhook::Replies::BookingEventsReply
 					# },
 					actions: [
 						{
-							type: "postback",
+							type: "uri",
 							label: "查詢醫生資訊",
-							data: {
-								controller: "doctors",
-								action: "show",
-								doctor_id: doctor.id
-							}
+							uri: liff_doctor_url(@clinic, doctor)
 						},
 						{
 							type: "uri",
