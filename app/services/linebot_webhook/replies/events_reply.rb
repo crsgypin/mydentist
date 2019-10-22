@@ -53,6 +53,13 @@ module LinebotWebhook::Replies::EventsReply
 		})
 	end
 
+	def reply_no_events
+		reply_message({
+			type: "text",
+			text: "您尚無掛號紀錄"
+		})
+	end
+
 	def reply_event_abort_or_select_services
 		reply_message({
 			type: "confirm",

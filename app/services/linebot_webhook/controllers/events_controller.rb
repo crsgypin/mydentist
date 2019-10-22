@@ -3,7 +3,11 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 
 	def index
 		@events = @line_account.events.where(status: "已預約")
-		reply_events
+		if @events.length > 0
+			reply_events
+		else
+			reply_no_events
+		end
 	end
 
 	def destroy
