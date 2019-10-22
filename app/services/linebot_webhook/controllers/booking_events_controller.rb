@@ -27,9 +27,9 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 		end
 		@booking_event.update(service: @service)
 		if @booking_event.doctor.nil?
-			reply_event_doctors
+			reply_booking_event_doctors
 		else
-			reply_event_doctors
+			reply_booking_event_doctors
 		end
 	end
 

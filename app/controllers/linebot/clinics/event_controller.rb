@@ -2,7 +2,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def show
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
-		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
+		@booking_event = @line_account.booking_events.last || @line_account.booking_events.new
 
 		@doctor = @clinic.doctors.find_by(id: params[:doctor_id]) || @clinic.doctors.first
 
@@ -22,7 +22,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		end
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
-		@booking_event = @line_account.events.find_or_initialize_by(status: "預約中")
+		@booking_event = @line_account.booking_events.find_or_initialize_by(status: "預約中")
 		@booking_event.clinic = @clinic
 		@booking_event.patient = @line_account.patient
 		@booking_event.status = "已預約"

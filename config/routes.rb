@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       end
     	resources :members
     	resources :events
+      resources :booking_events
     	resources :patients
       resources :patients, only: [], module: :patients do
         resource :info, only: [:show, :edit, :update], controller: :info
@@ -94,6 +95,7 @@ Rails.application.routes.draw do
       end
       resources :members
       resources :events
+      resources :booking_events
       resources :patients
       resources :patients, only: [], module: :patients do
         resource :info, only: [:show, :edit, :update], controller: :info
