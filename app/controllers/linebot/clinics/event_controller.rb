@@ -55,51 +55,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	end
 
 	def set_event_durations
-		@doctor_durations = @doctor.doctor_durations.where(wday: @date.wday)
-		doctor_duration_hours = @doctor_durations.map do |doctor_duration|
-			doctor_duration.hour
-		end
-		@doctor_event_durations = @doctor.event_durations.where("events.date = ?", @date)
-
-		@select_event_durations = [
-			{name: "上午診", hours: @clinic.wday_segment_hours(@date.wday, "早上")},
-			{name: "下午診", hours: @clinic.wday_segment_hours(@date.wday, "下午")},
-			{name: "晚上診", hours: @clinic.wday_segment_hours(@date.wday, "晚上")},
-		].map do |segment|
-			segment_durations = {
-				name: segment[:name],
-				hour_segments: segment[:hours].select do |hour|
-					doctor_duration_hours.include?(hour)
-				end.map do |hour|
-					h = {
-						hour: hour,
-						minute_segments: (60 / Clinic.default_duration).times.map do |index|
-							minute = Clinic.default_duration * index
-							m = {
-								minute: minute,
-								enabled: proc do
-									enabled = true
-									enabled = false if @date < Date.today
-									service_duration = @service.duration
-									(service_duration / Clinic.default_duration).times.each do |index|
-										hh = hour
-										mm = minute + Clinic.default_duration * index
-										if mm > 60
-											hh += 1
-											mm -= 60
-										end
-										if @doctor_event_durations.find{|d| d.hour == hh && d.minute == mm}
-											enabled = false
-										end
-									end
-									enabled
-								end.call
-							}
-						end
-					}
-				end
-			}
-		end
+		@select_event_durations = @doctor.current_event_durations(@date, @service.duration)
 	end
 
 	def event_params

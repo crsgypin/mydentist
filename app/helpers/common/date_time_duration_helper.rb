@@ -3,8 +3,8 @@ module Common::DateTimeDurationHelper
 	def segments
 		[
       {name: "整日", hours: (6..22)},
-      {name: "早上", hours: (6..12)},
-      {name: "下午", hours: (12..18)},
+      {name: "早上", hours: (6..11)},
+      {name: "下午", hours: (12..17)},
       {name: "晚上", hours: (18..22)}
     ]
 	end

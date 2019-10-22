@@ -46,20 +46,23 @@
 		</div>
 	</div>
 
-	<div class="time_box">
+	<div class="time-box">
+		<% i = 0 %>
 		<% @select_event_durations.each do |segment| %>
 		<div class="segment_box">
 			<div class="title">
 				<%= segment[:name] %>
 			</div>
 			<% segment[:hour_segments].each do |hour_segment| %>
+			<% next if !hour_segment[:has_duration] %>
 			<% hour = hour_segment[:hour] %>
-			<ul class="hours_box">
+			<ul class="hours-box">
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
-				<li>
-					<%= radio_button_tag "event[hour_minute]", hour_minute_format(hour, minute), false, disabled: minute_segment[:enabled]  %>
-					<%= link_to hour_minute_format(hour, minute), "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
+				<li class="minutes-box" data-click_duration_count="<%= @service.duration / Clinic.default_duration %>">
+					<%= radio_button_tag "event[hour_minute]", hour_minute_format(hour, minute), false, disabled: !minute_segment[:enabled]  %>
+					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
+					<% i += 1 %>
 				</li>
 				<% end %>
 			</ul>
@@ -68,3 +71,6 @@
 		<% end %>
 	</div>
 </div>
+
+
+

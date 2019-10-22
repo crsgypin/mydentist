@@ -21,6 +21,50 @@ class Doctor < ApplicationRecord
 		self.doctor_durations_note.gsub("\n", "<br>")
 	end
 
+	def current_event_durations(date, service_duration)
+		doctor_event_durations = self.event_durations.where("events.date = ?", date)
+		doctor_duration_hours = self.doctor_durations.where(wday: date.wday).map do |doctor_duration|
+			doctor_duration.hour
+		end
+		[
+			{name: "上午診", hours: self.clinic.wday_segment_hours(date.wday, "早上")},
+			{name: "下午診", hours: self.clinic.wday_segment_hours(date.wday, "下午")},
+			{name: "晚上診", hours: self.clinic.wday_segment_hours(date.wday, "晚上")},
+		].map do |segment|
+			segment_durations = {
+				name: segment[:name],
+				hour_segments: segment[:hours].map do |hour|
+					h = {
+						has_duration: doctor_duration_hours.include?(hour),
+						hour: hour,
+						minute_segments: (60 / Clinic.default_duration).times.map do |index|
+							minute = Clinic.default_duration * index
+							m = {
+								minute: minute,
+								enabled: proc do
+									enabled = true
+									enabled = false if date < Date.today
+									(service_duration / Clinic.default_duration).times.each do |index|
+										hh = hour
+										mm = minute + Clinic.default_duration * index
+										if mm > 60
+											hh += 1
+											mm -= 60
+										end
+										if doctor_event_durations.find{|d| d.hour == hh && d.minute == mm}
+											enabled = false
+										end
+									end
+									enabled
+								end.call
+							}
+						end
+					}
+				end
+			}
+		end
+	end
+
   private
 
   def set_friendly_id

@@ -43,6 +43,22 @@
 			reloadForm();
 		});
 
+		container.on("click", ".time-box ul.hours-box li a", function(e){
+			e.preventDefault();
+			var input = $(this).siblings("input")[0];
+			if(input.disabled){
+				return
+			}
+			var clickDurationCount = $(this).closest('.minutes-box').data("click_duration_count");
+			container.find(".time-box ul li a").removeClass("selected");
+
+			var index = $(this).data("index");
+			for(let i = 0; i < clickDurationCount; i++){
+				var a = container.find("[data-index='" + (index + i) + "']");
+				a.addClass("selected");
+			}
+		});
+
 		function reloadForm(args){
 			var args = args || {};
 			var line_account_id = "<%= params[:line_account_id] %>";
