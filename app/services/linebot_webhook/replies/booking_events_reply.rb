@@ -117,34 +117,6 @@ module LinebotWebhook::Replies::BookingEventsReply
 		})
 	end
 
-	def reply_confirm_destroy
-		reply_message({
-			type: "confirm",
-			alt_text: "確認取消？",
-			text: "你是否取消預約？",
-			actions: [
-				{
-					type: "postback",
-					label: "否",
-					data: {
-						controller: "events",
-						action: "index",
-					}
-				},
-				{
-					type: "postback",
-					label: "是",
-					data: {
-						controller: "events",
-						action: "destroy",
-						status: "已預約",
-						id: @event.id
-					}
-				}
-			]
-		})
-	end
-
 	def reply_booking_event_destroyed
 		reply_message({
 			type: "text",

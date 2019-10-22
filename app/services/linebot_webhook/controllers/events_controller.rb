@@ -10,12 +10,17 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 		end
 	end
 
+	def confirm_destroy
+		@event = @line_account.events.find_by(id: @message[:data][:id])
+		reply_confirm_destroy
+	end
+
 	def destroy
 		if @message[:data][:status] == "已預約"
-			booking_event = @line_account.events.find_by(status: "已預約", id: @message[:data][:id])
+			event = @line_account.events.find_by(status: "已預約", id: @message[:data][:id])
 		end
-		if booking_event.present?
-			booking_event.update(status: "預約中取消")
+		if event.present?
+			event.update(status: "預約中取消")
 		end
 		reply_event_destroyed
 	end
