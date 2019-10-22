@@ -29,7 +29,7 @@ def clinic_durations
 				if [9,10,11,14,15,16,17,18,19,20,21].include?(hour)
 					[0, 15, 30, 45].each do |minute|
 						clinic_duration = clinic.clinic_durations.find_or_initialize_by(wday: wday, hour: hour, minute: minute)
-
+						clinic_duration.duration = Clinic.default_duration
 						clinic_duration.id = id
 						clinic_duration.save!
 						id += 1
