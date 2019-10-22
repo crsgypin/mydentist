@@ -47,10 +47,7 @@ module LinebotWebhook::Replies::ClinicReply
 			type: "text",
 			text: proc do
 				r = "門診時間\n\n"
-				r += "週一~週五 PM 02:00~PM 05:00 PM06:00~PM09:00\n"
-				r += "週六 PM 02:00~PM 05:00\n"
-				r += "週日休診\n"
-				r += "國定假日、過年除夕晚上～初五休診"
+				r += @clinic.clinic_durations_note
 				r
 			end.call
 		})

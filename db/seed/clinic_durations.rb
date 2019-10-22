@@ -37,6 +37,8 @@ def clinic_durations
 				end
 			end
 		end
+
+		clinic.update_clinic_durations_note!
 	end
 	puts "clinic_durations done!!"
 	Clinic.all.each do |clinic|

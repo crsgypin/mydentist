@@ -19,6 +19,7 @@ def doctor_durations
 				id += 1
 			end
 		end
+		doctor.update_doctor_durations_note!
 	end
 	puts "doctor_durations done!"
 	Doctor.all.each do |doctor|
