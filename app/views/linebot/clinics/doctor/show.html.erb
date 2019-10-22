@@ -14,7 +14,7 @@
 				<% [
 					{name: "主治", content: @doctor.pro},
 					{name: "學經歷", content: @doctor.experience},
-					{name: "看診時間", content: @doctor.doctor_durations_note},
+					{name: "看診時間", content: @doctor.doctor_durations_note_html.html_safe},
 					].each do |elm| %>
 				<li>
 					<h3 class="title">

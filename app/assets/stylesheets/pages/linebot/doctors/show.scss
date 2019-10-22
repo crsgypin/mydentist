@@ -11,7 +11,7 @@
 		}		
 	}
 	.info-box {
-		top: 220px;
+		top: 260px;
 		width: 100%;
 		position: fixed;
 		max-width: calc(500px - 40px);
@@ -31,7 +31,7 @@
 			}
 		}
 		.detail-box {
-			height: calc(100vh - 220px - 100px);
+			height: calc(100vh - 260px - 100px);
 			background: $colorW;
 			padding: 10px 20px;
 			overflow: scroll;
