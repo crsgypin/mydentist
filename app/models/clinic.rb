@@ -4,6 +4,7 @@ class Clinic < ApplicationRecord
 	has_many :services
 	has_many :patients
 	has_many :events
+	has_many :event_durations, through: :events
 	has_many :line_accounts, class_name: "Line::Account"
 	has_many :clinic_durations, class_name: "Clinic::Duration"
 	has_many :clinic_vacations, class_name: "Clinic::Duration"

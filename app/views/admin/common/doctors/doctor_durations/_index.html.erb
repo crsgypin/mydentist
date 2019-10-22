@@ -23,7 +23,7 @@
     {t: "今日掛號", v: proc{|a|
       e = @doctor_event_durations.find{|e| e.event.date == Date.today && e.event.date.wday == a.wday && e.hour == a.hour && e.minute == a.minute}
       if e.present?
-        "#{e.id} #{e.event.patient.try(:name)}"
+        "#{e.id} #{e.event.patient.try(:name)} #{e.event.total_duration}"
       end
     }},
   ],

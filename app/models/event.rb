@@ -37,6 +37,10 @@ class Event < ApplicationRecord
 		true
 	end
 
+	def event_durations_count
+		self.total_duration / Clinic.default_duration
+	end
+
 	def check_for_source
 		if self.doctor.nil?						
 			self.errors.add("請選擇醫生","")
