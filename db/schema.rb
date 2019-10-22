@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 20191022022212) do
     t.integer "service_id"
     t.integer "line_account_id"
     t.integer "event_id"
+    t.date "date"
+    t.integer "hour", limit: 1
+    t.integer "minute", limit: 1
+    t.integer "duration", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_booking_events_on_clinic_id"

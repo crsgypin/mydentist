@@ -27,7 +27,7 @@ def event_durations
 						hour: hour,
 						minute: minute,
 						duration: duration,
-						source: rand(10) > 8 ? "現場" : "網路",
+						source: rand(10) > 4 ? "現場" : "網路",
 						status: proc do
 							if date < Date.today
 								rand(10) > 5 ? "爽約" : "報到"
