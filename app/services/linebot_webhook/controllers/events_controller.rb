@@ -20,7 +20,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 			event = @line_account.events.find_by(status: "已預約", id: @message[:data][:id])
 		end
 		if event.present?
-			event.update(status: "預約中取消")
+			event.update(status: "取消")
 		end
 		reply_event_destroyed
 	end
