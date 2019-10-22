@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @booking_event.service_id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration}分鐘)" ]}, class: "form-control", id: "service_select" %>
+		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration}分鐘)" ]}, class: "form-control", id: "service_select" %>
 	</div>
 
 
@@ -47,22 +47,18 @@
 	</div>
 
 	<div class="time_box">
-		<% [
-			{name: "上午診", hours: @clinic.wday_segment_hours(@date.wday, "早上")},
-			{name: "下午診", hours: @clinic.wday_segment_hours(@date.wday, "下午")},
-			{name: "晚上診", hours: @clinic.wday_segment_hours(@date.wday, "晚上")},
-		].each do |segment| %>
+		<% @select_event_durations.each do |segment| %>
 		<div class="segment_box">
 			<div class="title">
 				<%= segment[:name] %>
 			</div>
-			<% segment[:hours].each do |hour| %>
-			<% next if !@doctor_durations.map{|a| a.hour}.include?(hour) %>
+			<% segment[:hour_segments].each do |hour_segment| %>
+			<% hour = hour_segment[:hour] %>
 			<ul class="hours_box">
-				<% [0, 15, 30, 45].each do |minute| %>
+				<% hour_segment[:minute_segments].each do |minute_segment| %>
+				<% minute = minute_segment[:minute] %>
 				<li>
-					<% event_disabled = @date >= Date.today ? @doctor_event_durations.find{|e| e.hour == hour && e.minute == minute} : true %>
-					<%= radio_button_tag "event[hour_minute]", "#{hour}:#{minute}", false, disabled: event_disabled  %>
+					<%= radio_button_tag "event[hour_minute]", hour_minute_format(hour, minute), false, disabled: minute_segment[:enabled]  %>
 					<%= link_to hour_minute_format(hour, minute), "", onclick: "event.preventDefault(); $(this).siblings('input').click();" %>
 				</li>
 				<% end %>
