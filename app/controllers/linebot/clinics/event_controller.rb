@@ -75,18 +75,25 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 						hour: hour,
 						minute_segments: (60 / Clinic.default_duration).times.map do |index|
 							minute = Clinic.default_duration * index
-							if @date >= Date.today
-								if @doctor_event_durations.find{|d| d.hour == hour && d.minute == minute}
-									enabled = false
-								else
-									enabled = true
-								end
-							else
-								enabled = false
-							end
-							r = {
+							m = {
 								minute: minute,
-								enabled: enabled,
+								enabled: proc do
+									enabled = true
+									enabled = false if @date < Date.today
+									service_duration = @service.duration
+									(service_duration / Clinic.default_duration).times.each do |index|
+										hh = hour
+										mm = minute + Clinic.default_duration * index
+										if mm > 60
+											hh += 1
+											mm -= 60
+										end
+										if @doctor_event_durations.find{|d| d.hour == hh && d.minute == mm}
+											enabled = false
+										end
+									end
+									enabled
+								end.call
 							}
 						end
 					}

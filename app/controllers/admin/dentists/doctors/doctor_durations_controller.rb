@@ -10,6 +10,10 @@ class Admin::Dentists::Doctors::DoctorDurationsController < Admin::Dentists::Doc
 
   def index
     @doctor_durations = @doctor.doctor_durations
+    @doctor_event_durations = @doctor.event_durations.includes(:event)
+
+    search_doctor_durations
+
     @doctor_durations = @doctor_durations.page(params[:page]).per(20)
   end
 
