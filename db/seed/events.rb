@@ -26,7 +26,15 @@ def event_durations
 						date: date,
 						start_hour: hour,
 						start_minute: minute,
-						total_duration: duration
+						total_duration: duration,
+						source: rand(10) > 8 ? "現場" : "網路",
+						status: proc do
+							if date < Date.today
+								rand(10) > 5 ? "爽約" : "報到"
+							else
+								"已預約"
+							end
+						end.call
 					})
 					event.save!
 					id += 1

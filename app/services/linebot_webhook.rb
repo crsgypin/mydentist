@@ -34,14 +34,14 @@ class LinebotWebhook
 				return controller("errors_controller").clear_status
 			end
 
-			if @line_account.dialog_status == "預約掛號"
-				return controller("events_controller").update
-			elsif @line_account.dialog_status == "填寫個人資料"
-				return controller("patient_controller").update
-			end
+			# if @line_account.dialog_status == "預約掛號"
+			# 	return controller("booking_events_controller").update
+			# elsif @line_account.dialog_status == "填寫個人資料"
+			# 	return controller("patient_controller").update
+			# end
 
 			if @message[:text] == "預約掛號"
-				controller("events_controller").create
+				controller("booking_events_controller").create
 
 			elsif @message[:text] == "查詢掛號"
 				controller("events_controller").index

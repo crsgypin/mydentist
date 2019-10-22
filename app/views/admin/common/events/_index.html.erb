@@ -4,6 +4,7 @@
   total_resources_count: @events.total_count,
   cols: [
     {k: "id", v: proc{|a| a.id }},
+    {t: "診所", v: proc{|a| a.clinic.try(:name) }},
     {t: "醫生", v: proc{|a| a.doctor.try(:name) }},
     {t: "病患", v: proc{|a| a.patient.try(:name) }},
     {t: "項目", v: proc{|a| a.service.try(:name) }},
@@ -15,6 +16,7 @@
     {t: "LINE", v: proc{|a| 
     	"#{a.line_account.try(:id)} - #{a.line_account.try(:display_name)}"
     }},
+    {t: "來源", v: proc{|a| a.source }},
     {t: "狀態", v: proc{|a| a.status }},
     {t: "", v: proc{|a| 
       link_to "刪除", url_for(action: :destroy, id: a), method: "delete", data: {confirm: "確定移除?"}, remote: true
