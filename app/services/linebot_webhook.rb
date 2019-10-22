@@ -22,56 +22,61 @@ class LinebotWebhook
     @line_account.update(clinic: @clinic)
 
 		if @message[:type] == "unfollow"
-			controller("follows_controller").destroy
+			to("follows#destroy")
 			return
 		end
 		@line_account.update(status: "follow") if @line_account.status != "follow" #always set to follow except for unfollow
 
 		if @message[:type] == "follow"
-			controller("follows_controller").create
+			to("follows#create")
 		elsif @message[:type] == "message"
 			if @message[:text] == "00"
-				return controller("errors_controller").clear_status
+				return to("errors#clear_status")
 			end
 
 			# if @line_account.dialog_status == "預約掛號"
-			# 	return controller("booking_events_controller").update
+			# 	return to("booking_events#update")
 			# elsif @line_account.dialog_status == "填寫個人資料"
-			# 	return controller("patient_controller").update
+			# 	return to("patient#update")
 			# end
 
 			if @message[:text] == "預約掛號"
-				controller("booking_events_controller").create
+				to("booking_events#create")
 
 			elsif @message[:text] == "查詢掛號"
-				controller("events_controller").index
+				to("events#index")
 
 			elsif @message[:text] == "醫師介紹"
-				controller("doctors_controller").index
+				to("doctors#index")
 
 			elsif @message[:text] == "衛教資訊"
 
 			elsif @message[:text] == "診所資訊"
-				controller("clinic_controller").show
+				to("clinic#show")
 
 			elsif @message[:text] == "個人設定"
-				controller("patient_controller").show
+				to("patient#show")
 
 			elsif @message[:text] == "Hello, world"
-				# controller("patient_controller").show
+				# to("patient#show")
 			return handle_verify
 
 			end
 		elsif @message[:type] == "postback"
 			data = @message[:data]
-			controller("#{data[:controller]}_controller").send(data[:action])
+			controller = data[:controller]
+			action = data[:action]
+			to("#{controller}##{action}")
 		else
 			raise "unknown type: #{message[:type]}"
 		end
 	end
 
-	def controller(controller)
-		eval("LinebotWebhook::Controllers::#{controller.camelize}").new(@clinic, @line_account, @message)
+	def to(str)
+		controller = str.split("#")[0]
+		action = str.split("#")[1]
+		Rails.logger.info "line webhook processed by #{controller} controller, action: #{action}"
+		eval("LinebotWebhook::Controllers::#{controller.camelize}Controller").new(@clinic, @line_account, @message).send(action)
 	end
 
 end
