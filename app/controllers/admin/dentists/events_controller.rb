@@ -10,7 +10,7 @@ class Admin::Dentists::EventsController < Admin::Dentists::ApplicationController
   }
 
   def index
-    @events = ::Event.all
+    @events = ::Event.includes(:event_durations)
     @events = @events.page(params[:page]).per(20)
   end
 

@@ -4,31 +4,28 @@ class Event < ApplicationRecord
 	belongs_to :patient, optional: true
 	belongs_to :doctor, optional: true
 	belongs_to :service, optional: true
-	has_many :event_durations, class_name: "Event::Duration", autosave: true
+	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	enum status: {"預約中" => 5, "已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "預約中取消" => 40, "已預約取消" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
 	before_validation :check_for_source, on: :create
+	after_save :check_hour_minute_duration
 
-	def hour_minute_duration=(hour_minute_duration)
-		r = parse_hour_minute_duration_format(hour_minute_duration)
-		hour = r[:hour]
-		minute = r[:minute]
-		duration = r[:duration]
-		self.event_durations.destroy_all
-		default_duration = Clinic.default_duration
-		(duration / default_duration).times do |index|
-			minute = minute + index * default_duration
-			if minute < 60
-				self.event_durations.new(hour: hour, minute: minute, duration: default_duration)
-			else
-				h = hour + 1
-				m = minute - 60
-				self.event_durations.new(hour: h, minute: m, duration: default_duration)
-			end
+	def check_hour_minute_duration
+		if self.changes[:start_hour].present? || self.changes[:start_minute].present? || self.changes[:total_duration].present?
+			self.event_durations.destroy_all
+			default_duration = Clinic.default_duration
+			(self.total_duration / default_duration).times do |index|
+				minute = self.start_minute + index * default_duration
+				if minute < 60
+					self.event_durations.create(hour: self.start_hour, minute: minute, duration: default_duration)
+				else
+					h = self.start_hour + 1
+					m = minute - 60
+					self.event_durations.create(hour: h, minute: m, duration: default_duration)
+				end
+			end				
 		end
-		self.start_hour = hour
-		self.start_minute = minute
-		self.total_duration = duration
+		true
 	end
 
 	def check_for_source

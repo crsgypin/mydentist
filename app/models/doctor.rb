@@ -1,8 +1,8 @@
 class Doctor < ApplicationRecord
 	belongs_to :clinic
-	has_many :doctor_durations, class_name: "Doctor::Duration"
-	has_many :doctor_services, class_name: "Doctor::Service"
-	has_many :doctor_vacations, class_name: "Doctor::Vacation"
+	has_many :doctor_durations, class_name: "Doctor::Duration", dependent: :destroy
+	has_many :doctor_services, class_name: "Doctor::Service", dependent: :destroy
+	has_many :doctor_vacations, class_name: "Doctor::Vacation", dependent: :destroy
 	has_many :services, through: :doctor_services
 	has_many :events
 	has_many :event_durations, through: :events

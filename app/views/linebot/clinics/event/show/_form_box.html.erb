@@ -10,14 +10,17 @@
 		</div>
 	</div>
 	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @booking_event.service_id, @clinic.services.map{|a| [a.id, a.name]}, class: "form-control", id: "service_select" %>
+		<%= select_field_tag "event[service_id]", @booking_event.service_id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration}分鐘)" ]}, class: "form-control", id: "service_select" %>
 	</div>
 
 
 	<div class="date_box">
 		<div class="month_box">
 			<%= link_to icon_tag(:angle_left), "", id: "last_week"%>
-			<span><%= @date.month %></span>
+			<span>
+				<span class="year"><%= @date.year  %></span>年
+				<span class="month"><%= @date.month %></span>月
+			</span>
 			<%= link_to icon_tag(:angle_right), "", id: "next_week" %>
 		</div>
 		<div class="wday_box">

@@ -24,7 +24,9 @@ def event_durations
 						patient: patient, 
 						service: service, 
 						date: date,
-						hour_minute_duration: hour_minute_duration_format(hour, minute, duration)
+						start_hour: hour,
+						start_minute: minute,
+						total_duration: duration
 					})
 					event.save!
 					id += 1

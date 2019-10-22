@@ -1,4 +1,4 @@
-<div id="linebot_event_show">
+<div id="linebot-event-show">
 	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
 	<%= hidden_field_tag "line_account_id", params[:line_account_id] %>
 	<%= render_relative_partial "show/form_box" %>
@@ -11,7 +11,7 @@
 <%= render_relative_partial "show/liff_js" %>
 <script type="text/javascript">
 	$(function(){
-		var container = $("#linebot_event_show");
+		var container = $("#linebot-event-show");
 
 		container.on("change", "#doctor_select", function(e){
 			reloadForm();

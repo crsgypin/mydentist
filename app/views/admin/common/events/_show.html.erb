@@ -7,11 +7,15 @@
     {t: "病患", v: proc{|a| a.patient.try(:name) }},
     {t: "LINE", v: proc{|a| a.line_account.try(:display_name) }},
     {t: "項目", v: proc{|a| a.service.try(:name) }},
-    {k: "status", v: proc{|a| a.status }},
-    {k: "date", v: proc{|a| a.date }},
-    {k: "hour", v: proc{|a| a.hour }},
-    {k: "minute", v: proc{|a| a.minute }},
-    {k: "duration", v: proc{|a| a.duration }},
+    {k: "狀態", v: proc{|a| a.status }},
+    {k: "日期", v: proc{|a| a.date }},
+    {k: "起始時間", v: proc{|a| hour_minute_format(a.start_hour, a.start_minute) }},
+    {k: "總區間", v: proc{|a| a.total_duration }},
+    {k: "區間", v: proc{|a|
+      a.event_durations.map do |ed|
+        hour_minute_format(ed.hour, ed.minute)
+      end
+     }},
     {k: "created_at", v: proc{|a| a.created_at }},
     {k: "updated_at", v: proc{|a| a.updated_at }}
   ]

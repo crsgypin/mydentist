@@ -10,7 +10,7 @@ class Admin::Dev::EventsController < Admin::Dev::ApplicationController
   }
 
   def index
-    @events = ::Event.all
+    @events = ::Event.includes(:event_durations)
     @events = @events.order(id: :desc)
     @events = @events.page(params[:page]).per(20)
   end
