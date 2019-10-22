@@ -43,7 +43,7 @@ class LinebotWebhook
 			if @message[:text] == "預約掛號"
 				to("booking_events#create")
 
-			elsif @message[:text] == "查詢掛號"
+			elsif @message[:text] == "查詢掛號" || @message[:text] == "查詢/取消掛號"
 				to("events#index")
 
 			elsif @message[:text] == "醫師介紹"
