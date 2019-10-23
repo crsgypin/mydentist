@@ -24,7 +24,9 @@
       <% end %>
     <% end %>
   </ul>  
-  <p onclick="showLogOutModal()">登出</p>
+  <div class="bottom-box" onclick="showLogOutModal()">
+    <%= link_to "登出", destroy_member_session_path, method: "delete" %>
+  </div>
 </sidemenu>
 
 <script type="text/javascript">
