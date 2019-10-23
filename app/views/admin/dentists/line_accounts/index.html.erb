@@ -3,7 +3,7 @@
   resources: @line_accounts,
   cols: [
     {k: "id", v: proc{|a| a.id }},
-    {t: "對話狀態", v: proc{|a| a.dialog_status }},
+    {t: "對話狀態", v: proc{|a| "#{a.dialog_status}(#{a.dialog_status_step})" }},
     {t: "LINE ID", v: proc{|a| a.line_user_id }},
     {t: "狀態", v: proc{|a| a.status }},
     {t: "名稱", v: proc{|a| a.display_name }},
