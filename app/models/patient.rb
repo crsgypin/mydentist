@@ -14,6 +14,10 @@ class Patient < ApplicationRecord
 	validates_uniqueness_of :friendly_id
   attr_accessor :year, :month, :day
 
+  def filled_in_web
+    self.name.present? && self.birthday.present? && self.person_id.present?
+  end
+
   private
 
   def set_birthday

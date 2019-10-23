@@ -3,7 +3,7 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 
 	def show
 		@patient = @line_account.patient
-		if !@patient.present?
+		if !@patient.present? || !@patient.filled_in_web
 			@line_account.update({
 				dialog_status: "填寫個人資料",
 				dialog_status_step: 1 
