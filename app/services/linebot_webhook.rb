@@ -34,11 +34,11 @@ class LinebotWebhook
 				return to("errors#clear_status")
 			end
 
-			# if @line_account.dialog_status == "預約掛號"
-			# 	return to("booking_events#update")
-			# elsif @line_account.dialog_status == "填寫個人資料"
-			# 	return to("patient#update")
-			# end
+			if @line_account.dialog_status == "預約掛號"
+				return to("booking_events#update")
+			elsif @line_account.dialog_status == "填寫個人資料"
+				return to("patient#update")
+			end
 
 			if @message[:text] == "預約掛號"
 				to("booking_events#create")
