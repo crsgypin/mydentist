@@ -26,7 +26,7 @@ module LinebotWebhook::Replies::PatientReply
 					label: "變更姓名",
 					data: {
 						controller: "patient",
-						action: "update",
+						action: "update_note",
 						type: "name"
 					}
 				},
@@ -35,7 +35,7 @@ module LinebotWebhook::Replies::PatientReply
 					label: "變更生日",
 					data: {
 						controller: "patient",
-						action: "update",
+						action: "update_note",
 						type: "birthday"
 					}
 				},
@@ -44,7 +44,7 @@ module LinebotWebhook::Replies::PatientReply
 					label: "變更手機號碼",
 					data: {
 						controller: "patient",
-						action: "update",
+						action: "update_note",
 						type: "phone"
 					}
 				},
