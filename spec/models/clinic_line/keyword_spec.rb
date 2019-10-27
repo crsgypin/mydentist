@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe KnowledgeCategory, type: :model do
+RSpec.describe ClinicLine::Keyword, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
