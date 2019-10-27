@@ -219,13 +219,10 @@ ActiveRecord::Schema.define(version: 20191027123951) do
   end
 
   create_table "line_keywords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string "keywordable_type"
-    t.integer "keywordable_id"
     t.integer "message_template_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["keywordable_type", "keywordable_id"], name: "index_line_keywords_on_keywordable_type_and_keywordable_id"
     t.index ["message_template_id"], name: "index_line_keywords_on_message_template_id"
   end
 
