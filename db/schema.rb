@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191022022212) do
+ActiveRecord::Schema.define(version: 20191026152133) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -182,6 +182,16 @@ ActiveRecord::Schema.define(version: 20191022022212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_line_accounts_on_patient_id"
+  end
+
+  create_table "line_questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "questionable_type"
+    t.integer "questionable_id"
+    t.string "content"
+    t.integer "answers_count", limit: 1, default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["questionable_type", "questionable_id"], name: "index_line_questions_on_questionable_type_and_questionable_id"
   end
 
   create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

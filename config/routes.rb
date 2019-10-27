@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resource :info, only: [], module: :info do
       resources :clinic_durations, only: [:index, :create]
     end
+    namespace :keywords do
+      resources :knowledge_categories
+      resources :clinic_questions
+    end
   end
 
   namespace :admin do
