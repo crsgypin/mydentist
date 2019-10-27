@@ -1,7 +1,7 @@
 
-#doctor-container {
+#clinic #show-layout {
 	display: flex;
-	#doctor-sidemenu {
+	#show-layout-sidemenu {
 	  width: 200px;
 	  height: calc(100vh - 100px);
 	  background-color: rgba(238, 241, 247, 0.5);
@@ -45,7 +45,7 @@
 			}
 		}
 	}
-	#doctor-inbox {
+	#show-layout-inbox {
 		width: calc(100% - 200px);
 		padding: 20px;
 	}

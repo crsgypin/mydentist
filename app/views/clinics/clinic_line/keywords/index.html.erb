@@ -1,0 +1,20 @@
+
+<div id="clinic-line-keywords">
+	<ul class="line_message_template_block">
+	<% @clinic_line_keywords.each do |clinic_line_keyword| %>
+		<li>
+			<div class="question">
+				<span class="title">Q</span>
+				<span class="content"><%= clinic_line_keyword.title %></span>
+			</div>
+			<div class="reply">
+				<span class="title">A</span>
+				<span class="content"><%= clinic_line_keyword.content %></span>				
+			</div>
+			<div class="buttons_box">
+				<%= link_to "編輯", url_for(action: :edit, id: clinic_line_keyword), class: "btnBu" %>
+			</div>
+		</li>
+	<% end %>
+</ul>
+</div>

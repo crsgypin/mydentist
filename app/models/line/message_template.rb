@@ -18,4 +18,9 @@ class Line::MessageTemplate < ApplicationRecord
 		end
 	end
 
+	def first_content
+		first_content = self.content_json[0]
+		first_content[:text]
+	end
+
 end
