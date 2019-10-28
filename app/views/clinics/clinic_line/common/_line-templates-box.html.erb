@@ -1,18 +1,17 @@
 
-<ul class="line-templates-box">
-	<% line_templates.each do |line_template| %>
-	<% puts "aaa: #{line_template}" %>
+<ul class="line-templates-box" id="<%= id %>">
+	<% resources.each do |resource| %>
 	<li>
 		<div class="question">
 			<span class="title">Q</span>
-			<span class="content"><%= line_template[:title] %></span>
+			<span class="content"><%= cols[:q].call(resource) %></span>
 		</div>
 		<div class="reply">
 			<span class="title">A</span>
-			<span class="content"><%= line_template[:content] %></span>				
+			<span class="content"><%= cols[:a].call(resource) %></span>
 		</div>
 		<div class="buttons_box">
-			<%= link_to "編輯", line_template[:edit_path], class: "btnBu" %>
+			<%= link_to "編輯", cols[:edit_path].call(resource), class: "btnBu" %>
 		</div>
 	</li>
 	<% end %>

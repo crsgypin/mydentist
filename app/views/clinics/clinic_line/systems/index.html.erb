@@ -1,12 +1,11 @@
 
-<div id="clinic-line-systems">
-	<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
-		line_templates: @clinic_line_systems.map do |system|
-			r = {
-				title: system.category,
-				content: system.line_template.content,
-				edit_path: url_for(action: :edit, id: system)
-			}
-		end
-	} %>
-</div>
+<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
+  id: "clinic-line-systems",
+  resources: @clinic_line_systems,
+  cols: {
+    q: proc{|a| a.category },
+    a: proc{|a| a.line_template.content },
+    edit_path: proc{|a| url_for(action: :edit, id: a) },
+  }
+}
+%>

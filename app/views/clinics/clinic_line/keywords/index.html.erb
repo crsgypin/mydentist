@@ -1,12 +1,11 @@
 
-<div id="clinic-line-keywords">
-	<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
-		line_templates: @clinic_line_keywords.map do |keyword|
-			r = {
-				title: keyword.line_template.title,
-				content: keyword.line_template.content,
-				edit_path: url_for(action: :edit, id: keyword)
-			}
-		end,
-	} %>
-</div>
+<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
+  id: "clinic-line-keywords",
+  resources: @clinic_line_keywords,
+  cols: {
+    q: proc{|a| a.line_template.title },
+    a: proc{|a| a.line_template.content },
+    edit_path: proc{|a| url_for(action: :edit, id: a) },
+  }
+}
+%>
