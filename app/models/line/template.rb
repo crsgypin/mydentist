@@ -5,7 +5,7 @@ class Line::Template < ApplicationRecord
 	has_many :template_messages, class_name: "Line::TemplateMessage", dependent: :destroy
 
 	def keyword_names=(keywords)
-		self.keywords.destroy if self.id.present?
+		self.keywords.destroy_all if self.id.present?
 	  keywords.present? && keywords.split(",").each do |keyword|
 	  	k = self.keywords.new(name: keyword)
 	  	k.save if self.id.present?
@@ -18,9 +18,18 @@ class Line::Template < ApplicationRecord
 		end
 	end
 
-	def first_content
-		first_content = self.content_json[0]
-		first_content[:text]
+	def message_contents=(contents)
+		self.template_messages.destroy_all if self.id.present?
+		contents.split("|").each do |content|
+			k = self.template_messages.new(category: "text", content: content)
+			k.save if self.id.present?
+		end
+	end
+
+	def message_contents
+		self.template_messages.map do |m|
+			m.content
+		end
 	end
 
 

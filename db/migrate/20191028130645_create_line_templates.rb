@@ -5,6 +5,6 @@ class CreateLineTemplates < ActiveRecord::Migration[5.1]
     	t.integer :templateable_id
       t.timestamps
     end
-    add_index :line_message_templates, [:templateable_type, :templateable_id], name: :index_templateable_id
+    add_index :line_templates, [:templateable_type, :templateable_id], name: :index_templateable_id
   end
 end
