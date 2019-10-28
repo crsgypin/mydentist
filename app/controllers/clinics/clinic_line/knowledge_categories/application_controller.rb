@@ -2,7 +2,7 @@ class ::Clinics::ClinicLine::KnowledgeCategories::ApplicationController < ::Clin
 	before_action :set_knowledge_category
 
 	def set_knowledge_category
-		@knowledge_category = @clinic.knowledge_categories.find(params[:knowledge_category_id])
+		@clinic_line_knowledge_category = @clinic.clinic_line_knowledge_categories.find(params[:knowledge_category_id])
 	end
 
 end

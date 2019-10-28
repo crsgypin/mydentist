@@ -1,11 +1,11 @@
 
 <div id="clinic-line-keywords">
-	<%= render "clinics/clinic_line/common/line-templates-box", locals: {
+	<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
 		line_templates: @clinic_line_keywords.map do |keyword|
 			r = {
 				title: keyword.line_template.title,
 				content: keyword.line_template.content,
-				edit_path: url_for(action: :edit, keyword)
+				edit_path: url_for(action: :edit, id: keyword)
 			}
 		end,
 	} %>

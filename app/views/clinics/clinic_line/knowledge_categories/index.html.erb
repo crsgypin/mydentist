@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
 	$(function(){
-		$.getScript("<%= url_for(controller: File.join(params[:controller], "knowledges"), action: :index, id: @clinic_line_knowledge_category) %>")
+		$.getScript("<%= url_for(action: :show, id: @clinic_line_knowledge_category) %>")
 	});
 </script>
 

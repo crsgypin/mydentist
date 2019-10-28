@@ -1,11 +1,11 @@
 
 <div id="clinic-line-systems">
-	<%= render "clinics/clinic_line/common/line-templates-box", locals: {
+	<%= render partial: "clinics/clinic_line/common/line-templates-box", locals: {
 		line_templates: @clinic_line_systems.map do |system|
 			r = {
-				title: system.line_template.title,
+				title: system.category,
 				content: system.line_template.content,
-				edit_path: url_for(action: :edit, system)
+				edit_path: url_for(action: :edit, id: system)
 			}
 		end
 	} %>
