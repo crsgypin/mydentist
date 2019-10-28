@@ -1,0 +1,91 @@
+
+.line-templates-form {
+	width: 100%;
+	max-width: 800px;
+	box-shadow: 0 2px 12px 0 rgba(110, 110, 110, 0.5);
+  border: solid 1px #dddddd;
+  background-color: #ffffff;
+  padding: 30px;
+	>.title {
+		text-align: center;
+		font-weight: bold;
+		font-size: $fs_24p;
+		padding-bottom: 24px;
+	}
+	.content-box {
+		.inbox {
+			padding-bottom: 30px;
+			margin-bottom: 30px;
+			ul {
+				padding-left: 30px;
+				padding-right: 30px;
+				li {
+					padding-bottom: 10px;
+					.header {
+						display: flex;
+						justify-content: space-between;
+						color: $colorGy1;
+						font-size: $fs_14p;
+						padding-bottom: 5px;
+						padding-right: 40px;
+						.title {
+							padding-left: 8px;
+						}
+						.words {
+
+						}
+					}
+					.content {
+						display: flex;
+						padding-bottom: 10px;
+						input {
+							width: calc(100% - 40px);
+							height: 36px;
+							line-height: 36px;
+							color: $colorGy;
+							padding-left: 8px;
+							background: $colorGy_l;
+							border-radius: 3px;
+							border: 1px solid $colorGy1;
+						}
+						a {
+							width: 40px;
+							font-size: $fs_30p;
+							line-height: 36px;
+							text-align: right;
+						}
+					}
+				}
+			}
+			.add-box {
+				text-align: center;
+				a {
+					color: $colorBu;
+					font-size: $fs_30p;
+				}
+			}
+			&.questions-box {
+				border-bottom: 1px solid $colorGy1;
+			}
+			&.replies-box {
+				.title {
+					.note {
+						color: $colorGy1;
+					}
+				}
+			}
+		}
+		.buttons-box {
+			text-align: right;
+			a {
+				font-size: $fs_20p;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			a:first-child {
+				margin-right: 40px;
+			}
+		}
+	}
+}
+

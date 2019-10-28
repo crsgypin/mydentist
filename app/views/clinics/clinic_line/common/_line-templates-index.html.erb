@@ -1,5 +1,5 @@
 
-<ul class="line-templates-box" id="<%= id %>">
+<ul class="line-templates-index" id="<%= id %>">
 	<% resources.each do |resource| %>
 	<li>
 		<div class="question">
@@ -15,4 +15,17 @@
 		</div>
 	</li>
 	<% end %>
+	<li>
+		<div class="question">
+			<span class="title">Q</span>
+			<span class="content"></span>
+		</div>
+		<div class="reply">
+			<span class="title">A</span>
+			<span class="content"></span>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "新增", new[:path].call, class: "btnBu" %>
+		</div>
+	</li>
 </ul>

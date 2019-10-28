@@ -1,0 +1,63 @@
+
+<div class="line-templates-form">
+	<div class="title">
+		<%= title %>
+	</div>
+	<div class="content-box">
+		<div class="inbox questions-box">
+			<ul>
+				<% questions.each_with_index do |question, index| %>
+				<li>
+					<div class="header">
+						<span class="title">
+						<% if index == 0 %>
+							關聯句、字
+						<% end %>
+						</span>
+						<span class="words">
+							3/30
+						</span>
+					</div>
+					<div class="content">
+						<%= text_field_tag "line_template[keywords_attributes][][name]", question[:name] %>
+						<%= link_to icon_tag(:close_circle1), "" %>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+			<div class="add-box">
+				<%= link_to icon_tag(:plus_circle), "" %>
+			</div>
+		</div>
+		<div class="inbox replies-box">
+			<ul>
+				<% replies.each_with_index do |reply, index| %>
+				<li>
+					<div class="header">
+						<span class="title">
+						<% if index == 0 %>
+							回答內容
+							<span class="note">註：最多為5個上限</span>
+						<% end %>
+						</span>
+						<span class="words">
+							3/30
+						</span>
+					</div>
+					<div class="content">
+						<%= text_field_tag "line_template[template_messages_attributes][][content]", reply[:content] %>
+						<%= link_to icon_tag(:close_circle1), "" %>						
+					</div>
+				</li>
+				<% end %>
+			</ul>
+			<div class="add-box">
+				<%= link_to icon_tag(:plus_circle), "" %>
+			</div>
+		</div>
+		<div class="buttons-box">
+			<%= link_to "取消", cancel_url, class: "btnW" %>
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</div>
+	</div>
+</div>
