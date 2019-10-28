@@ -37,6 +37,9 @@ Rails.application.routes.draw do
       end
       resources :systems
       resources :broadcasts
+
+      resources :line_keywords, only: [:destroy]
+      resources :line_template_messages, only: [:destroy]
     end
   end
 

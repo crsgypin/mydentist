@@ -1,14 +1,16 @@
 
-<%= form_tag url_for(action: :update), method: "patch" do %>
+<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
 <%= render partial: "clinics/clinic_line/common/line-template-form", locals: {
 	title: "編輯關鍵字",
-	questions: @clinic_line_keyword.line_template.keywords.map do |keyword|
+	keywords: @clinic_line_keyword.line_template.keywords.map do |keyword|
 		r = {
+			id: keyword.id,
 			name: keyword.name
 		}
 	end,
-	replies: @clinic_line_keyword.line_template.template_messages.map do |message|
+	template_messages: @clinic_line_keyword.line_template.template_messages.map do |message|
 		r = {
+			id: message.id,
 			content: message.content
 		}
 	end,

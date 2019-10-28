@@ -3,6 +3,8 @@ class Line::Template < ApplicationRecord
 	belongs_to :templateable, polymorphic: true
 	has_many :keywords, class_name: "Line::Keyword", dependent: :destroy
 	has_many :template_messages, class_name: "Line::TemplateMessage", dependent: :destroy
+	accepts_nested_attributes_for :keywords, allow_destroy: true
+	accepts_nested_attributes_for :template_messages, allow_destroy: true
 
 	def title
 		self.keyword_names.join(",")
