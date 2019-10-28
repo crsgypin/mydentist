@@ -1,0 +1,24 @@
+
+<div id="clinic-knowledge-categories-index">
+	<ul class="knowledge-categories">
+	<% @clinic_line_knowledge_categories.each do |category| %>
+		<li class="<%= "selected" if category == @clinic_line_knowledge_category %>">
+			<%= link_to category.name, url_for(action: :show, id: category) %>
+		</li>
+	<% end %>
+	<% if @clinic_line_knowledge_categories.length < 10 %>
+		<li class="">
+			<%= link_to "+ 新增類別", url_for(action: :new) %>
+		</li>
+	<% end %>
+	</ul>
+	<div id="clinic-knowledge-categories-show">
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$.getScript("<%= url_for(action: :show, id: @clinic_line_knowledge_category) %>")
+	});
+</script>
+

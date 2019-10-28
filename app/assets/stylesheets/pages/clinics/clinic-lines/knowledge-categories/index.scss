@@ -1,0 +1,21 @@
+
+#clinic-knowledge-categories-index {
+	ul.knowledge-categories {
+		display: flex;
+		li {
+			min-width: 100px;
+			text-align: center;
+			a {
+				color: $colorGy1;
+				display: inline-block;
+				width: 100%;
+				border-bottom: 1px solid $colorGy1;
+			}
+			&.selected a {
+				color: $colorBu;
+				border-bottom: 3px solid $colorBu;
+			}
+		}
+	}
+}
+
