@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191027123951) do
+ActiveRecord::Schema.define(version: 20191022022212) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -44,40 +44,6 @@ ActiveRecord::Schema.define(version: 20191027123951) do
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_durations_on_clinic_id"
     t.index ["wday_hour_minute"], name: "index_clinic_durations_on_wday_hour_minute"
-  end
-
-  create_table "clinic_line_broadcasts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "clinic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "clinic_line_keywords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "clinic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "clinic_line_knowledge_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "clinic_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["clinic_id"], name: "index_clinic_line_knowledge_categories_on_clinic_id"
-  end
-
-  create_table "clinic_line_knowledges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "knowledge_category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["knowledge_category_id"], name: "index_clinic_line_knowledges_on_knowledge_category_id"
-  end
-
-  create_table "clinic_line_systems", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "clinic_id"
-    t.integer "category", limit: 1
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "clinic_patient_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -216,23 +182,6 @@ ActiveRecord::Schema.define(version: 20191027123951) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_line_accounts_on_patient_id"
-  end
-
-  create_table "line_keywords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer "message_template_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["message_template_id"], name: "index_line_keywords_on_message_template_id"
-  end
-
-  create_table "line_message_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string "templateable_type"
-    t.integer "templateable_id"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["templateable_type", "templateable_id"], name: "index_templateable_id"
   end
 
   create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

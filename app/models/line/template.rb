@@ -1,8 +1,8 @@
-class Line::MessageTemplate < ApplicationRecord
-	self.table_name = "line_message_templates"
+class Line::Template < ApplicationRecord
+	self.table_name = "line_templates"
 	belongs_to :templateable, polymorphic: true
 	has_many :keywords, class_name: "Line::Keyword", dependent: :destroy
-	json_format :content
+	has_many :template_messages, class_name: "Line::TemplateMessage", dependent: :destroy
 
 	def keyword_names=(keywords)
 		self.keywords.destroy if self.id.present?
@@ -22,5 +22,6 @@ class Line::MessageTemplate < ApplicationRecord
 		first_content = self.content_json[0]
 		first_content[:text]
 	end
+
 
 end
