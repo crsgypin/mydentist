@@ -4,14 +4,14 @@
 	<li>
 		<div class="question">
 			<span class="title">Q</span>
-			<span class="content"><%= line_template.title %></span>
+			<span class="content"><%= line_template[:title] %></span>
 		</div>
 		<div class="reply">
 			<span class="title">A</span>
-			<span class="content"><%= line_template.content %></span>				
+			<span class="content"><%= line_template[:content] %></span>				
 		</div>
 		<div class="buttons_box">
-			<%= link_to "編輯", edit_path.call(line_template), class: "btnBu" %>
+			<%= link_to "編輯", line_template[:edit_path], class: "btnBu" %>
 		</div>
 	</li>
 	<% end %>

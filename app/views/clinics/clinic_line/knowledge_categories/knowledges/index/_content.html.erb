@@ -1,5 +1,5 @@
 
-<%= render_relative_partial "../../common/line-templates-box", locals: {
+<%= render "clinics/clinic_line/common/line-templates-box", locals: {
 	line_templates: @clinic_line_knowledges.map do |knowledge|
 		knowledge.line_template
 	end,

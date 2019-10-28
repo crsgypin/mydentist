@@ -8,7 +8,6 @@ class ::Clinics::ClinicLine::KnowledgeCategoriesController < ::Clinics::ClinicLi
 	def show
 		set_clinic_line_knowledge_categories
 		@clinic_line_knowledge_category = @clinic_line_knowledge_categories.find(params[:id])
-		@clinic_line_knowledges = @clinic_line_knowledge_category.knowledges
 	end
 
 	private

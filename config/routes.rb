@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       resources :keywords
       resources :knowledge_categories
       resources :knowledge_categories, only: [], module: :knowledge_categories do
-        resources :clinic_line_knowledges
+        resources :knowledges
       end
       resources :systems
       resources :broadcasts
