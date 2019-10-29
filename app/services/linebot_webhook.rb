@@ -64,7 +64,10 @@ class LinebotWebhook
 
 			elsif @message[:text] == "Hello, world"
 				# to("patient#show")
-			return handle_verify
+				return handle_verify
+
+			elsif Line::Keyword.find_by(name: @message[:text]).present?
+				to("line_keywords#show")
 
 			end
 		elsif @message[:type] == "postback"
