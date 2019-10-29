@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20191028131146) do
 
   create_table "clinic_line_broadcasts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

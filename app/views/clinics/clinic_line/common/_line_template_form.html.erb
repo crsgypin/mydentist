@@ -9,8 +9,8 @@
 			<%= render_relative_partial "line_template_form/keyword_inputs", locals: {line_template: line_template} %>
 			<% elsif keywords_type == "system" %>
 			<%= render_relative_partial "line_template_form/keyword_system", locals: {system_title: keyword_title} %>
-			<% elsif keywords_type == "title" %>
-			<%= render_relative_partial "line_template_form/keyword_title_input", locals: {system_title: system_title} %>
+			<% elsif keywords_type == "broadcast" %>
+			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: broadcast_title} %>
 			<% end %>
 		</div>
 		<div class="inbox template-messages-box">
