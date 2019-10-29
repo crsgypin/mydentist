@@ -1,0 +1,18 @@
+
+<li id="line_template_<%= line_keyword[:id] %>">
+	<div class="header">
+		<span class="title">
+		<% if local_assigns[:index] && index == 0 %>
+			關聯句、字
+		<% end %>
+		</span>
+		<span class="words">
+			3/30
+		</span>
+	</div>
+	<div class="content">
+		<%= text_field_tag "line_template[keywords_attributes][][name]", line_keyword.name %>
+		<%= link_to icon_tag(:close_circle1), "javascript:", onclick: "$(this).closest('li').remove();" %>
+	</div>
+</li>
+

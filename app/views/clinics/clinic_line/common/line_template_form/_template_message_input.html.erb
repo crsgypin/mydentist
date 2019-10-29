@@ -1,0 +1,19 @@
+<li>
+	<div class="header">
+		<span class="title">
+		<% if local_assigns[:index] && index == 0 %>
+			回答內容
+			<span class="note">註：最多為5個上限</span>
+		<% end %>
+		</span>
+		<span class="words">
+			3/30
+		</span>
+	</div>
+	<div class="content">
+		<%= text_field_tag "line_template[template_messages_attributes][][content]", line_template_message.content %>
+		<%= link_to icon_tag(:close_circle1), "javascript:", onclick: "$(this).closest('li').remove();" %>
+	</div>
+</li>
+
+

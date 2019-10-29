@@ -1,5 +1,5 @@
 
-ul.line-templates-index {
+ul.line_templates_index {
 	overflow: hidden;
 	li {
 		float: left;
@@ -9,6 +9,7 @@ ul.line-templates-index {
 	  background-color: #ffffff;
 	  padding: 20px;
 		margin: 10px;
+		position: relative;
 		.question, .reply{
 			.title {
 				font-size: $fs_30p;
@@ -20,6 +21,11 @@ ul.line-templates-index {
 		}
 		.buttons_box {
 			text-align: right;
+		}
+		.delete_box {
+			position: absolute;
+			right: 10px;
+			top: 10px;
 		}
 	}
 

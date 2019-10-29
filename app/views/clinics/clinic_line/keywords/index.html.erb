@@ -1,11 +1,12 @@
 
-<%= render partial: "clinics/clinic_line/common/line-templates-index", locals: {
+<%= render partial: "clinics/clinic_line/common/line_templates_index", locals: {
   id: "clinic-line-keywords",
   resources: @clinic_line_keywords,
   cols: {
     q: proc{|a| a.line_template.title },
     a: proc{|a| a.line_template.content },
     edit_path: proc{|a| url_for(action: :edit, id: a) },
+    delete_path: proc{|a| url_for(action: :destroy, id: a)}
   },
   new: {
   	path: proc{|a| url_for(action: :new)}

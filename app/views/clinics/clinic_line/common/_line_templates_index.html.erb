@@ -1,7 +1,7 @@
 
-<ul class="line-templates-index" id="<%= id %>">
+<ul class="line_templates_index" id="<%= id %>">
 	<% resources.each do |resource| %>
-	<li>
+	<li id="line_template_<%= resource.id %>">
 		<div class="question">
 			<span class="title">Q</span>
 			<span class="content"><%= cols[:q].call(resource) %></span>
@@ -12,6 +12,9 @@
 		</div>
 		<div class="buttons_box">
 			<%= link_to "編輯", cols[:edit_path].call(resource), class: "btnBu" %>
+		</div>
+		<div class="delete_box">
+			<%= link_to icon_tag(:close), cols[:delete_path].call(resource), remote: true, method: "delete", data: {confirm: "確定移除?"} %>
 		</div>
 	</li>
 	<% end %>

@@ -17,6 +17,7 @@ class ::Clinics::ClinicLine::KeywordsController < ::Clinics::ClinicLine::Applica
 
 	def edit
 		@clinic_line_keyword = @clinic.clinic_line_keywords.find(params[:id])
+		@line_template = @clinic_line_keyword.line_template
 	end
 
 	def update
@@ -25,5 +26,11 @@ class ::Clinics::ClinicLine::KeywordsController < ::Clinics::ClinicLine::Applica
 		update_line_template
 	end
 
+	def destroy
+		@clinic_line_keyword = @clinic.clinic_line_keywords.find(params[:id])
+		if !@clinic_line_keyword.destroy
+			return js_render_model_error(@clinic)
+		end
+	end
 
 end
