@@ -1,0 +1,10 @@
+
+<% if clinic_line_knowledge_category == @clinic_line_knowledge_category %>
+<li class="selected">
+	<%= link_to clinic_line_knowledge_category.name, url_for(action: :edit, id: clinic_line_knowledge_category), remote: true %>
+</li>
+<% else %>
+<li>
+	<%= link_to clinic_line_knowledge_category.name, url_for(action: :show, id: clinic_line_knowledge_category) %>
+</li>
+<% end %>
