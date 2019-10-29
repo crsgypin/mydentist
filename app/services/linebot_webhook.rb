@@ -50,6 +50,7 @@ class LinebotWebhook
 				to("doctors#index")
 
 			elsif @message[:text] == "衛教資訊"
+				to("clinic_line_knowledge_categories#index")
 
 			elsif @message[:text] == "診所資訊"
 				to("clinic#show")
