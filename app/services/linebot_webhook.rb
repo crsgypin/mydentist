@@ -34,28 +34,32 @@ class LinebotWebhook
 				return to("errors#clear_status")
 			end
 
+			if basic_messages.include?(@message[:text])
+				@line_account.update(dialog_status: nil)
+			end
+
 			if @line_account.dialog_status == "預約掛號"
 				return to("booking_events#update")
 			elsif @line_account.dialog_status == "填寫個人資料"
 				return to("patient#update")
 			end
 
-			if @message[:text] == "預約掛號"
+			if @message[:text] == basic_messages[0]
 				to("booking_events#create")
 
-			elsif @message[:text] == "查詢掛號" || @message[:text] == "查詢/取消掛號"
+			elsif @message[:text] == "查詢掛號" || @message[:text] == basic_messages[1]
 				to("events#index")
 
-			elsif @message[:text] == "醫師介紹"
+			elsif @message[:text] == basic_messages[2]
 				to("doctors#index")
 
-			elsif @message[:text] == "衛教資訊"
+			elsif @message[:text] == basic_messages[3]
 				to("clinic_line_knowledge_categories#index")
 
-			elsif @message[:text] == "診所資訊"
+			elsif @message[:text] == basic_messages[4]
 				to("clinic#show")
 
-			elsif @message[:text] == "個人設定"
+			elsif @message[:text] == basic_messages[5]
 				to("patient#show")
 
 			elsif @message[:text] == "Hello, world"
