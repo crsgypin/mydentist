@@ -5,14 +5,13 @@
 	</div>
 	<div class="content-box">
 		<div class="inbox keywords-box">
-			<ul>
-				<% line_template.keywords.each_with_index do |line_keyword, index| %>
-				<%= render_relative_partial "line_template_form/keyword_input", locals: {line_keyword: line_keyword, index: index} %>
-				<% end %>
-			</ul>
-			<div class="add-box">
-				<%= link_to icon_tag(:plus_circle), "javascript: window.addLineKeyword();" %>
-			</div>
+			<% if keywords_type == "keywords" %>
+			<%= render_relative_partial "line_template_form/keyword_inputs", locals: {line_template: line_template} %>
+			<% elsif keywords_type == "system" %>
+			<%= render_relative_partial "line_template_form/keyword_system", locals: {system_title: keyword_title} %>
+			<% elsif keywords_type == "title" %>
+			<%= render_relative_partial "line_template_form/keyword_title_input", locals: {system_title: system_title} %>
+			<% end %>
 		</div>
 		<div class="inbox template-messages-box">
 			<ul>
@@ -32,9 +31,6 @@
 </div>
 
 <script type="text/javascript">
-	window.addLineKeyword = function(){
-		$(".line-templates-form .keywords-box ul").append("<%= j render_relative_partial 'line_template_form/keyword_input', locals: {line_keyword: Line::Keyword.new} %>");
-	}
 	window.addLineTemplateMessage = function(){
 		$(".line-templates-form .template-messages-box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
 	}

@@ -13,11 +13,14 @@
 		<div class="buttons_box">
 			<%= link_to "編輯", cols[:edit_path].call(resource), class: "btnBu" %>
 		</div>
+		<% if cols[:delete_path].present? %>
 		<div class="delete_box">
 			<%= link_to icon_tag(:close), cols[:delete_path].call(resource), remote: true, method: "delete", data: {confirm: "確定移除?"} %>
 		</div>
+		<% end %>
 	</li>
 	<% end %>
+	<% if local_assigns[:new].present? %>
 	<li>
 		<div class="question">
 			<span class="title">Q</span>
@@ -31,4 +34,5 @@
 			<%= link_to "新增", new[:path].call, class: "btnBu" %>
 		</div>
 	</li>
+	<% end %>
 </ul>
