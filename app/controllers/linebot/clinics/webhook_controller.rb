@@ -14,7 +14,7 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	    @reply_token = params["events"][0]["replyToken"]
 	    @line_account.update(reply_token: @reply_token)
 
-	    response = linebot.reply_message(@reply_token, [reply_message])
+	    response = linebot.reply_message(@reply_token, reply_message)
 	    Rails.logger.info "line response, code: #{response.code}, body: #{response.body}"
 	  end
     render json: {}

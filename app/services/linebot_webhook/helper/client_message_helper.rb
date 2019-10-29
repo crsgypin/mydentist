@@ -26,4 +26,8 @@ module LinebotWebhook::Helper::ClientMessageHelper
 		end
 	end
 
+	def basic_messages
+		@basic_messages ||= ["預約掛號", "查詢/取消掛號", "醫師介紹", "衛教資訊", "診所資訊", "個人設定"]
+	end
+
 end

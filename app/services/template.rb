@@ -7,7 +7,7 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "",
+			base_dir: "clinics/clinic_line/keywords",
 			resources: [
 				{
 					class_name: "Clinic",

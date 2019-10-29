@@ -1,0 +1,37 @@
+
+<div class="line-templates-form">
+	<div class="title">
+		<%= title %>
+	</div>
+	<div class="content-box">
+		<div class="inbox keywords-box">
+			<% if keywords_type == "keywords" %>
+			<%= render_relative_partial "line_template_form/keyword_inputs", locals: {line_template: line_template} %>
+			<% elsif keywords_type == "system" %>
+			<%= render_relative_partial "line_template_form/keyword_system", locals: {system_title: keyword_title} %>
+			<% elsif keywords_type == "broadcast" %>
+			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: broadcast_title} %>
+			<% end %>
+		</div>
+		<div class="inbox template-messages-box">
+			<ul>
+				<% line_template.template_messages.each_with_index do |line_template_message, index| %>
+				<%= render_relative_partial "line_template_form/template_message_input", locals: {line_template_message: line_template_message, index: index} %>
+				<% end %>
+			</ul>
+			<div class="add-box">
+				<%= link_to icon_tag(:plus_circle), "javascript: window.addLineTemplateMessage();" %>
+			</div>
+		</div>
+		<div class="buttons-box">
+			<%= link_to "取消", cancel_url, class: "btnW" %>
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	window.addLineTemplateMessage = function(){
+		$(".line-templates-form .template-messages-box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
+	}
+</script>

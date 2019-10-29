@@ -1,0 +1,15 @@
+
+<ul>
+	<% line_template.keywords.each_with_index do |line_keyword, index| %>
+	<%= render_relative_partial "keyword_inputs/input", locals: {line_keyword: line_keyword} %>
+	<% end %>
+</ul>
+<div class="add-box">
+	<%= link_to icon_tag(:plus_circle), "javascript: window.addLineKeyword();" %>
+</div>
+
+<script type="text/javascript">
+	window.addLineKeyword = function(){
+		$(".line-templates-form .keywords-box ul").append("<%= j render_relative_partial 'keyword_inputs/input', locals: {line_keyword: Line::Keyword.new} %>");
+	}	
+</script>

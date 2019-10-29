@@ -1,0 +1,14 @@
+
+<aside id="show-layout-sidemenu">
+	<ul>
+	<% [
+		{name: "關鍵字回覆", link: clinic_clinic_line_keywords_path},
+		{name: "衛教資訊", link: clinic_clinic_line_knowledge_categories_path},
+		{name: "歡迎語、無法判讀", link: clinic_clinic_line_systems_path},
+		{name: "訊息廣播", link: clinic_clinic_line_broadcasts_path},
+	].each do |elm| %>
+    <li class="<%= "selected" if request.fullpath == elm[:link] %>"><%= link_to elm[:name], elm[:link] %></li>
+	<% end %>
+  </ul>		
+</aside>
+

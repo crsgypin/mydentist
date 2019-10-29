@@ -10,6 +10,10 @@ class Clinic < ApplicationRecord
 	has_many :clinic_vacations, class_name: "Clinic::Duration"
 	has_many :clinic_patient_notifications, class_name: "Clinic::PatientNotification"
 	has_many :clinic_notification_patients, through: :clinic_patient_notifications, source: :patients
+	has_many :clinic_line_keywords, class_name: "ClinicLine::Keyword"
+	has_many :clinic_line_knowledge_categories, class_name: "ClinicLine::KnowledgeCategory"
+	has_many :clinic_line_systems, class_name: "ClinicLine::System"
+	has_many :clinic_line_broadcasts, class_name: "ClinicLine::Broadcast"
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper

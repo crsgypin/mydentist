@@ -1,0 +1,33 @@
+
+ul.line_templates_index {
+	overflow: hidden;
+	li {
+		float: left;
+		width: 350px;
+	  border-radius: 6px;
+	  box-shadow: 0 2px 12px 0 rgba(110, 110, 110, 0.5);
+	  background-color: #ffffff;
+	  padding: 20px;
+		margin: 10px;
+		position: relative;
+		.question, .reply{
+			.title {
+				font-size: $fs_30p;
+				padding-right: 5px;
+			}
+			.content {
+				font-size: $fs_20p;
+			}
+		}
+		.buttons_box {
+			text-align: right;
+		}
+		.delete_box {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+	}
+
+}
+
