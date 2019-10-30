@@ -6,6 +6,17 @@ class ::Clinics::ClinicLine::KnowledgeCategoriesController < ::Clinics::ClinicLi
 		render "show"
 	end
 
+	def new
+		@clinic_line_knowledge_category = @clinic_line_knowledge_categories.new
+	end
+
+	def create
+		@clinic_line_knowledge_category = @clinic_line_knowledge_categories.new(clinic_line_knowledge_category_params)
+		if !@clinic_line_knowledge_category.save
+			return js_render_model_error(@clinic_line_knowledge_category)
+		end
+	end
+
 	def show
 		@clinic_line_knowledge_category = @clinic_line_knowledge_categories.find(params[:id])
 	end
@@ -16,7 +27,9 @@ class ::Clinics::ClinicLine::KnowledgeCategoriesController < ::Clinics::ClinicLi
 
 	def update
 		@clinic_line_knowledge_category = @clinic_line_knowledge_categories.find(params[:id])
-		@clinic_line_knowledge_category.update(clinic_line_knowledge_category_params)
+		if !@clinic_line_knowledge_category.update(clinic_line_knowledge_category_params)
+			return js_render_model_error(@clinic_line_knowledge_category)
+		end
 	end
 
 	private
