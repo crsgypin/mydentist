@@ -5,8 +5,13 @@ class Member < ApplicationRecord
          :recoverable, :rememberable, :validatable
   belongs_to :clinic, optional: true
   enum role: {clinic_admin: 10, doctor: 20}
-  validates_inclusion_of :level, in: [0, 100, 200, 500]
+  enum level: {"訪客" => 0,"一般會員" => 100,"管理者" => 200,"後台管理者" => 500} 
+  #validates_inclusion_of :level, in: [0, 100, 200, 500]
   has_one :doctor
+
+  def level_number
+    self.class.levels[self.level]
+  end
 
   def email_required?
     #for devised, noted at 2019/9/16

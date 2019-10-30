@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       resources :systems
       resources :broadcasts
     end
+    resources :members
   end
 
   namespace :admin do

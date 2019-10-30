@@ -1,0 +1,22 @@
+<div id="members-index">
+	<div class="container">
+		<div class="button-box" style="padding: 20px 0;">
+			<%= link_to "新增會員", url_for(action: :new), class: "btnBu" %>
+		</div>
+		<%= render partial: "clinics/common/clinic-table" , locals: {
+		  id: "members",
+		  resources: @members,
+		  cols: [
+		    {t: "圖片", v: proc{|a|
+		    }},
+		    {t: "使用者名稱", v: proc{|a| a.username }},
+		    {t: "權限", v: proc{|a| a.level }},
+		  ],
+		  row: {
+		  	link: proc {|a| url_for(action: :show, id: a)}
+		  }
+		}
+		%>
+	</div>
+</div>
+

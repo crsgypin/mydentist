@@ -9,6 +9,7 @@
       {name: "診所管理", link: clinic_info_path},
       {name: "醫師管理", link: clinic_doctors_path},
       {name: "關鍵字管理", link: clinic_clinic_line_keywords_path},
+      {name: "帳號管理", link: clinic_members_path},
       ].each do |elm| %>
       <% if request.fullpath.include?(elm[:link]) %>
       <li class="selected">
