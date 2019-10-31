@@ -4,7 +4,7 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
       variable_name: "patient",
       new_resource: proc { @clinic.patients.new},
       find_resource: proc { @clinic.patients.find(params[:id])},
-      resource_params: proc { params.require(:patient).permit(@patient.class.accessable_atts)}
+      # resource_params: proc { params.require(:patient).permit(:name, :gender, :person_id, :default_doctor_id, :health_insurance_status, :roc_year, :month, :day, :phone, :phone2, :address, :note)}
     })
   }
 
@@ -13,7 +13,20 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
-    @patients = @patients.page(params[:page]).per(20)
+    @patients = @patients.page(params[:page]).per(10)
+  end
+
+  def update
+    @patient = @clinic.patients.find(params[:id])
+    if !@patient.update(patient_params)
+      return js_render_model_error(@patient)
+    end
+  end
+
+  private
+
+  def patient_params
+    params.require(:patient).permit(:name, :gender, :person_id, :default_doctor_id, :health_insurance_status, :roc_year, :month, :day, :phone, :phone2, :address, :note)
   end
 
 end

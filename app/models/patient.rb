@@ -14,7 +14,7 @@ class Patient < ApplicationRecord
   before_validation :check_for_source, on: :create
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id
-  attr_accessor :year, :month, :day
+  attr_accessor :roc_year, :year, :month, :day
 
   def filled_in_web
     self.name.present? && self.birthday.present? && self.person_id.present?
@@ -51,7 +51,9 @@ class Patient < ApplicationRecord
   private
 
   def set_birthday
-    if self.year.present? && self.month.present? && self.day.present?
+    if self.roc_year.present? && self.month.present? && self.day.present?
+      self.birthday = Date.parse("#{self.roc_year.to_i + 1911}/#{self.month}/#{self.day}") rescue nil
+    elsif self.year.present? && self.month.present? && self.day.present?
       self.birthday = Date.parse("#{self.year}/#{self.month}/#{self.day}") rescue nil
     end
   end
