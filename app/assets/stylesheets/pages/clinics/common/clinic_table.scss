@@ -1,24 +1,30 @@
 
-table#clinic-table {
+table#clinic_table {
 	width: 100%;
 	text-align: center;
 	tr {
 		border-left: 1px solid #cccccc;
 		border-right: 1px solid #cccccc;
 		border-bottom: 1px solid #cccccc;
-		display: flex;
-		justify-content: space-between;
 		width: 100%;
 		&:first-child {
-			background: $colorBu_l; 
 			border-top: 1px solid #cccccc;
 		}
-		td {	
+		th, td {	
+			font-size: 14px;
 			text-align: center;
-			height: 80px;
-			line-height: 20px;
-			padding: 30px 10px;			
+			padding: 0 10px;			
 			min-width: 50px;
+		}
+		th {
+			height: 40px;
+			line-height: 40px;
+			background: $colorBu_l; 
+		}
+		td {
+			height: 80px;
+			line-height: 80px;
+			background: $colorW;			
 		}
 	}
 }

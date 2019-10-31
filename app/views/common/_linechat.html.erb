@@ -1,0 +1,50 @@
+
+<% image_url = "https://obs.line-scdn.net/0h-xQswZfGcldsCliAHLUNAFBPfDobJHQfFGU1ZEEMLmFEOj0CU2VtMx0OfjRJaDQABG84NU4LKGES" %>
+<% stick_url = "https://stickershop.line-scdn.net/stickershop/v1/sticker/52002738/PC/sticker.png" %>
+<% messages = [
+	{host_image_url: image_url, hostname: "無想牙醫診所小助手", message: {
+		type: "text", text: "{Nickname}歡迎你"
+	}},
+	{host_image_url: image_url, hostname: "無想牙醫診所小助手", message: {
+		type: "image", previewImageUrl: stick_url
+	}}
+
+] %>
+
+<div class="linechat selected">
+	<div class="header-box">
+		<div class="preview">
+			預覽
+		</div>
+		<div class="note">
+		</div>
+	</div>
+	<div class="content-box">
+		<ul>
+			<% messages.each do |message| %>
+			<li>
+				<div class="host">
+					<%= bg_center_image(message[:host_image_url]) %>
+				</div>
+				<div class="info">
+					<div class="host_name">
+						<%= message[:hostname] %>
+					</div>
+					<div class="reply_content">
+						<% if message[:message][:type] == "text" %>
+						<div class="reply_text">
+							<%= message[:message][:text] %>
+						</div>
+						<% elsif message[:message][:type] == "image" %>
+						<div class="reply_image">
+							<%= image_tag message[:message][:previewImageUrl] %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+

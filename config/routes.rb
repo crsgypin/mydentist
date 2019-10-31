@@ -119,6 +119,7 @@ Rails.application.routes.draw do
         resources :colors, only: [:index, :show]
         resources :buttons, only: [:index, :show]
         resources :lightboxes, only: [:index, :show]
+        resources :components, only: [:index, :show]
       end
     end
   end
