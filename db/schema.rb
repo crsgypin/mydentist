@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191028131146) do
+ActiveRecord::Schema.define(version: 20191031073307) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20191028131146) do
 
   create_table "clinics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "friendly_id"
+    t.integer "tooth_cleaning_service_id"
     t.string "name", limit: 100
     t.string "name_en", limit: 100
     t.string "phone", limit: 100
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 20191028131146) do
     t.string "clinic_durations_note", limit: 500, default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tooth_cleaning_service_id"], name: "index_clinics_on_tooth_cleaning_service_id"
   end
 
   create_table "doctor_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -269,6 +271,9 @@ ActiveRecord::Schema.define(version: 20191028131146) do
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "friendly_id"
     t.integer "clinic_id"
+    t.integer "default_doctor_id"
+    t.integer "current_event_id"
+    t.integer "tooth_cleaning_service_id"
     t.integer "profile_status", limit: 1, default: 0
     t.integer "source", limit: 1, default: 1
     t.string "name", limit: 100
@@ -281,6 +286,10 @@ ActiveRecord::Schema.define(version: 20191028131146) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_patients_on_clinic_id"
+    t.index ["current_event_id"], name: "index_patients_on_current_event_id"
+    t.index ["default_doctor_id"], name: "index_patients_on_default_doctor_id"
+    t.index ["tooth_cleaning_service_id"], name: "index_patients_on_tooth_cleaning_service_id"
   end
 
   create_table "services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
