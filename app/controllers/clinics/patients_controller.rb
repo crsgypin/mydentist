@@ -9,7 +9,7 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
   }
 
   def index
-    @patients = @clinic.patients
+    @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end

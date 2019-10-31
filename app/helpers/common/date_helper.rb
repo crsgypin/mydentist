@@ -37,6 +37,7 @@ module Common::DateHelper
 	end
 
 	def roc_year(date)
+		return nil if date.nil?
 		(date.year - 1911)
 	end
 

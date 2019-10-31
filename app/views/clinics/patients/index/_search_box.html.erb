@@ -2,7 +2,7 @@
 <div id="search-box">
 	<%= form_tag url_for, method: "get" do %>
 	<%= text_field_tag "key", params[:key] %>
-	<%= submit_tag "搜尋", class: "btnW" %>
+	<%= link_to "新增病患", url_for(action: :new), class: "btnBu" %>
 	<% end %>
 </div>
 

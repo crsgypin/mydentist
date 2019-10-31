@@ -276,12 +276,15 @@ ActiveRecord::Schema.define(version: 20191031073307) do
     t.integer "source", limit: 1, default: 1
     t.string "name", limit: 100
     t.string "phone", limit: 100
+    t.string "phone2"
     t.string "person_id", limit: 100
     t.date "birthday"
     t.integer "gender", limit: 1
+    t.integer "health_insurance_status"
     t.string "skill"
     t.string "photo"
     t.string "address"
+    t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_patients_on_clinic_id"

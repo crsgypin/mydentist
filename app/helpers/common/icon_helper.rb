@@ -31,6 +31,7 @@ module Common::IconHelper
 			share: "fas fa-share-alt",
 			trash: "fas fa-trash",
 			comment: "far fa-comment",
+			circle: "fas fa-circle",
 			thumb: "far fa-thumbs-up",
 			thumb_fill: "fas fa-thumbs-up",
 			plus: "fas fa-plus",

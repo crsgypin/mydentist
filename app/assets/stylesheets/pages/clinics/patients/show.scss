@@ -1,5 +1,6 @@
 #patients-show {
 	background: $colorGy_l;
+	display: flex;
 	#patients-nav {
 		height: 60px;
 		font-size: $fs_18p;
@@ -7,16 +8,14 @@
 		padding: 0 20px;
 		border-bottom: 1px solid #979797;
 	}
-	.patient-main-box {
+	.main_box {
 		background: $colorW;
-		width: 800px;
-		padding: 10px 130px;
-		.title {
-			text-align: center;
-			font-size: $fs_24p;
-			font-weight: bold;
-			padding: 20px 0;
-		}
+		width: calc(100% - 300px);
+		padding: 10px 100px;
 	}	
+	.side_box {
+		width: 300px;
+		padding: 10px 10px;
+	}
 }
 

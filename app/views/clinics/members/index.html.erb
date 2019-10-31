@@ -3,7 +3,7 @@
 		<div class="button-box" style="padding: 20px 0;">
 			<%= link_to "新增會員", url_for(action: :new), class: "btnBu" %>
 		</div>
-		<%= render partial: "clinics/common/clinic-table" , locals: {
+		<%= render partial: "clinics/common/clinic_table" , locals: {
 		  id: "members",
 		  resources: @members,
 		  cols: [

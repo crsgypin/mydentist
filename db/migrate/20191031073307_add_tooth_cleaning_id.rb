@@ -5,6 +5,9 @@ class AddToothCleaningId < ActiveRecord::Migration[5.1]
   	add_column :patients, :default_doctor_id, :integer, after: :clinic_id
   	add_column :patients, :current_event_id, :integer, after: :default_doctor_id
   	add_column :patients, :last_tooth_cleaning_event_id, :integer, after: :current_event_id
+    add_column :patients, :phone2, :string, after: :phone
+    add_column :patients, :note, :string, after: :address
+    add_column :patients, :health_insurance_status, :integer, after: :gender
   	add_index :patients, :default_doctor_id
   	add_index :patients, :current_event_id
   	add_index :patients, :last_tooth_cleaning_event_id
@@ -16,5 +19,8 @@ class AddToothCleaningId < ActiveRecord::Migration[5.1]
   	remove_column :patients, :default_doctor_id
   	remove_column :patients, :current_event_id
   	remove_column :patients, :last_tooth_cleaning_event_id
+    remove_column :patients, :phone2
+    remove_column :patients, :note
+    remove_column :patients, :health_insurance_status
   end
 end
