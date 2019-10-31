@@ -6,7 +6,7 @@ class Patient < ApplicationRecord
   has_many :patient_notification_clinics, through: :clinic_patient_notifications, source: :clinic
   belongs_to :default_doctor, class_name: "::Doctor", foreign_key: :default_doctor_id, optional: true
   belongs_to :current_event, class_name: "::Event", foreign_key: :current_event_id, optional: true
-  belongs_to :tooth_cleaning_service, class_name: "::Service", foreign_key: :tooth_cleaning_service_id, optional: true
+  belongs_to :last_tooth_cleaning_event, class_name: "::Event", foreign_key: :last_tooth_cleaning_event_id, optional: true
   enum source: {"網路" => 1, "現場" => 2}
   enum :gender => {"男" => 1, "女" => 2}
   enum notification_list: {"無" => 0, "回診推播" => 1}
@@ -19,6 +19,26 @@ class Patient < ApplicationRecord
 
   def filled_in_web
     self.name.present? && self.birthday.present? && self.person_id.present?
+  end
+
+  def update_current_event
+    events = self.events.where(status: "已預約")
+    if events.length > 0
+      self.current_event = self.events.order(date: :asc).first
+    else
+      self.current_event = nil
+    end
+    self.save
+  end
+
+  def update_last_tooth_cleaning_event
+    events = self.events.joins(:service).where(status: "報到").where("services.category = ?", Service.categories["洗牙"])
+    if events.length > 0
+      self.last_tooth_cleaning_event = self.events.order(date: :asc).last
+    else
+      self.last_tooth_cleaning_event = nil
+    end
+    self.save
   end
 
   private

@@ -14,7 +14,6 @@ class Clinic < ApplicationRecord
 	has_many :clinic_line_knowledge_categories, class_name: "ClinicLine::KnowledgeCategory"
 	has_many :clinic_line_systems, class_name: "ClinicLine::System"
 	has_many :clinic_line_broadcasts, class_name: "ClinicLine::Broadcast"
-  belongs_to :tooth_cleaning_service, class_name: "::Service", foreign_key: :tooth_cleaning_service_id, optional: true
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper
