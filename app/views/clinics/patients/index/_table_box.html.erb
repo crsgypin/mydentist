@@ -3,15 +3,29 @@
   id: "patients",
   resources: @patients,
   cols: [
-    {t: "病患姓名", v: proc{|a| a.name }},
+    {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
     {t: "性別", v: proc{|a| a.gender }},
     {t: "身分證號碼", v: proc{|a| a.person_id }},
-    {t: "出生年月日", v: proc{|a| a.birthday }},
+    {t: "出生年月日", v: proc{|a| roc_format(a.birthday, 3) }},
     {t: "聯絡電話", v: proc{|a| a.phone }},
-    {t: "看診醫生", v: proc{|a| a.gender }},
-    {t: "已可洗牙", v: proc{|a| a.gender }},
-    {t: "下次就診日期", v: proc{|a| a.gender }},
-    {t: "加入推播狀態", v: proc{|a| a.gender }},
+    {t: "看診醫生", v: proc{|a|
+      if a.default_doctor
+        a.default_doctor.name
+      else
+
+      end
+    }},
+    {t: "已可洗牙", v: proc{|a| 
+      if a.available_for_tooth_cleaning 
+        icon_tag(:circle, class: 'colorBu')
+      else
+        ""
+      end
+    }},
+    {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
+    {t: "加入推播狀態", unclickable: true, v: proc{|a| 
+      render_relative_partial "table_box/notification", locals: {patient: a}
+     }},
   ],
   row: {
     link: proc do |a|

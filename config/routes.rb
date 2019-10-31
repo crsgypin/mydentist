@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :clinics, only: [], module: :clinics do
     resources :events
     resources :patients
+    resources :patients, only: [], module: :patients do
+      resource :notification, only: [:create, :destroy], controller: :notification
+    end
     resources :doctors
     resources :doctors, only: [], module: :doctors do
       resource :info, only: [:show, :edit, :update], controller: :info

@@ -8,9 +8,9 @@
 		<% end %>
 	</tr>
 	<% resources.each do |resource|%>
-	<tr onclick="window.location.href= '<%= row[:link].call(resource) %>'">
+	<tr>
 		<% cols.each do |col| %>
-		<td>
+		<td <%= "onclick=\"window.location.href= '#{row[:link].call(resource)}'\"".html_safe if !col[:unclickable] %>>
 			<%= col[:v].call(resource) %>
 		</td>
 		<% end %>

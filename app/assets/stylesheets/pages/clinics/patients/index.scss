@@ -1,6 +1,7 @@
-#patients-index {
-	.patient-main-box {
+#patients_index {
+	.patient_main_box {
 		background: #f5f5f5;
 		padding: 30px 80px;
+		min-height: calc(100vh - 60px);
 	}
 }

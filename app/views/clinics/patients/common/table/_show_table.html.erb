@@ -1,0 +1,10 @@
+
+<div id="patient_show_table">
+	<ul>
+		<% fields.each do |field| %>
+		<li class="<%= field[:class] %>">
+			<%= field[:v].call(resource) %>
+		</li>
+		<% end %>
+	</ul>
+</div>

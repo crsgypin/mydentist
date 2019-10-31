@@ -1,0 +1,4 @@
+
+$("#notification_<%= @patient.id %>").replaceWith("<%= j render_relative_partial '../index/table_box/notification', locals: {patient: @patient} %>");
+
+$("#patients_nav").replaceWith("<%= j render_relative_partial '../index/navbar' %>");

@@ -11,6 +11,8 @@ class Event < ApplicationRecord
 	validates_presence_of :status, :source
 	before_validation :check_for_source, on: :create
 	after_save :check_hour_minute_duration
+	after_save :set_special_event_to_patient
+	after_create :set_default_doctor
 	include Common::DateTimeDurationHelper
 
 	def hour_minute_duration=(str)
@@ -62,4 +64,19 @@ class Event < ApplicationRecord
 		true
 	end
 
+	def set_special_event_to_patient
+		if self.changes[:status].present?
+			self.patient.update_current_event
+			if self.service.category == "洗牙"
+				self.patient.update_last_tooth_cleaning_event
+			end
+		end
+	end
+
+	def set_default_doctor
+		if !self.patient.default_doctor.present? || self.doctor != self.patient.default_doctor
+			self.patient.update(default_doctor: self.doctor)
+			true
+		end
+	end
 end

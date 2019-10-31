@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191028131146) do
+ActiveRecord::Schema.define(version: 20191031073307) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -269,22 +269,33 @@ ActiveRecord::Schema.define(version: 20191028131146) do
   create_table "patients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "friendly_id"
     t.integer "clinic_id"
+    t.integer "default_doctor_id"
+    t.integer "current_event_id"
+    t.integer "last_tooth_cleaning_event_id"
     t.integer "profile_status", limit: 1, default: 0
     t.integer "source", limit: 1, default: 1
     t.string "name", limit: 100
     t.string "phone", limit: 100
+    t.string "phone2"
     t.string "person_id", limit: 100
     t.date "birthday"
     t.integer "gender", limit: 1
+    t.integer "health_insurance_status"
     t.string "skill"
     t.string "photo"
     t.string "address"
+    t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_patients_on_clinic_id"
+    t.index ["current_event_id"], name: "index_patients_on_current_event_id"
+    t.index ["default_doctor_id"], name: "index_patients_on_default_doctor_id"
+    t.index ["last_tooth_cleaning_event_id"], name: "index_patients_on_last_tooth_cleaning_event_id"
   end
 
   create_table "services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
+    t.integer "category", default: 0
     t.string "name", limit: 100
     t.integer "duration", default: 15
     t.datetime "created_at", null: false
