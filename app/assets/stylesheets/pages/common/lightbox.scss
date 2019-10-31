@@ -20,10 +20,10 @@
   	display: inline-block;
     vertical-align: middle;
     width: 600px;
-    min-height: 30vh;
+    min-height: 200px;
     border-radius: 10px;
-    background: $colorW;
     box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
+    background-color: $colorW;
     padding: 30px;
 
     .header_box {
@@ -31,7 +31,7 @@
 	    font-size: 42px;
 	    color: #4a4a4a;
     }
-    .close-box {
+    .close_box {
       position: absolute;
       right: 10px;
       top: 5px;
@@ -40,7 +40,19 @@
 
 
     .content_box {
-			min-height: calc(30vh - 13px - 13px);
+			min-height: 100px;
+      text-align: center;
+
+      &.highlight {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-weight: bold;
+        font-size: $fs_24p;
+        p, a {
+          font-size: $fs_24p;     
+        }
+      }
     }
 
     .buttons_box {
@@ -49,12 +61,8 @@
 				font-size: $fs_18p;
 				width: 200px;
 				padding: 5px;
-				&.cancel {
-					margin-right: 10px;
-				}
-				&.submit {
-					margin-left: 10px;
-				}
+        margin-left: 10px;
+        margin-right: 10px;
 			}
     }
   }

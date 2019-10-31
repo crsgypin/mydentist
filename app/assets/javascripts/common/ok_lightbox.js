@@ -15,13 +15,13 @@ var OKLightbox = function(){
   }
   var action = {
     getView: function(){
-      var layout = '<div id="ok_lightbox" class="lightbox fs12 colorGy2 select">'
+      var layout = '<div id="ok_lightbox" class="lightbox" style="display: hidden">'
           layout += '  <div class="inbox">'
-          layout += '    <div class="content_box pv10 alignC">'
-          layout += '      <p class="content alignC"></p>'
+          layout += '    <div class="content_box highlight">'
+          layout += '      <p class="content"></p>'
           layout += '    </div>'
-          layout += '    <div class="button_box alignC mt2 mb6">'
-          layout += '      <a id="ok_lightbox_ok" class="btn1 ph10 pv3 fs12" href="#ok_lightbox_ok">OK</a>'
+          layout += '    <div class="buttons_box alignC mt2 mb6">'
+          layout += '      <a id="ok_lightbox_ok" class="btnBu" href="#ok_lightbox_ok">OK</a>'
           layout += '    </div>'
           layout += '  </div>'
           layout += '</div>'
@@ -32,11 +32,11 @@ var OKLightbox = function(){
     show: function(content,cb){
       (!$("#ok_lightbox").length)&&action.getView();
       container.find('.content').html(content);
-      container.addClass('select');
+      container.fadeIn(400);
       callback = cb;
     },
     hide: function(){
-      container&&container.removeClass('select');
+      container&&container.fadeOut(400);
       (typeof callback == "function")&& callback();
     }
   };
