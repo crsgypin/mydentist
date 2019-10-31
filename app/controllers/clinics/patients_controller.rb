@@ -9,11 +9,22 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
   }
 
   def index
-    @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+    if params[:category] != "notification"
+      @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+    else
+      @patients = @clinic.clinic_notification_patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+    end
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
     @patients = @patients.page(params[:page]).per(10)
+  end
+
+  def create
+    @patient = @clinic.patients.new(patient_params)
+    if !@patient.save
+      return js_render_model_error(@patient)
+    end    
   end
 
   def update

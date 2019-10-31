@@ -1,9 +1,9 @@
 
-<div id="patients-nav">
+<div id="patients_nav">
 	<ul>
 		<% [
 			{name: "病患列表(#{@clinic.patients.count})", link: url_for},
-			{name: "回診推播列表(#{@clinic.clinic_patient_notifications.count})", link: url_for(key: "round")},
+			{name: "回診推播列表(#{@clinic.clinic_patient_notifications.count})", link: url_for(category: "notification")},
 			].each do |elm|  %>
 		<li class="<%= "selected" if request.fullpath == elm[:link] %>">
 			<%= link_to elm[:name], elm[:link] %>

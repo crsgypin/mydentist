@@ -1,0 +1,14 @@
+
+<div id="notification_<%= patient.id %>">
+<%=
+if patient.line_account.present?
+  if !patient.clinic_patient_notification.present?
+    link_to icon_tag(:plus), clinic_patient_notification_path(@clinic, patient), remote: true, method: "post"
+  else
+    link_to icon_tag(:minus), clinic_patient_notification_path(@clinic, patient), remote: true, method: "delete"
+  end
+else
+  "未加入linebot"
+end
+%>
+</div>

@@ -36,6 +36,7 @@ module Common::IconHelper
 			thumb_fill: "fas fa-thumbs-up",
 			plus: "fas fa-plus",
 			plus_circle: "fas fa-plus-circle",
+			minus: "fas fa-minus",
 			camera: "fas fa-camera",
 			google: "fab fa-google",
 			search: "fas fa-search",

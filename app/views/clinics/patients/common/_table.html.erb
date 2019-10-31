@@ -16,7 +16,7 @@
     {class: "both", v: proc{|a| 
     	r = ""
     	r += select_field_tag "patient[default_doctor_id]", a.default_doctor_id, [[nil, "看診醫師"]] + @clinic.doctors.map{|a| [a.id, a.name]}
-    	r += select_field_tag "patient[health_insurance_status]", a.health_insurance_status, [[nil,"健保狀況"]] + Patient.health_insurance_statuses.map{|a| [a,a]}
+    	r += select_field_tag "patient[health_insurance_status]", a.health_insurance_status, [[nil,"健保狀況"]] + Patient.health_insurance_statuses.keys
     	r.html_safe
     }},
     {v: proc{|a|

@@ -23,16 +23,8 @@
       end
     }},
     {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
-    {t: "加入推播狀態", v: proc{|a| 
-      if a.line_account.present?
-        if a.clinic_patient_notification.present?
-          link_to "+", "", remote: true
-        else
-          "無"
-        end
-      else
-        "未加入linebot"
-      end
+    {t: "加入推播狀態", unclickable: true, v: proc{|a| 
+      render_relative_partial "table_box/notification", locals: {patient: a}
      }},
   ],
   row: {
