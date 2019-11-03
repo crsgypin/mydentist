@@ -35,6 +35,14 @@
           {t: "休診時間", v: proc{|a| 
             link_to "選取休診時間", ""
           }},
+          {t: "診療項目", v: proc{|a| 
+            r = ""
+            r += link_to "編輯診療項目", clinic_info_services_path(@clinic), remote: true
+            r += "<div>"
+            r += a.services.map{|s| s.name}.join(", ")
+            r += "</div>"
+            r.html_safe
+          }},
           {k: "描述", v: proc{|a| 
             text_field_tag "clinic[address]", a.address
           }},

@@ -1,0 +1,26 @@
+
+<div id="clinic_info_services" class="lightbox">
+	<%= form_tag url_for(action: :create), method: "post", class: "inbox bg_width", remote: true do %>
+		<div class="content_box">
+			<table class="clinic_table">
+				<tr>
+					<th>診療項目</th>
+					<th>所需時間</th>
+					<th></th>
+				</tr>
+				<% @services.each_with_index do |service, index| %>
+				<%= render_relative_partial "lightbox/tr", locals: {service: service, index: index} %>
+				<% end %>
+			</table>
+			<div class="add_btn_box">
+				<%= link_to "新增", url_for(action: :new), remote: true, class: "btnBu" %>
+			</div>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "取消", "javascript: $('#clinic_info_services').remove();", class: "btnW" %>
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</div>
+	<% end %>
+</div>
+
+
