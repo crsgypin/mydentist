@@ -5,14 +5,14 @@
   <% end %>
   <div class="content_box">
     <div id="doctors_show_container">
-      <%= form_tag url_for(action: :update), method: :patch, class: "clinic_form clinic_form_box" do %>
+      <%= form_tag url_for(action: :update), method: :patch, class: "clinic_form clinic_form_box", remote: true do %>
       <%= render partial: "clinics/common/clinic_form_table" , locals: {
         id: "doctor",
         resource: @doctor,
         fields: [
           {t: "照片", v: proc{ |a| 
             r = "<div class='clinic_photo_box'>"
-            r += bg_center_image @clinic.photo_url
+            r += bg_center_image a.photo_url
             r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_doctor_info_photo_path(@clinic, a)}');"
             r += "</div>"
             r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
@@ -43,6 +43,9 @@
         ]
       }
       %>
+      <div class="buttons_box">
+        <%= submit_tag "儲存", class: "btnBu" %>
+      </div>
       <% end %>
     </div>
   </div>

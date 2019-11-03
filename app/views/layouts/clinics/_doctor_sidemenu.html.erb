@@ -1,6 +1,6 @@
 
-<aside id="show-layout-sidemenu">
-	<%= image_tag @doctor.photo.url, alt: @doctor.name %>
+<aside id="show_layout_sidemenu">
+	<%= bg_center_image @doctor.photo.url%>
   <p><%= "#{@doctor.name}#{@doctor.title}" %></p>
 	<ul>
 	<% [

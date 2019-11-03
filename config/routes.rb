@@ -24,13 +24,7 @@ Rails.application.routes.draw do
     resources :doctors
     resources :doctors, only: [], module: :doctors do
       resource :info, only: [:show, :edit, :update], controller: :info
-      resource :info, only: [] do
-        resources :clinic_durations, only: [:index, :create]
-        resources :clinic_vacations, only: [:index, :new, :create, :update, :destroy]
-        resources :clinic_vacations, only: [], module: :clinic_vacations do
-          resources :events, only: [:index]
-        end
-        resources :services, only: [:index, :new, :create, :destroy]
+      resource :info, only: [], module: :info do
         resource :photo, only: [:new, :create], controller: :photo
       end
       resources :doctor_durations, only: [:index, :create]

@@ -8,7 +8,7 @@ class Doctor < ApplicationRecord
 	has_many :event_durations, through: :events
 	enum status: {"在職" => 1, "離職" => 2}
 	before_validation :set_friendly_id, on: :create
-	validates_presence_of :friendly_id
+	validates_presence_of :friendly_id, :name
 	validates_uniqueness_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper
@@ -19,6 +19,14 @@ class Doctor < ApplicationRecord
 
 	def doctor_durations_note_html
 		self.doctor_durations_note.gsub("\n", "<br>")
+	end
+
+	def photo_url
+		if self.photo.present?
+			self.photo.url
+		else
+			common_static_image_url(:dentist3)
+		end
 	end
 
 	def current_event_durations(date, service_duration)

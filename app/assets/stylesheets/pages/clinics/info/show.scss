@@ -7,10 +7,6 @@
       table {
         tr {
           td {
-            .photo_note {
-              padding-left: 20px;
-              color: $colorGy1;
-            }
           }
         }
       }
@@ -19,24 +15,6 @@
       margin-top: 20px;
       text-align: right;
     }
-  }
-}
-
-.clinic_photo_box {
-  position: relative;
-  display: inline-block;
-  .bg_center_image {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-  }
-  .pic_edit {
-    position: absolute;
-    right: -10px;
-    bottom: 0;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
   }
 }
 
