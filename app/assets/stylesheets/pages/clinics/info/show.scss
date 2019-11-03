@@ -7,18 +7,6 @@
       table {
         tr {
           td {
-            border-top: 0;
-            vertical-align: middle;
-            a {
-              color: $colorBu;
-              text-decoration: underline;
-            }
-            &:first-child {
-              width: 100px;
-            }
-            &:nth-child(2) {
-              width: calc(100% - 100px);
-            }
             .photo_note {
               padding-left: 20px;
               color: $colorGy1;

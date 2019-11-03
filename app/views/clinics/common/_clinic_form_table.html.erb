@@ -11,7 +11,6 @@
 <%# variable: mode, trs %>
 <table class="table table-sm <%= table_class %>" style="<%= table_style %>">
 <% fields.each_with_index do |field, index| %>
-	<% next if mode == "edit" && !field.keys.include?(:e) %>
 	<%= "<tr>".html_safe if index % fields_per_row == 0 %>
 		<td class="<%= title_class %>" style="<%= title_style %>">
 			<% if field.keys.include?(:t) %>
@@ -20,7 +19,6 @@
 				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
 			<% end %>
 		</td>
-		<% if mode == "show" %>
 		<td class="<%= value_class %>" style="<%= value_style %>">
 			<% if field.keys.include?(:v) %>
 				<%= field[:v].call(resource) %>
@@ -28,13 +26,6 @@
 				<%= t("activerecord.attributes.#{resource.class.name.underscore}.#{field[:k]}") %>
 			<% end %>
 		</td>
-		<% elsif mode == "edit" %>
-		<td class="<%= value_class %>" style="<%= value_style %>">
-			<% if field.keys.include?(:e) %>
-				<%= field[:e].call(resource) %>
-			<% end %>
-		</td>
-		<% end %>
 	<%= "</tr>".html_safe if ((index + 1) % fields_per_row == 0) || (fields.lenth == index + 1)  %>
 	</tr>
 <% end %>
