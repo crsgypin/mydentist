@@ -9,10 +9,10 @@
   	<%= render_relative_partial "clinics/logout_lightbox" %>
   	<div id="clinic-container">
       <% if @doctor_sidemenu == 1 || @clinic_line_sidemenu == 1 %>
-        <div id="show-layout">
+        <div id="show_layout">
           <%= render_relative_partial "clinics/doctor_sidemenu" if @doctor_sidemenu == 1 %>
           <%= render_relative_partial "clinics/clinic_line_sidemenu" if @clinic_line_sidemenu == 1 %>
-          <div id="show-layout-inbox">
+          <div id="show_layout_inbox">
             <%= yield %>
           </div>
         </div>

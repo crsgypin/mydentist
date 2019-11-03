@@ -1,5 +1,5 @@
 
-#clinic #show-layout {
+#clinic #show_layout {
 	display: flex;
 	#show_layout_sidemenu {
 	  width: 200px;
@@ -46,7 +46,7 @@
 			}
 		}
 	}
-	#show-layout-inbox {
+	#show_layout_inbox {
 		width: calc(100% - 200px);
 		padding: 20px;
 	}
