@@ -6,13 +6,9 @@
 		</div>
 		<%= render partial: "clinics/common/vacations_form", locals: {
 			vacations: @clinic_vacations, 
-			li_id: proc do |clinic_vacation|
-				"clinic_vacation_#{clinic_vacation.new_record? ? "new" : clinic_vacation.id}"
-			end,
-			vacation_events_path: proc do |clinic_vacation|
-				clinic_info_clinic_vacation_events_path(@clinic, clinic_vacation)
-			end,
-			leave_link: "javascript: $('#clinic_info_clinic_vacations').remove();"
+			li: proc do |clinic_vacation|
+				render_relative_partial "lightbox/tr", locals: {clinic_vacation: clinic_vacation}
+			end
 		} %>
 		<div class="buttons_box">
 			<%= link_to "離開", "javascript: $('#clinic_info_clinic_vacations').remove();", class: "btnW" %>

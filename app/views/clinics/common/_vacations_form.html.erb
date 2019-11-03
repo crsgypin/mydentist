@@ -3,11 +3,7 @@
 	<div class="main_box clinic_form">
 		<ul>
 			<% vacations.each do |vacation| %>
-			<%= render_relative_partial "vacations_form/tr", locals: {
-				vacation: vacation,
-				li_id: li_id,
-				vacation_events_path: vacation_events_path
-			} %>
+			<%= li.call(vacation) %>
 			<% end %>
 		</ul>
 		<div class="add_btn_box alignR">

@@ -1,5 +1,5 @@
 
-<li id="<%= li_id.call(vacation) %>" class="vacation_view" onclick="$.getScript('<%= vacation_events_path.call(vacation) %>');">
+<li id="<%= li[:id] %>" class="vacation_view" data-url="<%= li[:vacation_events_path] %>" onclick="$(this).data('url') && $.getScript($(this).data('url'));">
 	<div class="vacation_close_box">
 		<% if vacation.new_record? %>
 		<%= link_to icon_tag(:close), "javascript:", onclick: "$(this).closest('li').remove();" %>
@@ -10,19 +10,14 @@
 	<div class="title">
 		休診日
 	</div>
-	<% if vacation.new_record? %>
-		<% options = {url: url_for(action: :create), method: :post} %>
-	<% else %>
-		<% options = {url: url_for(action: :update, id: vacation), method: :patch} %>
-	<% end %>
-	<%= form_tag options[:url], method: options[:method], remote: true, class: "date_button_box" do %>
+	<%= form_tag li[:path], method: li[:method], remote: true, class: "date_button_box" do %>
 		<div class="date_box">
 			<div class="start_date">
-				<%= date_field_tag "clinic_vacation[start_date]", vacation.start_date, class: "start_date_input" %>
+				<%= li[:start_input] %>
 			</div>
 			<span class="to">至</span>
 			<div class="end_date">
-				<%= date_field_tag "clinic_vacation[end_date]", vacation.end_date, class: "end_date_input" %>
+				<%= li[:end_input] %>
 			</div>
 			<div class="count_box">
 				共計<span><%= vacation.new_record? ? nil : vacation.days_count %></span>天

@@ -5,8 +5,25 @@
 	li_id: proc do |doctor_vacation|
 		"doctor_vacation_#{doctor_vacation.new_record? ? "new" : doctor_vacation.id}"
 	end,
+	li_path: proc do |doctor_vacation|
+		if doctor_vacation.new_record?
+			url_for(action: :create)
+		else
+			url_for(action: :update, id: doctor_vacation)
+		end
+	end,
+	li_method: proc do |doctor_vacation|
+		if doctor_vacation.new_record?
+			"post"
+		else
+			"patch"
+		end				
+	end,
 	vacation_events_path: proc do |doctor_vacation|
 		clinic_doctor_doctor_vacation_events_path(@clinic, @doctor, doctor_vacation)
 	end,
-	leave_link: "javascript: $('#clinic_info_doctor_vacations').remove();"
 } %>
+
+<div class="form_buttons_box">
+	<%= submit_tag "儲存", class: "btnBu" %>
+</div>
