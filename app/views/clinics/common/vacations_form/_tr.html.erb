@@ -1,0 +1,30 @@
+
+<li id="<%= li[:id] %>" class="vacation_view" data-url="<%= li[:vacation_events_path] %>" onclick="$(this).data('url') && $.getScript($(this).data('url'));">
+	<div class="vacation_close_box">
+		<% if vacation.new_record? %>
+		<%= link_to icon_tag(:close), "javascript:", onclick: "$(this).closest('li').remove();" %>
+		<% else %>
+		<%= link_to icon_tag(:close), url_for(action: :destroy, id: vacation), remote: true, method: :delete, data: {confirm: "確定移除?"} %>
+		<% end %>
+	</div>
+	<div class="title">
+		休診日
+	</div>
+	<%= form_tag li[:path], method: li[:method], remote: true, class: "date_button_box" do %>
+		<div class="date_box">
+			<div class="start_date">
+				<%= li[:start_input] %>
+			</div>
+			<span class="to">至</span>
+			<div class="end_date">
+				<%= li[:end_input] %>
+			</div>
+			<div class="count_box">
+				共計<span><%= vacation.new_record? ? nil : vacation.days_count %></span>天
+			</div>
+		</div>
+		<div class="button_box">
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</div>
+	<% end %>
+</li>

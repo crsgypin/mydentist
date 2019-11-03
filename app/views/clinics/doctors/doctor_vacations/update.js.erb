@@ -1,0 +1,5 @@
+
+alert("更新成功");
+$("#doctor_vacation_<%= @doctor_vacation.id %>").replaceWith("<%= j render_relative_partial 'index/tr', locals: {doctor_vacation: @doctor_vacation} %>")
+
+

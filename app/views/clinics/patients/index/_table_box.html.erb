@@ -1,6 +1,7 @@
 <div id="table-box">
 <%= render partial: "clinics/common/clinic_table" , locals: {
   id: "patients",
+  class: "ht80",
   resources: @patients,
   cols: [
     {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},

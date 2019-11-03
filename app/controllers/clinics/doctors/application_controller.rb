@@ -6,5 +6,4 @@ class ::Clinics::Doctors::ApplicationController < ::Clinics::ApplicationControll
 		@doctor = @clinic.doctors.find_by!(id: params[:doctor_id])
 	end
  
-
 end

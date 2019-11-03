@@ -1,0 +1,18 @@
+
+<div id="upload_photo_lightbox" class="lightbox">
+	<%= form_tag form_url, method: form_method, remote: true, class: "inbox" do %>
+	<div class="content_box">
+		<div class='clinic_photo_box'>
+			<%= bg_center_image photo_url %>
+			<%= image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$(this).siblings('input').click();" %>
+			<%= file_field_tag photo_input_name, class: "hidden", onchange: "window.showFileImage(this, $(this).siblings('.bg_center_image'), 1);" %>
+		</div>
+	</div>
+	<div class="buttons_box">
+		<%= content_tag :div, "取消", onclick: "$(this).closest('.lightbox').remove();", class: "btnW cursor_pointer" %>
+		<%= submit_tag "儲存", class: "btnBu" %>
+	</div>
+	<% end %>
+</div>
+
+

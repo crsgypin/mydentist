@@ -1,6 +1,7 @@
-<div id="doctors-index">
+<div id="doctors_index">
 	<%= render partial: "clinics/common/clinic_table" , locals: {
 	  id: "doctors",
+	  class: "ht80",
 	  resources: @doctors,
 	  cols: [
 	    {t: "圖片", v: proc{|a|

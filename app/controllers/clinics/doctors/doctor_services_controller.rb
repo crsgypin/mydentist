@@ -9,15 +9,7 @@ class ::Clinics::Doctors::DoctorServicesController < ::Clinics::Doctors::Applica
 	end
 
 	def create
-		# @doctor_service = @doctor.doctor_services.new(doctor_service_params)
-		@doctor_service = @doctor.doctor_services.new
-		@doctor_service.service_id = proc do
-			(@clinic.services.map{|a| a.id} - @doctor.services.map{|a| a.id}).last
-		end.call
-		if !@doctor_service.save
-			@error_messages = @doctor_service.errors.full_messages.join(",")
-			return js_render_error @error_messages
-		end
+		@doctor.update!(doctor_params)
 	end
 
 	def update
@@ -41,6 +33,10 @@ class ::Clinics::Doctors::DoctorServicesController < ::Clinics::Doctors::Applica
 
 	def doctor_service_params
 		params.require(:doctor_service).permit(:service_id, :duration)
+	end
+
+	def doctor_params
+		params.require(:doctor).permit(doctor_services_attributes: [:id, :service_id, :duration])
 	end
 
 end

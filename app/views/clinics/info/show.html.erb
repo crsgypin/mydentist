@@ -1,21 +1,18 @@
 
-<div id="clinic-info">
-  <%= form_tag url_for(action: :update), method: "patch" do %>
-  <div class="inbox">
-    <div class="content-box">
-      <% if false %>
-      <img src="<%= @clinic.photo.url %>" onclick="showUploadModal()">
-      <span>請上傳 200 * 200 px 以上的照片</span>
-      <% end %>
-      <%= render_relative_partial "common/table" , locals: {
-        id: "clinic-info-table",
+<div id="clinic_info">
+  <%= form_tag url_for(action: :update), method: "patch", class: "inbox form_border clinic_form clinic_form_box", remote: true do %>
+    <div class="content_box">
+      <%= render partial: "clinics/common/clinic_form_table" , locals: {
+        id: "clinic_info-table",
         resource: @clinic,
         fields: [
           {t: "照片", v: proc{ |a| 
-            if @clinic.photo.present?
-              r = image_tag @clinic.photo.url
-            end
-            # 請上傳 200 * 200 px 以上的照片
+            r = "<div class='clinic_photo_box'>"
+            r += bg_center_image @clinic.photo_url
+            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_info_photo_path(@clinic)}');"
+            r += "</div>"
+            r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
+            r.html_safe
           }},
           {t: "診所名稱", v: proc{|a| 
             text_field_tag "clinic[name]", a.name
@@ -24,31 +21,49 @@
           {t: "診所電話", v: proc{|a| 
             text_field_tag "clinic[phone]", a.phone
           }},
+          {t: "診所電話2", v: proc{|a| 
+            text_field_tag "clinic[phone2]", a.phone2
+          }},
           {t: "診所地址", v: proc{|a| 
             text_field_tag "clinic[address]", a.address
           }},
           {t: "營業時間", v: proc{|a| 
-            r = ""
+            r = "<div class='field'>"
             r += link_to "選取診所營業時間", clinic_info_clinic_durations_path(@clinic) 
             r += "<div>"
             r += a.clinic_durations_note_html
             r += "</div>"
+            r += "</div>"
             r.html_safe
           }},
           {t: "休診時間", v: proc{|a| 
-            link_to "選取休診時間", ""
+            r = "<div class='field'>"
+            r += link_to "選取休診時間", clinic_info_clinic_vacations_path(@clinic), remote: true
+            r += "<div>"
+            r += a.clinic_vacations.map{|a| "#{roc_format(a.start_date, 3)}~#{roc_format(a.end_date, 3)}"}.join("<br>")
+            r += "</div>"
+            r += "</div>"
+            r.html_safe
+          }},
+          {t: "診療項目", v: proc{|a| 
+            r = "<div class='field'>"
+            r += link_to "編輯診療項目", clinic_info_services_path(@clinic), remote: true
+            r += "<div>"
+            r += a.services.map{|s| s.name}.join(", ")
+            r += "</div>"
+            r += "</div>"
+            r.html_safe
           }},
           {k: "描述", v: proc{|a| 
-            text_field_tag "clinic[address]", a.address
+            text_field_tag "clinic[description]", a.description
           }},
         ]
       }
       %>
     </div>
-    <div class="buttons-box">
+    <div class="form_buttons_box">
       <%= submit_tag "儲存", class: "btnBu" %>
     </div>
-  </div>
   <% end %>
 </div>
 
@@ -57,8 +72,8 @@
 <script>
   function setMode(mode, dom){
     if(mode == "show"){
-      $("#clinic-info").find("table tr .show").removeClass("hidden");
-      $("#clinic-info").find("table tr .edit").addClass("hidden");
+      $("#clinic_info").find("table tr .show").removeClass("hidden");
+      $("#clinic_info").find("table tr .edit").addClass("hidden");
     } else if(mode == "edit") {
       setMode("show");
       $(dom).closest("tr").find(".show").addClass("hidden");

@@ -1,5 +1,5 @@
 
-table#clinic_table {
+table.clinic_table {
 	width: 100%;
 	text-align: center;
 	tr {
@@ -22,9 +22,16 @@ table#clinic_table {
 			background: $colorBu_l; 
 		}
 		td {
-			height: 80px;
-			line-height: 80px;
+			height: 40px;
+			vertical-align: middle;
 			background: $colorW;			
+		}
+	}
+	&.ht80 {
+		td {
+			height: 80px;
+			line-height: 40px;
+			vertical-align: middle;
 		}
 	}
 }

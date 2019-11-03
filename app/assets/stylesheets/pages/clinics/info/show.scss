@@ -1,39 +1,17 @@
-#clinic-info {
+#clinic_info {
   background: $colorW;
-  .inbox {
+  >.inbox {
     width: 80%;
     margin: 20px auto;
-    .content-box {
-      border-radius: 10px;
-      border: 1px solid $colorGy;
-      padding: 20px;
+    >.content_box {
       table {
         tr {
           td {
-            border-top: 0;
-            input {
-              border: none;
-              width: 100%;
-            }
-            a {
-              color: $colorBu;
-              text-decoration: underline;
-            }
-            &:first-child {
-              width: 100px;
-            }
-            &:nth-child(2) {
-              width: calc(100% - 100px);
-              border-bottom: 1px solid $colorGy;
-            }
           }
         }
       }
     }
-    .buttons-box {
-      margin-top: 20px;
-      text-align: right;
-    }
   }
 }
+
 

@@ -1,4 +1,4 @@
-class ::Clinics::Info::ClinicDurationsController < ::Clinics::ApplicationController
+class ::Clinics::Info::ClinicDurationsController < ::Clinics::Info::ApplicationController
 
 	def index
 		@clinic_durations = @clinic.clinic_durations

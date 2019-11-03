@@ -1,5 +1,5 @@
 
-<table id="clinic_table">
+<table class="clinic_table <%= local_assigns[:class] %>">
 	<tr>
 		<% cols.each do |col| %>
 		<th>
@@ -7,11 +7,11 @@
 		</th>
 		<% end %>
 	</tr>
-	<% resources.each do |resource|%>
+	<% resources.each_with_index do |resource, index|%>
 	<tr>
 		<% cols.each do |col| %>
-		<td <%= "onclick=\"window.location.href= '#{row[:link].call(resource)}'\"".html_safe if !col[:unclickable] %>>
-			<%= col[:v].call(resource) %>
+		<td <%= "onclick=\"window.location.href= '#{row[:link].call(resource)}'\"".html_safe if local_assigns[:row] && !col[:unclickable] %>>
+			<%= col[:v].call(resource, index) %>
 		</td>
 		<% end %>
 	</tr>

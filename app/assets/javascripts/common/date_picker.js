@@ -21,31 +21,34 @@ $(function(){
 	$.datepicker.setDefaults( $.datepicker.regional[ "zh-TW" ] );
 
 	var box, input;
-	$("input.date_picker").datepicker({
-		beforeShow: function(a,b){
-			input = a;
-			box = b.dpDiv;
-			$(box).css("font-size", "12px");
-			changeToRocYear();
-		},
-		onChangeMonthYear: function(year,month){
-			changeToRocYear();
-		},
-		// onSelect: function(date){
-		// 	var rocDate = date.split("-").map(function(a,i){
-		// 		if(i==0){
-		// 			return a - 1911;
-		// 		} else {
-		// 			return a;
-		// 		}
-		// 	}).join("-");
-		// 	$(input).val(rocDate);
-		// },
-		dateFormat: "yy-mm-dd",
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "1950:2070"
-	});
+	window.datepickerInput = function(elm){
+		elm.datepicker({
+			beforeShow: function(a,b){
+				input = a;
+				box = b.dpDiv;
+				$(box).css("font-size", "12px");
+				changeToRocYear();
+			},
+			onChangeMonthYear: function(year,month){
+				changeToRocYear();
+			},
+			// onSelect: function(date){
+			// 	var rocDate = date.split("-").map(function(a,i){
+			// 		if(i==0){
+			// 			return a - 1911;
+			// 		} else {
+			// 			return a;
+			// 		}
+			// 	}).join("-");
+			// 	$(input).val(rocDate);
+			// },
+			dateFormat: "yy-mm-dd",
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "1950:2070"
+		});
+	}
+	datepickerInput($("input.date_picker"));
 
 	function changeToRocYear(){
 		setTimeout(function(){

@@ -1,44 +1,22 @@
 
-
-<div id="clinic-doctor-doctor_services-index">
-	<div class="head-box">
-		<%= link_to "新增", url_for(action: :create), remote: true, class: "btnBu", method: "post" %>
-		<p class="note">註：時程最多10個為上限</p>
+<div id="clinic_doctor_doctor_services_index">
+	<%= form_tag url_for(action: :create), method: "post", remote: true do %>
+	<div class="form_buttons_box">
+		<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
 	</div>
-	<div class="content-box">
-		<div id="doctor-service-table">
-			<% @doctor_services.each do |doctor_service| %>
-				<%= form_tag url_for(action: :update, id: doctor_service), method: :patch, remote: true do %>
-				<%= render_relative_partial "common/service_tr", locals: {doctor_service: doctor_service} %>
-				<% end %>
-			<% end%>
-		</div>
+	<table class="clinic_table ht80">
+		<tr>
+			<th>診療項目</th>
+			<th>所需時間</th>
+			<th>LINE上可預約</th>
+			<th></th>
+		</tr>
+		<% @doctor_services.each_with_index do |doctor_service, index| %>
+		<%= render_relative_partial "index/tr", locals: {doctor_service: doctor_service, index: index} %>
+		<% end %>
+	</table>
+	<div class="form_buttons_box">
+		<%= submit_tag "儲存", class: "btnBu" %>
 	</div>
+	<% end %>
 </div>
-
-<script type="text/javascript">
-	$("#doctor-service-table").on("click", ".edit-btn", function(e){
-		e.preventDefault();
-		setAllShowMode();
-		var id = $(this).closest(".s-row").attr("id");
-		setEditMode(id);
-	});
-	$("#doctor-service-table").on("click", ".cancel-btn", function(e){
-		e.preventDefault();
-		setAllShowMode();
-	});
-	function setAllShowMode(){
-		$("#doctor-service-table").find('.show-view').removeClass("hidden");
-		$("#doctor-service-table").find('.edit-view').addClass("hidden");
-	}
-	function setEditMode(targetId){
-		var box = $("#" + targetId);
-		box.find(".show-view").addClass("hidden");
-		box.find(".edit-view").removeClass("hidden");
-	}
-	function setShowMode(targetId){
-		var box = $("#" + targetId);
-		box.find(".show-view").removeClass("hidden");
-		box.find(".edit-view").addClass("hidden");
-	}
-</script>

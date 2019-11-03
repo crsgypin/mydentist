@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191031073307) do
+ActiveRecord::Schema.define(version: 20191103031244) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -93,7 +93,8 @@ ActiveRecord::Schema.define(version: 20191031073307) do
 
   create_table "clinic_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
-    t.date "date"
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_vacations_on_clinic_id"
@@ -104,6 +105,7 @@ ActiveRecord::Schema.define(version: 20191031073307) do
     t.string "name", limit: 100
     t.string "name_en", limit: 100
     t.string "phone", limit: 100
+    t.string "phone2", limit: 100
     t.string "address", limit: 100
     t.text "description"
     t.string "channel_secret"

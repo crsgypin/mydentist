@@ -3,16 +3,16 @@ def event_durations
 	include Common::DateTimeDurationHelper
 	puts "start events"
 	id = 1
+	Event.where(clinic_id: Clinic.first(2).pluck(:id)).destroy_all
 	Clinic.all.each do |clinic|
-		clinic.events.destroy_all
 		patients = clinic.patients
 		services = clinic.services
-		dates = (-10..10).map{|a| Date.today + a.day}
+		dates = (-30..30).map{|a| Date.today + a.day}
 
 		dates.each do |date|
 			clinic.doctors.each do |doctor|
 				doctor_durations = doctor.doctor_durations.where(wday: date.wday)
-				doctor_durations.sample(rand(30) + 10).each do |doctor_duration|
+				doctor_durations.sample(rand(20) + 5).each do |doctor_duration|
 					patient = patients[rand(100)%patients.length]
 					service = services[rand(100)%services.length]
 					hour = doctor_duration.hour

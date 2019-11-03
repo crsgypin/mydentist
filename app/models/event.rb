@@ -22,6 +22,10 @@ class Event < ApplicationRecord
 		self.duration = t[:duration]
 	end
 
+	def duration_desc
+		"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(self.hour, self.minute)}"
+	end
+
 	def check_hour_minute_duration
 		if self.changes[:hour].present? || self.changes[:minute].present? || self.changes[:duration].present?
 			self.event_durations.destroy_all

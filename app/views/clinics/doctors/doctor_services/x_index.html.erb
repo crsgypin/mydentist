@@ -1,0 +1,44 @@
+
+
+<div id="clinic_doctor_doctor_services_index">
+	<div class="head-box">
+		<%= link_to "新增", url_for(action: :create), remote: true, class: "btnBu", method: "post" %>
+		<p class="note">註：時程最多10個為上限</p>
+	</div>
+	<div class="content-box">
+		<div id="doctor-service-table">
+			<% @doctor_services.each do |doctor_service| %>
+				<%= form_tag url_for(action: :update, id: doctor_service), method: :patch, remote: true do %>
+				<%= render_relative_partial "common/service_tr", locals: {doctor_service: doctor_service} %>
+				<% end %>
+			<% end%>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("#doctor-service-table").on("click", ".edit-btn", function(e){
+		e.preventDefault();
+		setAllShowMode();
+		var id = $(this).closest(".s-row").attr("id");
+		setEditMode(id);
+	});
+	$("#doctor-service-table").on("click", ".cancel-btn", function(e){
+		e.preventDefault();
+		setAllShowMode();
+	});
+	function setAllShowMode(){
+		$("#doctor-service-table").find('.show-view').removeClass("hidden");
+		$("#doctor-service-table").find('.edit-view').addClass("hidden");
+	}
+	function setEditMode(targetId){
+		var box = $("#" + targetId);
+		box.find(".show-view").addClass("hidden");
+		box.find(".edit-view").removeClass("hidden");
+	}
+	function setShowMode(targetId){
+		var box = $("#" + targetId);
+		box.find(".show-view").removeClass("hidden");
+		box.find(".edit-view").addClass("hidden");
+	}
+</script>

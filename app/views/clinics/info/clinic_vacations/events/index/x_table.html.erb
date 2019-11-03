@@ -1,0 +1,11 @@
+
+<table>
+	<% @events.each do |event| %>
+	<tr>
+		<td><%= event.patient.name %></td>
+		<td><%= roc_format(event.date,3) %></td>
+		<td><%= event.duration_desc %></td>
+	</tr>
+	<% end %>
+</table>
+

@@ -1,0 +1,9 @@
+
+<div id="doctor_vacations_index">
+<%= render partial: "clinics/common/vacations_form", locals: {
+	vacations: @doctor_vacations, 
+	li: proc do |doctor_vacation|
+		render_relative_partial "index/tr", locals: {doctor_vacation: doctor_vacation}
+	end
+} %>
+</div>

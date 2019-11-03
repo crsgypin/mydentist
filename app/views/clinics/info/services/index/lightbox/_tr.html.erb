@@ -1,0 +1,17 @@
+
+<tr>
+	<td>
+		<%= hidden_field_tag "clinic[services_attributes][#{index}][id]", service.id %>
+		<%= text_field_tag "clinic[services_attributes][#{index}][name]", service.name %>
+	</td>
+	<td>
+    <%=	select_field_tag "clinic[services_attributes][#{index}][duration]", service.duration, Service.durations.keys %>
+  </td>
+	<td>
+		<% if service.id.present? %>
+			<%= link_to "刪除", url_for(action: :destroy, id: service), id: "delete_service", remote: true, method: "delete", data: {confirm: "確定移除?"} %>
+		<% else %>
+			<%= link_to "刪除", "javascript:", onclick: "$(this).closest('tr').remove();" %>
+		<% end %>
+	</td>
+</tr>
