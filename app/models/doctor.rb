@@ -11,6 +11,7 @@ class Doctor < ApplicationRecord
 	validates_presence_of :friendly_id, :name
 	validates_uniqueness_of :friendly_id
 	mount_uploader :photo, PhotoUploader
+	accepts_nested_attributes_for :doctor_services
 	include Common::DateTimeDurationHelper
 
 	def update_doctor_durations_note!

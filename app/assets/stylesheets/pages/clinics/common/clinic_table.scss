@@ -30,7 +30,8 @@ table.clinic_table {
 	&.ht80 {
 		td {
 			height: 80px;
-			line-height: 80px;		
+			line-height: 40px;
+			vertical-align: middle;
 		}
 	}
 }

@@ -1,0 +1,20 @@
+
+<tr>
+	<td>
+		<%= hidden_field_tag "doctor[doctor_services_attributes][#{index}][id]", doctor_service.id %>
+		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][service_id]", doctor_service.service_id, @clinic.services.map{|s| [s.id, s.name]} %>
+	</td>
+	<td>
+		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][duration]", doctor_service.duration, Doctor::Service.durations.keys %>
+	</td>
+	<td>
+
+	</td>				
+	<td>
+		<% if doctor_service.new_record? %>
+		<%= link_to "刪除", "javascript:", onclick: "$(this).closest('tr').remove();;" %>
+		<% else %>
+		<%= link_to "刪除", url_for(action: :destroy, id: doctor_service), method: "delete", remote: true, data: {confirm: "確定要移除?"} %>
+		<% end %>
+	</td>
+</tr>

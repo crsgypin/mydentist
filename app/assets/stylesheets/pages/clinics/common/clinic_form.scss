@@ -41,8 +41,13 @@
       }
     }
   }
-  .buttons_box {
-    text-align: right;
+}
+
+.form_buttons_box {
+  text-align: right;
+  margin: 20px 0;
+  a, input[type=submit] {
+    padding: 0 20px;
   }
 }
 

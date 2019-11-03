@@ -1,6 +1,20 @@
 class Doctor::Service < ApplicationRecord
 	belongs_to :doctor
 	belongs_to :service, class_name: "::Service"
-	validates_uniqueness_of :doctor_id, scope: :service_id
+	validates_uniqueness_of :service_id, scope: :doctor_id, message: "重複的服務"
+	enum duration: {"15分鐘" => 15, "30分鐘" => 30, "45分鐘" => 45, "1小時" => 60}
+	before_destroy :check_for_destroy
+
+	def events
+		self.service.events
+	end
+
+	def check_for_destroy
+		if self.events.present?
+			self.errors.add("此項目已有掛號","")
+			throw :abort
+		end
+		true
+	end
 
 end
