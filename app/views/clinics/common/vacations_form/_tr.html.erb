@@ -1,0 +1,35 @@
+
+<li id="<%= li_id.call(vacation) %>" class="vacation_view" onclick="$.getScript('<%= vacation_events_path.call(vacation) %>');">
+	<div class="vacation_close_box">
+		<% if vacation.new_record? %>
+		<%= link_to icon_tag(:close), "javascript:", onclick: "$(this).closest('li').remove();" %>
+		<% else %>
+		<%= link_to icon_tag(:close), url_for(action: :destroy, id: vacation), remote: true, method: :delete, data: {confirm: "確定移除?"} %>
+		<% end %>
+	</div>
+	<div class="title">
+		休診日
+	</div>
+	<% if vacation.new_record? %>
+		<% options = {url: url_for(action: :create), method: :post} %>
+	<% else %>
+		<% options = {url: url_for(action: :update, id: vacation), method: :patch} %>
+	<% end %>
+	<%= form_tag options[:url], method: options[:method], remote: true, class: "date_button_box" do %>
+		<div class="date_box">
+			<div class="start_date">
+				<%= date_field_tag "clinic_vacation[start_date]", vacation.start_date, class: "start_date_input" %>
+			</div>
+			<span class="to">至</span>
+			<div class="end_date">
+				<%= date_field_tag "clinic_vacation[end_date]", vacation.end_date, class: "end_date_input" %>
+			</div>
+			<div class="count_box">
+				共計<span><%= vacation.new_record? ? nil : vacation.days_count %></span>天
+			</div>
+		</div>
+		<div class="button_box">
+			<%= submit_tag "儲存", class: "btnBu" %>
+		</div>
+	<% end %>
+</li>

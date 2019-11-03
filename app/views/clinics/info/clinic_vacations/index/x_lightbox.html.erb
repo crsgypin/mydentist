@@ -1,0 +1,30 @@
+
+<div id="clinic_info_clinic_vacations" class="lightbox bg_width">
+	<div class="inbox">
+		<div class="header_box">
+			休診時間系統
+		</div>
+		<div class="content_box">
+			<div class="main_box clinic_form">
+				<ul>
+					<% @clinic_vacations.each do |clinic_vacation| %>
+					<%= render_relative_partial "lightbox/tr", locals: {clinic_vacation: clinic_vacation} %>
+					<% end %>
+				</ul>
+				<div class="add_btn_box alignR">
+					<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
+				</div>
+			</div>
+			<div class="side_box">
+				<div class="title">
+				</div>
+				<div class="content_box">
+				</div>
+			</div>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "離開", "javascript: $('#clinic_info_clinic_vacations').remove();", class: "btnW" %>
+		</div>
+	</div>
+</div>
+
