@@ -5,6 +5,10 @@ class Clinic::Vacation < ApplicationRecord
 	def days_count
 		(self.end_date - self.start_date).to_i + 1
 	end
+
+	def events
+		self.clinic.event.where("events.date >= ? and events.date <= ?", self.start_date, self.end_date)
+	end
 	
 
 end

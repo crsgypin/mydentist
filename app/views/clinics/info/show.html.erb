@@ -36,7 +36,7 @@
             r = ""
             r += link_to "選取休診時間", clinic_info_clinic_vacations_path(@clinic), remote: true
             r += "<div>"
-            r += a.clinic_vacations.map{|a| "#{roc_format(a.start_date, 3)}~#{roc_format(a.end_date, 3)}"}.join(" ")
+            r += a.clinic_vacations.map{|a| "#{roc_format(a.start_date, 3)}~#{roc_format(a.end_date, 3)}"}.join("<br>")
             r += "</div>"
             r.html_safe
           }},
