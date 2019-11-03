@@ -1,0 +1,39 @@
+
+#clinic_info_clinic_vacations {
+	.inbox {
+		.header_box {
+		}
+		.content_box {
+			display: flex;
+			.main_box {
+				width: calc(100% - 200px);
+				background: $colorGy_l;
+				padding: 10px;
+				display: flex;
+				ul {
+					li {
+						.vacation_close_box {
+							float: right;
+							overflow: hidden;
+						}
+						.title {
+							color: $colorGy;
+						}
+						.date_button_box {
+							display: flex;
+							.date_box {
+								width: calc(100% - 100px);
+							}
+							.button_box {
+								width: 100px;
+							}
+						}
+					}
+				}
+			}
+			.side_box {
+				width: 200px;
+			}
+		}
+	}
+}

@@ -33,7 +33,7 @@
             r.html_safe
           }},
           {t: "休診時間", v: proc{|a| 
-            link_to "選取休診時間", ""
+            link_to "選取休診時間", clinic_info_clinic_vacations_path(@clinic), remote: true
           }},
           {t: "診療項目", v: proc{|a| 
             r = ""

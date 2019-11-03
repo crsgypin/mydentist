@@ -7,7 +7,7 @@ class Clinic < ApplicationRecord
 	has_many :event_durations, through: :events
 	has_many :line_accounts, class_name: "Line::Account"
 	has_many :clinic_durations, class_name: "Clinic::Duration"
-	has_many :clinic_vacations, class_name: "Clinic::Duration"
+	has_many :clinic_vacations, class_name: "Clinic::Vacation"
 	has_many :clinic_patient_notifications, class_name: "Clinic::PatientNotification"
 	has_many :clinic_notification_patients, through: :clinic_patient_notifications, source: :patient
 	has_many :clinic_line_keywords, class_name: "ClinicLine::Keyword"
