@@ -3,7 +3,7 @@ def doctor_services
 	#doctor duration
 	id = 1
 	Doctor.includes(:clinic).each_with_index do |doctor, index|
-		doctor.doctor_services.destroy_all
+		doctor.doctor_services.delete_all
 		service_indexes = [
 			[0,1,2,3],
 			[0,1,2,3,5],
