@@ -1,0 +1,4 @@
+
+alert("更新成功");
+$("#clinic_vacation_<%= @clinic_vacation.id %>").replaceWith("<%= j render_relative_partial 'index/lightbox/tr', locals: {clinic_vacation: @clinic_vacation} %>")
+

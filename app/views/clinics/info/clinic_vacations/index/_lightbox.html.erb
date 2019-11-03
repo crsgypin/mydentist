@@ -1,42 +1,18 @@
 
-<div id="clinic_info_clinic_vacations" class="lightbox">
-	<%= form_tag url_for(action: :create), method: "post", class: "inbox", remote: true do %>
+<div id="clinic_info_clinic_vacations" class="lightbox bg_width">
+	<div class="inbox">
 		<div class="header_box">
 			休診時間系統
 		</div>
 		<div class="content_box">
-			<div class="main_box">
+			<div class="main_box clinic_form">
 				<ul>
-					<% @clinic.clinic_vacations.each do |clinic_vacation| %>
-					<li>
-						<div class="vacation_close_box">
-							<%= link_to icon_tag(:close), "", remote: true, method: :delete %>
-						</div>
-						<div class="title">
-							休診日
-						</div>
-						<div class="date_button_box">
-							<div class="date_box">
-								<div class="start_date">
-									<%# date_input "clinic_vacation[start_date]", clinic_vacation.start_date %>
-								</div>
-								<span>至</span>
-								<div class="end_date">
-									<%# date_input "clinic_vacation[end_date]", clinic_vacation.end_date %>
-								</div>
-								<div class="count">
-									共計<span></span>天
-								</div>
-							</div>
-							<div class="button_box">
-								<%= link_to "儲存", "", class: "btnBu" %>
-							</div>
-						</div>
-					</li>
+					<% @clinic_vacations.each do |clinic_vacation| %>
+					<%= render_relative_partial "lightbox/tr", locals: {clinic_vacation: clinic_vacation} %>
 					<% end %>
 				</ul>
 				<div class="add_btn_box alignR">
-					<%= link_to "新增", url_for(action: :new), class: "btnBu" %>
+					<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
 				</div>
 			</div>
 			<div class="side_box">
@@ -44,9 +20,8 @@
 		</div>
 		<div class="buttons_box">
 			<%= link_to "取消", "javascript: $('#clinic_info_clinic_vacations').remove();", class: "btnW" %>
-			<%= submit_tag "儲存", class: "btnBu" %>
 		</div>
-	<% end %>
+	</div>
 </div>
 
 

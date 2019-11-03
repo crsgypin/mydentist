@@ -1,0 +1,5 @@
+
+$("#clinic_info_clinic_vacations .clinic_form ul").append("<%= j render_relative_partial 'index/lightbox/tr', locals: {clinic_vacation: @clinic_vacation} %>")
+
+window.datepickerInput($(".start_date_input"));
+window.datepickerInput($(".end_date_input"));

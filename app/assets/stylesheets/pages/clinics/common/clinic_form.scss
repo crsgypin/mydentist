@@ -1,6 +1,6 @@
 
 .clinic_form {
-	input, select {
+	input[type=text], select {
 		width: 100%;
 		border: 0;
 		border-bottom: 1px solid $colorGy1;

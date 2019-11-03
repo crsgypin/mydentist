@@ -5,7 +5,7 @@
   <% end %>
   <div class="content_box">
     <div id="doctors-show-container">
-      <%= form_tag url_for(action: :update), method: :patch, class: "clinic-form" do %>
+      <%= form_tag url_for(action: :update), method: :patch, class: "clinic_form" do %>
       <%= render partial: "admin/common/show_table" , locals: {
         id: "doctor",
         resource: @doctor,

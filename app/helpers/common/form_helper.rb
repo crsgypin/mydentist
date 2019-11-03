@@ -7,12 +7,12 @@ module Common::FormHelper
 	def date_input(name, value, e = {})
 		class_name = e[:class_name]
 		width = e[:width]
-		html = "<input t=\"text\" name='#{name}' class='#{class_name} date_picker' value='#{value}' style='#{width.present? && "width: #{width}px"}' autocomplete=\"off\">"
+		html = "<input type=\"text\" name='#{name}' class='#{class_name} date_picker' value='#{value}' style='#{width.present? && "width: #{width}px"}' autocomplete=\"off\">"
 		return html.html_safe
 	end
 
 	def date_field_tag(name, value, option={})
-		html = "<input t=\"text\" name='#{name}' class=\"#{option[:class]} date_picker\" value='#{value}' style=\"#{option[:style]}\">"
+		html = "<input type=\"text\" name='#{name}' class=\"#{option[:class]} date_picker\" value='#{value}' style=\"#{option[:style]}\">"
 		return html.html_safe
 	end	
 
