@@ -1,0 +1,12 @@
+
+
+<%= render partial: "clinics/common/vacations_form", locals: {
+	vacations: @doctor_vacations, 
+	li_id: proc do |doctor_vacation|
+		"doctor_vacation_#{doctor_vacation.new_record? ? "new" : doctor_vacation.id}"
+	end,
+	vacation_events_path: proc do |doctor_vacation|
+		clinic_doctor_doctor_vacation_events_path(@clinic, @doctor, doctor_vacation)
+	end,
+	leave_link: "javascript: $('#clinic_info_doctor_vacations').remove();"
+} %>
