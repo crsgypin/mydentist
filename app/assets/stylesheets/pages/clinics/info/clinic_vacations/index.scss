@@ -68,8 +68,10 @@
 			}
 			.side_box {
 				width: 350px;
-				background: $colorBu;
+				background: $colorBu_l;
 				padding: 10px;
+				max-height: 500px;
+				overflow: scroll;
 				>.title {
 					text-align: center;
 					font-weight: bold;
