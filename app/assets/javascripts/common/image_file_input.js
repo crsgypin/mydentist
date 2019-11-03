@@ -5,7 +5,6 @@ function showFileImage(fileInput, targetImageElm, isBg){
 	if(!isBg){
 		targetImageElm.attr('src', url);
 	} else {
-		console.log("url(" + url + ")");
 		targetImageElm.css("background-image", "url('" + url + "')")
 	}
 }

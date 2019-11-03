@@ -7,9 +7,9 @@
         resource: @clinic,
         fields: [
           {t: "照片", v: proc{ |a| 
-            r = "<div class='photo_box'>"
+            r = "<div class='clinic_photo_box'>"
             r += bg_center_image @clinic.photo_url
-            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "showUploadPhotoLightbox();"
+            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_info_photo_path(@clinic)}');"
             r += "</div>"
             r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
             r.html_safe
@@ -46,7 +46,6 @@
       <%= submit_tag "儲存", class: "btnBu" %>
     </div>
   <% end %>
-  <%= render_relative_partial "show/upload_photo_lightbox" %>
 </div>
 
 <%# render :partial => "share/upload_img_modal" %>

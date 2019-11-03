@@ -11,7 +11,7 @@
         tr {
           td {
             border-top: 0;
-            vertical-align: bottom;
+            vertical-align: middle;
             input {
               border: none;
               width: 100%;
@@ -40,22 +40,24 @@
       text-align: right;
     }
   }
-  .photo_box {
-    position: relative;
-    display: inline-block;
-    .bg_center_image {
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-    }
-    .pic_edit {
-      position: absolute;
-      right: -10px;
-      bottom: 0;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-    }
+}
+
+.clinic_photo_box {
+  position: relative;
+  display: inline-block;
+  .bg_center_image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  .pic_edit {
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
   }
 }
+
 

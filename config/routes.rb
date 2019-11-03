@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resource :info, only: [:show, :edit, :update], controller: :info
     resource :info, only: [], module: :info do
       resources :clinic_durations, only: [:index, :create]
+      resource :photo, only: [:new, :create], controller: :photo
     end
     namespace :clinic_line do
       resources :keywords
