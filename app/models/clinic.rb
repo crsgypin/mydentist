@@ -17,6 +17,8 @@ class Clinic < ApplicationRecord
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	include Common::DateTimeDurationHelper
+	include Common::StaticImageHelper
+	include Common::ImageHelper
 
 	def self.default_duration
 		15
@@ -24,6 +26,14 @@ class Clinic < ApplicationRecord
 
 	def to_param
 		self.friendly_id
+	end
+
+	def photo_url
+		if self.photo.present?
+			self.photo.url
+		else
+			common_static_image_url(:dentist3)
+		end
 	end
 
 	def wday_segment_hours(wday, segment)

@@ -1,9 +1,9 @@
-#clinic-info {
+#clinic_info {
   background: $colorW;
-  .inbox {
+  >.inbox {
     width: 80%;
     margin: 20px auto;
-    .content-box {
+    >.content_box {
       border-radius: 10px;
       border: 1px solid $colorGy;
       padding: 20px;
@@ -11,6 +11,7 @@
         tr {
           td {
             border-top: 0;
+            vertical-align: bottom;
             input {
               border: none;
               width: 100%;
@@ -26,13 +27,34 @@
               width: calc(100% - 100px);
               border-bottom: 1px solid $colorGy;
             }
+            .photo_note {
+              padding-left: 20px;
+              color: $colorGy1;
+            }
           }
         }
       }
     }
-    .buttons-box {
+    .buttons_box {
       margin-top: 20px;
       text-align: right;
+    }
+  }
+  .photo_box {
+    position: relative;
+    display: inline-block;
+    .bg_center_image {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+    .pic_edit {
+      position: absolute;
+      right: -10px;
+      bottom: 0;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
     }
   }
 }

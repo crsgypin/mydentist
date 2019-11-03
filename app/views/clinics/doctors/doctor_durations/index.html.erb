@@ -7,7 +7,7 @@
 			check_box_tag "doctor_durations[][wday_hour_minute]", wday_hour_minute, @doctor_durations.find{|d| d.wday_hour_minute == wday_hour_minute}
 		end
 	} %>
-	<div class="buttons-box">
+	<div class="buttons_box">
 		<%= submit_tag "儲存", class: "btnBu" %>
 	</div>
 <% end %>

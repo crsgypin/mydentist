@@ -1,21 +1,18 @@
 
-<div id="clinic-info">
-  <%= form_tag url_for(action: :update), method: "patch" do %>
-  <div class="inbox">
-    <div class="content-box">
-      <% if false %>
-      <img src="<%= @clinic.photo.url %>" onclick="showUploadModal()">
-      <span>請上傳 200 * 200 px 以上的照片</span>
-      <% end %>
+<div id="clinic_info">
+  <%= form_tag url_for(action: :update), method: "patch", class: "inbox" do %>
+    <div class="content_box">
       <%= render_relative_partial "common/table" , locals: {
-        id: "clinic-info-table",
+        id: "clinic_info-table",
         resource: @clinic,
         fields: [
           {t: "照片", v: proc{ |a| 
-            if @clinic.photo.present?
-              r = image_tag @clinic.photo.url
-            end
-            # 請上傳 200 * 200 px 以上的照片
+            r = "<div class='photo_box'>"
+            r += bg_center_image @clinic.photo_url
+            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "showUploadPhotoLightbox();"
+            r += "</div>"
+            r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
+            r.html_safe
           }},
           {t: "診所名稱", v: proc{|a| 
             text_field_tag "clinic[name]", a.name
@@ -45,11 +42,11 @@
       }
       %>
     </div>
-    <div class="buttons-box">
+    <div class="buttons_box">
       <%= submit_tag "儲存", class: "btnBu" %>
     </div>
-  </div>
   <% end %>
+  <%= render_relative_partial "show/upload_photo_lightbox" %>
 </div>
 
 <%# render :partial => "share/upload_img_modal" %>
@@ -57,8 +54,8 @@
 <script>
   function setMode(mode, dom){
     if(mode == "show"){
-      $("#clinic-info").find("table tr .show").removeClass("hidden");
-      $("#clinic-info").find("table tr .edit").addClass("hidden");
+      $("#clinic_info").find("table tr .show").removeClass("hidden");
+      $("#clinic_info").find("table tr .edit").addClass("hidden");
     } else if(mode == "edit") {
       setMode("show");
       $(dom).closest("tr").find(".show").addClass("hidden");
