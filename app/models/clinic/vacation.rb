@@ -7,7 +7,13 @@ class Clinic::Vacation < ApplicationRecord
 	end
 
 	def events
-		self.clinic.event.where("events.date >= ? and events.date <= ?", self.start_date, self.end_date)
+		self.clinic.events.where("events.date >= ? and events.date <= ?", self.start_date, self.end_date)
+	end
+
+	def event_patients
+		self.events.includes(:patient).map do |event|
+			event.patient
+		end.uniq
 	end
 	
 

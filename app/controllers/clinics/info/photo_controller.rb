@@ -1,4 +1,4 @@
-class ::Clinics::Info::PhotoController < ::Clinics::ApplicationController
+class ::Clinics::Info::PhotoController < ::Clinics::Info::ApplicationController
 
 	def new
 

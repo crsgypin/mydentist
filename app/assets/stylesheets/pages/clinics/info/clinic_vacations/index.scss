@@ -3,7 +3,7 @@
 	.inbox {
 		.header_box {
 		}
-		.content_box {
+		>.content_box {
 			display: flex;
 			.main_box {
 				width: calc(100% - 350px);
@@ -23,7 +23,7 @@
 							}
 							overflow: hidden;
 						}
-						.title {
+						>.title {
 							text-align: left;
 							color: $colorGy;
 						}
@@ -68,6 +68,17 @@
 			}
 			.side_box {
 				width: 350px;
+				background: $colorBu;
+				padding: 10px;
+				>.title {
+					text-align: center;
+					font-weight: bold;
+				}
+				>.content_box {
+					table {
+						width: 100%;
+					}
+				}
 			}
 		}
 		.buttons_box {

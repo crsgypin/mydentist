@@ -1,4 +1,4 @@
-class ::Clinics::Info::ServicesController < ::Clinics::ApplicationController
+class ::Clinics::Info::ServicesController < ::Clinics::Info::ApplicationController
 
 	def index
 		@services = @clinic.services

@@ -1,5 +1,5 @@
 
-<li id="clinic_vacation_<%= clinic_vacation.new_record? ? "new" : clinic_vacation.id %>">
+<li id="clinic_vacation_<%= clinic_vacation.new_record? ? "new" : clinic_vacation.id %>" class="vacation_view" onclick="$.getScript('<%= clinic_info_clinic_vacation_events_path(@clinic, clinic_vacation) %>');">
 	<div class="vacation_close_box">
 		<% if clinic_vacation.new_record? %>
 		<%= link_to icon_tag(:close), "javascript:", onclick: "$(this).closest('li').remove();" %>
