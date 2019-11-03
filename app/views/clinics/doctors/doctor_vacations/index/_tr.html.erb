@@ -1,0 +1,36 @@
+
+
+<%= render partial: "clinics/common/vacations_form/tr",  locals: {
+	vacation: doctor_vacation,
+	li: {
+		id: "doctor_vacation_#{doctor_vacation.new_record? ? "new" : doctor_vacation.id}",
+		path: proc do
+			if doctor_vacation.new_record?
+				url_for(action: :create)
+			else
+				url_for(action: :update, id: doctor_vacation)
+			end						
+		end.call,
+		method: proc do
+			if doctor_vacation.new_record?
+				"post"
+			else
+				"patch"
+			end
+		end.call,
+		vacation_events_path: proc do
+			if doctor_vacation.new_record?
+				nil
+			else
+				clinic_doctor_doctor_vacation_events_path(@clinic, @doctor, doctor_vacation)
+			end
+		end.call,
+		start_input: date_field_tag("doctor_vacation[start_date]", doctor_vacation.start_date, class: "start_date_input", autocomplete: "off"),
+		end_input: date_field_tag("doctor_vacation[end_date]", doctor_vacation.end_date, class: "end_date_input", autocomplete: "off")
+	}
+} %>
+
+<script type="text/javascript">
+	window.datepickerInput($(".start_date_input"));
+	window.datepickerInput($(".end_date_input"));	
+</script>

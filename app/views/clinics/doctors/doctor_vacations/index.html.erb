@@ -1,29 +1,9 @@
 
-
+<div id="doctor_vacations_index">
 <%= render partial: "clinics/common/vacations_form", locals: {
 	vacations: @doctor_vacations, 
-	li_id: proc do |doctor_vacation|
-		"doctor_vacation_#{doctor_vacation.new_record? ? "new" : doctor_vacation.id}"
-	end,
-	li_path: proc do |doctor_vacation|
-		if doctor_vacation.new_record?
-			url_for(action: :create)
-		else
-			url_for(action: :update, id: doctor_vacation)
-		end
-	end,
-	li_method: proc do |doctor_vacation|
-		if doctor_vacation.new_record?
-			"post"
-		else
-			"patch"
-		end				
-	end,
-	vacation_events_path: proc do |doctor_vacation|
-		clinic_doctor_doctor_vacation_events_path(@clinic, @doctor, doctor_vacation)
-	end,
+	li: proc do |doctor_vacation|
+		render_relative_partial "index/tr", locals: {doctor_vacation: doctor_vacation}
+	end
 } %>
-
-<div class="form_buttons_box">
-	<%= submit_tag "儲存", class: "btnBu" %>
 </div>
