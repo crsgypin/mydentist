@@ -12,8 +12,17 @@
   	color: $colorW;
   }
   .info {
-  	height: 60px;
+  	height: 70px;
   	background: $colorBu;
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: space-around;
+  	.bg_center_image {
+  		width: 45px;
+  		height: 45px;
+  		border-radius: 50%;
+  		margin: 0 auto;
+  	}
   }
   ul {
 		padding-top: 50px;

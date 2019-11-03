@@ -5,13 +5,15 @@ class ::Clinics::InfoController < ::Clinics::ApplicationController
   end
 
   def update
-  	@clinic.update(clinic_params)
+  	if !@clinic.update(clinic_params)
+  		return js_render_model_error @clinic
+  	end
   end
 
   private
 
   def clinic_params
-  	params.require(:clinic).permit(:name, :phone, :address)
+  	params.require(:clinic).permit(:name, :phone, :phone2, :address)
   end
 
 end
