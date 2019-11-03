@@ -4,18 +4,11 @@
     width: 80%;
     margin: 20px auto;
     >.content_box {
-      border-radius: 10px;
-      border: 1px solid $colorGy;
-      padding: 20px;
       table {
         tr {
           td {
             border-top: 0;
             vertical-align: middle;
-            input {
-              border: none;
-              width: 100%;
-            }
             a {
               color: $colorBu;
               text-decoration: underline;
@@ -25,7 +18,6 @@
             }
             &:nth-child(2) {
               width: calc(100% - 100px);
-              border-bottom: 1px solid $colorGy;
             }
             .photo_note {
               padding-left: 20px;

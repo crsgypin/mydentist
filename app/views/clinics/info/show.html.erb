@@ -1,6 +1,6 @@
 
 <div id="clinic_info">
-  <%= form_tag url_for(action: :update), method: "patch", class: "inbox", remote: true do %>
+  <%= form_tag url_for(action: :update), method: "patch", class: "inbox form_border clinic_form clinic_form_box", remote: true do %>
     <div class="content_box">
       <%= render_relative_partial "common/table" , locals: {
         id: "clinic_info-table",
@@ -28,26 +28,29 @@
             text_field_tag "clinic[address]", a.address
           }},
           {t: "營業時間", v: proc{|a| 
-            r = ""
+            r = "<div class='field'>"
             r += link_to "選取診所營業時間", clinic_info_clinic_durations_path(@clinic) 
             r += "<div>"
             r += a.clinic_durations_note_html
             r += "</div>"
+            r += "</div>"
             r.html_safe
           }},
           {t: "休診時間", v: proc{|a| 
-            r = ""
+            r = "<div class='field'>"
             r += link_to "選取休診時間", clinic_info_clinic_vacations_path(@clinic), remote: true
             r += "<div>"
             r += a.clinic_vacations.map{|a| "#{roc_format(a.start_date, 3)}~#{roc_format(a.end_date, 3)}"}.join("<br>")
             r += "</div>"
+            r += "</div>"
             r.html_safe
           }},
           {t: "診療項目", v: proc{|a| 
-            r = ""
+            r = "<div class='field'>"
             r += link_to "編輯診療項目", clinic_info_services_path(@clinic), remote: true
             r += "<div>"
             r += a.services.map{|s| s.name}.join(", ")
+            r += "</div>"
             r += "</div>"
             r.html_safe
           }},

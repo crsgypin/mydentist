@@ -1,10 +1,16 @@
 
 .clinic_form {
-	input[type=text], select {
+	input[type=text], textarea, select, .field {
 		width: 100%;
 		border: 0;
 		border-bottom: 1px solid $colorGy1;
 		color: $colorGy;
 		background: none;
 	}
+}
+
+.clinic_form_box {
+  border-radius: 10px;
+  border: 1px solid $colorGy;
+  padding: 20px;
 }
