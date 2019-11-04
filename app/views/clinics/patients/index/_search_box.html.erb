@@ -1,8 +1,34 @@
 
-<div id="search-box">
+<div id="search_box">
 	<%= form_tag url_for, method: "get" do %>
-	<%= text_field_tag "key", params[:key] %>
+	<div class="input_box">
+		<%= hidden_field_tag "category", params[:category] %>
+		<%= text_field_tag "key", params[:key], id: "search" %>
+		<div class="search_result hidden">
+		</div>
+	</div>
 	<%= link_to "新增病患", url_for(action: :new), class: "btnBu" %>
 	<% end %>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$("input#search").on("keydown", function(){
+			var key = $(this).val();
+			if(key.length){
+				var path = "<%= url_for %>";
+				path = path + "?key=" + key;
+				$.getScript(path);
+			} else {
+				$("#search_box .search_result").html('');
+			}
+		});
+		$("#search_box").on("click", ".search_result ul li", function(){
+			var name = $(this).data("name");
+			$("input#search").val(name);
+			// $("#search_box .search_result").html('');
+			$("#search_box").find('form').submit();
+		});
+	})
+</script>
 
