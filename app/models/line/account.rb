@@ -4,6 +4,7 @@ class Line::Account < ApplicationRecord
 	belongs_to :patient, optional: true
 	has_many :events, class_name: "Event", foreign_key: :line_account_id
 	has_many :booking_events, class_name: "BookingEvent", foreign_key: :line_account_id
+	has_many :sendings
 	enum status: {"follow" => 1, "unfollow" => 2}
 	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id
@@ -11,10 +12,6 @@ class Line::Account < ApplicationRecord
 	before_save :check_reply_token
 	# after_create :create_or_update_richmenu_to_user #over 1000, so depreciated at 2019/7/4
 	include ApplicationHelper
-
-	def push_message(message)
-		_push_message(message)
-	end
 
 	def get_and_set_profle_for_validation
 		if self.status == "follow"
@@ -69,24 +66,24 @@ class Line::Account < ApplicationRecord
 
 	private	
 
-  def _push_message(message_content)
-    client = Line::Bot::Client.new do |config|
-      config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
-      config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
-    end
-    message = {
-      type: 'text',
-      text: message_content
-    }
-    response = client.push_message(self.line_user_id, message)
-    Rails.logger.info "naver_line_push_log, line_user_id: #{line_user_id}, message: #{message_content}.\n result: code: #{response.code}, body: #{response.body}"
-    result = {
-      result: true,
-      response: {
-        code: response.code,
-        body: response.body
-      }
-    }
-  end	
+  # def _push_message(message_content)
+  #   client = Line::Bot::Client.new do |config|
+  #     config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
+  #     config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+  #   end
+  #   message = {
+  #     type: 'text',
+  #     text: message_content
+  #   }
+  #   response = client.push_message(self.line_user_id, message)
+  #   Rails.logger.info "naver_line_push_log, line_user_id: #{line_user_id}, message: #{message_content}.\n result: code: #{response.code}, body: #{response.body}"
+  #   result = {
+  #     result: true,
+  #     response: {
+  #       code: response.code,
+  #       body: response.body
+  #     }
+  #   }
+  # end	
 
 end
