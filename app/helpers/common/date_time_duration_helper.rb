@@ -61,6 +61,19 @@ module Common::DateTimeDurationHelper
 		r
 	end
 
+	def next_hour_minute(hour, minute, duration)
+		next_hour = hour
+		next_minute = minute + duration
+		if next_minute >= 60
+			next_hour += 1
+			next_minute -= 60
+		end
+		r = {
+			hour: next_hour,
+			minute: next_minute
+		}
+	end
+
 	def hour_minute_duration_format(hour, minute, duration)
 		hour_minute = hour_minute_format(hour, minute)
 		"#{hour_minute}_#{duration}"

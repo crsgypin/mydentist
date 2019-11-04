@@ -23,7 +23,8 @@ class Event < ApplicationRecord
 	end
 
 	def duration_desc
-		"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(self.hour, self.minute)}"
+		r = next_hour_minute(self.hour, self.minute, self.duration)
+		"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"
 	end
 
 	def check_hour_minute_duration
