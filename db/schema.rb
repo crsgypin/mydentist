@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191103031244) do
+ActiveRecord::Schema.define(version: 20191104130536) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -227,6 +227,29 @@ ActiveRecord::Schema.define(version: 20191103031244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_line_keywords_on_template_id"
+  end
+
+  create_table "line_sending_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "sending_id"
+    t.integer "message_type", limit: 1
+    t.integer "template_type", limit: 1
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sending_id"], name: "index_line_sending_messages_on_sending_id"
+  end
+
+  create_table "line_sendings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "account_id"
+    t.integer "client_sending_id"
+    t.integer "source", limit: 1
+    t.integer "server_type", limit: 1
+    t.integer "status", limit: 1
+    t.string "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_line_sendings_on_account_id"
+    t.index ["client_sending_id"], name: "index_line_sendings_on_client_sending_id"
   end
 
   create_table "line_template_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

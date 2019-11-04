@@ -1,0 +1,29 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "line_sendings",
+  resources: @line_sendings,
+  total_resouces_count: @line_sendings.total_count,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "回應ID", v: proc{|a| a.client_sending_id }},
+    {t: "來源", v: proc{|a| a.source }},
+    {t: "server type", v: proc{|a| a.server_type }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "訊息內容", v: proc{|a| 
+      if a.source == "client"
+        if a.messages[0][:type] == "message"
+          a.messages[0][:message]["text"].to_s
+        else
+          a.messages.to_s[0..100]
+        end
+      elsif a.source == "server"
+        a.messages.to_s[0..100]
+      end
+    }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

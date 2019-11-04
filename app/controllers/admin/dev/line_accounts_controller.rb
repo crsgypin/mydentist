@@ -1,5 +1,5 @@
 class Admin::Dev::LineAccountsController < Admin::Dev::ApplicationController
-  before_action -> {@embedded = 1}, only: [:show]
+  before_action -> {@embedded = 1}, only: [:show, :edit]
   before_action -> {
     access_config({
       variable_name: "line_account",

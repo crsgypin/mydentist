@@ -128,6 +128,10 @@ Rails.application.routes.draw do
       end
       resources :services
       resources :line_accounts
+      resources :line_accounts, only: [], module: :line_accounts do
+        resource :info, only: [:show], controller: :info
+        resources :line_sendings
+      end
       resource :linebot, only: [:new, :create], controller: :linebot #for linebot test
       get "styles", to: redirect("/admin/dev/style/colors")
       namespace :style do

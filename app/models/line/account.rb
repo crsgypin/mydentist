@@ -4,6 +4,7 @@ class Line::Account < ApplicationRecord
 	belongs_to :patient, optional: true
 	has_many :events, class_name: "Event", foreign_key: :line_account_id
 	has_many :booking_events, class_name: "BookingEvent", foreign_key: :line_account_id
+	has_many :sendings
 	enum status: {"follow" => 1, "unfollow" => 2}
 	enum dialog_status: {"預約掛號" => 1, "填寫個人資料" => 2}
 	validates_presence_of :line_user_id
@@ -11,10 +12,6 @@ class Line::Account < ApplicationRecord
 	before_save :check_reply_token
 	# after_create :create_or_update_richmenu_to_user #over 1000, so depreciated at 2019/7/4
 	include ApplicationHelper
-
-	def push_message(message)
-		_push_message(message)
-	end
 
 	def get_and_set_profle_for_validation
 		if self.status == "follow"
@@ -65,6 +62,10 @@ class Line::Account < ApplicationRecord
 			self.reply_token_time = Time.now
 		end
 		true
+	end
+
+	def push_message(message_content)
+		_push_message(message_content)
 	end
 
 	private	

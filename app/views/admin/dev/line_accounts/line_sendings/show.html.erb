@@ -1,0 +1,17 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "line_sending",
+  resource: @line_sending,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "回應ID", v: proc{|a| a.client_sending_id }},
+    {t: "來源", v: proc{|a| a.source }},
+    {t: "server type", v: proc{|a| a.server_type }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "訊息內容", v: proc{|a| 
+      a.messages.to_s
+    }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>
