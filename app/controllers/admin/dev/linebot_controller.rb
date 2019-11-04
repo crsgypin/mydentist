@@ -7,15 +7,30 @@ class Admin::Dev::LinebotController < Admin::Dev::ApplicationController
 	def create
 		@clinic = Clinic.find_by(friendly_id: params[:clinic_id])
 		linebot_webhook =  LinebotWebhook.new(params["events"], @clinic)
-		messages = linebot_webhook.parse
+		reply_messages = linebot_webhook.parse
 		@line_account = linebot_webhook.line_account
-		@data = messages.map do |message|
+
+		@client_sending = @line_account.sendings.create!({
+			source: "client",
+			messages: params["events"]
+		})			
+
+    @line_account.sendings.create!({
+    	client_sending: @client_sending,
+    	source: "server",
+    	server_type: "reply",
+    	reply_token: @reply_token,
+    	messages: reply_messages,
+    	status: "測試" #no sending
+    })
+
+		@data = reply_messages.map do |reply_message|
 			r = {
-				reply_message: message,
+				reply_message: reply_message,
 				line_account: @line_account.attributes,
 			}
-		end
-		@data = @data.first
+		end.first
 	end
+
 
 end

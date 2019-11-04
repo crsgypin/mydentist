@@ -1,12 +1,13 @@
 class Line::Sending < ApplicationRecord
 	self.table_name = "line_sendings"
 	belongs_to :account
+	belongs_to :client_sending, class_name: "Line::Sending", foreign_key: :client_sending_id, optional: true
 	has_many :sending_messages
 	enum source: {"server" => 1, "client" => 2}
 	enum server_type: {"push" => 1, "reply" => 2}
-	enum status: {"成功" => 1, "失敗" => 2}
+	enum status: {"成功" => 1, "失敗" => 2, "測試" => 3}
 	after_create :check_message_source
-	validates_presence_of :source, :server_type
+	validates_presence_of :source
 	attr_accessor :reply_token
 
 	def messages=(messages)
@@ -33,6 +34,9 @@ class Line::Sending < ApplicationRecord
 
 	def check_message_source
 		if self.source != "server"
+			return
+		end
+		if self.status == "測試"
 			return
 		end
     linebot ||= Line::Bot::Client.new do |config|

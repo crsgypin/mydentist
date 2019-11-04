@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 20191104130536) do
 
   create_table "line_sendings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "account_id"
+    t.integer "client_sending_id"
     t.integer "source", limit: 1
     t.integer "server_type", limit: 1
     t.integer "status", limit: 1
@@ -248,6 +249,7 @@ ActiveRecord::Schema.define(version: 20191104130536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_line_sendings_on_account_id"
+    t.index ["client_sending_id"], name: "index_line_sendings_on_client_sending_id"
   end
 
   create_table "line_template_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
