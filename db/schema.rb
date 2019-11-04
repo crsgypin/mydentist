@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20191104130536) do
   create_table "line_sending_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "sending_id"
     t.integer "message_type", limit: 1
+    t.integer "template_type", limit: 1
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

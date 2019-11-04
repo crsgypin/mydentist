@@ -44,6 +44,7 @@ class Line::Sending < ApplicationRecord
     if self.server_type == "push"
     	response = linebot.push_message(self.account.line_user_id, self.messages)
     elsif self.server_type == "reply"
+    	raise "no reply token for reply" if !self.reply_token.present?
 	    response = linebot.reply_message(self.reply_token, self.messages)
     end
     Rails.logger.info "line response, action: #{self.server_type}, code: #{response.code}, body: #{response.body}"
