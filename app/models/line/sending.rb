@@ -6,12 +6,12 @@ class Line::Sending < ApplicationRecord
 	enum server_type: {"push" => 1, "reply" => 2}
 	enum status: {"成功" => 1, "失敗" => 2}
 	after_create :check_message_source
-	validates_presence_of :source, :source_type, :message_type
+	validates_presence_of :source, :server_type
 	attr_accessor :reply_token
 
 	def messages=(messages)
 		if messages.class.name == "Array"
-			self.message.each do |message|
+			messages.each do |message|
 				self.sending_messages.new({
 					content_json: message
 				})
@@ -48,7 +48,7 @@ class Line::Sending < ApplicationRecord
     end
     Rails.logger.info "line response, action: #{self.server_type}, code: #{response.code}, body: #{response.body}"
 
-    if response.code == 200
+    if response.code.to_i == 200
     	self.update(status: "成功")
     else
     	m = "#{response.code}, #{response.body}"[0..200]

@@ -1,4 +1,5 @@
 class Line::SendingMessage < ApplicationRecord
+	self.table_name = "line_sending_messages"
 	belongs_to :sending
 	enum message_type: {"text" => 1, "image" => 2, "video" => 3, "template_confirm" => 11, "template_buttons" => 12, "template_carousel" => 13}
 	json_format :content
