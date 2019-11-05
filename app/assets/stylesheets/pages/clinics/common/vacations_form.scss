@@ -74,33 +74,36 @@
 			line-height: 40px;
 		}
 		>.content_box {
-			overflow-y: scroll;
-			height: calc(500px - 40px - 160px);
-			table {
-				width: 100%;
-				font-size: $fs_14p;
-				line-height: $lh_20p;
+			height: calc(500px - 40px);
+			.events_box {
+				overflow-y: scroll;
+				height: calc(100% - 160px);
+				table {
+					width: 100%;
+					font-size: $fs_14p;
+					line-height: $lh_20p;
+				}				
 			}
-		}
-		>.preview_box {
-			height: 160px;
-			padding: 10px;
-			.preview_dialog {
-				font-size: $fs_14p;
-				line-height: $lh_20p;
-				height: calc(160px - 60px);
-				overflow: scroll;
-				padding: 5px;
-				margin-bottom: 5px;
-				border: solid 1px #dadada;
-				background: $colorW;
-				border-radius: 5px;
-				text-align: left;
-			}
-	 		.sending_box {
-				text-align: center;
-				height: 60px;
-				line-height: 60px;
+			.preview_box {
+				height: 160px;
+				padding: 10px;
+				.preview_dialog {
+					font-size: $fs_14p;
+					line-height: $lh_20p;
+					height: calc(160px - 60px);
+					overflow: scroll;
+					padding: 5px;
+					margin-bottom: 5px;
+					border: solid 1px #dadada;
+					background: $colorW;
+					border-radius: 5px;
+					text-align: left;
+				}
+		 		.sending_box {
+					text-align: center;
+					height: 60px;
+					line-height: 60px;
+				}
 			}
 		}
 	}

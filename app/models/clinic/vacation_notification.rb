@@ -8,7 +8,7 @@ class Clinic::VacationNotification < ApplicationRecord
 	def sending_messages
 		if !self.event.patient || !self.event.patient.line_account.present?
 			self.errors.add("無LINE帳號", "")
-			return false
+			throw :abort
 		end
 		line_account = self.event.patient.line_account
 		line_sending = line_account.sendings.create({
@@ -25,7 +25,7 @@ class Clinic::VacationNotification < ApplicationRecord
 						label: "否，取消預約",
 						data: {
 							controller: "clinic_vacation_notifications",
-							action: "confirm_abort"
+							action: "confirm_abort",
 						}
 					},
 					{
@@ -40,8 +40,8 @@ class Clinic::VacationNotification < ApplicationRecord
 			})
 		})
 		if line_sending.status != "成功"
-			self.errors.add(self.line_sending.error_message ,"");
-			return false
+			self.errors.add(line_sending.error_message ,"");
+			throw :abort
 		end
 		self.line_sending = line_sending
 		true

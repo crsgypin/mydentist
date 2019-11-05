@@ -56,12 +56,12 @@ class Line::Sending < ApplicationRecord
     if response.code.to_i == 200
     	self.update(status: "成功")
     else
-    	m = "#{response.code}, #{response.body}"[0..200]
+    	m = "#{response.code}, #{response.body}"[0..170]
     	self.update(status: "失敗", error_message: m)
     end
 
 	  rescue Exception => e
-	  	m = "#{e.to_s}, #{e.trace.first(5).join("\n")}"[0..200]
+	  	m = "#{e.to_s}, #{e.backtrace.first(5).join("\n")}"[0..170]
 	  	self.update(status: "失敗", error_message: m)
 	  end
 	end

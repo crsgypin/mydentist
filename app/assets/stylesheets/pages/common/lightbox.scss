@@ -30,7 +30,7 @@
     border-radius: 10px;
     box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.5);
     background-color: $colorW;
-    padding: 30px;
+    padding: 10px 20px;
 
     >.header_box {
 			margin: 10px 0 3px;
@@ -66,7 +66,6 @@
 			a, input[type=submit] {
 				font-size: $fs_18p;
 				width: 200px;
-				padding: 5px;
         margin-left: 10px;
         margin-right: 10px;
 			}
