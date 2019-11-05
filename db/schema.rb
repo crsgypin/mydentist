@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191104130536) do
+ActiveRecord::Schema.define(version: 20191105123513) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 20191104130536) do
     t.index ["patient_id"], name: "index_clinic_patient_notifications_on_patient_id"
   end
 
+  create_table "clinic_vacation_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "vacation_id"
+    t.integer "event_id"
+    t.integer "line_sending_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_clinic_vacation_notifications_on_event_id"
+    t.index ["line_sending_id"], name: "index_clinic_vacation_notifications_on_line_sending_id"
+    t.index ["vacation_id"], name: "index_clinic_vacation_notifications_on_vacation_id"
+  end
+
   create_table "clinic_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
     t.date "start_date"
@@ -138,6 +149,17 @@ ActiveRecord::Schema.define(version: 20191104130536) do
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_doctor_services_on_doctor_id"
     t.index ["service_id"], name: "index_doctor_services_on_service_id"
+  end
+
+  create_table "doctor_vacation_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "vacation_id"
+    t.integer "event_id"
+    t.integer "line_sending_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_doctor_vacation_notifications_on_event_id"
+    t.index ["line_sending_id"], name: "index_doctor_vacation_notifications_on_line_sending_id"
+    t.index ["vacation_id"], name: "index_doctor_vacation_notifications_on_vacation_id"
   end
 
   create_table "doctor_vacations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

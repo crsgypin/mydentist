@@ -86,6 +86,8 @@
 			height: 160px;
 			padding: 10px;
 			.preview_dialog {
+				font-size: $fs_14p;
+				line-height: $lh_20p;
 				height: calc(160px - 60px);
 				overflow: scroll;
 				padding: 5px;
