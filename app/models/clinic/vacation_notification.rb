@@ -2,14 +2,20 @@ class Clinic::VacationNotification < ApplicationRecord
 	belongs_to :vacation
 	belongs_to :event
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true
-	before_create :sending_messages
+	before_create :check_line_account
+	after_create :send_messages
 	include LinebotWebhook::Helper::RepliedMessageHelper
 
-	def sending_messages
+	def check_line_account
 		if !self.event.patient || !self.event.patient.line_account.present?
 			self.errors.add("無LINE帳號", "")
 			throw :abort
 		end
+		true
+	end
+
+	def send_messages
+		#訊息一定要在新增後發送，因為需要取得ID
 		line_account = self.event.patient.line_account
 		line_sending = line_account.sendings.create({
     	client_sending: @client_sending,
@@ -26,6 +32,7 @@ class Clinic::VacationNotification < ApplicationRecord
 						data: {
 							controller: "clinic_vacation_notifications",
 							action: "confirm_abort",
+							id: self.id
 						}
 					},
 					{
@@ -34,6 +41,7 @@ class Clinic::VacationNotification < ApplicationRecord
 						data: {
 							controller: "clinic_vacation_notifications",
 							action: "confirm_change",
+							id: self.id
 						}
 					}
 				]
