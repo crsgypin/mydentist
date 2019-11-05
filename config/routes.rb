@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :doctor_vacations
       resources :doctor_vacations, only: [], module: :doctor_vacations do
         resources :events, only: [:index]
+        resources :vacation_notifications, only: [:index, :create]
       end
     end
     resource :info, only: [:show, :edit, :update], controller: :info
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
       resources :clinic_vacations, only: [:index, :new, :create, :update, :destroy]
       resources :clinic_vacations, only: [], module: :clinic_vacations do
         resources :events, only: [:index]
+        resources :vacation_notifications, only: [:index, :create]
       end
       resources :services, only: [:index, :new, :create, :destroy]
       resource :photo, only: [:new, :create], controller: :photo
