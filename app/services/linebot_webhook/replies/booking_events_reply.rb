@@ -47,7 +47,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 						{
 							type: "uri",
 							label: "預約",
-							uri: liff_line_event_url(@clinic, @line_account, doctor)
+							uri: liff_line_event_url(@clinic, @line_account, {doctor_id: doctor.id})
 						}
 						# {
 						# 	type: "postback",
