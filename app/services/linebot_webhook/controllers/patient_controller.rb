@@ -19,26 +19,38 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 		if (1..3).include?(@line_account.dialog_status_step)
 			#for create
 			if @line_account.dialog_status_step == 1
-				fill_name
+				if !fill_name
+					return reply_invalid_name_format
+				end
 				@line_account.update(dialog_status_step: 2)
 				reply_to_fill_birthday
 			elsif @line_account.dialog_status_step == 2
-				fill_birthday
+				if !fill_birthday
+					return reply_invalid_birthday_format
+				end
 				@line_account.update(dialog_status_step: 3)
 				reply_to_fill_phone
 			elsif @line_account.dialog_status_step == 3
-				fill_phone
+				if !fill_phone
+					return reply_invalid_phone_format
+				end
 				@line_account.update(dialog_status: nil, dialog_status_step: nil)
 				reply_finished
 			end
 		elsif (11..13).include?(@line_account.dialog_status_step)
 			#for update
 			if @line_account.dialog_status_step == 11
-				fill_name
+				if !fill_name
+					return reply_invalid_name_format
+				end
 			elsif @line_account.dialog_status_step == 12
-				fill_birthday
+				if !fill_birthday
+					return reply_invalid_birthday_format
+				end
 			elsif @line_account.dialog_status_step == 13
-				fill_phone
+				if !fill_phone
+					return reply_invalid_phone_format
+				end
 			end
 			@line_account.update(dialog_status: nil, dialog_status_step: nil)
 			reply_to_check_patient
@@ -64,7 +76,7 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 		#name
 		name = @message[:text]
 		if name.length < 2
-			return reply_invalid_name_format
+			return false
 		end
 		@patient.name = name
 		@patient.save
@@ -72,8 +84,8 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 
 	def fill_birthday
 		date = Date.parse(@message[:text]) rescue nil
-		if !date.present?
-			return reply_invalid_birthday_format
+		if date.nil?
+			return false
 		end
 		@patient.birthday = date
 		@patient.save
@@ -82,7 +94,7 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 	def fill_phone
 		phone = @message[:text].to_s
 		if phone.length < 6
-			return reply_invalid_phone_format
+			return false
 		end
 		@patient.phone = phone
 		@patient.save
