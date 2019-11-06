@@ -13,7 +13,6 @@
 		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
 	</div>
 
-
 	<div class="date_box">
 		<div class="month_box">
 			<%= link_to icon_tag(:angle_left), "", id: "last_week"%>
