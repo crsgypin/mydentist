@@ -7,7 +7,11 @@
 		<div class="search_result hidden">
 		</div>
 	</div>
+	<% if params[:category] != "notification" %>
 	<%= link_to "新增病患", url_for(action: :new), class: "btnBu" %>
+	<% else %>
+	<%= link_to "回診推播(#{@patients.total_count})", "", class: "btnW" %>
+	<% end %>
 	<% end %>
 </div>
 
