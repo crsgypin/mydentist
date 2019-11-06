@@ -1,5 +1,6 @@
 class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationController
   include JsCrudConcern
+  include Common::DateHelper
 
 	def show
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
@@ -45,6 +46,16 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 			 return js_render_model_error @event
 		end
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
+
+		@line_account.sendings.create({
+    	client_sending: @client_sending,
+    	source: "server",
+    	server_type: "push",
+    	messages: {
+    		type: "text", 
+    		text: "您的掛號已成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
+    	}
+    })
 	end
 
 	def update
@@ -61,6 +72,16 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 			 return js_render_model_error @event
 		end
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)				
+
+		@line_account.sendings.create({
+    	client_sending: @client_sending,
+    	source: "server",
+    	server_type: "push",
+    	messages: {
+    		type: "text", 
+    		text: "您的掛號已修正成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
+    	}
+    })
 	end
 
 	private
