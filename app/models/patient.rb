@@ -17,7 +17,7 @@ class Patient < ApplicationRecord
   attr_accessor :roc_year, :year, :month, :day
 
   def filled_in_web
-    self.name.present? && self.birthday.present? && self.person_id.present?
+    self.name.present? && self.birthday.present? && self.phone.present?
   end
 
   def available_for_tooth_cleaning
