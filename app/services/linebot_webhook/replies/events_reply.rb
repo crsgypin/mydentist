@@ -27,7 +27,7 @@ module LinebotWebhook::Replies::EventsReply
 						{
 							type: "uri",
 							label: "變更約診",
-							uri: liff_line_event_url(@clinic, @line_account)
+							uri: liff_line_event_url(@clinic, @line_account, {event_id: event.id})
 						},
 						{
 							type: "postback",
