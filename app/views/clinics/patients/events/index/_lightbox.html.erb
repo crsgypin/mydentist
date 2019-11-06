@@ -1,0 +1,28 @@
+
+<div id="patient_events" class="lightbox">
+	<div class="inbox">
+		<div class="header_box">
+			<%= @patient.name %> 就診紀錄
+		</div>
+		<div class="content_box">
+			<div class="table_box">
+				<table>
+					<% @events.each_with_index do |event, index| %>
+					<tr>
+						<td><%= index + 1 %></td>
+						<td><%= roc_format(event.date, 3) %></td>
+						<td><%= event.duration_desc %></td>
+						<td><%= event.doctor.name %></td>
+						<td><%= event.service.name %></td>
+						<td><%= event.status %></td>
+					</tr>
+					<% end %>
+				</table>
+			</div>
+		</div>
+		<div class="buttons_box form_buttons_box">
+			<%= link_to "關閉", "javascript: $('#patient_events').remove()", class: "btnBu" %>
+		</div>
+	</div>
+</div>
+

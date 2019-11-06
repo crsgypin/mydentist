@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :patients
     resources :patients, only: [], module: :patients do
       resource :notification, only: [:create, :destroy], controller: :notification
+      resources :events, only: [:index]
     end
     resources :doctors
     resources :doctors, only: [], module: :doctors do

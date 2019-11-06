@@ -1,0 +1,23 @@
+
+#patient_events {
+	.inbox {
+		.content_box {
+			.table_box {
+				height: 400px;
+				overflow-y: scroll;
+				background: $colorGy_l;
+				padding: 10px;
+				table {
+					width: 100%;
+					font-size: $fs_14p;
+					line-height: $lh_20p;
+					tr {
+						td {
+							padding: 0 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
