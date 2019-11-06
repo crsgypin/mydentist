@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration}分鐘)" ]}, class: "form-control", id: "service_select" %>
+		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
 	</div>
 
 
@@ -59,7 +59,7 @@
 			<ul class="hours-box">
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
-				<li class="minutes-box" data-click_duration_count="<%= @service.duration / Clinic.default_duration %>">
+				<li class="minutes-box" data-click_duration_count="<%= @service.duration_number / Clinic.default_duration %>">
 					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration), false, disabled: !minute_segment[:enabled]  %>
 					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
 					<% i += 1 %>

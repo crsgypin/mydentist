@@ -11,10 +11,10 @@
 	<div class="s-col">
 		所需時間
 		<span class="show-view">
-			<%= doctor_service.duration %>分鐘
+			<%= doctor_service.duration %>
 		</span>
 		<span class="edit-view hidden">
-			<%= select_field_tag "doctor_service[duration]", doctor_service.duration, [15, 30, 45, 60].map {|a| [a, "#{a}分鐘"]} %>
+			<%= select_field_tag "doctor_service[duration]", doctor_service.duration, doctor_service.class.durations.keys} %>
 		</span>
 	</div>
 	<div class="s-col alignR">
