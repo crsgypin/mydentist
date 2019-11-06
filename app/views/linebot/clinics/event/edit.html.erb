@@ -1,6 +1,7 @@
 <div id="linebot_event_show">
 	<%= form_tag url_for(action: :update, id: @event), method: "patch", remote: true do %>
 	<%= hidden_field_tag "line_account_id", params[:line_account_id] %>
+	<%= hidden_field_tag "event_id", params[:event_id] %>
 	<%= render_relative_partial "common/form_box" %>
 	<div class="submit_box">
 		<%= submit_tag "確定", class: "btnW" %>

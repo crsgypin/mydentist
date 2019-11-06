@@ -1,16 +1,18 @@
 class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationController
+  include JsCrudConcern
 
 	def show
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 
 		if !params[:event_id].present?
-			_new
+			redirect_to url_for(request.query_parameters.merge({action: :new}))
 		else
-			_edit
+			redirect_to url_for(request.query_parameters.merge({action: :edit}))
 		end
 	end
 
-	def _new
+	def new
+		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@booking_event = @line_account.booking_events.last
 		set_doctor
 		set_service
@@ -19,7 +21,8 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		render "new"
 	end
 
-	def _edit
+	def edit
+		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@event = @line_account.events.find_by(params[:event_id])
 		set_doctor
 		set_service
@@ -49,13 +52,12 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 			return @error_message = "您尚未選擇時間"
 		end
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
-		@event = @line_account.events.find_by(event_id: params[:event_id])
-		@event.clinic = @clinic
+		@event = @line_account.events.find_by(id: params[:event_id])
 		@event.clinic = @clinic
 		@event.patient = @line_account.patient
 		@event.status = "已預約"
 		@event.assign_attributes(event_params)
-		if !@event.save
+		if !@event.saved_changes
 			 return js_render_model_error @event
 		end
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)				
