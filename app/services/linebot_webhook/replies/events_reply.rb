@@ -10,7 +10,7 @@ module LinebotWebhook::Replies::EventsReply
 					text: proc do 
 						r = "醫生: #{event.doctor.name}\n"
 						r += "項目: #{event.service.name}\n"
-						r += "時段: #{event.hour}:#{event.minute}"
+						r += "時段: #{event.desc_format(2)}"
 						r
 					end.call,
 					name: "有預約",

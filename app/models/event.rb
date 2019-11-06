@@ -16,6 +16,7 @@ class Event < ApplicationRecord
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
 	include Common::DateTimeDurationHelper
+	include Common::DateHelper
 
 	def hour_minute_duration=(str)
 		t = parse_hour_minute_duration_format(str)
@@ -27,6 +28,16 @@ class Event < ApplicationRecord
 	def duration_desc
 		r = next_hour_minute(self.hour, self.minute, self.duration)
 		"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"
+	end
+
+	def desc_format(format_type = 1)
+		if format_type == 1
+			r = next_hour_minute(self.hour, self.minute, self.duration)
+			"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"			
+		elsif format_type == 2			
+			r = next_hour_minute(self.hour, self.minute, self.duration)
+			"#{roc_format(self.date, 3)} #{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"			
+		end
 	end
 
 	def check_hour_minute_duration

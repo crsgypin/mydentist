@@ -67,8 +67,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@event.clinic = @clinic
 		@event.patient = @line_account.patient
 		@event.status = "已預約"
-		@event.assign_attributes(event_params)
-		if !@event.saved_changes
+		if !@event.update(event_params)
 			 return js_render_model_error @event
 		end
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)				
