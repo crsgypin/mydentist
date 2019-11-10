@@ -48,7 +48,6 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
 
 		@line_account.sendings.create({
-    	client_sending: @client_sending,
     	source: "server",
     	server_type: "push",
     	messages: {
@@ -73,7 +72,6 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)				
 
 		@line_account.sendings.create({
-    	client_sending: @client_sending,
     	source: "server",
     	server_type: "push",
     	messages: {

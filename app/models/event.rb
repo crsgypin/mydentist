@@ -8,7 +8,7 @@ class Event < ApplicationRecord
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	has_many :clinic_vacation_notifications
 	has_many :doctor_vacation_notifications
-	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "取消" => 40, "診所休假取消" => 45, "醫生休假取消" => 50}
+	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "取消" => 40, "暫停" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
 	validates_presence_of :status, :source
 	before_validation :check_for_source, on: :create
