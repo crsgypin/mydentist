@@ -1,4 +1,4 @@
-module EventNotificationConcern
+module NotificationConcern
 	extend ActiveSupport::Concern
   included do
   	attr_accessor :text_message
@@ -13,10 +13,7 @@ module EventNotificationConcern
 		sending = self.line_account.sendings.create!({
     	source: "server",
     	server_type: "push",
-    	messages: {
-    		type: "text", 
-    		text: self.text_message
-    	}
+			message: self.line_message_template(self.text_message)
     })
     self.update!(line_sending: sending)
   end

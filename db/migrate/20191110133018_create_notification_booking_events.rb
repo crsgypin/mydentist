@@ -1,6 +1,6 @@
-class CreateBookingEventNotifications < ActiveRecord::Migration[5.1]
+class CreateNotificationBookingEvents < ActiveRecord::Migration[5.1]
   def change
-    create_table :booking_event_notifications do |t|
+    create_table :notification_booking_events do |t|
     	t.integer :booking_event_id, index: true
     	t.integer :new_event_id, index: true
     	t.integer :patient_id, index: true
