@@ -5,7 +5,7 @@ class Event::Notification < ApplicationRecord
 	belongs_to :line_account, class_name: "Line::Account"
 	belongs_to :event, class_name: "Event", optional: true
 	belongs_to :new_event, class_name: "Event", foreign_key: :new_event_id, optional: true
-	belongs_to :booking_event, class_name: "Booking::Event", optional: true
+	belongs_to :booking_event, class_name: "BookingEvent", optional: true
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true
 	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
 	after_create :send_message
@@ -38,7 +38,13 @@ class Event::Notification < ApplicationRecord
           {
             type: "uri",
             label: "是，預約",
-            uri: liff_line_event_url(self.notification_template.clinic, self.line_account, {event_id: self.event.id, event_notification_id: self.id})
+            uri: proc do 
+              if self.notification_template.category == "回診推播"
+                liff_line_event_url(self.notification_template.clinic, self.line_account, {booking_event_id: self.booking_event.id, event_notification_id: self.id})
+               else
+                liff_line_event_url(self.notification_template.clinic, self.line_account, {event_id: self.event.id, event_notification_id: self.id})
+              end
+            end.call
           }
         ]
       })        

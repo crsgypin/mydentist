@@ -1,5 +1,4 @@
 <%= form_tag clinic_event_notification_template_path(@clinic, @event_notification_template), method: "get", id: "patient_table_box", remote: true do %>
-  <%= hidden_field_tag  "args[clinic_name]", @clinic.name %>
   <%= render partial: "clinics/common/clinic_table" , locals: {
     id: "patients",
     class: "ht80",
@@ -37,8 +36,18 @@
       end
       if @category == "notification"
         r = [
-          {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{|a| 
-            check_box_tag("patient_ids[]", a.id, false, class: "notification_check")}}
+          {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{ |a, index| 
+              r = check_box_tag("patients[#{index}][id]", a.id, false, class: "notification_check")
+              
+              {
+                clinic_name: @clinic.name,
+                patient_name: a.name
+              }.each do |name, value|
+                r += check_box_tag("patients[#{index}][args][#{name}]", value, false, class: "")
+              end
+              r.html_safe
+            }
+          }
         ] + r
       end
      r

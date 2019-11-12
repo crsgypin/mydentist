@@ -1,6 +1,7 @@
 class Patient < ApplicationRecord
 	belongs_to :clinic
 	has_many :events
+  has_many :booking_events
   has_one :line_account, class_name: "Line::Account"
   has_one :clinic_patient_notification, class_name: "Clinic::PatientNotification"
   belongs_to :default_doctor, class_name: "::Doctor", foreign_key: :default_doctor_id, optional: true

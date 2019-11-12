@@ -11,8 +11,8 @@
 			<% end %>
 		<% end %>
 
-		<% @patient_objs.present? && @patient_objs.each do |patient_obj| %>
-			<% patient = patient_obj[:event] %>
+		<% @patient_objs.present? && @patient_objs.each_with_index do |patient_obj, index| %>
+			<% patient = patient_obj[:patient] %>
 			<% args = patient_obj[:args] %>
 			<%= hidden_field_tag "patients[#{index}][id]", patient.id %>
 			<% args.each do |name, value| %>
