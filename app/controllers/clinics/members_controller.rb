@@ -8,6 +8,11 @@ class ::Clinics::MembersController < ::Clinics::ApplicationController
     @members = @members.page(params[:page]).per(20)
   end
 
+  def show
+    @member = @clinic.members.find(params[:id])
+
+  end
+
   def create
     @member = @clinic.members.new(member_params)
     if !@member.save
