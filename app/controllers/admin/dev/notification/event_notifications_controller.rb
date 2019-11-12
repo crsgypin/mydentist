@@ -10,7 +10,7 @@ class Admin::Dev::Notification::EventNotificationsController < Admin::Dev::Notif
   }
 
   def index
-    @event_notifications = ::Event::Notification.all
+    @event_notifications = ::Event::Notification.order(id: :desc)
     @event_notifications = @event_notifications.page(params[:page]).per(20)
   end
 
