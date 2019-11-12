@@ -1,10 +1,9 @@
-module NotificationConcern
+module EventBookingEventNotificationConcern
 	extend ActiveSupport::Concern
   included do
   	attr_accessor :text_message
 		belongs_to :line_account, class_name: "Line::Account"
 		belongs_to :line_sending, class_name: "Line::Sending", optional: true
-		enum status: {"尚未回覆" => 0, "同意" => 1, "取消" => 2}
 		after_create :send_message
   end
 

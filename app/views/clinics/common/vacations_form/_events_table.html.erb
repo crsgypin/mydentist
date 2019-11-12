@@ -1,19 +1,68 @@
 
-<div class="events_box">
-	<table>
-		<% events.each do |event| %>
-		<tr>
-			<td><%= event.patient.name %></td>
-			<td><%= roc_format(event.date,3) %></td>
-			<td><%= event.duration_desc %></td>
-		</tr>
-		<% end %>
-	</table>
+<div class="title">
+	休診期間已約診病患
 </div>
-<div class="preview_box">
-	<div class="sending_box">
-		<%= link_to "送出", clinic_info_clinic_vacation_vacation_notifications_path(@clinic, @clinic_vacation), remote: true, class: "btnBu" %>
+<div class="tabs_box">
+	<ul>
+		<% [
+		{name: "影響病患名單", key: "events"},
+		{name: "發送紀錄", key: "notifications"},
+		].each do |tab| %>
+		<li class="<%= 'selected' if @key == tab[:key] %>">
+			<%= link_to tab[:name], url_for(key: tab[:key]), remote: true %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<div class="query_box clinic_form">
+	<ul>
+		<li>
+			<%= select_field_tag "line_account_status", "", {nil => "選擇帳戶綁定狀態", 0 => "未綁定", 1 => "已綁定"} %>
+		</li>
+		<li>
+			<%= select_field_tag "sending_status", "", {nil => "選擇訊息發送狀態", 1 => "已約診", 2 => "已取消", 3 => "未回應"} %>
+		</li>
+</div>
+<div class="content_box">
+	<div class="events_box">
+		<table>
+			<tr>
+				<th>病患</th>
+				<th>日期</th>
+				<th>帳號綁定</th>
+				<th>訊息發送</th>
+			</tr>
+			<% events.each do |event| %>
+			<tr>
+				<td>
+					<p class="title"><%= event.patient.name %></p>
+					<p class="value"><%= event.patient.phone %></p>
+				</td>
+				<td>
+					<p class="title"><%= roc_format(event.date,4) %></p>
+					<p class="value"><%= event.duration_desc %></p>
+				</td>
+				<td>
+					<% if event.patient.has_line_account? %>
+					<span class="colorGn">已綁定</span>
+					<% else %>
+					<span class="colorBu">未綁定</span>
+					<% end %>			
+				</td>
+				<td>
+					<% if event.event_notifications.length > 0 %>
+					<span class="colorGn">已發送</span>
+					<% else %>
+					<span class="colorBu">未發送</span>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<div class="preview_box">
+		<div class="sending_box">
+			<%= link_to "送出", clinic_info_clinic_vacation_vacation_notifications_path(@clinic, @clinic_vacation), remote: true, class: "btnBu" %>
+		</div>
 	</div>
 </div>
-
-

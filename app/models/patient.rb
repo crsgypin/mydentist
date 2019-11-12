@@ -16,6 +16,10 @@ class Patient < ApplicationRecord
 	validates_uniqueness_of :friendly_id
   attr_accessor :roc_year, :year, :month, :day
 
+  def has_line_account?
+    
+  end
+
   def filled_in_web
     self.name.present? && self.birthday.present? && self.phone.present?
   end

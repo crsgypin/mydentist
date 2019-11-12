@@ -2,97 +2,9 @@
 .vacations_form {
 	display: flex;
 	.main_box {
-		width: calc(100% - 350px);
-		background: $colorGy_l;
-		padding: 10px;
-		max-height: 500px;
-		overflow: scroll;
-		ul {
-			li {
-				margin-bottom: 10px;
-				background: $colorW;
-				padding: 10px;
-				.vacation_close_box {
-					line-height: 1;
-					a {
-						float: right;
-					}
-					overflow: hidden;
-				}
-				>.title {
-					text-align: left;
-					color: $colorGy;
-				}
-				.date_button_box {
-					display: flex;
-					.date_box {
-						width: calc(100% - 100px);
-						position: relative;
-						padding-right: 40px;
-						.to {
-							position: absolute;
-							top: 20px;
-							right: 5px;
-						}
-						.start_date, .end_date {
-							padding-bottom: 5px;
-						}
-						.count_box {
-							text-align: right;
-							span {
-								display: inline-block;
-								width: 40px;
-								text-align: center;
-								line-height: 1;
-								border-bottom: 1px solid $colorGy1;
-							}
-						}
-					}
-					.button_box {
-						position: relative;
-						width: 100px;
-						input {
-					    position: absolute;
-					    bottom: 0;
-					    width: 80%;
-					    right: 0;
-						}
-					}
-				}
-			}
-		}
+		width: calc(100% - 500px);
 	}
 	.side_box {
-		width: 350px;
-		background: $colorBu_l;
-		padding: 0 10px;
-		max-height: 500px;
-		>.title {
-			text-align: center;
-			font-weight: bold;
-			height: 40px;
-			line-height: 40px;
-		}
-		>.content_box {
-			height: calc(500px - 40px);
-			.events_box {
-				overflow-y: scroll;
-				height: calc(100% - 60px);
-				table {
-					width: 100%;
-					font-size: $fs_14p;
-					line-height: $lh_20p;
-				}				
-			}
-			.preview_box {
-				height: 60px;
-				padding: 10px;
-		 		.sending_box {
-					text-align: center;
-					height: 60px;
-					line-height: 60px;
-				}
-			}
-		}
+		width: 500px;
 	}
 }

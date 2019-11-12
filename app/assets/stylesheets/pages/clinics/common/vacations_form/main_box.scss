@@ -1,0 +1,61 @@
+
+.vacations_form .main_box {
+	background: $colorGy_l;
+	padding: 10px;
+	max-height: 500px;
+	overflow: scroll;
+	ul {
+		li {
+			margin-bottom: 10px;
+			background: $colorW;
+			padding: 10px;
+			.vacation_close_box {
+				line-height: 1;
+				a {
+					float: right;
+				}
+				overflow: hidden;
+			}
+			>.title {
+				text-align: left;
+				color: $colorGy;
+			}
+			.date_button_box {
+				display: flex;
+				.date_box {
+					width: calc(100% - 100px);
+					position: relative;
+					padding-right: 40px;
+					.to {
+						position: absolute;
+						top: 20px;
+						right: 5px;
+					}
+					.start_date, .end_date {
+						padding-bottom: 5px;
+					}
+					.count_box {
+						text-align: right;
+						span {
+							display: inline-block;
+							width: 40px;
+							text-align: center;
+							line-height: 1;
+							border-bottom: 1px solid $colorGy1;
+						}
+					}
+				}
+				.button_box {
+					position: relative;
+					width: 100px;
+					input {
+				    position: absolute;
+				    bottom: 0;
+				    width: 80%;
+				    right: 0;
+					}
+				}
+			}
+		}
+	}
+}
