@@ -1,5 +1,5 @@
 class ::Clinics::Info::ClinicVacations::EventNotificationTemplatesController < ::Clinics::Info::ClinicVacations::ApplicationController
-
+	#no used, noted at 2019/11/12
 	def show
 		@event_notification_template = Event::NotificationTemplate.find_by(id: params[:id])
 		@events = @clinic_vacation.events.where(id: params[:event_ids])
