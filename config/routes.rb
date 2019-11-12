@@ -147,6 +147,14 @@ Rails.application.routes.draw do
         resources :lightboxes, only: [:index, :show]
         resources :components, only: [:index, :show]
       end
+      namespace :notification do
+        resources :event_notification_templates
+        resources :event_notification_templates, only: [], module: :event_notification_templates do
+          resource :info, only: [:show], controller: :info
+          resources :notifications
+        end
+        resources :event_notifications
+      end
     end
   end
 

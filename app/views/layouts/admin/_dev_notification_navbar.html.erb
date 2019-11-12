@@ -1,0 +1,13 @@
+
+<div class="container">
+<% [
+	{name: "掛號通知", link: admin_dev_notification_event_notifications_path},
+	{name: "掛號通知樣板", link: admin_dev_notification_event_notification_templates_path},
+	].each do |elm| %>
+	<% if request.url.include? elm[:link] %>
+	<%= link_to elm[:name], elm[:link], class: "btnBu" %>	
+	<% else %>
+	<%= link_to elm[:name], elm[:link], class: "btnW" %>	
+	<% end %>
+<% end %>
+</div>

@@ -1,0 +1,23 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "event_notifications",
+  resources: @event_notifications,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "line_account_id", v: proc{|a| a.line_account_id }},
+    {t: "event", v: proc{|a| 
+    	if a.event.present?
+    		"#{a.event.id} #{a.event.status}"
+    	end
+    }},
+    {t: "booking_event_id", v: proc{|a| 
+    	a.booking_event_id 
+    }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "參數", v: proc{|a| a.args }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>
