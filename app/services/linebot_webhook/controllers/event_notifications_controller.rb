@@ -20,12 +20,12 @@ class LinebotWebhook::Controllers::EventNotificationsController < LinebotWebhook
 		elsif category == "回診修改掛號"
 			#do nothing
 		elsif category == "診所休假修改掛號"
-			self.event.update(status: "取消")
+			@event_notification.event.update(status: "取消")
 		elsif category == "醫生休假修改掛號"
-			self.event.update(status: "取消")
+			@event_notification.event.update(status: "取消")
 		end
 		@event_notification.update(status: "取消")
-		reply_event_cancel
+		reply_event_canceled
 	end
 
 end

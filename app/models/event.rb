@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  default_scope { where.not(status: "取消")}
+  # default_scope { where.not(status: "取消")}
 	belongs_to :clinic
 	belongs_to :line_account, class_name: "Line::Account", foreign_key: :line_account_id, optional: true
 	belongs_to :patient, optional: true

@@ -7,7 +7,7 @@ class Event::Notification < ApplicationRecord
 	belongs_to :new_event, class_name: "Event", foreign_key: :new_event_id, optional: true
 	belongs_to :booking_event, class_name: "Booking::Event", optional: true
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true
-	enum status: {"尚未回覆" => 0, "同意" => 1, "取消" => 2}
+	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
 	after_create :send_message
   json_format :args
 	# validates_presence_of :category
@@ -43,7 +43,7 @@ class Event::Notification < ApplicationRecord
         ]
       })        
     })
-    self.update!(line_sending: sending)
+    self.update!(line_sending: sending, status: "尚未回覆")
   end
 
   def arg_content
