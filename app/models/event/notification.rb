@@ -38,7 +38,7 @@ class Event::Notification < ApplicationRecord
           {
             type: "uri",
             label: "是，預約",
-            uri: liff_line_event_url(self.notification_template.clinic, self.line_account, {notification_id: self.id})
+            uri: liff_line_event_url(self.notification_template.clinic, self.line_account, {event_id: self.event.id, event_notification_id: self.id})
           }
         ]
       })        

@@ -21,6 +21,7 @@ module Common::LineShareHelper
 		end	
 		url += "&doctor_id=#{args[:doctor_id]}" if args[:doctor_id].present?
 		url += "&event_id=#{args[:event_id]}" if args[:event_id].present?
+		url += "&event_notification_id=#{args[:event_notification_id]}" if args[:event_notification_id].present?
 		url
 	end
 
