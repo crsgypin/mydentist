@@ -4,6 +4,7 @@
   fields: [
     {k: "id", v: proc{|a| a.id }},
     {k: "line_user_id", v: proc{|a| a.line_user_id }},
+    {t: "病患資料", v: proc{|a| a.patient.try(:name) }},
     {k: "status", v: proc{|a| a.status }},
     {k: "dialog_status", v: proc{|a| a.dialog_status }},
     {k: "dialog_status_step", v: proc{|a| a.dialog_status_step }},
