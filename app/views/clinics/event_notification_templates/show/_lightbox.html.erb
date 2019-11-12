@@ -12,7 +12,7 @@
 			<p class="note">推播對象：提醒洗牙回診</p>
 		</div>
 		<div class="content_box">
-			<%= text_area_tag "text_message", ClinicLine::System.clinic_vacation_change_note %>
+			<%= text_area_tag "text_message", @event_notification_template.content %>
 			<% @event_notification_template.args.each do |key, name| %>
 			<%= link_to name, "", class: "btnBu" %>
 			<% end %>

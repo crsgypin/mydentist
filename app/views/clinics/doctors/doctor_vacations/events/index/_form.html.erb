@@ -1,0 +1,10 @@
+
+<%= render partial: 'clinics/common/vacations_form/event_notifications_table', locals: {
+	events: @events,
+	query_path: url_for,
+	notification_template_path: clinic_event_notification_template_path(@clinic, @event_notification_template),
+	args: {
+		clinic_name: @clinic.name,
+		doctor_name: @doctor.name
+	}
+} %>

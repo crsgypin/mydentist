@@ -43,8 +43,8 @@ class Event::NotificationTemplate < ApplicationRecord
 			"醫生休假修改掛號" => {
 				init_content: "您好，由於醫生{doctor_name}看診時段臨時變動，請您重新預約新的時段。造成不便，敬請見諒。謝謝。{clinic_name}關心您～",
 				args: {
-					doctor_name: "醫生名稱",
-					clinic_name: "診所名稱"
+					clinic_name: "診所名稱",
+					doctor_name: "醫生名稱"
 				}
 			}
 		}
