@@ -205,10 +205,12 @@ ActiveRecord::Schema.define(version: 20191112025102) do
   end
 
   create_table "event_notification_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
     t.integer "category", limit: 1
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_event_notification_templates_on_clinic_id"
   end
 
   create_table "event_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

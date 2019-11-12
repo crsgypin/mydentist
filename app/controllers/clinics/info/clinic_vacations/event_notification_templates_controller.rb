@@ -1,10 +1,13 @@
-class ::Clinics::Info::ClinicVacations::EventNotificationsController < ::Clinics::Info::ClinicVacations::ApplicationController
+class ::Clinics::Info::ClinicVacations::EventNotificationTemplatesController < ::Clinics::Info::ClinicVacations::ApplicationController
 
-	def index
+	def show
+		@event_notification_template = Event::NotificationTemplate.find_by(id: params[:id])
 		@events = @clinic_vacation.events.where(id: params[:event_ids])
 	end
 
 	def create
+		@event_notification_template = Event::NotificationTemplate.find_by(id: params[:id])
+
 		@events = @clinic_vacation.events.where(id: params[:event_ids])
 		@events.each do |event|
 			event.event_notifications.create!({

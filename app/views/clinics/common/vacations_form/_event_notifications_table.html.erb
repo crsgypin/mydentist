@@ -26,7 +26,7 @@
 			</li>
 		</ul>
 	<% end %>
-	<%= form_tag clinic_info_clinic_vacation_event_notifications_path(@clinic, @clinic_vacation) , method: "get", remote: true, class: "content_box" do %>
+	<%= form_tag clinic_event_notification_template_path(@clinic, @event_notification_template) , method: "get", remote: true, class: "content_box" do %>
 		<div class="events_box">
 			<table>
 				<tr>

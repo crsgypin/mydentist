@@ -1,6 +1,7 @@
 class Event::NotificationTemplate < ApplicationRecord
+	belongs_to :clinic
+	has_many :notifications
 	init_categories = proc do
-		puts "33"
 	  enum category: self.category_contents.keys
 	end
 
@@ -49,11 +50,12 @@ class Event::NotificationTemplate < ApplicationRecord
 		}
 	end
 
-	def self.init_content
+	def self.init_content(clinic)
 		self.category_contents.map do |category, v|
-			c = self.find_by(category: category)
+			c = self.find_by(clinic: clinic, category: category)
 			if c.nil?
 				c = self.create!({
+					clinic: clinic,
 					category: category,
 					content: v[:init_content]
 				})

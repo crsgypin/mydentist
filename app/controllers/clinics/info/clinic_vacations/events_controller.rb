@@ -16,6 +16,8 @@ class ::Clinics::Info::ClinicVacations::EventsController < ::Clinics::Info::Clin
 		end
 
 		@events = @events.order(date: :asc, hour: :asc, minute: :asc)
+
+		@event_notification_template = @clinic.event_notification_templates.find_by(category: "診所休假修改掛號")
 	end
 
 end
