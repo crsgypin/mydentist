@@ -25,7 +25,7 @@ class Event::NotificationTemplate < ApplicationRecord
 				args: {
 					clinic_name: "診所名稱",
 					patient_name: "病患名稱"
-				}		
+				}
 			},
 			"回診修改掛號" => {
 				init_content: "您好，您預約時間，在{new_clinic_time}有時間可以進行選擇，請問您是否要將時間移至{new_clinic_time}嗎？。{clinic_name}關心您~",

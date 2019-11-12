@@ -12,8 +12,7 @@ class ::Clinics::Info::ClinicVacations::EventNotificationTemplatesController < :
 		@events.each do |event|
 			event.event_notifications.create!({
 				line_account: event.patient.line_account,
-				text_message: params[:text_message],
-				category: "修改掛號"
+				text_message: params[:text_message]
 			})
 		end
 	end

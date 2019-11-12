@@ -27,6 +27,7 @@
 		</ul>
 	<% end %>
 	<%= form_tag clinic_event_notification_template_path(@clinic, @event_notification_template) , method: "get", remote: true, class: "content_box" do %>
+		<%= hidden_field_tag "args[clinic_name]", @clinic.name %>
 		<div class="events_box">
 			<table>
 				<tr>

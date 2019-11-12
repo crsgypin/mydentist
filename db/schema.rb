@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(version: 20191112025102) do
     t.integer "line_sending_id"
     t.integer "notification_template_id"
     t.integer "status", limit: 1, default: 0
+    t.string "args"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["booking_event_id"], name: "index_event_notifications_on_booking_event_id"

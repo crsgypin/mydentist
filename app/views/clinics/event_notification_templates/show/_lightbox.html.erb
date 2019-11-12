@@ -1,15 +1,21 @@
 
 <div id="event_notification_template_lightbox" class="lightbox">
 	<%= form_tag clinic_event_notification_template_notifications_path(@clinic, @event_notification_template), method: "post", remote: true, class: "inbox" do %>
+		<% @args.each do |key, value| %>
+		<%= hidden_field_tag "args[#{key}]", value %>
+		<% end %>
+		<% @events.each do |event| %>
+		<%= hidden_field_tag "event_ids[]", event.id %>
+		<% end %>
 		<div class="header_box">
 			推播訊息
 			<p class="note">推播對象：提醒洗牙回診</p>
 		</div>
 		<div class="content_box">
-			<% @events.each do |event| %>
-			<%= hidden_field_tag "event_ids[]", event.id %>
-			<% end %>
 			<%= text_area_tag "text_message", ClinicLine::System.clinic_vacation_change_note %>
+			<% @event_notification_template.args.each do |key, name| %>
+			<%= link_to name, "", class: "btnBu" %>
+			<% end %>
 		</div>
 		<div class="buttons_box">
 			<%= link_to "取消", "javascript: $('#event_notification_template_lightbox').remove()", class: "btnW" %>

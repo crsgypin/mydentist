@@ -8,6 +8,7 @@ class CreateEventNotifications < ActiveRecord::Migration[5.1]
     	t.integer :line_sending_id, index: true
       t.integer :notification_template_id, index: true
     	t.integer :status, limit: 1, default: 0
+      t.string :args
       t.timestamps
     end
   end
