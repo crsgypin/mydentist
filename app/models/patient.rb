@@ -1,6 +1,7 @@
 class Patient < ApplicationRecord
 	belongs_to :clinic
 	has_many :events
+  has_many :booking_events
   has_one :line_account, class_name: "Line::Account"
   has_one :clinic_patient_notification, class_name: "Clinic::PatientNotification"
   belongs_to :default_doctor, class_name: "::Doctor", foreign_key: :default_doctor_id, optional: true
@@ -15,6 +16,10 @@ class Patient < ApplicationRecord
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id
   attr_accessor :roc_year, :year, :month, :day
+
+  def has_line_account?
+    self.line_account.present?
+  end
 
   def filled_in_web
     self.name.present? && self.birthday.present? && self.phone.present?

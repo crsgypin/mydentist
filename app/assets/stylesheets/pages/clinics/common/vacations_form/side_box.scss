@@ -1,0 +1,75 @@
+
+.vacations_form .side_box #event_notifications_box {
+	background: $colorBu_l;
+	padding: 0 10px;
+	max-height: 500px;
+	>.title {
+		text-align: center;
+		font-weight: bold;
+		height: 40px;
+		line-height: 40px;
+	}
+	>.tabs_box {
+		ul {
+			display: flex;
+			padding: 5px 0;
+			li {
+				padding: 0 10px;
+				border-bottom: 1px solid $colorGy;
+				&:not(:first-child){
+				}
+				&.selected {
+					color: $colorBu;
+					border-bottom: 3px solid $colorBu;
+				}
+			}			
+		}
+	}
+	>.query_box {
+		ul {
+			display: flex;
+			padding: 5px 0;			
+			li {
+				padding: 0 10px;
+				&:not(:first-child){
+				}
+				select {
+					height: 30px;
+					font-size: $fs_12p;
+					background: $colorW;
+				}
+			}			
+		}
+	}
+	>.content_box {
+		height: calc(500px - 140px);
+		.events_box {
+			overflow-y: scroll;
+			height: calc(100% - 60px);
+			table {
+				width: 100%;
+				font-size: $fs_14p;
+				line-height: $lh_20p;
+				td {
+					.title {
+						font-size: $fs_14p;
+					}
+					.value {
+						font-size: $fs_12p;
+						color: $colorGy1;
+						line-height: 1;
+					}
+				}
+			}				
+		}
+		.preview_box {
+			height: 60px;
+			padding: 10px;
+	 		.sending_box {
+				text-align: center;
+				height: 60px;
+				line-height: 60px;
+			}
+		}
+	}
+}

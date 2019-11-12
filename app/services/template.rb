@@ -7,29 +7,24 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "clinics/clinic_line/keywords",
+			base_dir: "admin/dev/notification",
 			resources: [
 				{
-					class_name: "Clinic",
+					class_name: "Event::NotificationTemplate",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
-					associated_resources: [
-						{
-							associated_name: "events",
-							index_columns: %w(id),
-							except_show_columns: [],
-						},
-						{
-							associated_name: "doctors",
-							index_columns: %w(id),
-							except_show_columns: [],
-						},
-						{
-							associated_name: "patients",
-							index_columns: %w(id),
-							except_show_columns: [],
-						},
-					]
+					# associated_resources: [
+					# 	{
+					# 		associated_name: "notifications",
+					# 		index_columns: %w(id),
+					# 		except_show_columns: [],
+					# 	},
+					# ]
+				},
+				{
+					class_name: "Event::Notification",
+					index_columns: %w(id),
+					except_show_columns: %w(uploaded_at),
 				}
 			],
 		})

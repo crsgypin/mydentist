@@ -12,6 +12,7 @@
   	<%= render_relative_partial "admin/dentists_navbar" if params[:controller].include?("admin/dentists") %>
     <%= render_relative_partial "admin/dev_navbar" if params[:controller].include?("admin/dev") %>
     <%= render_relative_partial "admin/dev_style_navbar" if params[:controller].include?("admin/dev/style") %>
+    <%= render_relative_partial "admin/dev_notification_navbar" if request.url.include?("admin/dev/notification") %>
   	<div class="container" style="min-height: 600px; padding-bottom: 40px;">
   	  <%= yield %>
   	</div>

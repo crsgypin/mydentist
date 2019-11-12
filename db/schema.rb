@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191105123513) do
+ActiveRecord::Schema.define(version: 20191112071000) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -204,12 +204,41 @@ ActiveRecord::Schema.define(version: 20191105123513) do
     t.index ["wday_hour_minute"], name: "index_event_durations_on_wday_hour_minute"
   end
 
+  create_table "event_notification_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.integer "category", limit: 1
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_event_notification_templates_on_clinic_id"
+  end
+
+  create_table "event_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "event_id"
+    t.integer "new_event_id"
+    t.integer "booking_event_id"
+    t.integer "line_account_id"
+    t.integer "line_sending_id"
+    t.integer "notification_template_id"
+    t.integer "status", limit: 1, default: 0
+    t.string "args"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_event_id"], name: "index_event_notifications_on_booking_event_id"
+    t.index ["event_id"], name: "index_event_notifications_on_event_id"
+    t.index ["line_account_id"], name: "index_event_notifications_on_line_account_id"
+    t.index ["line_sending_id"], name: "index_event_notifications_on_line_sending_id"
+    t.index ["new_event_id"], name: "index_event_notifications_on_new_event_id"
+    t.index ["notification_template_id"], name: "index_event_notifications_on_notification_template_id"
+  end
+
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
     t.integer "doctor_id"
     t.integer "patient_id"
     t.integer "service_id"
     t.integer "line_account_id"
+    t.integer "ori_event_id"
     t.integer "status", limit: 1
     t.integer "source", limit: 1, default: 1
     t.date "date"
@@ -222,6 +251,7 @@ ActiveRecord::Schema.define(version: 20191105123513) do
     t.index ["clinic_id"], name: "index_events_on_clinic_id"
     t.index ["doctor_id"], name: "index_events_on_doctor_id"
     t.index ["line_account_id"], name: "index_events_on_line_account_id"
+    t.index ["ori_event_id"], name: "index_events_on_ori_event_id"
     t.index ["patient_id"], name: "index_events_on_patient_id"
     t.index ["service_id"], name: "index_events_on_service_id"
   end

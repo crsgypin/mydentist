@@ -1,0 +1,14 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "event_notification_template",
+  resource: @event_notification_template,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "診所", v: proc{|a| a.clinic.name }},
+    {t: "類別", v: proc{|a| a.category }},
+    {t: "參數", v: proc{|a| a.args.map{|a,b| "#{a}-#{b}"}.join(" | ")}},
+    {t: "內容", v: proc{|a| a.content}},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

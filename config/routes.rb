@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       resources :doctor_vacations
       resources :doctor_vacations, only: [], module: :doctor_vacations do
         resources :events, only: [:index]
-        resources :vacation_notifications, only: [:index, :create]
+        # resources :event_notifications, only: [:index, :create]
       end
     end
     resource :info, only: [:show, :edit, :update], controller: :info
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       resources :clinic_vacations, only: [:index, :new, :create, :update, :destroy]
       resources :clinic_vacations, only: [], module: :clinic_vacations do
         resources :events, only: [:index]
-        resources :vacation_notifications, only: [:index, :create]
+        # resources :event_notifications, only: [:index, :create]
       end
       resources :services, only: [:index, :new, :create, :destroy]
       resource :photo, only: [:new, :create], controller: :photo
@@ -57,6 +57,10 @@ Rails.application.routes.draw do
       resources :broadcasts
     end
     resources :members
+    resources :event_notification_templates, only: [:show]
+    resources :event_notification_templates, only: [], module: :event_notification_templates do
+      resources :notifications, only: [:create]
+    end
   end
 
   namespace :admin do
@@ -142,6 +146,14 @@ Rails.application.routes.draw do
         resources :buttons, only: [:index, :show]
         resources :lightboxes, only: [:index, :show]
         resources :components, only: [:index, :show]
+      end
+      namespace :notification do
+        resources :event_notification_templates
+        resources :event_notification_templates, only: [], module: :event_notification_templates do
+          resource :info, only: [:show], controller: :info
+          resources :notifications
+        end
+        resources :event_notifications
       end
     end
   end

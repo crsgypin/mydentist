@@ -1,0 +1,16 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "event_notification_templates",
+  resources: @event_notification_templates,
+  cols: [
+    {t: "id", v: proc{|a| a.id }},
+    {t: "診所", v: proc{|a| a.clinic.name }},
+    {t: "類別", v: proc{|a| a.category }},
+    {t: "參數", v: proc{|a| a.args.map{|a,b| "#{a}-#{b}"}.join(" | ")}},
+    {t: "推播", v: proc{|a| a.notifications.length}},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

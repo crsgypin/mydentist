@@ -1,0 +1,118 @@
+
+<div id="event_notifications_box">
+	<div class="title">
+		休診期間已約診病患
+	</div>
+	<div class="tabs_box">
+		<ul>
+			<% [
+			{name: "影響病患名單", key: "events"},
+			{name: "發送紀錄", key: "notifications"},
+			].each do |tab| %>
+			<li class="<%= 'selected' if @key == tab[:key] %>">
+				<%= link_to tab[:name], url_for(key: tab[:key]), remote: true %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<%= form_tag query_path, method: "get", class: "query_box clinic_form", remote: true do %>
+		<%= hidden_field_tag "key", @key %>
+		<ul>
+			<li>
+				<%= select_field_tag "line_account_status", params[:line_account_status], {nil => "選擇帳戶綁定狀態", 0 => "未綁定", 1 => "已綁定"}, onchange: "$(this).closest('form').submit();" %>
+			</li>
+			<li>
+				<%= select_field_tag "sending_status", "", {nil => "選擇訊息發送狀態", 1 => "已約診", 2 => "已取消", 3 => "未回應"}, onchange: "$(this).closest('form').submit();" %>
+			</li>
+		</ul>
+	<% end %>
+	<%= form_tag notification_template_path , method: "get", remote: true, class: "content_box" do %>
+		<div class="events_box">
+			<table>
+				<tr>
+					<th>
+						<%= check_box_tag "", "", false, id: "all_check", onchange: "updateAllEventsCount();" %>				
+					</th>
+					<th>病患</th>
+					<th>日期</th>
+					<th>帳號綁定</th>
+					<th>訊息發送</th>
+				</tr>
+				<% event_objs.each_with_index do |event_obj, index| %>
+				<% event = event_obj[:event] %>
+				<% args = event_obj[:args] %>
+				<tr>
+					<td>
+						<% if event.patient.has_line_account? %>
+							<% if event.event_notifications.length == 0 %>
+								<% args.each do |name, value| %>
+								<%= check_box_tag "events[#{index}][args][#{name}]", value, false, class: "args_input hidden" %>
+								<% end %>
+								<%= check_box_tag "events[#{index}][id]", event.id, false, onchange: "updateEventsCount(); updateArgInputs(this);", class: "sel_event" %>
+							<% else %>
+								<%= check_box_tag "", "", false, disabled: true %>
+							<% end %>
+						<% else %>
+						<% end %>
+					</td>
+					<td>
+						<p class="title"><%= event.patient.name %></p>
+						<p class="value"><%= event.patient.phone %></p>
+					</td>
+					<td>
+						<p class="title"><%= roc_format(event.date,4) %></p>
+						<p class="value"><%= event.duration_desc %></p>
+					</td>
+					<td>
+						<% if event.patient.has_line_account? %>
+						<span class="colorGn">已綁定</span>
+						<% else %>
+						<span class="colorBu">未綁定</span>
+						<% end %>			
+					</td>
+					<td>
+						<% if event.event_notifications.length > 0 %>
+						<% event_notification = event.event_notifications.last %>
+						<span class="colorGn"><%= event_notification.status %></span>
+						<% else %>
+						<span class="colorBu">未發送</span>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		<div class="preview_box">
+			<div class="sending_box">
+				<%= link_to "javascript:;", onclick: "$(this).closest('form').submit();", class: "btnBu" do %>
+					推播(<span class="number">0</span>)
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	function updateEventsCount(){
+		var count = $("#event_notifications_box .events_box input.sel_event:checked").length;
+		var n = $("#event_notifications_box").find(".sending_box .number")
+		n.text(count);
+	}
+	function updateAllEventsCount(){
+		var checked = $("#all_check")[0].checked;
+		$("#event_notifications_box .events_box input.sel_event").each(function(i, elm){
+			elm.checked = checked;
+			updateArgInputs(elm);
+		});
+		updateEventsCount();
+	}
+	function updateArgInputs(input){
+		$(input).closest("td").find(".args_input").each(function(i, elm){
+			elm.checked = input.checked;
+		});
+	}
+	function completePushNotification(){
+		<%# callback %>
+		$("#event_notifications_box form.query_box").submit();
+	}
+</script>

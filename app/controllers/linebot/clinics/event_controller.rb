@@ -24,7 +24,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def edit
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
-		@event = @line_account.events.find_by(params[:event_id])
+		@event = @line_account.events.find_by!(id: params[:event_id])
 		set_doctor
 		set_service
 		set_date
@@ -48,7 +48,6 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
 
 		@line_account.sendings.create({
-    	client_sending: @client_sending,
     	source: "server",
     	server_type: "push",
     	messages: {
@@ -56,14 +55,19 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
     		text: "您的掛號已成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
     	}
     })
+
+    check_event_notification
 	end
 
 	def update
 		if !params[:event][:hour_minute_duration].present?
 			return @error_message = "您尚未選擇時間"
 		end
+
+    ActiveRecord::Base.transaction do	
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
-		@event = @line_account.events.find_by(id: params[:event_id])
+		@event = @line_account.events.find_by!(id: params[:event_id])
+		check_event_date
 		@event.clinic = @clinic
 		@event.patient = @line_account.patient
 		@event.status = "已預約"
@@ -73,7 +77,6 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)				
 
 		@line_account.sendings.create({
-    	client_sending: @client_sending,
     	source: "server",
     	server_type: "push",
     	messages: {
@@ -81,6 +84,9 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
     		text: "您的掛號已修正成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
     	}
     })
+
+    check_event_notification
+    end
 	end
 
 	private
@@ -139,6 +145,22 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def event_params
 		params.require(:event).permit(:doctor_id, :service_id, :date, :hour_minute_duration)
+	end
+
+	def check_event_date
+		new_date = Date.parse(params[:event][:date]) rescue nil
+		if @event.date != new_date
+			@ori_event = @event
+			@ori_event.update(status: "已改約")
+			@event = @line_account.events.new(ori_event: @ori_event)
+		end
+	end
+
+	def check_event_notification
+		if params[:event_notification_id].present?
+			@event_notification = Event::Notification.find_by(id: params[:event_notification_id])
+			@event_notification.update!(status: "同意")
+		end
 	end
 
 end

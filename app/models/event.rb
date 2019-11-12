@@ -1,14 +1,15 @@
 class Event < ApplicationRecord
-  default_scope { where.not(status: "取消")}
+  # default_scope { where.not(status: "取消")}
 	belongs_to :clinic
 	belongs_to :line_account, class_name: "Line::Account", foreign_key: :line_account_id, optional: true
 	belongs_to :patient, optional: true
 	belongs_to :doctor
 	belongs_to :service
+	belongs_to :ori_event, class_name: "Event", foreign_key: :ori_event_id, optional: true
+	has_one :new_event, -> { order(id: :desc)}, class_name: "Event", foreign_key: :ori_event_id
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
-	has_many :clinic_vacation_notifications
-	has_many :doctor_vacation_notifications
-	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "取消" => 40, "診所休假取消" => 45, "醫生休假取消" => 50}
+	has_many :event_notifications, class_name: "Event::Notification", dependent: :destroy
+	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
 	validates_presence_of :status, :source
 	before_validation :check_for_source, on: :create
