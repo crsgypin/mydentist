@@ -17,7 +17,7 @@ class Patient < ApplicationRecord
   attr_accessor :roc_year, :year, :month, :day
 
   def has_line_account?
-    
+    self.line_account.present?
   end
 
   def filled_in_web

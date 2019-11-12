@@ -6,7 +6,6 @@ class ::Clinics::Info::ClinicVacations::VacationNotificationsController < ::Clin
 
 	def create
 		@events = @clinic_vacation.events
-		@vacation_notifications = {pass: [], fail: []}
 		@events.each do |event|
 			n = @clinic_vacation.vacation_notifications.create({
 				event: event
