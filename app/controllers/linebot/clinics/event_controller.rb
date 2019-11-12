@@ -24,7 +24,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def edit
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
-		@event = @line_account.events.find_by(params[:event_id])
+		@event = @line_account.events.find_by!(id: params[:event_id])
 		set_doctor
 		set_service
 		set_date

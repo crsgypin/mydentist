@@ -54,6 +54,8 @@
 			var line_account_id = "<%= params[:line_account_id] %>";
 			var doctorId = $("#doctor_select").val();
 			var serviceId = $("#service_select").val();
+			var eventId = $("[name='event_id']").val();
+			var eventNotificationId = $("[name='event_notification_id']").val();
 			date = args.date || $("[name='event[date]']:checked").val();
 			$.ajax({
 				url: "<%= url_for %>",
@@ -64,6 +66,8 @@
 					date: date,
 					doctor_id: doctorId,
 					service_id: serviceId,
+					event_id: eventId,
+					event_notification_id: eventNotificationId
 				}
 			});
 		}
