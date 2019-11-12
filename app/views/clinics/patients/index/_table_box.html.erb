@@ -3,7 +3,8 @@
   id: "patients",
   class: "ht80",
   resources: @patients,
-  cols: [
+  cols: proc do 
+    r = [
     {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
     {t: "性別", v: proc{|a| a.gender }},
     {t: "身分證號碼", v: proc{|a| a.person_id }},
@@ -24,10 +25,20 @@
       end
     }},
     {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
-    {t: "加入推播狀態", unclickable: true, v: proc{|a| 
-      render_relative_partial "table_box/notification", locals: {patient: a}
-     }},
-  ],
+    ]
+    if @category == "all"
+      r += [    {t: "加入推播狀態", unclickable: true, v: proc{|a| 
+        render_relative_partial "table_box/notification", locals: {patient: a}
+      }}
+    ]
+    end
+    if @category == "notification"
+      r = [
+        {t: check_box_tag("","",false), unclickable: true, v: proc{|a| check_box_tag("patient_ids[]", a.id,false)}}
+      ] + r
+    end
+   r
+ end.call,
   row: {
     link: proc do |a|
       url_for(action: :show, id: a)

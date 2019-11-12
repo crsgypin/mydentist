@@ -5,7 +5,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @date = Date.parse(params[:date]) rescue  Date.today
   
     @segment = params[:segment] || "整日"
-    @events = @clinic.events.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
+    @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
     
     @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
 

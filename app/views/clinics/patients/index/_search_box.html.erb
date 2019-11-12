@@ -1,16 +1,17 @@
 
 <div id="search_box">
 	<%= form_tag url_for, method: "get" do %>
+	<% if @category == "notification" %>
+	<%= link_to "回診推播(#{@patients.total_count})", "", class: "btnW" %>
+	<% end %>
 	<div class="input_box">
 		<%= hidden_field_tag "category", params[:category] %>
 		<%= text_field_tag "key", params[:key], id: "search" %>
 		<div class="search_result hidden">
 		</div>
 	</div>
-	<% if params[:category] != "notification" %>
+	<% if @category == "all" %>
 	<%= link_to "新增病患", url_for(action: :new), class: "btnBu" %>
-	<% else %>
-	<%= link_to "回診推播(#{@patients.total_count})", "", class: "btnW" %>
 	<% end %>
 	<% end %>
 </div>

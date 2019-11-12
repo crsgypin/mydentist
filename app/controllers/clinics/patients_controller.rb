@@ -9,10 +9,13 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
   }
 
   def index
-    if params[:category] != "notification"
+    @category = params[:category].present? ? params[:category] : "all"
+    if @category == "all"
       @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
-    else
+    elsif @category == "notification"
       @patients = @clinic.clinic_notification_patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+    else
+      raise "invalid category"
     end
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
