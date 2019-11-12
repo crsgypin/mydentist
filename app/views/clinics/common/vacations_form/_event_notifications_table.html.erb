@@ -26,7 +26,7 @@
 			</li>
 		</ul>
 	<% end %>
-	<%= form_tag clinic_info_clinic_vacation_events_path(@clinic, @clinic_vacation) , method: "post", remote: true, class: "content_box" do %>
+	<%= form_tag clinic_info_clinic_vacation_event_notifications_path(@clinic, @clinic_vacation) , method: "get", remote: true, class: "content_box" do %>
 		<div class="events_box">
 			<table>
 				<tr>
@@ -43,7 +43,7 @@
 					<td>
 						<% if event.patient.has_line_account? %>
 							<% if event.event_notifications.length == 0 %>
-								<%= check_box_tag "event_id", event.id, false, onchange: "updateEventsCount()", class: "sel_event" %>
+								<%= check_box_tag "event_ids[]", event.id, false, onchange: "updateEventsCount()", class: "sel_event" %>
 							<% else %>
 								<%= check_box_tag "", "", false, disabled: true %>
 							<% end %>
@@ -78,7 +78,7 @@
 		</div>
 		<div class="preview_box">
 			<div class="sending_box">
-				<%= link_to clinic_info_clinic_vacation_vacation_notifications_path(@clinic, @clinic_vacation), remote: true, class: "btnBu" do %>
+				<%= link_to "javascript:;", onclick: "$(this).closest('form').submit();", class: "btnBu" do %>
 					推播(<span class="number">0</span>)
 				<% end %>
 			</div>

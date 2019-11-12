@@ -1,5 +1,5 @@
 
-<div id="vacation_notification_lightbox" class="lightbox">
+<div id="event_notification_lightbox" class="lightbox">
 	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
 		<div class="header_box">
 			推播訊息
@@ -9,7 +9,7 @@
 			<%= text_area_tag "content", ClinicLine::System.clinic_vacation_change_note %>
 		</div>
 		<div class="buttons_box">
-			<%= link_to "取消", "javascript: $('#vacation_notification_lightbox').remove()", class: "btnW" %>
+			<%= link_to "取消", "javascript: $('#event_notification_lightbox').remove()", class: "btnW" %>
 			<%= submit_tag "推播", class: "btnBu" %>
 		</div>
 	<% end %>

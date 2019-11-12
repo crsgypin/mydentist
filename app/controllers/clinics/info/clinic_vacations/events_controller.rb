@@ -3,7 +3,7 @@ class ::Clinics::Info::ClinicVacations::EventsController < ::Clinics::Info::Clin
 	def index
 		@key = params[:key] || "events"
 
-		@events = @clinic_vacation.events.includes(:event_notifications, :patient)
+		@events = @clinic_vacation.events.includes(:event_notifications, :patient => :line_account)
 
 		if params[:line_account_status].present?
 			if params[:line_account_status] == "0"
