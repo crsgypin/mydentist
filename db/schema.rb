@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 20191111075509) do
     t.integer "booking_event_id"
     t.integer "line_account_id"
     t.integer "line_sending_id"
+    t.integer "category", limit: 1
     t.integer "status", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

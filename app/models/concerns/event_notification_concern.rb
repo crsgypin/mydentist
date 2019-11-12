@@ -2,9 +2,6 @@ module EventNotificationConcern
 	extend ActiveSupport::Concern
   included do
   	attr_accessor :text_message
-		belongs_to :line_account, class_name: "Line::Account"
-		belongs_to :line_sending, class_name: "Line::Sending", optional: true
-    enum category: {"回診推播" => 1, "修改掛號" => 2}
 		after_create :send_message
   end
   include LinebotWebhook::Helper::RepliedMessageHelper
@@ -14,9 +11,9 @@ module EventNotificationConcern
   	raise "no text_message" if !self.text_message.present?
     if self.category == "回診推播"
       sending = self.line_account.sendings.create!({
-        source: "source",
+        source: "server",
         server_type: "push",
-        message: reply_message({
+        messages: reply_message({
           type: "confirm",
           alt_text: "回診推播訊息",
           text: "回診推播訊息",
@@ -41,13 +38,13 @@ module EventNotificationConcern
       })
     elsif self.category == "修改掛號"
       sending = self.line_account.sendings.create!({
-        source: "source",
+        source: "server",
         server_type: "push",
-        message: reply_message({
+        messages: reply_message({
           type: "confirm",
           alt_text: "修改掛號通知",
           text: "修改掛號通知",
-          action: [
+          actions: [
             {
               type: "postback",
               label: "否",
@@ -61,7 +58,7 @@ module EventNotificationConcern
             {
               type: "uri",
               label: "是，預約",
-              uri: liff_line_event_url(@clinic, @line_account, {event_id: self.event.id})
+              uri: liff_line_event_url(self.event.clinic, self.line_account, {event_id: self.event_id})
             }
           ]
         })

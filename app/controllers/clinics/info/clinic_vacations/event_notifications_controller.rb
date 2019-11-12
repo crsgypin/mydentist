@@ -5,16 +5,13 @@ class ::Clinics::Info::ClinicVacations::EventNotificationsController < ::Clinics
 	end
 
 	def create
-		@events = @clinic_vacation.events
+		@events = @clinic_vacation.events.where(id: params[:event_ids])
 		@events.each do |event|
-			n = @clinic_vacation.event_notifications.create({
-				event: event
+			event.event_notifications.create!({
+				line_account: event.patient.line_account,
+				text_message: params[:text_message],
+				category: "修改掛號"
 			})
-			if n.errors.present?
-				@event_notifications[:fail] << n
-			else
-				@event_notifications[:pass] << n
-			end
 		end
 	end
 

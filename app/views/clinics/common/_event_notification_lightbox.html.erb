@@ -6,7 +6,10 @@
 			<p class="note">推播對象：提醒洗牙回診</p>
 		</div>
 		<div class="content_box">
-			<%= text_area_tag "content", ClinicLine::System.clinic_vacation_change_note %>
+			<% @events.each do |event| %>
+			<%= hidden_field_tag "event_ids[]", event.id %>
+			<% end %>
+			<%= text_area_tag "text_message", ClinicLine::System.clinic_vacation_change_note %>
 		</div>
 		<div class="buttons_box">
 			<%= link_to "取消", "javascript: $('#event_notification_lightbox').remove()", class: "btnW" %>
