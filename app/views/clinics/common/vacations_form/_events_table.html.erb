@@ -14,15 +14,17 @@
 		<% end %>
 	</ul>
 </div>
-<div class="query_box clinic_form">
+<%= form_tag url_for, method: "get", class: "query_box clinic_form", remote: true do %>
+	<%= hidden_field_tag "key", @key %>
 	<ul>
 		<li>
-			<%= select_field_tag "line_account_status", "", {nil => "選擇帳戶綁定狀態", 0 => "未綁定", 1 => "已綁定"} %>
+			<%= select_field_tag "line_account_status", "", {nil => "選擇帳戶綁定狀態", 0 => "未綁定", 1 => "已綁定"}, onchange: "$(this).closest('form').submit();" %>
 		</li>
 		<li>
-			<%= select_field_tag "sending_status", "", {nil => "選擇訊息發送狀態", 1 => "已約診", 2 => "已取消", 3 => "未回應"} %>
+			<%= select_field_tag "sending_status", "", {nil => "選擇訊息發送狀態", 1 => "已約診", 2 => "已取消", 3 => "未回應"}, onchange: "$(this).closest('form').submit();" %>
 		</li>
-</div>
+	</ul>
+<% end %>
 <div class="content_box">
 	<div class="events_box">
 		<table>

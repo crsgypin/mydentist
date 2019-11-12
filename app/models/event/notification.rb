@@ -3,8 +3,9 @@ class Event::Notification < ApplicationRecord
 	self.table_name = "event_notifications"	
 	belongs_to :event, class_name: "Event"
 	belongs_to :new_event, class_name: "Event", foreign_key: :new_event_id, optional: true
+	belongs_to :booking_event, class_name: "Booking::Event"
 	enum status: {"尚未回覆" => 0, "同意" => 1, "取消" => 2}
-	include EventBookingEventNotificationConcern 
+	include EventNotificationConcern 
 	include LinebotWebhook::Helper::RepliedMessageHelper
 	include Common::LineShareHelper
 
