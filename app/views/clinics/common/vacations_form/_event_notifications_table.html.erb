@@ -66,8 +66,9 @@
 						<% end %>			
 					</td>
 					<td>
-						<% if event.event_notification.length > 0 %>
-						<span class="colorGn">已發送</span>
+						<% if event.event_notifications.length > 0 %>
+						<% event_notification = event.event_notifications.last %>
+						<span class="colorGn"><%= event_notification.status %></span>
 						<% else %>
 						<span class="colorBu">未發送</span>
 						<% end %>

@@ -1,3 +1,6 @@
 
-
+<% if @events.length > 0 %>
 $("body").append("<%= j render_relative_partial 'index/lightbox' %>");
+<% else %>
+alert("你尚未選擇任一病患");
+<% end %>

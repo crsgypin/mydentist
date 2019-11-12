@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191111075509) do
+ActiveRecord::Schema.define(version: 20191112025102) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -204,13 +204,20 @@ ActiveRecord::Schema.define(version: 20191111075509) do
     t.index ["wday_hour_minute"], name: "index_event_durations_on_wday_hour_minute"
   end
 
+  create_table "event_notification_templates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "category", limit: 1
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "event_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "event_id"
     t.integer "new_event_id"
     t.integer "booking_event_id"
     t.integer "line_account_id"
     t.integer "line_sending_id"
-    t.integer "category", limit: 1
+    t.integer "notification_template_id"
     t.integer "status", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -219,6 +226,7 @@ ActiveRecord::Schema.define(version: 20191111075509) do
     t.index ["line_account_id"], name: "index_event_notifications_on_line_account_id"
     t.index ["line_sending_id"], name: "index_event_notifications_on_line_sending_id"
     t.index ["new_event_id"], name: "index_event_notifications_on_new_event_id"
+    t.index ["notification_template_id"], name: "index_event_notifications_on_notification_template_id"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
