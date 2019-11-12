@@ -27,9 +27,6 @@
 		</ul>
 	<% end %>
 	<%= form_tag notification_template_path , method: "get", remote: true, class: "content_box" do %>
-		<% args.each do |name, value| %>
-		<%= hidden_field_tag "args[#{name}]", value %>
-		<% end %>
 		<div class="events_box">
 			<table>
 				<tr>
@@ -41,12 +38,17 @@
 					<th>帳號綁定</th>
 					<th>訊息發送</th>
 				</tr>
-				<% events.each_with_index do |event, index| %>
+				<% event_objs.each_with_index do |event_obj, index| %>
+				<% event = event_obj[:event] %>
+				<% args = event_obj[:args] %>
 				<tr>
 					<td>
 						<% if event.patient.has_line_account? %>
 							<% if event.event_notifications.length == 0 %>
-								<%= check_box_tag "event_ids[]", event.id, false, onchange: "updateEventsCount()", class: "sel_event" %>
+								<% args.each do |name, value| %>
+								<%= check_box_tag "events[#{index}][args][#{name}]", value, false, class: "args_input hidden" %>
+								<% end %>
+								<%= check_box_tag "events[#{index}][id]", event.id, false, onchange: "updateEventsCount(); updateArgInputs(this);", class: "sel_event" %>
 							<% else %>
 								<%= check_box_tag "", "", false, disabled: true %>
 							<% end %>
@@ -100,8 +102,14 @@
 		var checked = $("#all_check")[0].checked;
 		$("#event_notifications_box .events_box input.sel_event").each(function(i, elm){
 			elm.checked = checked;
+			updateArgInputs(elm);
 		});
 		updateEventsCount();
+	}
+	function updateArgInputs(input){
+		$(input).closest("td").find(".args_input").each(function(i, elm){
+			elm.checked = input.checked;
+		});
 	}
 	function completePushNotification(){
 		<%# callback %>

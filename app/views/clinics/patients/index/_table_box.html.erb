@@ -1,49 +1,55 @@
-<div id="table-box">
-<%= render partial: "clinics/common/clinic_table" , locals: {
-  id: "patients",
-  class: "ht80",
-  resources: @patients,
-  cols: proc do 
-    r = [
-    {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
-    {t: "性別", v: proc{|a| a.gender }},
-    {t: "身分證號碼", v: proc{|a| a.person_id }},
-    {t: "出生年月日", v: proc{|a| roc_format(a.birthday, 3) }},
-    {t: "聯絡電話", v: proc{|a| a.phone }},
-    {t: "看診醫生", v: proc{|a|
-      if a.default_doctor
-        a.default_doctor.name
-      else
-
-      end
-    }},
-    {t: "已可洗牙", v: proc{|a| 
-      if a.available_for_tooth_cleaning 
-        icon_tag(:circle, class: 'colorBu')
-      else
-        ""
-      end
-    }},
-    {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
-    ]
-    if @category == "all"
-      r += [    {t: "加入推播狀態", unclickable: true, v: proc{|a| 
-        render_relative_partial "table_box/notification", locals: {patient: a}
-      }}
-    ]
-    end
-    if @category == "notification"
+<%= form_tag clinic_event_notification_template_path(@clinic, @event_notification_template), method: "get", id: "patient_table_box", remote: true do %>
+  <%= hidden_field_tag  "args[clinic_name]", @clinic.name %>
+  <%= render partial: "clinics/common/clinic_table" , locals: {
+    id: "patients",
+    class: "ht80",
+    resources: @patients,
+    cols: proc do 
       r = [
-        {t: check_box_tag("","",false), unclickable: true, v: proc{|a| check_box_tag("patient_ids[]", a.id,false)}}
-      ] + r
-    end
-   r
- end.call,
-  row: {
-    link: proc do |a|
-      url_for(action: :show, id: a)
-    end
+        {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
+        {t: "性別", v: proc{|a| a.gender }},
+        {t: "身分證號碼", v: proc{|a| a.person_id }},
+        {t: "出生年月日", v: proc{|a| roc_format(a.birthday, 3) }},
+        {t: "聯絡電話", v: proc{|a| a.phone }},
+        {t: "看診醫生", v: proc{|a|
+          if a.default_doctor
+            a.default_doctor.name
+          else
+            ""
+          end
+        }},
+        {t: "已可洗牙", v: proc{|a| 
+          if a.available_for_tooth_cleaning 
+            icon_tag(:circle, class: 'colorBu')
+          else
+            ""
+          end
+        }},
+        {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
+      ]
+
+      if @category == "all"
+        r += [
+          {t: "加入推播狀態", unclickable: true, v: proc{|a| 
+            render_relative_partial "table_box/notification", locals: {patient: a}
+          }}
+        ]
+      end
+      if @category == "notification"
+        r = [
+          {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{|a| 
+            check_box_tag("patient_ids[]", a.id, false, class: "notification_check")}}
+        ] + r
+      end
+     r
+   end.call,
+    row: {
+      link: proc do |a|
+        url_for(action: :show, id: a)
+      end
+    }
   }
-}
-%>
-</div>
+  %>
+<% end %>
+
+

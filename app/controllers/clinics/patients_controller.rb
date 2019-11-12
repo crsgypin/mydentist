@@ -21,6 +21,9 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
     @patients = @patients.page(params[:page]).per(10)
+
+    #event_notification_template
+    @event_notification_template = @clinic.event_notification_templates.find_by(category: "回診推播")
   end
 
   def create

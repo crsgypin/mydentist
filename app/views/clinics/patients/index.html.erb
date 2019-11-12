@@ -6,3 +6,23 @@
 		<%= render_relative_partial "index/pagination" %>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$("#patients_index").on("change", ".notification_check", function(){
+			updateCount();
+		});
+		$("#patients_index").on("change", ".notification_check_all", function(){
+			var checked = this.checked;
+			$("#patients_index .notification_check").each(function(i, elm){
+				$(elm)[0].checked = checked;
+			})
+			updateCount();
+		});
+
+		function updateCount(){
+			var count = $("#patients_index .notification_check:checked").length;
+			$("#search_box .number").text(count);
+		}
+	})
+</script>
