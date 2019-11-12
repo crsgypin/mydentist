@@ -5,6 +5,8 @@ class Event < ApplicationRecord
 	belongs_to :patient, optional: true
 	belongs_to :doctor
 	belongs_to :service
+	belongs_to :ori_event, class_name: "Event", foreign_key: :ori_event_id, optional: true
+	has_one :new_event, class_name: "Event", foreign_key: :ori_event_id
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	has_many :event_notifications, class_name: "Event::Notification", dependent: :destroy
 	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "過期" => 25, "已改約" => 30, "取消" => 40, "暫停" => 45}
