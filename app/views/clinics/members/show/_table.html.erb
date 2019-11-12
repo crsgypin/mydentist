@@ -1,0 +1,21 @@
+
+<div class="clinic_form">
+<%= render partial: "clinics/patients/common/table/show_table" , locals: {
+  id: "member",
+  resource: @member,
+  fields: [
+    {v: proc{ |a| 
+		  r = "<div class='clinic_photo_box'>"
+		  r += bg_center_image @clinic.photo_url
+		  r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_info_photo_path(@clinic)}');"
+		  r += "</div>"
+		  r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
+		  r.html_safe
+		}},
+    {v: proc{|a| 
+    	text_field_tag "patient[username]", a.username, placeholder: "名稱"
+    }},
+  ]
+}
+%>
+</div>

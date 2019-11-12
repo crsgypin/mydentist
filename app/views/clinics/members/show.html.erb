@@ -1,0 +1,17 @@
+<div id="patients_show">
+  <%= render_relative_partial "show/navbar" %>
+  <div class="content_box">
+    <div class="main_box">
+      <h1>個人資料</h1>
+      <%= form_tag url_for(action: :update), method: "patch", class: "form_box", remote: true do %>
+        <%= render_relative_partial "show/table" %>    
+        <div class="buttons_box">
+          <%= link_to "取消", url_for(action: :index), class: "btnW" %>
+          <%= submit_tag "儲存", class: "btnBu" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="side_box">
+    </div>
+  </div>
+</div>

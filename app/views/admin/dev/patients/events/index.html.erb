@@ -2,8 +2,9 @@
   id: "events",
   resources: @events,
   cols: [
-    {k: "id", v: proc{|a| a.id }},
-    {k: "status", v: proc{|a| a.status }}
+    {t: "id", v: proc{|a| a.id }},
+    {t: "日期", v: proc{|a| a.date }},
+    {t: "狀態", v: proc{|a| a.status }}
   ],
   row: {
 	  default_sel_index: 0,
