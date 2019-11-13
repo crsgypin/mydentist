@@ -1,73 +1,79 @@
 
-<div id="clinic-event-new" class="lightbox">
-	<div class="inbox">
-		<div class="close_box">
-			<%= link_to icon_tag(:close), "", onclick: "event.preventDefault(); $(this).closest('.lightbox').remove();" %>
+<div id="clinic_event_new" class="lightbox">
+	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
+		<div class="header_box">
+			新增預約
 		</div>
-		<%= form_tag url_for(action: :create), method: "post", remote: true do %>
 		<%= hidden_field_tag "patient[source]", "現場" %>
 		<%= hidden_field_tag "event[source]", "現場" %>
 		<%= hidden_field_tag "event[status]", "已預約" %>
 		<%= hidden_field_tag "event[date]", @date.strftime("%Y/%m/%d") %>
-		<div class="content_box">
-			<div class="e-row">
-				<div class="field">
-					<%= text_field_tag "patient[name]", "", placeholder: "病患姓名", autofocus: true %>
-				</div>
+		<div class="content_box clinic_form">
+			<div class="patient_box">
+			<%= render partial: "clinics/patients/common/table/show_table" , locals: {
+			  id: "patient",
+			  resource: @patient,
+			  fields: [
+			    {v: proc{|a| 
+			    	text_field_tag "patient[person_id]", a.phone, placeholder: "病患姓名"
+			    }},
+			    {v: proc{|a|
+			        r = "<div class='date'>"
+			    	r += "<span>病患生日（必填）</span>"
+			    	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}) + "年</span>"
+			    	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}) + "月</span>"
+			    	r += "<span>" + select_field_tag("patient[day]", a.birthday.try(:day) || 1, (1..31).map{|d| [d,d]}) + "日</span>"
+			        r += "</div>"
+			    	r.html_safe
+			    }},
+			    {class: "both", v: proc{|a| 
+			    	r = ""
+			    	r += select_field_tag "patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}
+			    	r += text_field_tag "patient[person_id]", a.person_id, placeholder: "身分證號碼(必填)"
+			    	r.html_safe
+			    }},
+			    {class: "both", v: proc{|a| 
+			    	r = ""
+			    	r += text_field_tag "patient[person_id]", a.phone, placeholder: "身分證字號"
+			    	r += text_field_tag "patient[phone]", a.phone2, placeholder: "病患聯絡電話"
+			    	r.html_safe
+			    }},
+			    {v: proc{|a| 
+			    	text_field_tag "patient[note]", a.phone2, placeholder: "備註"
+			    }},
+			  ]
+			}
+			%>
 			</div>
-			<div class="e-row">
-				<div class="field">
-					<%= select_field_tag "event[service_id]", "", [[nil, "診療項目"]] + @clinic.services.map{|a| [a.id, a.name]} %>
-				</div>
-				<div class="field">
-					<%= text_field_tag "patient[phone]", "", placeholder: "病患電話" %>
-				</div>
-			</div>
-			<div class="e-row">
-				<div class="field">
-					<%= select_field_tag "event[doctor_id]", "", [[nil, "看診醫生"]] + @clinic.doctors.map{|a| [a.id, a.name]} %>
-				</div>
-				<div class="field">
-					<%= text_field_tag "patient[person_id]", "", placeholder: "身分證號碼" %>
-				</div>
-			</div>
-			<div class="e-row">
-				<div class="field">
-					<%= select_field_tag "patient[gender]", "", [[nil, "病患性別"], ["男", "男"], ["女", "女"]] %>
-				</div>
-				<div class="field">
-					<%= select_field_tag "", "", [[nil, "健保狀況"], ["有", "有"], ["無", "無"]] %>
-				</div>
-			</div>
-			<div class="e-row date">
-				<div class="field">
-					<% this_year = Date.today.year - 1911 %>
-					 <label>病患生日(必填)</label>
-				</div>
-				<div class="field">
-					 民國 
-					 <%= select_field_tag "patient[year]", 100, (30..this_year).map{|a| [a,a]} %> 年
-				</div>
-				<div class="field">
-					 <%= select_field_tag "patient[month]", 1, (1..12).map{|a| [a,a]} %> 月
-				</div>
-				<div class="field">
-					 <%= select_field_tag "patient[day]", 1, (1..30).map{|a| [a,a]} %> 日
-				</div>			
-			</div>
-			<div class="e-row">
-				<div class="field">
-					<%= select_field_tag "event[hour_minute]", "", [[nil, "看診時間"]].concat((9..22).map do |h|
-						d = hour_minute_format(h, 0) 
-						[d, d]
-					end) %>
-				</div>
+
+			<div class="event_box">
+				<%= render partial: "clinics/patients/common/table/show_table" , locals: {
+				  id: "event",
+				  resource: @event,
+				  fields: [
+				    {class: "both", v: proc{|a| 
+				    	r = ""
+				    	r += select_field_tag "event[insurance]", "", [[nil, "健保狀態"]] + Patient.genders.map{|a,b| [a,a]}
+				    	r += select_field_tag "event[service_id]", a.service_id, @clinic.services.map{|a| [a.id, a.name]}
+				    	r.html_safe
+				    }},
+				    {class: "both", v: proc{|a| 
+				    	r = ""
+				    	r += select_field_tag "event[doctor_id]", a.doctor_id, @clinic.doctors.map{|d| [d.id, d.name]}
+				    	r += "<div class='field_box'>"
+				    	r += "<span>看診時間(必填)</span>"
+				    	r += link_to "選擇時間", ""
+				    	r += "</div>"
+				    	r.html_safe
+				    }},
+				  ]
+				}
+				%>
 			</div>
 		</div>
 		<div class="buttons_box">
 			<%= link_to "取消", "", onclick: "event.preventDefault(); $(this).closest('.lightbox').remove();", class: "btnW" %>
 			<%= link_to "儲存", "", onclick: "event.preventDefault(); $(this).closest('form').submit();", class: "btnBu" %>
 		</div>
-		<% end %>
-	</div>
+	<% end %>
 </div>

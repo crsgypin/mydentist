@@ -3,7 +3,7 @@
   <%= form_tag url_for(action: :update), method: "patch", class: "inbox form_border clinic_form clinic_form_box", remote: true do %>
     <div class="content_box">
       <%= render partial: "clinics/common/clinic_form_table" , locals: {
-        id: "clinic_info-table",
+        id: "clinic_info_table",
         resource: @clinic,
         fields: [
           {t: "照片", v: proc{ |a| 

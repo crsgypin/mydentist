@@ -1,6 +1,19 @@
 
-#clinic-event-new {
-	.e-row {
+#clinic_event_new {
+	.inbox {
+		max-width: 800px;
+		.content_box {
+			.patient_box {
+				padding: 10px 40px;
+				border: 2px solid $colorBu;
+				border-radius: 10px;
+			}
+			.event_box {
+				padding: 10px 40px;
+			}
+		}
+	}
+	.e_row {
 		display: flex;
 		padding-bottom: 20px;
 		.field {

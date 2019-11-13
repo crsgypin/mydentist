@@ -18,6 +18,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def new
     @date = Date.parse(params[:date]) rescue  Date.today
     @event = @clinic.events.new(date: @date)
+    @patient = @clinic.patients.new
   end
 
   def create
