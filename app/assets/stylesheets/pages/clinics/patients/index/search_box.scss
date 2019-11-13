@@ -1,37 +1,42 @@
 
-#search_box {
+#patients_index #search_box {
 	padding: 20px 0;
 	form {
 		display: flex;
 		justify-content: space-between;
 		.input_box {
-			position: relative;
 			width: calc(100% - 150px);
 			input[type=text] {
 				width: 100%;
 				padding-left: 10px;
-			}
-			.search_result {
-				position: absolute;
-				width: 100%;
-				background: $colorW;
-				z-index: 10;
-				ul {
-					li {
-						padding: 10px;
-						cursor: pointer;
-						span:not(:first-child) {
-							margin-left: 10px;
-						}
-						&:hover {
-							background: $colorBu_l;
-						}
-					}
-				}
 			}
 		}
 		input[type=submit] {
 			width: 100px;
 		}		
 	}
+}
+
+#search_box {
+	.input_box {
+		position: relative;
+		.search_result {
+			position: absolute;
+			width: 100%;
+			background: $colorW;
+			z-index: 10;
+			ul {
+				li {
+					padding: 10px;
+					cursor: pointer;
+					span:not(:first-child) {
+						margin-left: 10px;
+					}
+					&:hover {
+						background: $colorBu_l;
+					}
+				}
+			}
+		}		
+	}	
 }

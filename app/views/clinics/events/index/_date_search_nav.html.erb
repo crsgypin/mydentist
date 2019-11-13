@@ -13,3 +13,25 @@
   </ul>
 </div>
 
+<script type="text/javascript">
+  $(function(){
+    $(".day_btn").on("click", function(e){
+      e.preventDefault();
+      //btn
+      $(".day_btn").removeClass("selected");
+      $(this).addClass('selected');
+      //table
+      var s = $(this).data("start");
+      var e = $(this).data("end");
+      $("#calendar_day table tr.hour_minute_tr").each(function(i, tr){
+        var h = $(tr).data('hour');
+        if(h >= s && h <= e){
+          $(tr).removeClass('hidden');
+        } else {
+          $(tr).addClass('hidden');
+        }
+      });
+    }); 
+
+  })  
+</script>

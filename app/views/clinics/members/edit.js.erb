@@ -1,0 +1,6 @@
+
+<% if params[:target] == "username" %>
+$("body").append("<%= j render_relative_partial 'edit/username_lightbox' %>");
+<% elsif params[:target] == "password" %>
+$("body").append("<%= j render_relative_partial 'edit/password_lightbox' %>");
+<% end %>

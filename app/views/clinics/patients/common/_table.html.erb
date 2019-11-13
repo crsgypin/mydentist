@@ -41,7 +41,9 @@
     	text_field_tag "patient[note]", a.note, placeholder: "備註"
     }},
     {v: proc{|a| 
-    	link_to "就診紀錄", clinic_patient_events_path(@clinic, @patient), class: "btnW", remote:true
+        if @patient.persisted?
+        	link_to "就診紀錄", clinic_patient_events_path(@clinic, @patient), class: "btnW", remote:true
+        end
     }},
   ]
 }

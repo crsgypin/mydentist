@@ -1,0 +1,23 @@
+
+<div id="member_username_edit" class="lightbox">
+	<%= form_tag url_for(action: :update), method: "patch", class: "inbox", remote: true do %>
+		<%= hidden_field_tag "target", "username" %>
+		<div class="header_box">
+			編輯使用者名稱
+		</div>
+		<div class="content_box clinic_form">
+			<div class="field_box pb10">
+				<label>原名稱</label>
+				<%= text_field_tag "", @member.username, disabled: true %>
+			</div>
+			<div class="field_box pb10">
+				<label>新名稱</label>
+				<%= text_field_tag "member[username]", @member.username %>
+			</div>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "返回", "javascript: $('#member_username_edit').remove();", class: "btnW" %>
+			<%= submit_tag "確定", class: "btnBu" %>
+		</div>
+	<% end %>
+</div>

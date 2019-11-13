@@ -1,75 +1,12 @@
 
 <% row_height = 40 %>
-<div id="calendar-day">
-  <div class="header">
-  </div>
-  <div class="table_box">
-    <div class="d-col">
-      <div class="d-row" style="height: <%= row_height %>px;">
-      </div>
-      <% @clinic.wday_segment_hours(@date.wday, @segment).each do |hour| %>
-      <% [0, 15, 30, 45].each do |minute| %>
-      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="height: <%= row_height %>px;">
-        <% if minute%30 == 0 %>
-        <%= hour_minute_format(hour, minute) %>
-        <% end %>      
-      </div>
-      <% end %>
-      <% end %>
-    </div>
-    <% @doctors.each do |doctor| %>
-    <% next if @doctor.present? &&  @doctor.to_i != doctor.id %>
-    <div class="d-col">
-      <div class="d-row" style="height: <%= row_height %>px;">
-        <%= doctor.name %>
-      </div>
-      <% @clinic.wday_segment_hours(@date.wday, @segment).each do |hour| %>
-      <% [0, 15, 30, 45].each do |minute| %>
-      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-      <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.hour == hour && a.minute == minute} %>
-      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
-        <% if event.present? %>
-        <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
-        <div class="patient_event <%= source_class %>" style="height: <%= event.event_durations_count * row_height %>px">
-          <div class="patient"><%= event.patient.name %></div>
-          <div class="service"><%= event.service.name %></div>
-          <div class="status">
-            <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
-            <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
-          </div>
-        </div>
-        <% else %>
-        <div class="patient_event" style="height: <%= row_height %>px;" onclick="alert(3);">
-
-        </div>
-        <% end %>
-      </div>
-      <% end %>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
-</div>
-<script type="text/javascript">
-  $(function(){
-    $(".day_btn").on("click", function(e){
-      e.preventDefault();
-      //btn
-      $(".day_btn").removeClass("selected");
-      $(this).addClass('selected');
-      //table
-      var s = $(this).data("start");
-      var e = $(this).data("end");
-      $("#calendar-day table tr.hour_minute_tr").each(function(i, tr){
-        var h = $(tr).data('hour');
-        if(h >= s && h <= e){
-          $(tr).removeClass('hidden');
-        } else {
-          $(tr).addClass('hidden');
-        }
-      });
-    });
-  })
-</script>
+<% if !@doctor.present? %>
+<%= render_relative_partial "calendar_day/doctors", locals: {
+  row_height: row_height
+} %>
+<% else %>
+<%= render_relative_partial "calendar_day/wdays", locals: {
+  row_height: row_height
+} %>
+<% end %>
 

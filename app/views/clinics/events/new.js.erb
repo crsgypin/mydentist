@@ -1,3 +1,19 @@
 
-$("body").append("<%= j render_relative_partial 'new/lightbox' %>");
+$("#clinic_event_form").remove();
+$("body").append("<%= j render_relative_partial 'common/event_lightbox' %>");
 
+$("#search_box input").on("keydown", function(){
+	var key = $(this).val();
+	if(key.length){
+		var path = "<%= clinic_patients_path(@clinic) %>";
+		path = path + "?key=" + key;
+		$.getScript(path);
+	} else {
+		$("#search_box .search_result").html('');
+	}
+});
+
+$("#search_box").on("click", ".search_result ul li", function(){
+	var id = $(this).data("id");
+	$.getScript("<%= new_clinic_event_path(@clinic) %>?patient_id=" + id);
+});

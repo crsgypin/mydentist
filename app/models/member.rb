@@ -8,6 +8,7 @@ class Member < ApplicationRecord
   enum level: {"訪客" => 0,"操作人員" => 100,"管理者" => 200,"後台管理者" => 500} 
   #validates_inclusion_of :level, in: [0, 100, 200, 500]
   has_one :doctor
+  before_destroy :check_level_for_destroy
 
   def level_number
     self.class.levels[self.level]
@@ -21,6 +22,14 @@ class Member < ApplicationRecord
   def email_changed?
     #for devised, noted at 2019/9/16
     false
+  end
+
+  private
+
+  def check_level_for_destroy
+    if self.level_number > 100
+      raise "無權限刪除"
+    end
   end
 
 

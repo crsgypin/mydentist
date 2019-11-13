@@ -1,0 +1,39 @@
+
+#clinic_event_form {
+	.inbox {
+		max-width: 800px;
+		.content_box {
+			.patient_box {
+				padding: 10px 40px;
+				border: 2px solid $colorBu;
+				border-radius: 10px;
+				&.disabled {
+					background: $colorGy_l;
+				}
+			}
+			.event_box {
+				padding: 10px 40px;
+			}
+			#search_box {
+				width: 100%;
+			}
+		}
+	}
+	.e_row {
+		display: flex;
+		padding-bottom: 20px;
+		.field {
+			width: 100%;
+			margin-right: 10px;
+			input, select {
+				width: 100%;
+			}
+		}
+		&.date {
+			select {
+				width: auto;
+			}
+		}
+	}
+}
+

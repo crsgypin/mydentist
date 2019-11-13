@@ -1,43 +1,45 @@
 
 #patients_show .content_box .form_box {
-	#patient_show_table {
-		ul {
-			li {
+	.buttons_box {
+		text-align: right;
+	}
+}
+
+#patient_show_table {
+	ul {
+		li {
+			display: flex;
+			margin-bottom: 20px;
+			input, select {
+				color: $colorGy;
+				font-size: $fs_18p;
+				line-height: $lh_24p;
+				height: 30px;
+			}
+			input {
+				padding-left: 10px;
+			}
+			&.both {
+				input, select, .field_box {
+					&:nth-child(1) {
+						margin-right: 10px;
+					}
+					&:nth-child(2) {
+						margin-left: 10px;
+					}
+					width: 50%;
+				}
+			}
+			.date {
+				width: 100%;
+				font-size: $fs_18p;
+				padding-left: 10px;
 				display: flex;
-				margin-bottom: 20px;
-				input, select {
-					color: $colorGy;
-					font-size: $fs_18p;
-					line-height: $lh_24p;
-					height: 30px;
-				}
-				input {
-					padding-left: 10px;
-				}
-				&.both {
-					input, select {
-						&:nth-child(1) {
-							margin-right: 10px;
-						}
-						&:nth-child(2) {
-							margin-left: 10px;
-						}
-					}
-				}
-				.date {
-					width: 100%;
-					font-size: $fs_18p;
-					padding-left: 10px;
-					display: flex;
-					justify-content: space-between;
-					select {
-						width: 90px;
-					}
+				justify-content: space-between;
+				select {
+					width: 90px;
 				}
 			}
 		}
-	}
-	.buttons_box {
-		text-align: right;
 	}
 }

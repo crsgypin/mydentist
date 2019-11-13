@@ -18,6 +18,17 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def new
     @date = Date.parse(params[:date]) rescue  Date.today
     @event = @clinic.events.new(date: @date)
+
+    if params[:patient_id].present?
+      @patient = @clinic.patients.find(params[:patient_id])
+    else
+      @patient = @clinic.patients.new
+    end
+  end
+
+  def edit
+    @event = @clinic.events.find(params[:id])
+    @patient = @event.patient
   end
 
   def create
