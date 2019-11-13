@@ -2,7 +2,7 @@
 <div class="search_result">
 	<ul>
 	<% @patients.each do |patient| %>
-		<li data-name="<%= patient.name %>">
+		<li data-name="<%= patient.name %>" data-id="<%= patient.id %>">
 			<span><%= patient.name %></span>
 			<span><%= patient.person_id %></span>
 			<span><%= roc_format(patient.birthday, 3) %></span>

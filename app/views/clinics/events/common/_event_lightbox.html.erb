@@ -1,5 +1,6 @@
+<% disabled = @patient.persisted? %>
 
-<div id="clinic_event_new" class="lightbox">
+<div id="clinic_event_form" class="lightbox">
 	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
 		<div class="header_box">
 			新增預約
@@ -7,39 +8,45 @@
 		<%= hidden_field_tag "patient[source]", "現場" %>
 		<%= hidden_field_tag "event[source]", "現場" %>
 		<%= hidden_field_tag "event[status]", "已預約" %>
-		<%= hidden_field_tag "event[date]", @date.strftime("%Y/%m/%d") %>
+		<%= hidden_field_tag "event[date]", @event.date.strftime("%Y/%m/%d") %>
 		<div class="content_box clinic_form">
-			<div class="patient_box">
+			<div class="patient_box <%= 'disabled' if disabled %>">
 			<%= render partial: "clinics/patients/common/table/show_table" , locals: {
 			  id: "patient",
 			  resource: @patient,
 			  fields: [
 			    {v: proc{|a| 
-			    	text_field_tag "patient[person_id]", a.phone, placeholder: "病患姓名"
+			    	r = "<div id='search_box'>"
+			    	r += "  <div class='input_box'>"
+				    r +=     text_field_tag "patient[name]", a.name, placeholder: "病患姓名", disabled: disabled, autocomplete: "off"
+				    r += "  <div class='search_result'></div>"
+				    r += "  </div>"
+				    r += "<div>"
+				    r.html_safe
 			    }},
 			    {v: proc{|a|
 			        r = "<div class='date'>"
 			    	r += "<span>病患生日（必填）</span>"
-			    	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}) + "年</span>"
-			    	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}) + "月</span>"
-			    	r += "<span>" + select_field_tag("patient[day]", a.birthday.try(:day) || 1, (1..31).map{|d| [d,d]}) + "日</span>"
+			    	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}, disabled: disabled) + "年</span>"
+			    	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}, disabled: disabled) + "月</span>"
+			    	r += "<span>" + select_field_tag("patient[day]", a.birthday.try(:day) || 1, (1..31).map{|d| [d,d]}, disabled: disabled) + "日</span>"
 			        r += "</div>"
 			    	r.html_safe
 			    }},
 			    {class: "both", v: proc{|a| 
 			    	r = ""
-			    	r += select_field_tag "patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}
-			    	r += text_field_tag "patient[person_id]", a.person_id, placeholder: "身分證號碼(必填)"
+			    	r += select_field_tag "patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}, disabled: disabled
+			    	r += text_field_tag "patient[person_id]", a.person_id, placeholder: "身分證號碼(必填)", disabled: disabled
 			    	r.html_safe
 			    }},
 			    {class: "both", v: proc{|a| 
 			    	r = ""
-			    	r += text_field_tag "patient[person_id]", a.phone, placeholder: "身分證字號"
-			    	r += text_field_tag "patient[phone]", a.phone2, placeholder: "病患聯絡電話"
+			    	r += text_field_tag "patient[person_id]", a.phone, placeholder: "身分證字號", disabled: disabled
+			    	r += text_field_tag "patient[phone]", a.phone2, placeholder: "病患聯絡電話", disabled: disabled
 			    	r.html_safe
 			    }},
 			    {v: proc{|a| 
-			    	text_field_tag "patient[note]", a.phone2, placeholder: "備註"
+			    	text_field_tag "patient[note]", a.phone2, placeholder: "備註", disabled: disabled
 			    }},
 			  ]
 			}

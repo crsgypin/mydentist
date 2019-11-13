@@ -1,5 +1,5 @@
 
-#clinic_event_new {
+#clinic_event_form {
 	.inbox {
 		max-width: 800px;
 		.content_box {
@@ -7,9 +7,15 @@
 				padding: 10px 40px;
 				border: 2px solid $colorBu;
 				border-radius: 10px;
+				&.disabled {
+					background: $colorGy_l;
+				}
 			}
 			.event_box {
 				padding: 10px 40px;
+			}
+			#search_box {
+				width: 100%;
 			}
 		}
 	}
