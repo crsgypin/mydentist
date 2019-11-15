@@ -141,6 +141,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def set_event_durations
 		@select_event_durations = @doctor.current_event_durations(@date, @service.duration_number)
+		# @day_hour_events = @doctor.day_hour_events(@date)
 	end
 
 	def event_params

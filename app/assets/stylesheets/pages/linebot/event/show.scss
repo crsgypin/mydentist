@@ -2,7 +2,7 @@
 #linebot_event_show {
 	padding: 20px;
 	margin-bottom: 100px;
-	#form-box {
+	#form_box {
 		.doctors_box {
 			padding-bottom: 5px;
 			display: flex;
@@ -80,7 +80,7 @@
 			}
 		}
 	}
-	.time-box {
+	.time_box {
 		padding: 10px 0px;
 		.segment_box {
 			color: $colorBu;
@@ -90,7 +90,7 @@
 				padding: 10px 0;
 				text-align: center;
 			}
-			ul.hours-box {
+			ul.hours_box {
 				display: flex;
 				justify-content: space-between;
 				padding: 5px 0;

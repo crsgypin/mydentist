@@ -1,4 +1,4 @@
-<div id="form-box">
+<div id="form_box">
 	<% if params[:event_notification_id] %>
 	<%# for event_notification %>
 	<%= hidden_field_tag "event_notification_id", params[:event_notification_id] %>
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 
-	<div class="time-box">
+	<div class="time_box">
 		<% i = 0 %>
 		<% @select_event_durations.each do |segment| %>
 		<div class="segment_box">
@@ -59,10 +59,10 @@
 			<% segment[:hour_segments].each do |hour_segment| %>
 			<% next if !hour_segment[:has_duration] %>
 			<% hour = hour_segment[:hour] %>
-			<ul class="hours-box">
+			<ul class="hours_box">
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
-				<li class="minutes-box" data-click_duration_count="<%= @service.duration_number / Clinic.default_duration %>">
+				<li class="minutes_box" data-click_duration_count="<%= @service.duration_number / Clinic.default_duration %>">
 					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration), false, disabled: !minute_segment[:enabled]  %>
 					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
 					<% i += 1 %>
