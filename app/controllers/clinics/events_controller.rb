@@ -1,21 +1,35 @@
 class ::Clinics::EventsController < ::Clinics::ApplicationController
+  include Common::DateTimeDurationHelper
 
   def index
-    @doctor = params[:doctor]
+    @doctor_id = params[:doctor_id]
     @date = Date.parse(params[:date]) rescue  Date.today
   
     @segment = params[:segment] || "整日"
     @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
 
-    @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)    
-    @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
-    @doctor_objs = @doctors.map do |doctor|
-      r = {
-        doctor: doctor,
-        day_hour_events: doctor.day_hour_events(@date, @clinic_wday_hours)
-      }
+    if !@doctor.present?
+      @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)    
+      @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
+      @doctor_objs = @doctors.map do |doctor|
+        r = {
+          doctor: doctor,
+          day_hour_events: doctor.day_hour_events(@date, @clinic_wday_hours)
+        }
+      end
+    else
+      @doctor = @clinic.doctors.find(@doctor_id)
+      @clinic_wday_hours = @clinic.max_min_hours
+      sunday = @date - @date.wday.day
+      @doctor_week_hour_events = (0..6).map do |wday|
+        date = (sunday + wday.day)
+        r = {
+          date: date,
+          ch_wday: ch_wday(wday),
+          day_hour_events:  @doctor.day_hour_events(date, @clinic_wday_hours)
+        }
+      end
     end
-
     respond_to do |format|
       format.html
       format.js

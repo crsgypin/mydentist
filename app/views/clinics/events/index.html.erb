@@ -14,7 +14,7 @@
 <script type="text/javascript">
 	$(function(){
 		window.reloadFrame = function(){
-			var doctorId = $("#doctor-input").val();
+			var doctorId = $("#doctor_input").val();
 			var date = $("#date-input").val();
 			var segment = $("#segment_input").val();
 			$.ajax({
@@ -22,7 +22,7 @@
 				method: "get",
 				dataType: "script",
 				data: {
-					doctor: doctorId,
+					doctor_id: doctorId,
 					date: date,
 					segment: segment						
 				}

@@ -39,7 +39,7 @@ class Clinic < ApplicationRecord
 	end
 
 	def max_min_hours
-		segment_hours("整日")
+		(8..22)
 	end
 
 	def wday_hours(wday, segment = nil)

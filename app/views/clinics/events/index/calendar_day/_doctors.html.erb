@@ -3,44 +3,18 @@
   <div class="header">
   </div>
   <div class="table_box">
-    <%= render_relative_partial "common/title_col", locals: {row_height: row_height} %>
+    <%= render_relative_partial "common/title_col", locals: {
+      row_height: row_height
+    } %>
     <% @doctor_objs.each do |doctor_obj| %>
-    <div class="d-col">
-      <div class="d-row" style="height: <%= row_height %>px;">
+    <div class="d_col">
+      <div class="d_row" style="height: <%= row_height %>px;">
         <%= doctor_obj[:doctor].name %>
       </div>
-      <% doctor_obj[:day_hour_events].each do |hour_segment| %>
-      <% hour = hour_segment[:hour] %>
-      <% hour_segment[:minute_segments].each do |minute_segment| %>
-        <% minute = minute_segment[:minute] %>
-        <% event = minute_segment[:event] %>
-        <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-        <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
-          <% if event.present? %>
-            <% if event.hour == hour && event.minute == minute %>
-            <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
-            <div class="patient_event <%= source_class %>" 
-              style="height: <%= event.event_durations_count * row_height %>px" 
-              data-url="<%= url_for(action: :edit, id: event) %>" 
-              onclick="$.getScript($(this).data('url'));">
-              <div class="patient"><%= event.patient.name %></div>
-              <div class="service"><%= event.service.name %></div>
-              <div class="status">
-                <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
-                <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
-              </div>
-            </div>
-            <% else %>
-            <%# 第一個的 event_duration 則不顯示 %>
-            <% end %>
-          <% else %>
-          <div class="patient_event" style="height: <%= row_height %>px;" onclick="alert(3);">
-
-          </div>
-          <% end %>
-        </div>
-        <% end %>
-      <% end %>
+      <%= render_relative_partial "common/events_col", locals: {
+        hour_segments: doctor_obj[:day_hour_events],
+        row_height: row_height
+      } %>
     </div>
     <% end %>
   </div>

@@ -36,7 +36,6 @@ class Doctor < ApplicationRecord
 
 	def day_hour_events(date, hours = nil)
 		events = day_events(date)
-
 		if hours.nil?
 			hours = segment_hours("整日")
 		end
