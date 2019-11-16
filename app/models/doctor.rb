@@ -60,7 +60,8 @@ class Doctor < ApplicationRecord
 		end
 	end
 
-	def current_event_durations(date, service_duration)
+	def current_event_durations1(date, service_duration)
+		#will be depreciated
 		doctor_event_durations = self.event_durations.where("events.date = ?", date)
 		doctor_duration_hours = self.doctor_durations.where(wday: date.wday).map do |doctor_duration|
 			doctor_duration.hour

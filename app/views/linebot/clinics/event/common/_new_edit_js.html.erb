@@ -39,9 +39,10 @@
 				return
 			}
 			input.checked = true;
+
+			<%# make links in selected mode %>
 			var clickDurationCount = $(_this).closest('.minutes_box').data("click_duration_count");
 			container.find(".time_box ul li a").removeClass("selected");
-
 			var index = $(_this).data("index");
 			for(let i = 0; i < clickDurationCount; i++){
 				var a = container.find("[data-index='" + (index + i) + "']");
