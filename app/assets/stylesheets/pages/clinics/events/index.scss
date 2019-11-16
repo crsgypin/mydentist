@@ -1,14 +1,16 @@
 
 #events_index {
-	display: flex;
-	.main-box {
-		width: calc(100% - 360px);
-		padding: 25px;
-	}
-	.side-box {
-		width: 360px;
-		padding-left: 20px;
-		padding-right: 20px;
-		background: $colorGy_l;
+	form {
+		display: flex;
+		.main_box {
+			width: calc(100% - 360px);
+			padding: 25px;
+		}
+		.side_box {
+			width: 360px;
+			padding-left: 20px;
+			padding-right: 20px;
+			background: $colorGy_l;
+		}
 	}
 }
