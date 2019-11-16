@@ -52,7 +52,8 @@
       format(date) {
         return date.toLocaleDateString('zh-Hans-CN');
       },
-      mode: 'dp-permanent'
+      mode: 'dp-permanent',
+      hilightedDate: new Date("<%= @date.strftime('%Y/%m/%d') %>")
     });
     t.open();
     t.on('select', function(_, dp){
