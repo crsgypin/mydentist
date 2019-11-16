@@ -12,7 +12,7 @@
         <%= doctor_obj[:doctor].name %>
       </div>
       <%= render_relative_partial "common/events_col", locals: {
-        hour_segments: doctor_obj[:day_hour_events],
+        hour_segments: doctor_obj[:hour_segments],
         row_height: row_height
       } %>
     </div>

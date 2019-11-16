@@ -22,7 +22,7 @@
 					<tr>
 						<td>
 							<%= hour %>
-						</td>			
+						</td>
 						<% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
 						<td>
 							<% day_hour_event = doctor_week_hour_event[:day_hour_events].find{|e| e[:hour] == hour} %>
