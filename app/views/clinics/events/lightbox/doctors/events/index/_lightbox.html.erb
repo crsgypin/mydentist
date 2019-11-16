@@ -1,0 +1,40 @@
+
+<div id="events_lightbox_doctor_events" class="lightbox">
+	<div class="inbox">
+		<div class="header_box">
+			看診時間系統
+		</div>
+		<div class="content_box">
+			<table>
+				<tr>
+					<th>
+					</th>
+					<% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
+					<th>
+						<p><%= doctor_week_hour_event[:date].strftime('%d') %></p>
+						<p><%= doctor_week_hour_event[:ch_wday] %></p>
+					</th>
+					<% end %>
+				</tr>
+				<% @clinic_wday_hours.each do |hour| %>
+					<% (60 / Clinic.default_duration).times do |time| %>
+					<% minute = Clinic.default_duration * time %>
+					<tr>
+						<td>
+							<%= hour %>
+						</td>			
+						<% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
+						<td>
+							<% day_hour_event = doctor_week_hour_event[:day_hour_events].find{|e| e[:hour] == hour} %>
+							<% day_minute = day_hour_event[:minute_segments].find{|m| m.}
+						</td>
+						<% end %>
+					</tr>
+					<% end %>
+				<% end %>
+		</div>
+		<div class="buttons_box">
+		</div>
+	</div>
+</div>
+

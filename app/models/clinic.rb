@@ -38,6 +38,10 @@ class Clinic < ApplicationRecord
 		end
 	end
 
+	def max_min_hours
+		segment_hours("整日")
+	end
+
 	def wday_hours(wday, segment = nil)
 		clinic_durations = self.clinic_durations.where(wday: wday).uniq
 		hours = clinic_durations.map{|d| d.hour}.uniq
