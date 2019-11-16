@@ -32,22 +32,22 @@
 			reloadForm();
 		});
 
-		container.on("click", ".time_box ul.hours_box li a", function(e){
-			e.preventDefault();
-			var input = $(this).siblings("input")[0];
+		window.onClickEventDuration = function(elm){
+			var _this = elm;
+			var input = $(_this).siblings("input")[0];
 			if(input.disabled){
 				return
 			}
 			input.checked = true;
-			var clickDurationCount = $(this).closest('.minutes_box').data("click_duration_count");
+			var clickDurationCount = $(_this).closest('.minutes_box').data("click_duration_count");
 			container.find(".time_box ul li a").removeClass("selected");
 
-			var index = $(this).data("index");
+			var index = $(_this).data("index");
 			for(let i = 0; i < clickDurationCount; i++){
 				var a = container.find("[data-index='" + (index + i) + "']");
 				a.addClass("selected");
 			}
-		});
+		}
 
 		function reloadForm(args){
 			var args = args || {};

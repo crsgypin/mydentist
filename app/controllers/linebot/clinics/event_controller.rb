@@ -141,7 +141,17 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 	def set_event_durations
 		@select_event_durations = @doctor.current_event_durations(@date, @service.duration_number)
-		# @day_hour_events = @doctor.day_hour_events(@date)
+
+		@doctor_day_events_by_hours = @doctor.day_events_by_hours(@date, @clinic.wday_hours(@date.wday))
+		@segment_doctor_day_events_by_hours = ["早上", "下午", "晚上"].map do |segment|
+			hours = segment_hours(segment)
+			r = {
+				name: segment,
+				hour_segments: @doctor_day_events_by_hours.select do |d|
+					hours.include?(d[:hour])
+				end
+			}
+		end
 	end
 
 	def event_params

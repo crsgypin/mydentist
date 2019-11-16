@@ -51,19 +51,20 @@
 
 	<div class="time_box">
 		<% i = 0 %>
-		<% @segment_doctor_day_events_by_hours.each do |segment| %>
+		<% @select_event_durations.each do |segment| %>
 		<div class="segment_box">
 			<div class="title">
 				<%= segment[:name] %>
 			</div>
 			<% segment[:hour_segments].each do |hour_segment| %>
+			<% next if !hour_segment[:has_duration] %>
 			<% hour = hour_segment[:hour] %>
 			<ul class="hours_box">
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
 				<li class="minutes_box" data-click_duration_count="<%= @service.duration_number / Clinic.default_duration %>">
-					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration_number), false, disabled: minute_segment[:event].present?  %>
-					<%= link_to hour_minute_format(hour, minute), "javascript:;", class: "", data: {index: i}, onclick: "window.onClickEventDuration(this);" %>
+					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration), false, disabled: !minute_segment[:enabled]  %>
+					<%= link_to hour_minute_format(hour, minute), "", class: "", data: {index: i} %>
 					<% i += 1 %>
 				</li>
 				<% end %>

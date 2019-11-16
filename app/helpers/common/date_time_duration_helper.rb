@@ -2,10 +2,10 @@ module Common::DateTimeDurationHelper
 
 	def segments
 		[
-      {name: "整日", hours: (6..22)},
-      {name: "早上", hours: (6..11)},
-      {name: "下午", hours: (12..17)},
-      {name: "晚上", hours: (18..22)}
+      {name: "整日", hours: (6..22).map{|h| h}},
+      {name: "早上", hours: (6..11).map{|h| h}},
+      {name: "下午", hours: (12..17).map{|h| h}},
+      {name: "晚上", hours: (18..22).map{|h| h}}
     ]
 	end
 

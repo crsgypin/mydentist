@@ -38,7 +38,20 @@ class Clinic < ApplicationRecord
 		end
 	end
 
+	def wday_hours(wday, segment = nil)
+		clinic_durations = self.clinic_durations.where(wday: wday).uniq
+		hours = clinic_durations.map{|d| d.hour}.uniq
+		if segment.present?
+			sh = segment_hours(segment)
+			hours = hours.select do |hour|
+				sh.include?(hour)
+			end
+		end
+		hours
+	end
+
 	def wday_segment_hours(wday, segment)
+		#will be depreciated
 		default_segment_hours = segment_hours(segment)
 		clinic_durations = self.clinic_durations.where(wday: wday).uniq
 		hours = clinic_durations.map{|d| d.hour}.uniq.select do |hour|
