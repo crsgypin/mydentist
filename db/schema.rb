@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 20191112071000) do
     t.integer "ori_event_id"
     t.integer "status", limit: 1
     t.integer "source", limit: 1, default: 1
+    t.integer "health_insurance_status", limit: 1
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1

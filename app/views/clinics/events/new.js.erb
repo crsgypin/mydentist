@@ -1,6 +1,6 @@
 
 $("#clinic_event_form").remove();
-$("body").append("<%= j render_relative_partial 'common/event_lightbox' %>");
+$("body").append("<%= j render_relative_partial 'common/event_lightbox', locals: {title: '新增預約'} %>");
 
 $("#search_box input").on("keydown", function(){
 	var key = $(this).val();

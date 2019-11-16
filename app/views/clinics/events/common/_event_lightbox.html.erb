@@ -3,7 +3,7 @@
 <div id="clinic_event_form" class="lightbox">
 	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
 		<div class="header_box">
-			新增預約
+			<%= title %>
 		</div>
 		<%= hidden_field_tag "patient[source]", "現場" %>
 		<%= hidden_field_tag "event[source]", "現場" %>
@@ -36,7 +36,7 @@
 			    {class: "both", v: proc{|a| 
 			    	r = ""
 			    	r += select_field_tag "patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}, disabled: disabled
-			    	r += text_field_tag "patient[person_id]", a.person_id, placeholder: "身分證號碼(必填)", disabled: disabled
+			    	r += select_field_tag "patient[health_insurance_status]", a.health_insurance_status, [[nil, "病患健保狀況"]] + Patient.health_insurance_statuses.keys, disabled: disabled
 			    	r.html_safe
 			    }},
 			    {class: "both", v: proc{|a| 

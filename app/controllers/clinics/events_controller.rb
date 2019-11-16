@@ -6,12 +6,13 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   
     @segment = params[:segment] || "整日"
     @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
-    
+
+    @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)    
     @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
     @doctor_objs = @doctors.map do |doctor|
       r = {
         doctor: doctor,
-        day_hour_events: doctor.day_hour_events(@date, @clinic.wday_hours(@date.wday))
+        day_hour_events: doctor.day_hour_events(@date, @clinic_wday_hours)
       }
     end
 

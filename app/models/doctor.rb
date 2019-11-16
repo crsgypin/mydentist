@@ -31,7 +31,7 @@ class Doctor < ApplicationRecord
 	end
 
 	def day_events(date)
-		events = self.events.where(date: date).includes(:event_durations)
+		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
 	end
 
 	def day_hour_events(date, hours = nil)
