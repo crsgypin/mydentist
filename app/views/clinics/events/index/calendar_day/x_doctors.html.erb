@@ -1,0 +1,41 @@
+
+
+<div id="calendar_day">
+  <div class="header">
+  </div>
+  <div class="table_box">
+    <%= render_relative_partial "common/title_col", locals: {row_height: row_height} %>
+    <% @doctors.each do |doctor| %>
+    <% next if @doctor.present? &&  @doctor.to_i != doctor.id %>
+    <div class="d-col">
+      <div class="d-row" style="height: <%= row_height %>px;">
+        <%= doctor.name %>
+      </div>
+      <% @clinic.wday_segment_hours(@date.wday, @segment).each do |hour| %>
+      <% [0, 15, 30, 45].each do |minute| %>
+      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
+      <% event = @events.find{|a| a.doctor == doctor && a.date == @date && a.hour == hour && a.minute == minute} %>
+      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
+        <% if event.present? %>
+        <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
+        <div class="patient_event <%= source_class %>" style="height: <%= event.event_durations_count * row_height %>px" data-url="<%= url_for(action: :edit, id: event) %>" onclick="$.getScript($(this).data('url'));">
+          <div class="patient"><%= event.patient.name %></div>
+          <div class="service"><%= event.service.name %></div>
+          <div class="status">
+            <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
+            <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
+          </div>
+        </div>
+        <% else %>
+        <div class="patient_event" style="height: <%= row_height %>px;" onclick="alert(3);">
+
+        </div>
+        <% end %>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+

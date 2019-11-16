@@ -8,6 +8,12 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
     
     @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
+    @doctor_objs = @doctors.map do |doctor|
+      r = {
+        doctor: doctor,
+        day_hour_events: doctor.day_hour_events(@date, @clinic.wday_hours(@date.wday))
+      }
+    end
 
     respond_to do |format|
       format.html
