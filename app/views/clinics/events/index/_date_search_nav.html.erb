@@ -1,37 +1,14 @@
 
-<div id="date-search-nav">
+<div id="date_search_nav">
   <%= hidden_field_tag "segment", @segment, id: "segment_input" %>
-  <ul class="date-select">
-    <% segments.each do |segment| %>
+  <ul class="date_select">
+    <% @range_segments.each do |segment| %>
     <li>
-      <%= link_to segment[:name], "", 
-        class: "day_btn #{"selected" if segment[:name] == @segment}", 
-        data: {start: segment[:hours].first, end: segment[:hours].last}, 
-        onclick: "event.preventDefault(); $('#segment_input').val('#{segment[:name]}'); window.reloadFrame();" %>
+      <%= link_to segment, "", 
+        class: "day_btn #{"selected" if segment == @segment}", 
+        onclick: "event.preventDefault(); $('#segment_input').val('#{segment}'); window.reloadFrame();" %>
     </li>
     <% end %>
   </ul>
 </div>
 
-<script type="text/javascript">
-  $(function(){
-    $(".day_btn").on("click", function(e){
-      e.preventDefault();
-      //btn
-      $(".day_btn").removeClass("selected");
-      $(this).addClass('selected');
-      //table
-      var s = $(this).data("start");
-      var e = $(this).data("end");
-      $("#calendar_day table tr.hour_minute_tr").each(function(i, tr){
-        var h = $(tr).data('hour');
-        if(h >= s && h <= e){
-          $(tr).removeClass('hidden');
-        } else {
-          $(tr).addClass('hidden');
-        }
-      });
-    }); 
-
-  })  
-</script>

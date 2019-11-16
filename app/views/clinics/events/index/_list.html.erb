@@ -10,12 +10,12 @@
 		<span><%= icon_tag(:close, class: "colorR") %>爽約</span>
 	</div>
 	<div class="table_box">
-		<div class="e-row title-row">
-			<div class="e-col">狀態</div>
-			<div class="e-col">病患</div>
-			<div class="e-col">項目</div>
-			<div class="e-col">醫生</div>
-			<div class="e-col">預約時間</div>
+		<div class="e_row title_row">
+			<div class="e_col">狀態</div>
+			<div class="e_col">病患</div>
+			<div class="e_col">項目</div>
+			<div class="e_col">醫生</div>
+			<div class="e_col">預約時間</div>
 		</div>
 		<% segment_events = [
 				{name: "上午診", segment_key: "早上", hours: segment_hours("早上")},
@@ -43,15 +43,15 @@
 			</div>
 			<div class="content">
 				<% segment[:events].each do |event| %>
-				<div class="e-row">
-					<div class="e-col">
+				<div class="e_row">
+					<div class="e_col">
 						<%= link_to icon_tag(:check_circle), clinic_event_path(@clinic, event, event: {status: "報到"}), remote: true, method: "patch", class: "check_in #{"selected" if event.status == "報到"}", id: "check_id_#{event.id}" %>
 						<%= link_to icon_tag(:close_circle), clinic_event_path(@clinic, event, event: {status: "爽約"}), remote: true, method: "patch", class: "break #{"selected" if event.status == "爽約"}", id: "break_#{event.id}" %>
 					</div>
-					<div class="e-col"><%= event.patient.name %></div>
-					<div class="e-col"><%= event.service.name %></div>
-					<div class="e-col"><%= event.doctor.name %></div>
-					<div class="e-col"><%= hour_minute_format(event.hour, event.minute) %></div>
+					<div class="e_col"><%= event.patient.name %></div>
+					<div class="e_col"><%= event.service.name %></div>
+					<div class="e_col"><%= event.doctor.name %></div>
+					<div class="e_col"><%= hour_minute_format(event.hour, event.minute) %></div>
 				</div>
 				<% end %>
 			</div>

@@ -5,11 +5,14 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @doctor_id = params[:doctor_id]
     @date = Date.parse(params[:date]) rescue  Date.today
   
-    @segment = params[:segment] || "整日"
     @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
 
     if !@doctor_id.present?
-      @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)    
+      @range_segments = segments.map{|s| s[:name]}
+      @segment = params[:segment]
+      @segment = "整日" if !@range_segments.include?(@segment) 
+
+      @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)
       @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
       @doctor_objs = @doctors.map do |doctor|
         r = {
@@ -18,6 +21,10 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
         }
       end
     else
+      @range_segments = ["整週", "整日"]
+      @segment = params[:segment]
+      @segment = "整週" if !@range_segments.include?(@segment) 
+
       @doctor = @clinic.doctors.find(@doctor_id)
       @clinic_wday_hours = @clinic.max_min_hours
       sunday = @date - @date.wday.day
