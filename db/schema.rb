@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191112071000) do
+ActiveRecord::Schema.define(version: 20191116144300) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20191112071000) do
     t.integer "doctor_id"
     t.integer "service_id"
     t.integer "duration", default: 15
+    t.integer "has_line_booking", limit: 1, default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_doctor_services_on_doctor_id"
@@ -241,6 +242,7 @@ ActiveRecord::Schema.define(version: 20191112071000) do
     t.integer "ori_event_id"
     t.integer "status", limit: 1
     t.integer "source", limit: 1, default: 1
+    t.integer "health_insurance_status", limit: 1
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1

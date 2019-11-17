@@ -4,19 +4,20 @@
   </div>
   <div class="table_box">
     <%= render partial: "clinics/events/common/title_col", locals: {row_height: row_height} %>
-    <% @doctor_objs.each do |doctor_obj| %>
+    <% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
     <div class="d_col">
-      <div class="d_row" style="height: <%= row_height %>px;">
-        <%= doctor_obj[:doctor].name %>
+      <div class="d_row day_row" style="height: <%= row_height %>px;">
+        <p><%= doctor_week_hour_event[:date].strftime('%d') %></p>
+        <p><%= doctor_week_hour_event[:ch_wday] %></p>
       </div>
       <%= render partial: "clinics/events/common/events_col", locals: {
-        hour_segments: doctor_obj[:hour_segments],
+        hour_segments: doctor_week_hour_event[:hour_segments],
         row_height: row_height,
         onclick_event: proc do |event|
           "$.getScript('#{url_for(action: :edit, id: event)}');"
         end,
         onclick_new_event: proc do |hour, minute|
-          "$.getScript('#{url_for(action: :new, date: @date, hour: hour, minute: minute)}');"
+          "$.getScript('#{url_for(action: :new, hour: hour, minute: minute)}');"
         end
       } %>
     </div>

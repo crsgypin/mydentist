@@ -1,4 +1,4 @@
-#events-index #calendar_day {
+#calendar_day {
 	padding: 0 20px;
 	.table_box {
 		width: 100%;
@@ -7,8 +7,8 @@
     margin-bottom: 30px;	
   	display: flex;
   	justify-content: space-between;
-    .d-col {
-    	.d-row {
+    .d_col {
+    	.d_row {
     		min-width: 70px;
     		text-align: center;
 				vertical-align: middle;
@@ -24,6 +24,13 @@
 				&.hour {
 					width: 60px;
 				}
+	    	&.day_row {
+	    		background: $colorBu;
+	    		color: $colorW;
+	    		p {
+	    			line-height: 1.2;
+	    		}
+	    	}
     	}
     	&:first-child {
     		.d-row {

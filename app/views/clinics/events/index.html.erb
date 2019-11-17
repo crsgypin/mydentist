@@ -1,32 +1,35 @@
-<div id="events-index">
-	<div class="main-box">
+<div id="events_index">
+	<%= form_tag url_for, method: "get" do %>
+	<div class="main_box">
 		<%= render_relative_partial "index/doctors_nav" %>
 		<%= render_relative_partial "index/date_search_nav" %>
 		<%= render_relative_partial "index/calendar_day" %>
 	</div>
-	<div class="side-box">
+	<div class="side_box">
 		<%= render_relative_partial "index/calendar_month" %>
 		<%= render_relative_partial "index/list" %>
 	</div>
+	<% end %>
 </div>
 
 
 <script type="text/javascript">
 	$(function(){
 		window.reloadFrame = function(){
-			var doctorId = $("#doctor-input").val();
-			var date = $("#date-input").val();
-			var segment = $("#segment_input").val();
-			$.ajax({
-				url: "<%= url_for %>",
-				method: "get",
-				dataType: "script",
-				data: {
-					doctor: doctorId,
-					date: date,
-					segment: segment						
-				}
-			})
+			$("#events_index form").submit();
+			// var doctorId = $("#doctor_input").val();
+			// var date = $("#date_input").val();
+			// var segment = $("#segment_input").val();
+			// $.ajax({
+			// 	url: "<%# url_for %>",
+			// 	method: "get",
+			// 	dataType: "script",
+			// 	data: {
+			// 		doctor_id: doctorId,
+			// 		date: date,
+			// 		segment: segment						
+			// 	}
+			// })
 		}
 	})
 </script>

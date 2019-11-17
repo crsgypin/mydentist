@@ -1,5 +1,5 @@
 
-#events-index #list {
+#events_index #list {
 	.title {
 		font-size: $fs-16p;
 		font-weight: bold;
@@ -9,13 +9,13 @@
 		border-bottom: 1px solid $colorGy;
 	}
 	.table_box {
-		.title-row {
+		.title_row {
 			font-size: $fs_12p;
 		}
-		.e-row {
+		.e_row {
 			display: flex;
 			width: 100%;
-			.e-col {
+			.e_col {
 				width: 68px;
 				text-align: center;
 			}
@@ -27,7 +27,7 @@
 			}
 			.content {
 				background: $colorW;
-				.e-row {
+				.e_row {
 					font-size: $fs_14p;
 					&:first-child {
 						border-top: 1px solid $colorGy;	
@@ -35,7 +35,7 @@
 					border-left: 1px solid $colorGy;
 					border-right: 1px solid $colorGy;
 					border-bottom: 1px solid $colorGy;
-					.e-col {
+					.e_col {
 						.check_in {
 							color: #d8d8d8;
 							&.selected {

@@ -1,6 +1,6 @@
 
 <div id="calendar-month">
-  <%= hidden_field_tag "", @date, id: "date-input" %>
+  <%= hidden_field_tag "date", @date, id: "date_input" %>
   <div class="title">
     行事曆
   </div>
@@ -52,12 +52,13 @@
       format(date) {
         return date.toLocaleDateString('zh-Hans-CN');
       },
-      mode: 'dp-permanent'
+      mode: 'dp-permanent',
+      hilightedDate: new Date("<%= @date.strftime('%Y/%m/%d') %>")
     });
     t.open();
     t.on('select', function(_, dp){
       var date = dp.state.selectedDate.toLocaleDateString('zh')
-      $("#date-input").val(date);
+      $("#date_input").val(date);
       window.reloadFrame();
 
       // let form = document.querySelector(FORM_META[i].form);

@@ -1,8 +1,12 @@
 
-<% if @event.status == "報到" %>
-$("[id=check_id_<%= @event.id %>]").addClass("selected");
-$("[id=break_<%= @event.id %>]").removeClass("selected");
-<% else %>
-$("[id=check_id_<%= @event.id %>]").removeClass("selected");
-$("[id=break_<%= @event.id %>]").addClass("selected");
+<% if false %>
+	<% if @event.status == "報到" %>
+	$("[id=check_id_<%= @event.id %>]").addClass("selected");
+	$("[id=break_<%= @event.id %>]").removeClass("selected");
+	<% else %>
+	$("[id=check_id_<%= @event.id %>]").removeClass("selected");
+	$("[id=break_<%= @event.id %>]").addClass("selected");
+	<% end %>
 <% end %>
+$("#clinic_event_form").remove();
+$.getScript(window.location.href);

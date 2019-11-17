@@ -1,11 +1,11 @@
 
 <% row_height = 40 %>
-<% if !@doctor.present? %>
+<% if !@doctor_id.present? %>
 <%= render_relative_partial "calendar_day/doctors", locals: {
   row_height: row_height
 } %>
 <% else %>
-<%= render_relative_partial "calendar_day/wdays", locals: {
+<%= render_relative_partial "calendar_day/doctor_weeks", locals: {
   row_height: row_height
 } %>
 <% end %>

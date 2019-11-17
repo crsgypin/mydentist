@@ -16,12 +16,22 @@ Rails.application.routes.draw do
   end
 
   resources :clinics, only: [], module: :clinics do
+    #看診日曆
     resources :events
+    namespace :events do
+      namespace :selector do
+        resources :event_durations, only: [:index, :create]
+      end
+    end
+
+    #病患
     resources :patients
     resources :patients, only: [], module: :patients do
       resource :notification, only: [:create, :destroy], controller: :notification
       resources :events, only: [:index]
     end
+
+    #醫生
     resources :doctors
     resources :doctors, only: [], module: :doctors do
       resource :info, only: [:show, :edit, :update], controller: :info
@@ -36,6 +46,8 @@ Rails.application.routes.draw do
         # resources :event_notifications, only: [:index, :create]
       end
     end
+
+    #診所
     resource :info, only: [:show, :edit, :update], controller: :info
     resource :info, only: [], module: :info do
       resources :clinic_durations, only: [:index, :create]
@@ -47,6 +59,8 @@ Rails.application.routes.draw do
       resources :services, only: [:index, :new, :create, :destroy]
       resource :photo, only: [:new, :create], controller: :photo
     end
+
+    #關鍵字
     namespace :clinic_line do
       resources :keywords
       resources :knowledge_categories

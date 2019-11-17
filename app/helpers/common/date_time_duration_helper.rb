@@ -2,10 +2,10 @@ module Common::DateTimeDurationHelper
 
 	def segments
 		[
-      {name: "整日", hours: (6..22)},
-      {name: "早上", hours: (6..11)},
-      {name: "下午", hours: (12..17)},
-      {name: "晚上", hours: (18..22)}
+      {name: "整日", hours: (6..22).map{|h| h}},
+      {name: "早上", hours: (6..11).map{|h| h}},
+      {name: "下午", hours: (12..17).map{|h| h}},
+      {name: "晚上", hours: (18..22).map{|h| h}}
     ]
 	end
 
@@ -31,6 +31,7 @@ module Common::DateTimeDurationHelper
 		ch_wdays[wday]
 	end	
 
+	#ex: 14:15
 	def hour_minute_format(hour, minute)
 		"#{sprintf('%02d', hour)}:#{sprintf('%02d', minute)}"
 	end
@@ -43,6 +44,7 @@ module Common::DateTimeDurationHelper
 		}
 	end
 
+	#0_13:15
 	def wday_hour_minute_format(wday, hour, minute)
 		hour_minute = hour_minute_format(hour, minute)
 		"#{wday}_#{hour_minute}"
@@ -61,19 +63,7 @@ module Common::DateTimeDurationHelper
 		r
 	end
 
-	def next_hour_minute(hour, minute, duration)
-		next_hour = hour
-		next_minute = minute + duration
-		if next_minute >= 60
-			next_hour += 1
-			next_minute -= 60
-		end
-		r = {
-			hour: next_hour,
-			minute: next_minute
-		}
-	end
-
+	#14:15_30
 	def hour_minute_duration_format(hour, minute, duration)
 		hour_minute = hour_minute_format(hour, minute)
 		"#{hour_minute}_#{duration}"
@@ -91,7 +81,22 @@ module Common::DateTimeDurationHelper
 		}
 	end
 
+
+	def next_hour_minute(hour, minute, duration)
+		next_hour = hour
+		next_minute = minute + duration
+		if next_minute >= 60
+			next_hour += 1
+			next_minute -= 60
+		end
+		r = {
+			hour: next_hour,
+			minute: next_minute
+		}
+	end
+
 	def wday_durations_note(wday_durations)
+		#wday_durations is clinic_durations or doctor_durations
 		g_wday_durations = wday_durations.group_by do |a| 
 			a.wday
 		end.sort do |a, b|

@@ -30,7 +30,37 @@ class Doctor < ApplicationRecord
 		end
 	end
 
-	def current_event_durations(date, service_duration)
+	def day_events(date)
+		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
+	end
+
+	def day_hour_events(date, hours = nil)
+		events = day_events(date)
+		if hours.nil?
+			hours = segment_hours("整日")
+		end
+		hours.map do |hour|
+			 r = {
+			 	hour: hour,
+			 	minute_segments: (60 / Clinic.default_duration).times.map do |time|
+			 		minute = Clinic.default_duration * time
+			 		m = {
+			 			minute: minute,
+			 			event: events.find do |event|
+			 				event.event_durations.find do |event_duration|
+				 				event_duration.hour == hour && event_duration.minute == minute
+			 				end
+			 			end
+			 		}
+			 		# m[:event_duration] = m[:event] ? m[:event].event_durations : nil
+			 		m
+			 	end
+			}
+		end
+	end
+
+	def current_event_durations1(date, service_duration)
+		#will be depreciated
 		doctor_event_durations = self.event_durations.where("events.date = ?", date)
 		doctor_duration_hours = self.doctor_durations.where(wday: date.wday).map do |doctor_duration|
 			doctor_duration.hour
