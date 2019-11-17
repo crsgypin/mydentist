@@ -21,6 +21,7 @@ class Clinic < ApplicationRecord
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Common::ImageHelper
+	include Common::LineShareHelper
 
 	def self.default_duration
 		15
@@ -28,6 +29,10 @@ class Clinic < ApplicationRecord
 
 	def add_line_friend_path
 		Rails.application.config_for(:api_key)['line']['add_friend_url']
+	end
+
+	def line_binding_url
+		liff_patient_binding_url(self)
 	end
 
 	def to_param

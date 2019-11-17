@@ -21,5 +21,12 @@ module LinebotWebhook::Replies::ErrorsReply
 		})
 	end
 
+	def reply_binding_patient
+		reply_message({
+			type: "text",
+			text: @clinic.line_binding_url
+		})
+	end
+
 end
 

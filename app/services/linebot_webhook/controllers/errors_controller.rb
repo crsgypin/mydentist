@@ -15,6 +15,10 @@ class LinebotWebhook::Controllers::ErrorsController < LinebotWebhook::Controller
 		reply_unbind_patient
 	end
 
+	def binding_patient
+		reply_binding_patient
+	end
+
 end
 
 
