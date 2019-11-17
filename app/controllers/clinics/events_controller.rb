@@ -15,14 +15,15 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def new
-    @date = Date.parse(params[:date]) rescue  Date.today
+    @date = Date.parse(params[:date]) rescue Date.today
     @event = @clinic.events.new(date: @date)
 
     if params[:patient_id].present?
+      #search patient_id
       @patient = @clinic.patients.find(params[:patient_id])
-    else
-      @patient = @clinic.patients.new
+      return
     end
+    @patient = @clinic.patients.new
   end
 
   def edit

@@ -23,8 +23,7 @@ class ::Clinics::Doctors::DoctorServicesController < ::Clinics::Doctors::Applica
 	def destroy
 		@doctor_service = @doctor.doctor_services.find_by!(id: params[:id])
 		if !@doctor_service.destroy
-			@error_messages = @doctor_service.errors.full_messages.join(",")
-			return js_render_error @error_messages
+			return js_render_model_error @doctor_service
 		end
 	end
 
@@ -36,7 +35,7 @@ class ::Clinics::Doctors::DoctorServicesController < ::Clinics::Doctors::Applica
 	end
 
 	def doctor_params
-		params.require(:doctor).permit(doctor_services_attributes: [:id, :service_id, :duration])
+		params.require(:doctor).permit(doctor_services_attributes: [:id, :service_id, :duration, :has_line_booking])
 	end
 
 end

@@ -8,7 +8,7 @@
 		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][duration]", doctor_service.duration, Doctor::Service.durations.keys %>
 	</td>
 	<td>
-
+		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][has_line_booking]", doctor_service.has_line_booking, Doctor::Service.has_line_bookings.keys %>
 	</td>				
 	<td>
 		<% if doctor_service.new_record? %>

@@ -16,7 +16,7 @@
           "$.getScript('#{url_for(action: :edit, id: event)}');"
         end,
         onclick_new_event: proc do |hour, minute|
-          "alert('#{hour}');"
+          "$.getScript('#{url_for(action: :new, date: @date, hour: hour, minute: minute)}');"
         end
       } %>
     </div>
