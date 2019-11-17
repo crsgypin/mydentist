@@ -1,7 +1,7 @@
 
-<% if params[:patient_form] != '1' %>
+<% if @mode == "binding" %> 
 <%= render_relative_partial "common/binding_form" %>
 <%= render_relative_partial "new/liff_js" %>
-<% else %>
+<% elsif @mode == "patient_form" %>
 <%= render_relative_partial "common/patient_form" %>
 <% end %>

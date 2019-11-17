@@ -1,6 +1,20 @@
 class Linebot::Clinics::PatientsController < Linebot::Clinics::ApplicationController
 
 	def new
+		respond_to do |format|
+			format.html do
+				if params[:patient_form] == '1'
+					@mode = "patient_form"
+				else
+					@mode = "binding"
+				end
+			end
+			format.js do
+				#for check line_user_id
+				@line_account = @clinic.line_accounts.find_by(line_user_id: params[:line_user_id])
+			end
+		end
+
 	end
 
 	def show

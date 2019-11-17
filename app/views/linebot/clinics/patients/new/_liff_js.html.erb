@@ -3,12 +3,15 @@
 	$(function(){
 	  liff.init(function (data) {
 	  	var userId = data.context.userId;
-	  	$("[name='line_user_id']").val(userId);	  	
+	  	$("[name='line_user_id']").val(userId);
+	  	$.getScript("<%= url_for %>?line_user_id=" + userId);
 	  }, function(m){
 	  	<% if Rails.env.production? %>
 	  	alert("抱歉，找不到此LINE ID");
 	  	<% else %>
-	  	$("[name='line_user_id']").val("<%= Line::Account.first(2).last.line_user_id %>");
+	  	var userId = "<%= Line::Account.first(2).last.line_user_id %>";
+	  	$("[name='line_user_id']").val(userId);
+	  	$.getScript("<%= url_for %>?line_user_id=" + userId);
 	  	<% end %>
 	  });
 	})

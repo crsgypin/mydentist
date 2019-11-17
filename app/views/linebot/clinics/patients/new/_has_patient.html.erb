@@ -6,11 +6,11 @@
 		</div>
 		<div class="content_box">
 			<div class="d_row">
-				<p>該用戶『已綁定』，若需綁定其他使用者，請使用其他電話進行綁定</p>
+				<p>您的LINE已經綁定帳戶</p>
+				<p>名稱: <%= @line_account.patient.name %></p>
 			</div>
 			<div class="buttons_box">
-				<%= link_to "使用其他電話綁定", url_for(action: :new), class: "btnBu" %>
-				<%= link_to "立即新增病患資料", url_for(action: :new, patient_form: 1), class: "btnBu" %>
+				<%= link_to "加入linebot", @clinic.add_line_friend_path, class: "btnBu" %>
 			</div>
 		</div>
 	</div>

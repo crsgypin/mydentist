@@ -1,0 +1,6 @@
+
+<% if @line_account.patient.present? %>
+	$("#linebot_patients_form").replaceWith("<%= j render_relative_partial 'new/has_patient' %>");
+<% else %>
+	<%# do nothing %>
+<% end %>
