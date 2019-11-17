@@ -1,7 +1,8 @@
-class ::Clinics::Events::Lightbox::Doctors::EventsController < ::Clinics::Events::Lightbox::Doctors::ApplicationController
+class ::Clinics::Events::Selector::Doctors::EventsController < ::Clinics::Events::Selector::Doctors::ApplicationController
 	include Common::DateTimeDurationHelper
 
 	def index
+		#lightbox
 		@date = Date.parse(params[:date])	rescue Date.today
 		sunday = @date - @date.wday.day
 
@@ -14,6 +15,10 @@ class ::Clinics::Events::Lightbox::Doctors::EventsController < ::Clinics::Events
 				day_hour_events: 	@doctor.day_hour_events(date, @clinic.wday_hours(@clinic_wday_hours))
 			}
 		end
+	end
+
+	def create
+		
 	end
 
 end

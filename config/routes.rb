@@ -19,10 +19,8 @@ Rails.application.routes.draw do
     #看診日曆
     resources :events
     namespace :events do
-      namespace :lightbox do
-        resources :doctors, only: [], module: :doctors do
-          resources :events, only: [:index]
-        end
+      namespace :selector do
+        resources :event_durations, only: [:index, :create]
       end
     end
 

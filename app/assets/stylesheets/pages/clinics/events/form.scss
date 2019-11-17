@@ -17,6 +17,15 @@
 			#search_box {
 				width: 100%;
 			}
+			.duration_field {
+				display: flex;
+				span {
+					margin-right: 10px;
+				}
+				a {
+					color: $colorBu;
+				}
+			}
 		}
 	}
 	.e_row {

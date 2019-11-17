@@ -1,0 +1,6 @@
+
+<div class='field_box duration_field'>"
+<span>看診時間(必填)</span>"
+<%= link_to "選擇時間", clinic_events_path(@clinic, doctor_id: @clinic.doctors.first.id, lightbox: 1), remote: true %>
+<% hidden_field_tag "hour_minute", "" %>
+</div>"

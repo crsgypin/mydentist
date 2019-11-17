@@ -20,6 +20,12 @@ class Event < ApplicationRecord
 	include Common::DateTimeDurationHelper
 	include Common::DateHelper
 
+	def hour_minute=(str)
+		t = parse_hour_minute_format(str)
+		self.hour = t[:hour]
+		self.minute = t[:minute]
+	end
+
 	def hour_minute_duration=(str)
 		t = parse_hour_minute_duration_format(str)
 		self.hour = t[:hour]

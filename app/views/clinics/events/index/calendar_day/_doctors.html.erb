@@ -9,7 +9,7 @@
       <div class="d_row" style="height: <%= row_height %>px;">
         <%= doctor_obj[:doctor].name %>
       </div>
-      <%= render_relative_partial "common/events_cols", locals: {
+      <%= render partial: "clinics/events/common/events_col", locals: {
         hour_segments: doctor_obj[:hour_segments],
         row_height: row_height,
         onclick_event: proc do |event|
