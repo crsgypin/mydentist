@@ -5,8 +5,14 @@
   row_height: row_height
 } %>
 <% else %>
-<%= render_relative_partial "calendar_day/doctor_weeks", locals: {
+<% if @segment == "整週" %>
+<%= render_relative_partial "calendar_day/doctor_week", locals: {
   row_height: row_height
 } %>
+<% elsif @segment == "整日" %>
+<%= render_relative_partial "calendar_day/doctor_day", locals: {
+  row_height: row_height
+} %>
+<% end %>
 <% end %>
 

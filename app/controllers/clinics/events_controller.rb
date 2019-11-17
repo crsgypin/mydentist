@@ -78,15 +78,27 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @segment = "整週" if !@range_segments.include?(@segment) 
 
     @doctor = @clinic.doctors.find(@doctor_id)
-    @clinic_wday_hours = @clinic.max_min_hours
-    sunday = @date - @date.wday.day
-    @doctor_week_hour_events = (0..6).map do |wday|
-      date = (sunday + wday.day)
-      r = {
-        date: date,
-        ch_wday: ch_wday(wday),
-        hour_segments:  @doctor.day_hour_events(date, @clinic_wday_hours)
-      }
+
+    if @segment == "整週"
+      @clinic_wday_hours = @clinic.max_min_hours
+      sunday = @date - @date.wday.day
+      @doctor_week_hour_events = (0..6).map do |wday|
+        date = (sunday + wday.day)
+        r = {
+          date: date,
+          ch_wday: ch_wday(wday),
+          hour_segments: @doctor.day_hour_events(date, @clinic_wday_hours)
+        }
+      end
+    elsif @segment == "整日"
+      @doctor_day_segment_hour_events = ["早上", "下午", "晚上"].map do |name|
+        hours = segment_hours(name)
+        r = {
+          name: name,
+          hours: hours,
+          hour_segments: @doctor.day_hour_events(@date, hours) 
+        }
+      end
     end
   end
 

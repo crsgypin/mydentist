@@ -1,0 +1,54 @@
+
+#linebot_patients_form {
+	.inbox {
+		text-align: center;
+		padding: 0 30px;
+		h1 {
+			font-size: $fs_24p;
+			font-weight: bold;
+		}
+		.image_box {
+			width: 100px;
+			margin: 0 auto;
+			padding-bottom: 20px;
+			img {
+				width: 100%;
+				display: block;
+			}
+		}
+		.content_box {
+			h2 {
+				font-size: $fs_20p;
+			}
+			h3 {
+				font-size: $fs_18p;
+			}
+			p {
+				font-size: $fs_14p;
+			}
+			.error {
+				color: $colorR;
+			}
+			.d_row {
+				font-size: $fs_14p;
+				padding-bottom: 20px;
+				input {
+					width: 100%;
+					border-radius: 5px;
+					border: 1px solid $colorGy;
+					width: 100%;
+					padding-left: 5px;
+					box-shadow: none;
+					height: 40px;
+					line-height: 40px;
+				}
+			}
+			.buttons_box {
+				padding-top: 40px;
+				input {
+					width: 80%;
+				}
+			}
+		}	
+	}
+}

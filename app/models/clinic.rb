@@ -26,6 +26,10 @@ class Clinic < ApplicationRecord
 		15
 	end
 
+	def add_line_friend_path
+		Rails.application.config_for(:api_key)['line']['add_friend_url']
+	end
+
 	def to_param
 		self.friendly_id
 	end

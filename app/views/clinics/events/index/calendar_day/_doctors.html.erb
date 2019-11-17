@@ -3,7 +3,10 @@
   <div class="header">
   </div>
   <div class="table_box">
-    <%= render partial: "clinics/events/common/title_col", locals: {row_height: row_height} %>
+    <%= render partial: "clinics/events/common/title_col", locals: {
+      row_height: row_height, 
+      hours: @clinic_wday_hours
+    } %>
     <% @doctor_objs.each do |doctor_obj| %>
     <div class="d_col">
       <div class="d_row" style="height: <%= row_height %>px;">

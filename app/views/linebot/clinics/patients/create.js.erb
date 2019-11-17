@@ -1,0 +1,10 @@
+
+<% puts "aa: #{@error_code}" %>
+<% if @error_code == 1 %>
+	
+<% elsif @error_code == 2 %>
+	$(".error").removeClass("hidden");
+	$(".error").text("很抱歉，此帳號已經被綁定");
+<% else %>
+	$("#body").html("<%= j render_relative_partial 'create/success' %>");
+<% end %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post "webhook", to: "webhook#create"
       resource :event, only: [:show, :edit, :new, :create, :update], controller: :event
       resource :doctor, only: [:show], controller: :doctor
+      resources :patients, only: [:show, :new, :create] 
     end
     resources :events
   end
