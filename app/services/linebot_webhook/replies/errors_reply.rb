@@ -14,5 +14,12 @@ module LinebotWebhook::Replies::ErrorsReply
 		})
 	end
 
+	def reply_unbind_patient
+		reply_message({
+			type: "text",
+			text: "已解除病患資料綁定"
+		})
+	end
+
 end
 
