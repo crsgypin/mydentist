@@ -90,7 +90,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :source, :date)
+    params.require(:event).permit(:status, :service_id, :doctor_id, :hour_minute, :source, :date, :health_insurance_status, :hour, :minute, :duration)
   end
 
   def patient_params

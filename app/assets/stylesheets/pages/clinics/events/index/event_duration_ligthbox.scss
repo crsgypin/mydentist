@@ -1,11 +1,11 @@
 
-#event_duration_ligthbox {
+#event_duration_lightbox {
 	.inbox {
 		.header_box {
 
 		}
 		.content_box {
-			.calendar_day_container {
+			#calendar_day {
 				overflow-y: scroll;
 				height: 70vh;
 			}

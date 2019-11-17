@@ -1,0 +1,50 @@
+
+<% row_height = 40 %>
+<div id="event_duration_lightbox" class="lightbox bg_width">
+  <div class="inbox">
+    <div class="header_box" onclick="$(this).closest('.lightbox').remove();">
+      看診時間系統
+    </div>
+    <%= form_tag url_for(action: :create), method: "post", remote: true, class: "content_box" do %>
+      <%= hidden_field_tag "doctor_id", @doctor_id, id: "doctor_id_input" %>
+      <%= hidden_field_tag "date", @date.strftime("%Y/%m/%d") %>
+      <%= hidden_field_tag "hour", @hour %>
+      <%= hidden_field_tag "minute", @minute %>
+      <%= hidden_field_tag "duration", @duration %>
+      <div id="calendar_day">
+        <div class="header">
+        </div>
+        <div class="table_box">
+          <%= render partial: "clinics/events/common/title_col", locals: {row_height: row_height} %>
+          <% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
+          <div class="d_col" data-date="<%= doctor_week_hour_event[:date].strftime('%Y/%m/%d') %>">
+            <div class="d_row day_row" style="height: <%= row_height %>px;">
+              <p><%= doctor_week_hour_event[:date].strftime('%d') %></p>
+              <p><%= doctor_week_hour_event[:ch_wday] %></p>
+            </div>
+            <%= render partial: "clinics/events/common/events_col", locals: {
+              hour_segments: doctor_week_hour_event[:hour_segments],
+              row_height: row_height,
+              onclick_event: proc do |event|
+
+              end,
+              onclick_new_event: proc do |hour, minute|
+                "window.setDateHourMinute($(this).closest('.d_col').data('date'), #{hour}, #{minute});"
+              end
+            } %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <script type="text/javascript">
+    window.setDateHourMinute = function(date, hour, minute){
+      var box = $("#event_duration_lightbox");
+      box.find("[name='date']").val(date);
+      box.find("[name='hour']").val(hour);
+      box.find("[name='minute']").val(minute);
+      $("#event_duration_lightbox form").submit();
+    }
+  </script>
+</div>

@@ -35,8 +35,10 @@ module Common::DateHelper
 			# ch_wday = ["日", "一", "二", "三", "四", "五", "六"]
 			"民國#{date.year - 1911}年#{date.month}月#{date.day}日(#{ch_wday(date.wday)})"
 		elsif format == 3
+			# 108/2/3
 			"#{date.year - 1911}/#{date.month}/#{date.day}"
 		elsif format == 4
+			# 108/2/3 (週ㄧ)
 			"#{date.year - 1911}/#{date.month}/#{date.day} (#{ch_wday(date.wday)})"
 		end
 	end
