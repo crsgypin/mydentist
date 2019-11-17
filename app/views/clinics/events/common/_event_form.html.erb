@@ -23,7 +23,7 @@
 		    r.html_safe
 	    }},
 	    {v: proc{|a|
-	        r = "<div class='date'>"
+	      r = "<div class='date'>"
 	    	r += "<span>病患生日（必填）</span>"
 	    	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}, disabled: disabled) + "年</span>"
 	    	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}, disabled: disabled) + "月</span>"

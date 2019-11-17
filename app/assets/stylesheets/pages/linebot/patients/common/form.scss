@@ -47,6 +47,27 @@
 					height: 40px;
 					line-height: 40px;
 				}
+				select {
+					width: 100%;
+					height: 40px;
+					line-height: 40px;
+				}
+				.title {
+					font-size: $fs_12p;
+					color: $colorGy;
+					text-align: left;
+				}
+				.date {
+					display: flex;
+					justify-content: space-between;
+					span {
+						display: inline-block;
+						width: 33%;
+					}
+					select {
+						max-width: 100px;
+					}
+				}
 			}
 			.buttons_box {
 				display: flex;
