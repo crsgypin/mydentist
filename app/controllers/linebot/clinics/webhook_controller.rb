@@ -23,7 +23,7 @@ class Linebot::Clinics::WebhookController < Linebot::Clinics::ApplicationControl
 	    	messages: reply_message
 	    })
 
-	    response = linebot.reply_message(@reply_token, reply_message)
+	    # response = linebot.reply_message(@reply_token, reply_message)
 	  end
     render json: {}
 	end
