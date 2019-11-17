@@ -9,7 +9,8 @@ module Linebot::StaticImageHelper
 	def linebot_static_image_urls
 		r = {
 			phone:  "/imgs/linebot/smartphone@3x.png",
-			form: "/imgs/linebot/group3Copy@3x.png"
+			form: "/imgs/linebot/group3Copy@3x.png",
+			line_bound_success: "/imgs/linebot/group3@3x.png"
 		}
 	end
 

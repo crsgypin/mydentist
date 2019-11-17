@@ -3,6 +3,10 @@ class Linebot::Clinics::PatientsController < Linebot::Clinics::ApplicationContro
 	def new
 	end
 
+	def show
+		@patient = @clinic.patients.find(params[:id])
+	end
+
 	def create
 		@line_account = Line::Account.find_by(line_user_id: params[:line_user_id])
 		@patient = @clinic.patients.find_by(phone: params[:phone])
