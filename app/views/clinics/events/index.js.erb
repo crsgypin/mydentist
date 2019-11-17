@@ -1,6 +1,12 @@
 
+<% if params[:lightbox] == '1' %>
+<%# for events new and edit %>
+$("body").append("<%= j render_relative_partial 'index/doctor_lightbox' %>");
+
+<% else %>
 $("#doctors-nav").replaceWith("<%= j render_relative_partial 'index/doctors_nav' %>");
 $("#date_search_nav").replaceWith("<%= j render_relative_partial 'index/date_search_nav' %>");
 $("#calendar_day").replaceWith("<%= j render_relative_partial 'index/calendar_day' %>");
 $("#list").replaceWith("<%= j render_relative_partial 'index/list' %>");
 
+<% end %>

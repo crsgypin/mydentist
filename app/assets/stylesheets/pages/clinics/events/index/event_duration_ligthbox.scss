@@ -1,0 +1,14 @@
+
+#event_duration_ligthbox {
+	.inbox {
+		.header_box {
+
+		}
+		.content_box {
+			.calendar_day_container {
+				overflow-y: scroll;
+				height: 70vh;
+			}
+		}
+	}
+}

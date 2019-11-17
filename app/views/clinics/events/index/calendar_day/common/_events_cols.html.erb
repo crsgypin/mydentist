@@ -11,8 +11,7 @@
 	    <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
 	    <div class="patient_event <%= source_class %>" 
 	      style="height: <%= event.event_durations_count * row_height %>px" 
-	      data-url="<%= url_for(action: :edit, id: event) %>" 
-	      onclick="$.getScript($(this).data('url'));">
+	      onclick="<%= onclick_event.call(event) %>">
 	      <div class="patient"><%= event.patient.name %></div>
 	      <div class="service"><%= event.service.name %></div>
 	      <div class="status">
@@ -24,7 +23,7 @@
 	    <%# 第一個的 event_duration 則不顯示 %>
 	    <% end %>
 	  <% else %>
-	  <div class="patient_event" style="height: <%= row_height %>px;" onclick="alert(3);">
+	  <div class="patient_event" style="height: <%= row_height %>px;" onclick="<%= onclick_new_event.call(hour, minute) %>">
 
 	  </div>
 	  <% end %>

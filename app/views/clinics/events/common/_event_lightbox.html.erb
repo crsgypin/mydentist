@@ -69,7 +69,7 @@
 				    	r += select_field_tag "event[doctor_id]", a.doctor_id, @clinic.doctors.map{|d| [d.id, d.name]}
 				    	r += "<div class='field_box'>"
 				    	r += "<span>看診時間(必填)</span>"
-				    	r += link_to "選擇時間", clinic_events_lightbox_doctor_events_path(@clinic, Doctor.first), remote: true
+				    	r += link_to "選擇時間", clinic_events_path(@clinic, doctor_id: @clinic.doctors.first.id, lightbox: 1), remote: true
 				    	r += "</div>"
 				    	r.html_safe
 				    }},
