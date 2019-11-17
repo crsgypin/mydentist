@@ -1,0 +1,17 @@
+<div id="linebot_patients_form">
+	<div class="inbox">
+		<h1>用戶確認</h1>
+		<div class="image_box">
+			<%= image_tag linebot_static_image_url(:line_bound_success) %>
+		</div>
+		<div class="content_box">
+			<div class="d_row">
+				<p>該用戶『已綁定』，若需綁定其他使用者，請使用其他電話進行綁定</p>
+			</div>
+			<div class="buttons_box">
+				<%= link_to "使用其他電話綁定", url_for(action: :new), class: "btnBu" %>
+				<%= link_to "立即新增病患資料", url_for(action: :new, form: 1), class: "btnBu" %>
+			</div>
+		</div>
+	</div>
+</div>

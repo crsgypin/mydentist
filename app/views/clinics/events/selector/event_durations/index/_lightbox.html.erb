@@ -15,7 +15,10 @@
         <div class="header">
         </div>
         <div class="table_box">
-          <%= render partial: "clinics/events/common/title_col", locals: {row_height: row_height} %>
+          <%= render partial: "clinics/events/common/title_col", locals: {
+            row_height: row_height, 
+            hours: @clinic_wday_hours
+          } %>
           <% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
           <div class="d_col" data-date="<%= doctor_week_hour_event[:date].strftime('%Y/%m/%d') %>">
             <div class="d_row day_row" style="height: <%= row_height %>px;">

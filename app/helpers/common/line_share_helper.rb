@@ -34,5 +34,14 @@ module Common::LineShareHelper
 		url
 	end
 
+	def liff_patient_binding_url(clinic)
+		if Rails.env.production?
+			url = "#{Rails.application.config_for(:api_key)["liff"]["linebot_patient_path"]}"
+		else
+			url = Rails.application.routes.url_helpers.new_linebot_clinic_patient_url(clinic, host: Rails.application.config_for(:api_key)["base_domain"])
+		end	
+		url
+	end
+
 end
 

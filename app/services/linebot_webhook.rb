@@ -32,6 +32,10 @@ class LinebotWebhook
 		elsif @message[:type] == "message"
 			if @message[:text] == "00"
 				return to("errors#clear_status")
+			elsif @message[:text] == "01"
+				return to("errors#unbind_patient")
+			elsif @message[:text] == "02"
+				return to("errors#binding_patient")
 			end
 
 			if basic_messages.include?(@message[:text])

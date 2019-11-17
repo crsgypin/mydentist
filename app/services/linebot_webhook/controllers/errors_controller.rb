@@ -10,6 +10,15 @@ class LinebotWebhook::Controllers::ErrorsController < LinebotWebhook::Controller
 		reply_clear_status
 	end
 
+	def unbind_patient
+		@line_account.update(patient: nil)
+		reply_unbind_patient
+	end
+
+	def binding_patient
+		reply_binding_patient
+	end
+
 end
 
 

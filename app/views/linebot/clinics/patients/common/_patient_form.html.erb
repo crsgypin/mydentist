@@ -1,0 +1,48 @@
+<div id="linebot_patients_form">
+	<%= form_tag url_for(action: :create), method: :post, class: "inbox", remote: true do %>
+		<%= hidden_field_tag "line_user_id", params[:line_user_id] %>
+		<h1>基本資料</h1>
+		<div class="image_box">
+			<%= image_tag linebot_static_image_url(:form) %>
+		</div>
+		<div class="content_box">
+			<% [
+				{title: "病患姓名（必填）", v: proc {
+					text_field_tag "patient[name]", ""
+				}},
+				{title: "病患性別（必填）", v: proc {
+					select_field_tag "patient[gender]", "", Patient.genders.keys
+				}},
+				{title: "病患生日（必填）", v: proc {
+		      r = "<div class='date'>"
+		    	r += "<span>民國" + select_field_tag("patient[roc_year]", 95, (50..Date.today.year).map{|y| [y,y]}) + "年</span>"
+		    	r += "<span>" + select_field_tag("patient[month]", 1, (1..12).map{|m| [m,m]}) + "月</span>"
+		    	r += "<span>" + select_field_tag("patient[day]", 1, (1..31).map{|d| [d,d]}) + "日</span>"
+		        r += "</div>"
+		    	r.html_safe
+				}},
+				{title: "身份證字號（必填）", v: proc {
+					text_field_tag "patient[person_id]", ""
+				}},
+				{title: "電話號碼（必填）", v: proc {
+					text_field_tag "patient[patient]", ""
+				}},
+				{title: "健保狀況（必填)", v: proc {
+		    	r = select_field_tag "patient[health_insurance_status]", "有", Patient.health_insurance_statuses.keys
+				}}
+			].each do |elm| %>
+			<div class="d_row">
+				<div class="title">
+					<%= elm[:title] %>					
+				</div>
+				<div class="value">
+					<%= elm[:v].call %>
+				</div>
+			</div>
+			<% end %>
+			<div class="buttons_box">
+				<%= submit_tag "確定", class: "btnBu" %>
+			</div>
+		</div>
+	<% end %>
+</div>

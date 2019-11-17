@@ -1,0 +1,24 @@
+<div id="linebot_patients_form">
+	<%= form_tag url_for(action: :create), method: :post, class: "inbox", remote: true do %>
+		<%= hidden_field_tag "action", "binding" %>
+		<%= hidden_field_tag "line_user_id", params[:line_user_id] %>
+		<h1>用戶確認</h1>
+		<div class="image_box">
+			<%= image_tag linebot_static_image_url(:phone) %>
+		</div>
+		<div class="content_box">
+			<div class="d_row">
+				為了與診所系統做串接，以辨別用戶與病患資料的一致性，以達到提供病患更方便的LINE預約服務。
+				請輸入用戶登記的『手機號碼』，以進行以下的用戶確認操作。
+			</div>
+			<div class="d_row">
+				<%= text_field_tag "phone", "" %>
+			</div>
+			<div class="d_row error hidden">
+			</div>
+			<div class="buttons_box">
+				<%= submit_tag "確定", class: "btnBu" %>
+			</div>
+		</div>
+	<% end %>
+</div>
