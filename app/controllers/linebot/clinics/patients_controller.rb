@@ -22,8 +22,9 @@ class Linebot::Clinics::PatientsController < Linebot::Clinics::ApplicationContro
 	end
 
 	def create
-		@line_account = Line::Account.find_by(line_user_id: params[:line_user_id])
-		if params[:mode] == "binding"
+		@line_account = Line::Account.find_by!(line_user_id: params[:line_user_id])
+		@mode = params[:mode]
+		if @mode == "binding"
 			@patient = @clinic.patients.find_by(phone: params[:phone])
 			if !@patient.present?
 				return @error_code = 1
@@ -31,7 +32,7 @@ class Linebot::Clinics::PatientsController < Linebot::Clinics::ApplicationContro
 				return @error_code = 2
 			end
 			@line_account.update!(patient: @patient)
-		elsif params[:mode] == "patient_form"
+		elsif @mode == "patient_form"
 	    ActiveRecord::Base.transaction do 		
 				@patient = @clinic.patients.new(patient_params)
 				if !@patient.save

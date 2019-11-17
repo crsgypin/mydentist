@@ -2,7 +2,7 @@
 	<div class="inbox">
 		<h1>用戶確認</h1>
 		<div class="image_box">
-			<%= image_tag linebot_static_image_url(:line_bound_success) %>
+			<%= image_tag linebot_static_image_url(:line_has_patient) %>
 		</div>
 		<div class="content_box">
 			<div class="d_row">
@@ -10,7 +10,7 @@
 			</div>
 			<div class="buttons_box">
 				<%= link_to "使用其他電話綁定", url_for(action: :new), class: "btnBu" %>
-				<%= link_to "立即新增病患資料", url_for(action: :new, patient_form: 1), class: "btnBu" %>
+				<%= link_to "立即新增病患資料", url_for(action: :new, patient_form: 1, line_user_id: params[:line_user_id]), class: "btnBu" %>
 			</div>
 		</div>
 	</div>

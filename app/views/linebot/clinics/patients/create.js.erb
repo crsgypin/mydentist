@@ -1,4 +1,5 @@
-<% puts @error_code %>
+
+<% if @mode == "binding" %>
 <% if @error_code == 1 %>
 	$("#linebot_patients_form").replaceWith("<%= j render_relative_partial 'create/no_patient' %>");
 <% elsif @error_code == 2 %>
@@ -6,3 +7,8 @@
 <% else %>
 	$("#linebot_patients_form").replaceWith("<%= j render_relative_partial 'create/binding_success' %>");
 <% end %>
+
+<% elsif @mode == "patient_form" %>
+	$("#linebot_patients_form").replaceWith("<%= j render_relative_partial 'create/binding_success' %>");
+<% end %>
+

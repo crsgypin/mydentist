@@ -1,6 +1,6 @@
 <div id="linebot_patients_form">
 	<%= form_tag url_for(action: :create), method: :post, class: "inbox", remote: true do %>
-		<%= hidden_field_tag "mode", "patient_form" %>
+		<%= hidden_field_tag "mode", @mode %>
 		<%= hidden_field_tag "line_user_id", params[:line_user_id] %>
 		<h1>基本資料</h1>
 		<div class="image_box">
@@ -45,5 +45,12 @@
 				<%= submit_tag "確定", class: "btnBu" %>
 			</div>
 		</div>
+	<% end %>
+	<% if !params[:line_user_id].present? %>
+	<script type="text/javascript">
+		$(function(){
+			alert("沒有line資料");
+		})
+	</script>
 	<% end %>
 </div>
