@@ -5,7 +5,7 @@
   <div class="table_box">
   	<% @doctor_day_segment_hour_events.each do |doctor_day_segment_hour_event| %>
   	<div class="d_block">
-	    <%= render partial: "clinics/events/common/title_col", locals: {
+	    <%= render partial: "clinics/events/common/event_duration_titles_col", locals: {
 	      row_height: row_height, 
 	      hours: doctor_day_segment_hour_event[:hours]
 	    } %>
@@ -13,7 +13,7 @@
 	      <div class="d_row day_row" style="height: <%= row_height %>px;">
 	      	<%= doctor_day_segment_hour_event[:name] %>
 	      </div>
-	      <%= render partial: "clinics/events/common/events_col", locals: {
+	      <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
 	        hour_segments: doctor_day_segment_hour_event[:hour_segments],
 	        row_height: row_height,
 	        onclick_event: proc do |event|

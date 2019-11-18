@@ -3,7 +3,7 @@
 	alert("<%= @error_message.html_safe %>");
 <% else %>
 	alert('ok');
+	$("#clinic_event_form").remove();
+	window.location.reload();
 <% end %>
-$("#clinic_event_form").remove();
-$.getScript(window.location.href);
 

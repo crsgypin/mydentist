@@ -4,7 +4,7 @@
   <div class="header">
   </div>
   <div class="table_box">
-    <%= render_relative_partial "common/title_col", locals: {row_height: row_height} %>
+    <%= render_relative_partial "common/event_duration_titles_col", locals: {row_height: row_height} %>
     <% @doctors.each do |doctor| %>
     <% next if @doctor_id.present? &&  @doctor.to_i != doctor.id %>
     <div class="d-col">

@@ -12,8 +12,9 @@ class Event < ApplicationRecord
 	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45}
 	enum source: {"網路" => 1, "現場" => 2}
   enum health_insurance_status: {"有" => 1, "無" => 2}
-	validates_presence_of :status, :source
+	validates_presence_of :status, :source, :duration
 	before_validation :check_for_source, on: :create
+	before_validation :check_duration
 	after_save :check_hour_minute_duration
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
@@ -104,5 +105,12 @@ class Event < ApplicationRecord
 			self.patient.update(default_doctor: self.doctor)
 			true
 		end
+	end
+
+	def check_duration
+		if self.duration.nil? || self.duration == 0
+			self.errors.add("需填寫區間", "")
+		end
+		throw(:abort)
 	end
 end
