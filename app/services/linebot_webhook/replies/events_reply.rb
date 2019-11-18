@@ -122,4 +122,31 @@ module LinebotWebhook::Replies::EventsReply
 		})
 	end
 
+	def reply_event_confirm_reject
+		reply_message({
+			type: "text",
+			text: "預約已取消"
+		})
+	end
+
+	def reply_event_confirm_ok_reserved
+		reply_message({
+			type: "text",
+			text: "預約完成\n我們將會在一週前提醒您！\n#{@clinic.name}關心您～"
+		})		
+	end
+
+	def reply_event_confirm_ok_lack_patient
+		[
+			reply_message({
+				type: "text",
+				text: "如果要進行線上預約的話，需要先填入基本資料才可以進行預約喔！"
+			}),
+			reply_message({
+				type: "text",
+				text: "請輸入健保卡的姓名。\n外籍人士，可輸入英文名字。",
+			})
+		]
+	end
+
 end

@@ -6,6 +6,10 @@ class Doctor::Service < ApplicationRecord
 	enum has_line_booking: {"有" => 1, "無" => 0}
 	before_destroy :check_for_destroy
 
+	def duration_number
+		self.read_attribute_before_type_cast(:duration)
+	end
+
 	def events
 		self.service.events
 	end

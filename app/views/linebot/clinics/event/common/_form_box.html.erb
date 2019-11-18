@@ -3,20 +3,22 @@
 	<%# for event_notification %>
 	<%= hidden_field_tag "event_notification_id", params[:event_notification_id] %>
 	<% end %>
+	<%# doctor selector %>
 	<div class="doctors_box">
 		<div class="image_box">
 			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
 			</div>
-			<p><%= select_field_tag "event[doctor_id]", @doctor.id, @clinic.doctors.map{|a| [a.id, a.name]}, id: "doctor_select" %></p>
+			<p><%= select_field_tag "event[doctor_id]", @doctor.id, @doctors.map{|a| [a.id, a.name]}, id: "doctor_select" %></p>
 		</div>
 		<div class="title">
 			選擇日期與時間
 		</div>
 	</div>
+	<%# services selector %>
 	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @service.id, @doctor.services.map{|a| [a.id, "#{a.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
+		<%= select_field_tag "event[service_id]", @doctor_service.service_id, @doctor_services.map{|a| [a.service_id, "#{a.service.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
 	</div>
-
+	<%# date selector %>
 	<div class="date_box">
 		<div class="month_box">
 			<%= link_to icon_tag(:angle_left), "", id: "last_week"%>
@@ -48,7 +50,7 @@
 			</ul>
 		</div>
 	</div>
-
+	<%# time selector %>
 	<div class="time_box">
 		<% i = 0 %>
 		<% @doctor_day_segment_hour_events.each do |segment| %>
@@ -61,8 +63,10 @@
 			<ul class="hours_box">
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
-				<li class="minutes_box" data-click_duration_count="<%= @service.duration_number / Clinic.default_duration %>">
-					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @service.duration_number), false, disabled: minute_segment[:event].present?  %>
+				<li class="minutes_box" data-click_duration_count="<%= @doctor_service.duration_number / Clinic.default_duration %>">
+					<% event = minute_segment[:event] %>
+					<% disabled = event.present? && ["已預約", "報到", "爽約"].include?(event.status) %>
+					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @doctor_service.duration_number), false, disabled: disabled %>
 					<%= link_to hour_minute_format(hour, minute), "javascript:;", class: "", data: {index: i}, onclick: "window.onClickEventDuration(this);" %>
 					<% i += 1 %>
 				</li>

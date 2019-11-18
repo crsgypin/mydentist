@@ -21,12 +21,11 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 
 	def update_service
 		@booking_event = @line_account.booking_events.last || @line_account.booking_events.new
-		@service = @clinic.services.find_by(id: @message[:data][:service_id])
-		if !@service
-			return reply_booking_event_no_servie
-		end
-		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
+		@service = @clinic.services.find_by(id: @message[:data][:service_id])		
+		return reply_booking_event_no_servie if !@service
 		@booking_event.update(service: @service)
+
+		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
 		if @booking_event.doctor.nil?
 			reply_booking_event_doctors
 		else
@@ -36,9 +35,9 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 
 	def update_doctor
 		@booking_event = @line_account.booking_events.last || @line_account.booking_events.new
-		@doctor = @clinic.doctors.find_by(id: @message[:data][:doctor_id])
+		@doctor = @clinic.doctors.find_by!(id: @message[:data][:doctor_id])
 		@booking_event.update!(doctor: @doctor)
-		reply_booking_event_times
+		reply_booking_event_time_durations
 	end
 
 	def services

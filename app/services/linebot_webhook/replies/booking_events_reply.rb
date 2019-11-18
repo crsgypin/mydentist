@@ -64,7 +64,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 		})
 	end
 
-	def reply_booking_event_times
+	def reply_booking_event_time_durations
 		# current not used, noted at 2019/10/1
 		# url = Rails.application.routes.url_helpers.linebot_clinic_event_url(@clinic, line_account_id: @line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		url = liff_line_event_url(@clinic, @line_account)

@@ -9,7 +9,7 @@ class Event < ApplicationRecord
 	has_one :new_event, -> { order(id: :desc)}, class_name: "Event", foreign_key: :ori_event_id
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	has_many :event_notifications, class_name: "Event::Notification", dependent: :destroy
-	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45}
+	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45, "缺少病患資料" => 55}
 	enum source: {"網路" => 1, "現場" => 2}
   enum health_insurance_status: {"有" => 1, "無" => 2}
 	validates_presence_of :status, :source, :duration
@@ -41,9 +41,11 @@ class Event < ApplicationRecord
 
 	def desc_format(format_type = 1)
 		if format_type == 1
+			#ex: 08:30 ~ 08:45
 			r = next_hour_minute(self.hour, self.minute, self.duration)
 			"#{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"			
 		elsif format_type == 2			
+			#ex: 108/11/18 08:30 ~ 08:45
 			r = next_hour_minute(self.hour, self.minute, self.duration)
 			"#{roc_format(self.date, 3)} #{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"			
 		end
@@ -74,24 +76,27 @@ class Event < ApplicationRecord
 	def check_for_source
 		if self.doctor.nil?						
 			self.errors.add("請選擇醫生","")
-			return false
-		end
-		if self.patient.nil?
-			self.errors.add("請選擇病患","")
-			return false
+			throw :abort
 		end
 		if self.service.nil?
 			self.errors.add("請選擇項目","")
-			return false
+			throw :abort
 		end
 		if self.date.nil?
 			self.errors.add("請選擇日期", "")
-			return false
+			throw :abort
+		end
+		if self.hour.nil? || self.minute.nil? || self.duration.nil?
+			self.errors.add("請選擇時間", "")
+			throw :abort
 		end
 		true
 	end
 
 	def set_special_event_to_patient
+		if !self.patient.present?
+			return true
+		end
 		if self.changes[:status].present?
 			self.patient.update_current_event
 			if self.service.category == "洗牙"
@@ -101,6 +106,9 @@ class Event < ApplicationRecord
 	end
 
 	def set_default_doctor
+		if !self.patient.present?
+			return true
+		end
 		if !self.patient.default_doctor.present? || self.doctor != self.patient.default_doctor
 			self.patient.update(default_doctor: self.doctor)
 			true
@@ -110,7 +118,7 @@ class Event < ApplicationRecord
 	def check_duration
 		if self.duration.nil? || self.duration == 0
 			self.errors.add("需填寫區間", "")
+			throw(:abort)
 		end
-		throw(:abort)
 	end
 end

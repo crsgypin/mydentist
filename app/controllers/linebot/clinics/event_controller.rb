@@ -16,7 +16,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@booking_event = @line_account.booking_events.last
 		set_doctor
-		set_service
+		set_doctor_service
 		set_date
 		set_event_durations
 		render "new"
@@ -26,36 +26,37 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@event = @line_account.events.find_by!(id: params[:event_id])
 		set_doctor
-		set_service
+		set_doctor_service
 		set_date
 		set_event_durations
 		render "edit"
 	end
 
 	def create
-		if !params[:event][:hour_minute_duration].present?
-			return @error_message = "您尚未選擇時間"
-		end
+		# if !params[:event][:hour_minute_duration].present?
+		# 	return @error_message = "您尚未選擇時間"
+		# end
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
 		@event = @line_account.events.new
 		@event.clinic = @clinic
-		@event.patient = @line_account.patient
-		@event.status = "已預約"
+		if @line_account.patient.present?
+			@event.patient = @line_account.patient
+			@event.status = "已預約"
+		else
+			@event.status = "缺少病患資料"
+		end
 		@event.assign_attributes(event_params)
 		if !@event.save
-			 return js_render_model_error @event
+			return js_render_model_error @event
 		end
+
+		#清除 LINE 狀態
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
 
-		@line_account.sendings.create({
-    	source: "server",
-    	server_type: "push",
-    	messages: {
-    		type: "text", 
-    		text: "您的掛號已成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
-    	}
-    })
+		#發送推播
+		push_notification
 
+		#回診推播處理
     check_event_notification
 	end
 
@@ -92,6 +93,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	private
 
 	def set_doctor
+		@doctors = @clinic.doctors
 		if params[:doctor_id].present?
 			@doctor = @clinic.doctors.find_by(id: params[:doctor_id])
 			return if @doctor.present?
@@ -107,20 +109,21 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		@doctor = @clinic.doctors.first
 	end
 
-	def set_service
+	def set_doctor_service
+		@doctor_services = @doctor.doctor_services.includes(:service).where("has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
 		if params[:service_id].present?
-			@service = @clinic.services.find_by(id: params[:service_id])
-			return if @service.present?
+ 			@doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id]}
+			return if @doctor_service.present?
 		end
 		if @event.present?
-			@service = @event.service
-			return if @service.present?
+			@doctor_service = @doctor_services.find{|d| d.service == @event.service}
+			return if @doctor_service.present?
 		end
 		if @booking_event.present?
-			@service = @booking_event.service
-			return if @service.present?
+			@doctor_service = @doctor_services.find{|d| d.service == @booking_event.service}
+			return if @doctor_service.present?
 		end
-		@service = @doctor.services.first
+		@doctor_service = @doctor_services.first
 	end
 
 	def set_date
@@ -174,5 +177,54 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 		end
 	end
 
+	def push_notification
+		@line_account.sendings.create({
+			source: "server",
+			server_type: "push",
+			messages: [
+				{
+					type: "text",
+					text: proc do
+						r = []
+						r << "#{@line_account.display_name}君"
+						r << "您的預約為："
+						r << "日期: #{@event.desc_format(2)}"
+						r << "醫生: #{@event.doctor.name}"
+						r << "項目: #{@event.service.name}"
+						s = r.join("\n")
+						s
+					end.call
+				},
+				{
+					type: "template",
+					altText: "確認資料",
+					template: {
+						type: "confirm",
+						text: "請問您的資料是否正確無誤？",
+						actions: [
+							{
+								type: "postback",
+								label: "否",
+								data: {
+									controller: "events",
+									action: "confirm_reject",
+									id: @event.id
+								}
+							},
+							{
+								type: "postback",
+								label: "是",
+								data: {
+									controller: "events",
+									action: "confirm_ok",
+									id: @event.id
+								}
+							},
+						]
+					}
+				}
+			]
+		})
+	end
 end
 

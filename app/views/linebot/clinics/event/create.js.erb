@@ -1,8 +1,11 @@
 
-alert('掛號已完成');
+<% if @event.status == "缺少病患資料" %>
+<%# do nothing %>
+<% else %>
+<%# do nothing %>
+<% end %>
 if(window.hasLiff){
 	liff.closeWindow();
 } else {
 	window.location.reload();
 }
-
