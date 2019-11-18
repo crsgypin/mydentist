@@ -15,7 +15,7 @@
         <div class="header">
         </div>
         <div class="table_box">
-          <%= render partial: "clinics/events/common/title_col", locals: {
+          <%= render partial: "clinics/events/common/event_duration_titles_col", locals: {
             row_height: row_height, 
             hours: @clinic_wday_hours
           } %>
@@ -25,7 +25,7 @@
               <p><%= doctor_week_hour_event[:date].strftime('%d') %></p>
               <p><%= doctor_week_hour_event[:ch_wday] %></p>
             </div>
-            <%= render partial: "clinics/events/common/events_col", locals: {
+            <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
               hour_segments: doctor_week_hour_event[:hour_segments],
               row_height: row_height,
               onclick_event: proc do |event|

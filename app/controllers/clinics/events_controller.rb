@@ -34,9 +34,13 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def create
     begin
     ActiveRecord::Base.transaction do 
-      @patient = @clinic.patients.new(patient_params)
-      if !@patient.save
-        raise @patient.errors.full_messages.join(",")
+      if params[:patient_id].present?
+        @patient = @clinic.patients.find(params[:patient_id])
+      else
+        @patient = @clinic.patients.new(patient_params)
+        if !@patient.save
+          raise @patient.errors.full_messages.join(",")
+        end
       end
       @event = @clinic.events.new(event_params)
       @event.patient = @patient
