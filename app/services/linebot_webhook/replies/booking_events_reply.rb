@@ -23,7 +23,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 		reply_message({
 			type: "carousel",
 			text: "請選擇醫生",
-			columns: @clinic.doctors.map do |doctor|
+			columns: @doctors.map do |doctor|
 				r = {
 					image_url: doctor.photo.url,
 					title: "#{doctor.name} #{doctor.title}",

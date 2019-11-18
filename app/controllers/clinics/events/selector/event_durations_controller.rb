@@ -3,10 +3,10 @@ class ::Clinics::Events::Selector::EventDurationsController < ::Clinics::Applica
 
 	def index
     @doctor_id = params[:doctor_id]
+    @doctor_service_id = params[:doctor_service_id]
     @date = Date.parse(params[:date]) rescue Date.today
     @hour = params[:hour]
     @minute = params[:minute]
-    @duration = params[:duration]
 
     @doctor = @clinic.doctors.find(params[:doctor_id])
     @clinic_wday_hours = @clinic.max_min_hours
