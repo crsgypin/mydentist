@@ -64,8 +64,8 @@
 				<% hour_segment[:minute_segments].each do |minute_segment| %>
 				<% minute = minute_segment[:minute] %>
 				<li class="minutes_box" data-click_duration_count="<%= @doctor_service.duration_number / Clinic.default_duration %>">
-					<% event = minute_segment[:event] %>
-					<% disabled = event.present? && ["已預約", "報到", "爽約"].include?(event.status) %>
+					<% events = minute_segment[:events] %>
+					<% disabled = events.find{|e| e.is_valid_in_line?}.present? %>
 					<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @doctor_service.duration_number), false, disabled: disabled %>
 					<%= link_to hour_minute_format(hour, minute), "javascript:;", class: "", data: {index: i}, onclick: "window.onClickEventDuration(this);" %>
 					<% i += 1 %>

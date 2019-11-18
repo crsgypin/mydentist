@@ -21,6 +21,10 @@ class Event < ApplicationRecord
 	include Common::DateTimeDurationHelper
 	include Common::DateHelper
 
+	def is_valid_in_line?
+		["已預約", "報到", "爽約"].include? self.status
+	end
+
 	def hour_minute=(str)
 		t = parse_hour_minute_format(str)
 		self.hour = t[:hour]

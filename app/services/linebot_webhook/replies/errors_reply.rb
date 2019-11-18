@@ -41,7 +41,7 @@ module LinebotWebhook::Replies::ErrorsReply
 				},
 				{
 					type: "uri",
-					label: "預約",
+					label: "綁定病患帳號",
 					uri: @clinic.line_binding_url
 				}
 			]

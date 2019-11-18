@@ -46,7 +46,7 @@ class Doctor < ApplicationRecord
 			 		minute = Clinic.default_duration * time
 			 		m = {
 			 			minute: minute,
-			 			event: events.find do |event|
+			 			events: events.select do |event|
 			 				event.event_durations.find do |event_duration|
 				 				event_duration.hour == hour && event_duration.minute == minute
 			 				end
