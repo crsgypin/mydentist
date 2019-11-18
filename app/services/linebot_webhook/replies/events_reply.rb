@@ -1,4 +1,5 @@
 module LinebotWebhook::Replies::EventsReply
+  include Linebot::MessagesHelper
 
 	def reply_events
 		reply_message({

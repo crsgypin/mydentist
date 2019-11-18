@@ -1,4 +1,4 @@
-module Linebot::MessagesImageHelper
+module Linebot::MessagesHelper
 
 	def linebot_event_confirmation_messages(line_account, event)
 		r = []

@@ -1,7 +1,7 @@
 class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationController
   include JsCrudConcern
   include Common::DateHelper
-  include Linebot::MessagesImageHelper
+  include Linebot::MessagesHelper
 
 	def show
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])

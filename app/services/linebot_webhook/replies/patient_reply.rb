@@ -1,6 +1,6 @@
 module LinebotWebhook::Replies::PatientReply
 	include Common::DateHelper
-  include Linebot::MessagesImageHelper
+  include Linebot::MessagesHelper
 
 	def reply_to_fill_name
 		reply_message({
