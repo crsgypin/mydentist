@@ -59,7 +59,7 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 
 			@event = @line_account.events.where(status: "缺少病患資料").last
 			if @event.present?
-				@event.update(status: "已預約")
+				@event.update(status: "已預約", patient: @line_account.patient)
 				reply_finished_with_event
 			else
 				reply_finished

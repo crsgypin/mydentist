@@ -5,6 +5,10 @@ class LinebotWebhook::Controllers::ErrorsController < LinebotWebhook::Controller
 		reply_postback_no_action
 	end	
 
+	def debug
+		reply_debug
+	end
+
 	def clear_status
 		@line_account.update(dialog_status: nil, dialog_status_step: nil)
 		reply_clear_status
@@ -15,9 +19,9 @@ class LinebotWebhook::Controllers::ErrorsController < LinebotWebhook::Controller
 		reply_unbind_patient
 	end
 
-	def binding_patient
-		reply_binding_patient
-	end
+	# def binding_patient
+	# 	reply_binding_patient
+	# end
 
 end
 
