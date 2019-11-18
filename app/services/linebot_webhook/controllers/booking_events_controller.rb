@@ -25,7 +25,7 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 		if !@service
 			return reply_booking_event_no_servie
 		end
-		@doctors = @service.doctors
+		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
 		@booking_event.update(service: @service)
 		if @booking_event.doctor.nil?
 			reply_booking_event_doctors
