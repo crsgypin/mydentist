@@ -209,7 +209,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 									controller: "events",
 									action: "confirm_reject",
 									id: @event.id
-								}
+								}.to_query
 							},
 							{
 								type: "postback",
@@ -218,7 +218,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 									controller: "events",
 									action: "confirm_ok",
 									id: @event.id
-								}
+								}.to_query
 							},
 						]
 					}
