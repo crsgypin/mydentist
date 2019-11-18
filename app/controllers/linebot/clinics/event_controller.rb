@@ -1,6 +1,7 @@
 class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationController
   include JsCrudConcern
   include Common::DateHelper
+  include Linebot::MessagesImageHelper
 
 	def show
 		@line_account = @clinic.line_accounts.find_by!(id: params[:line_account_id])
@@ -184,16 +185,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 			messages: [
 				{
 					type: "text",
-					text: proc do
-						r = []
-						r << "#{@line_account.display_name}君"
-						r << "您的預約為："
-						r << "日期: #{@event.desc_format(2)}"
-						r << "醫生: #{@event.doctor.name}"
-						r << "項目: #{@event.service.name}"
-						s = r.join("\n")
-						s
-					end.call
+					text: linebot_event_confirmation_messages(@line_account, @event)
 				},
 				{
 					type: "template",

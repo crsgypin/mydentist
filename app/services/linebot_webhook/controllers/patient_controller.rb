@@ -17,43 +17,9 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 	def update
 		@patient = @line_account.patient || @clinic.patients.new(line_account: @line_account)
 		if (1..3).include?(@line_account.dialog_status_step)
-			#for create
-			if @line_account.dialog_status_step == 1
-				if !fill_name
-					return reply_invalid_name_format
-				end
-				@line_account.update(dialog_status_step: 2)
-				reply_to_fill_birthday
-			elsif @line_account.dialog_status_step == 2
-				if !fill_birthday
-					return reply_invalid_birthday_format
-				end
-				@line_account.update(dialog_status_step: 3)
-				reply_to_fill_phone
-			elsif @line_account.dialog_status_step == 3
-				if !fill_phone
-					return reply_invalid_phone_format
-				end
-				@line_account.update(dialog_status: nil, dialog_status_step: nil)
-				reply_finished
-			end
+			update_for_new_patient
 		elsif (11..13).include?(@line_account.dialog_status_step)
-			#for update
-			if @line_account.dialog_status_step == 11
-				if !fill_name
-					return reply_invalid_name_format
-				end
-			elsif @line_account.dialog_status_step == 12
-				if !fill_birthday
-					return reply_invalid_birthday_format
-				end
-			elsif @line_account.dialog_status_step == 13
-				if !fill_phone
-					return reply_invalid_phone_format
-				end
-			end
-			@line_account.update(dialog_status: nil, dialog_status_step: nil)
-			reply_to_check_patient
+			update_for_modify_patient
 		end
 	end
 
@@ -71,6 +37,54 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 	end
 
 	private
+
+	def update_for_new_patient
+		if @line_account.dialog_status_step == 1
+			if !fill_name
+				return reply_invalid_name_format
+			end
+			@line_account.update(dialog_status_step: 2)
+			reply_to_fill_birthday
+		elsif @line_account.dialog_status_step == 2
+			if !fill_birthday
+				return reply_invalid_birthday_format
+			end
+			@line_account.update(dialog_status_step: 3)
+			reply_to_fill_phone
+		elsif @line_account.dialog_status_step == 3
+			if !fill_phone
+				return reply_invalid_phone_format
+			end
+			@line_account.update(dialog_status: nil, dialog_status_step: nil)
+
+			@event = @line_account.events.where(status: "缺少病患資料").last
+			if @event.present?
+				@event.update(status: "已預約")
+				reply_finished_with_event
+			else
+				reply_finished
+			end
+		end
+	end
+
+	def update_for_modify_patient
+		#for update
+		if @line_account.dialog_status_step == 11
+			if !fill_name
+				return reply_invalid_name_format
+			end
+		elsif @line_account.dialog_status_step == 12
+			if !fill_birthday
+				return reply_invalid_birthday_format
+			end
+		elsif @line_account.dialog_status_step == 13
+			if !fill_phone
+				return reply_invalid_phone_format
+			end
+		end
+		@line_account.update(dialog_status: nil, dialog_status_step: nil)
+		reply_to_check_patient
+	end
 
 	def fill_name
 		#name

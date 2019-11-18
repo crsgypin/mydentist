@@ -1,5 +1,6 @@
 module LinebotWebhook::Replies::PatientReply
 	include Common::DateHelper
+  include Linebot::MessagesImageHelper
 
 	def reply_to_fill_name
 		reply_message({
@@ -77,14 +78,14 @@ module LinebotWebhook::Replies::PatientReply
 		reply_message({
 			type: "text",
 			text: "請輸入您的手機號碼",
-		})		
+		})
 	end
 
 	def reply_invalid_phone_format
 		reply_message({
 			type: "text",
 			text: "手機格式錯誤，請再輸入一次",
-		})		
+		})
 	end
 
 	def reply_finished
@@ -100,6 +101,17 @@ module LinebotWebhook::Replies::PatientReply
 		})
 	end
 
+	def reply_finished_with_event
+		[
+			reply_message({
+				type: "text",
+				text: linebot_event_confirmation_messages(@line_account, @event)
+			}),
+			reply_message({
+				type: "text",
+				text: linebot_event_finished_messages(@clinic),
+			})
+		]		
+	end
 
 end
-

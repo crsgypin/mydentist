@@ -132,7 +132,7 @@ module LinebotWebhook::Replies::EventsReply
 	def reply_event_confirm_ok_reserved
 		reply_message({
 			type: "text",
-			text: "預約完成\n我們將會在一週前提醒您！\n#{@clinic.name}關心您～"
+			text: linebot_event_finished_messages(@clinic)
 		})		
 	end
 
