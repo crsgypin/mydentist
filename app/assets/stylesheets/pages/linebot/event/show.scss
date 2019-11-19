@@ -21,10 +21,19 @@
 		.services_box {
 			position: relative;
 			text-align: center;
+			.title {
+				font-size: $fs_16p;
+				font-weight: bold;
+				height: 40px;
+				line-height: 40px;
+			}
 			.value {
 				display: inline-block;
 				height: 40px;
 				line-height: 40px;
+				border: 1px solid $colorBu;
+				border-radius: 10px;
+				width: 250px;
 			}
 			.service_dropdown {
 				position: absolute;
@@ -34,11 +43,12 @@
 				transform: translate(-50%, 0);
 				-webkit-transform: translate(-50%, 0);
 				background: $colorW;
-		    -webkit-transition: all .3s ease-out;
-		    transition: all .3s ease-out; 
+		    /*-webkit-transition: all .3s ease-out;*/
+		    /*transition: all .3s ease-out; */
 		    overflow: hidden;
 		    border: 1px solid $colorBu;
 		    border-radius: 10px;
+				visibility: hidden;
 		    opacity: 0;
 		    ul {
 		    	li {
@@ -47,6 +57,7 @@
 		    	}
 		    }
 				&.selected {
+					visibility: visible;
 					opacity: 1;
 				}
 			}

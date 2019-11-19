@@ -1,9 +1,11 @@
 <div class="services_box">
 	<%= hidden_field_tag "event[service_id]", @doctor_service.service_id, id: "service_input" %>
-	<span class="value">
-		<% puts "doctor_service: #{@doctor_service.inspect}" %>
+	<div class="title">
+		診療項目
+	</div>
+	<div class="value">
 		<%= "#{@doctor_service.service.name} (#{@doctor_service.service.duration})" %>
-	</span>
+	</div>
 	<div class="service_dropdown">
 		<ul>
 		<% @doctor_services.each do |doctor_service| %>
@@ -19,7 +21,7 @@
 		});
 		$("#form_box .services_box ul li").on("click", function(){
 			var id = $(this).data("id");
-			$("#service_input").val($(this).data("id"));
+			$("#service_input").val(id);
 			window.reloadForm();
 		});
 	</script>
