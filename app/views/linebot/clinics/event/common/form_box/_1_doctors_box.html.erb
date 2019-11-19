@@ -1,11 +1,38 @@
 
 <div class="doctors_box">
-	<div class="image_box">
+	<div class="doctor">
 		<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
 		</div>
-		<p><%= select_field_tag "event[doctor_id]", @doctor.id, @doctors.map{|a| [a.id, a.name]}, id: "doctor_select" %></p>
+		<div class="value">
+			<%= hidden_field_tag "event[doctor_id]", @doctor.id, id: "doctor_input" %>
+			<%= "#{@doctor.name}#{@doctor.title}" %>
+		</div>
+		<div class="doctors_dropdown">
+			<ul>
+			<% @doctors.each do |doctor| %>
+				<li data-id="<%= doctor.id %>">
+					<div class="image_box"><%= bg_center_image doctor.photo.url, class: "round" %></div>
+					<div class="info_box">
+						<div><%= doctor.name %><%= doctor.title %></div>
+						<div><%= doctor.doctor_durations_note_html.html_safe %></div>
+						<div><%= doctor.services.map{|a| a.name}.join("<br>").html_safe %></div>
+					</div>
+				</li>
+			<% end %>
+			</ul>
+		</div>
 	</div>
 	<div class="title">
 		選擇日期與時間
 	</div>
+	<script type="text/javascript">
+		$("#form_box .doctors_box .value").on("click", function(){
+			$(this).siblings(".doctors_dropdown").toggleClass("selected");
+		});
+		$("#form_box .doctors_box ul li").on("click", function(){
+			var id = $(this).data("id");
+			$("#doctor_input").val(id);
+			window.reloadForm();
+		});
+	</script>
 </div>

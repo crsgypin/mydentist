@@ -1,0 +1,62 @@
+#linebot_event_show {
+	#form_box {
+		.date_box {
+			.month_box {
+				padding: 10px 0px;
+				display: flex;
+				justify-content: space-between;
+			}
+			.wday_box {
+				padding: 10px 0px;
+				ul {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					li {
+						width: calc(100% / 7);
+						text-align: center;				
+						a {
+							display: inline-block;
+						}
+						&.select {
+							a {
+								color: $colorGy_l;		
+							}
+						}
+					}
+				}
+			}		
+			.day_box {
+				padding: 10px 0px;
+				ul {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					li {
+						width: calc(100% / 7);
+						text-align: center;
+						input {
+							display: none;
+						}
+						a {
+							display: inline-block;
+							width: 50px;
+							height: 50px;
+							line-height: 50px;
+						}
+						a.today {
+							border: 1px solid $colorBl;
+							border-radius: 50%;							
+						}
+						input:checked + a {
+							color: $colorW;
+							background: $colorBl;
+							border-radius: 50%;
+							border: none;											
+						}
+					}
+				}
+			}
+		}
+	}
+}
