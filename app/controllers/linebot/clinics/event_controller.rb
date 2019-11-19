@@ -113,7 +113,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	def set_doctor_service
 		@doctor_services = @doctor.doctor_services.includes(:service).where("has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
 		if params[:service_id].present?
- 			@doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id]}
+ 			@doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id].to_i}
 			return if @doctor_service.present?
 		end
 		if @event.present?

@@ -6,7 +6,7 @@
 <%= hidden_field_tag "patient[source]", "現場" %>
 <%= hidden_field_tag "event[source]", "現場" %>
 <%= hidden_field_tag "event[status]", "已預約" %>
-<%= hidden_field_tag "event[date]", @event.date.strftime("%Y/%m/%d") %>
+<%= hidden_field_tag "event[date]", @date.strftime("%Y/%m/%d") %>
 <div class="content_box clinic_form">
 	<div class="patient_box <%= 'disabled' if patient_exist %>">
 	<%= hidden_field_tag "patient_id", @patient.id %>
@@ -60,18 +60,18 @@
 		    {class: "both", v: proc{|a| 
 		    	r = ""
 		    	r += select_field_tag "event[health_insurance_status]", "", [[nil, "健保狀態"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]}
-		    	r += select_field_tag "event[service_id]", a.service_id, @clinic.services.map{|a| [a.id, a.name]}
+		    	r += select_field_tag "event[service_id]", @service.id, @services.map{|a| [a.id, a.name]}
 		    	r.html_safe
 		    }},
 		    {class: "both", v: proc{|a| 
 		    	r = ""
-		    	r += select_field_tag "event[doctor_id]", a.doctor_id, @clinic.doctors.map{|d| [d.id, d.name]}
+		    	r += select_field_tag "event[doctor_id]", @doctor.id, @doctors.map{|d| [d.id, d.name]}
 		    	r += render_relative_partial "event_form/event_duration_field", locals: {
-		    		doctor_id: @clinic.doctors.first.id,
-		    		date: a.date,
+		    		doctor_id: @doctor.id,
+		    		date: @date,
 		    		hour: a.hour,
 		    		minute: a.minute,
-		    		duration: a.duration
+		    		duration: @duration
 		    	}
 		    	r.html_safe
 		    }},
@@ -84,5 +84,27 @@
 	<%= link_to "取消", "", onclick: "event.preventDefault(); $(this).closest('.lightbox').remove();", class: "btnW" %>
 	<%= link_to "儲存", "", onclick: "event.preventDefault(); $(this).closest('form').submit();", class: "btnBu" %>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		var box = $("#clinic_event_form");
+		var patientInput = box.find("[name='patient_id']");
+		var serviceInput = box.find("[name='event[service_id]']");
+		var doctorInput = box.find("[name='event[doctor_id]']");
+		[doctorInput, serviceInput].forEach(function(input){
+			$(input).on("change", function(){
+				$.ajax({
+					url: "<%= url_for %>",
+					method: "get",
+					data: {
+						patient_id: patientInput.val(),
+						service_id: serviceInput.val(),
+						doctor_id: doctorInput.val()
+					}
+				})
+			})
+		});
+	});
+</script>
 
 

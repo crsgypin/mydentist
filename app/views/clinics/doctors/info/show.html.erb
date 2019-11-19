@@ -1,8 +1,5 @@
 
 <div id="doctors_show">
-  <%= link_to clinic_doctors_path(@clinic), class: "back" do %>
-    <i class="fas fa-angle-left"></i><p>返回醫師列表</p>
-  <% end %>
   <div class="content_box">
     <div id="doctors_show_container">
       <%= form_tag url_for(action: :update), method: :patch, class: "clinic_form clinic_form_box", remote: true do %>

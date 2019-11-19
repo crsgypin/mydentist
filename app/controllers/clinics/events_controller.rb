@@ -8,27 +8,28 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
 
     if !@doctor_id.present?
-      set_for_all_doctors
+      index_set_for_all_doctors
     else
-      set_for_single_doctor
+      index_set_for_single_doctor
     end
   end
 
   def new
-    @date = Date.parse(params[:date]) rescue Date.today
-    @event = @clinic.events.new(date: @date)
-
-    if params[:patient_id].present?
-      #search patient_id
-      @patient = @clinic.patients.find(params[:patient_id])
-      return
-    end
-    @patient = @clinic.patients.new
+    @event = @clinic.events.new
+    new_edit_set_service
+    new_edit_set_doctor
+    new_edit_set_date
+    new_edit_set_patient
+    new_edit_set_duration
   end
 
   def edit
     @event = @clinic.events.find(params[:id])
-    @patient = @event.patient
+    new_edit_set_service
+    new_edit_set_doctor
+    new_edit_set_date
+    new_edit_set_patient
+    new_edit_set_duration
   end
 
   def create
@@ -61,7 +62,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
 
   private
 
-  def set_for_all_doctors
+  def index_set_for_all_doctors
     @range_segments = segments.map{|s| s[:name]}
     @segment = params[:segment]
     @segment = "整日" if !@range_segments.include?(@segment) 
@@ -76,7 +77,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     end
   end
 
-  def set_for_single_doctor
+  def index_set_for_single_doctor
     @range_segments = ["整週", "整日"]
     @segment = params[:segment]
     @segment = "整週" if !@range_segments.include?(@segment) 
@@ -104,6 +105,76 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
         }
       end
     end
+  end
+
+  def new_edit_set_doctor
+    @doctors = @service.doctors
+    if params[:doctor_id].present?
+      @doctor = @doctors.find_by(id: params[:doctor_id])
+      return if @doctor.present?
+    end
+    if @event.present?
+      @doctor = @doctors.find{|d| d == @event.doctor}
+      return if @doctor.present?
+    end
+    @doctor = @doctors.first    
+  end
+
+  # def new_edit_set_doctor_service
+  #   @doctor_services = @doctor.doctor_services.includes(:service)
+  #   if params[:service_id].present?
+  #     @doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id]}
+  #     return if @doctor_service.present?
+  #   end
+  #   if @event.present?
+  #     @doctor_service = @doctor_services.find{|d| d.service == @event.service}
+  #     return if @doctor_service.present?
+  #   end
+  #   @doctor_service = @doctor_services.first    
+  # end
+
+  def new_edit_set_service
+    @services = @clinic.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}
+    if params[:service_id].present?
+      @service = @clinic.services.find_by(id: params[:service_id])
+      return if @service.present?
+    end
+    if @event.present?
+      @service = @event.service
+      return if @service.present?
+    end
+    @service = @services.first
+  end
+
+  def new_edit_set_date
+    if params[:date].present?
+      @date = Date.parse(params[:date]) rescue nil
+      return if @date.present?
+    end
+    if @event.present?
+      @date = @event.date
+      return if @date.present?
+    end
+    @date = Date.today    
+  end
+
+  def new_edit_set_patient
+    if params[:patient_id].present?
+      #search patient_id
+      @patient = @clinic.patients.find(params[:patient_id])
+      return if @patient.present?
+    end
+    if @event.present?
+      @patient = @event.patient
+      return if @patient.present?
+    end
+    @patient = @clinic.patients.new
+  end
+
+  def new_edit_set_duration
+    #duration 不從 event 取出，因為 service 與 doctor 就可以決定
+    @doctor_service = @service.doctor_services.find{|s| s.doctor == @doctor}
+    @duration = @doctor_service.duration_number
   end
 
   def event_params

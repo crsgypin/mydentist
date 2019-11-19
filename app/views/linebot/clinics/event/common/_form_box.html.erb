@@ -14,10 +14,7 @@
 			選擇日期與時間
 		</div>
 	</div>
-	<%# services selector %>
-	<div class="services_box">
-		<%= select_field_tag "event[service_id]", @doctor_service.service_id, @doctor_services.map{|a| [a.service_id, "#{a.service.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
-	</div>
+	<%= render_relative_partial "form_box/services_box" %>
 	<%# date selector %>
 	<div class="date_box">
 		<div class="month_box">

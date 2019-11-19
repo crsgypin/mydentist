@@ -10,9 +10,16 @@
   text-align: right;
   line-height: 80px;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    line-height: 60px;
+    font-size: $fs_21p;
+    font-weight: bold;
+  }
 
 	.notification {
-		float: right;
     width: 30px;
     height: 30px;
     text-align: center;

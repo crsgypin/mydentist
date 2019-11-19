@@ -3,11 +3,12 @@
 <% hour = hour_segment[:hour] %>
 <% hour_segment[:minute_segments].each do |minute_segment| %>
   <% minute = minute_segment[:minute] %>
-  <% event = minute_segment[:event] %>
+  <% events = minute_segment[:events] %>
 	<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 	<div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
-	  <% if event.present? %>
-	    <% if event.hour == hour && event.minute == minute %>
+	  <% if events.length > 0 %>
+	  	<% event = events.find{|e| e.hour == hour && e.minute = minute && e.is_valid_in_line?} %>
+	    <% if event.present? %>
 	    <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
 	    <div class="patient_event <%= source_class %>" 
 	      style="height: <%= event.event_durations_count * row_height %>px" 

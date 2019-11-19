@@ -7,6 +7,7 @@ class ::Clinics::Events::Selector::EventDurationsController < ::Clinics::Applica
     @date = Date.parse(params[:date]) rescue Date.today
     @hour = params[:hour]
     @minute = params[:minute]
+    @duration = params[:duration].to_i
 
     @doctor = @clinic.doctors.find(params[:doctor_id])
     @clinic_wday_hours = @clinic.max_min_hours

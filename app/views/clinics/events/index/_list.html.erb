@@ -2,7 +2,7 @@
 	<div class="title">
 		今日看診名單
 		<div class="float_r">
-			<%= link_to "新增預約", url_for(action: :new), remote: true, class: "btnBu" %>
+			<%= link_to "新增預約", url_for(action: :new, doctor_id: @doctor_id, date: @date), remote: true, class: "btnBu" %>
 		</div>
 	</div>
 	<div class="note">

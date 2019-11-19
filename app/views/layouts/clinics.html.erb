@@ -5,10 +5,12 @@
 	</head>
   <body id="clinic">
   	<%= render_relative_partial "clinics/sidemenu" %>
-  	<%= render_relative_partial "clinics/navbar" %>
   	<%= render_relative_partial "clinics/logout_lightbox" %>
   	<div id="clinic-container">
-      <% if @doctor_sidemenu == 1 || @clinic_line_sidemenu == 1 %>
+      <%= render_relative_partial "clinics/navbar" %>
+      <% if @doctor_sidemenu == 1 || @clinic_line_sidemenu == 1 || @member_sidemenu == 1 %>
+        <%= render_relative_partial "clinics/doctor_nav" if @doctor_sidemenu == 1 %>
+        <%= render_relative_partial "clinics/member_nav" if @member_sidemenu == 1 %>
         <div id="show_layout">
           <%= render_relative_partial "clinics/doctor_sidemenu" if @doctor_sidemenu == 1 %>
           <%= render_relative_partial "clinics/clinic_line_sidemenu" if @clinic_line_sidemenu == 1 %>

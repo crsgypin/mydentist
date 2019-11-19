@@ -1,0 +1,27 @@
+<div class="services_box">
+	<%= hidden_field_tag "event[service_id]", @doctor_service.service_id, id: "service_input" %>
+	<span class="value">
+		<% puts "doctor_service: #{@doctor_service.inspect}" %>
+		<%= "#{@doctor_service.service.name} (#{@doctor_service.service.duration})" %>
+	</span>
+	<div class="service_dropdown">
+		<ul>
+		<% @doctor_services.each do |doctor_service| %>
+			<li data-id="<%= doctor_service.service_id %>">
+				<%= "#{doctor_service.service.name} (#{doctor_service.service.duration})" %>
+			</li>
+		<% end %>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$("#form_box .services_box .value").on("click", function(){
+			$(this).siblings(".service_dropdown").toggleClass("selected");
+		});
+		$("#form_box .services_box ul li").on("click", function(){
+			var id = $(this).data("id");
+			$("#service_input").val($(this).data("id"));
+			window.reloadForm();
+		});
+	</script>
+	<%# select_field_tag "event[service_id]", @doctor_service.service_id, @doctor_services.map{|a| [a.service_id, "#{a.service.name}(#{a.duration})" ]}, class: "form-control", id: "service_select" %>
+</div>

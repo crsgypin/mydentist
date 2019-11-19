@@ -1,4 +1,5 @@
 class ::Clinics::MembersController < ::Clinics::ApplicationController
+  before_action -> {@member_sidemenu = 1 }, only: [:show, :edit, :new]
 
   def index
     @members = @clinic.members

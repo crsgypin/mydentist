@@ -1,5 +1,8 @@
 
 <div id="clinic_nav">
+	<div class="title">
+		<%= roc_format(Date.today, 2) %>
+	</div>
 	<div class="notification">
 		<%= link_to "", onclick: "event.preventDefault(); showNews();" do %>
 			<%= icon_tag(:bell) %>

@@ -1,5 +1,6 @@
 
 <%= render partial: "clinics/common/show_page_nav", locals: {
-	name: "回病患列表",
-	url: url_for(action: :index)
+  name: "回會員列表",
+  url: clinic_members_path(@clinic)
 } %>
+
