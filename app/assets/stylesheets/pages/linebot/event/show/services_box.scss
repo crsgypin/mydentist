@@ -1,0 +1,53 @@
+
+#linebot_event_show {
+	#form_box {
+		.services_box {
+			position: relative;
+			text-align: center;
+			.title {
+				font-size: $fs_16p;
+				font-weight: bold;
+				height: 40px;
+				line-height: 40px;
+			}
+			.value {
+				display: inline-block;
+				height: 40px;
+				line-height: 40px;
+				border: 1px solid $colorBu;
+				border-radius: 10px;
+				width: 250px;
+				color: $colorBu;
+			}
+			.service_dropdown {
+				position: absolute;
+				top: 40px;
+				left: 50%;
+				width: 250px;
+				transform: translate(-50%, 0);
+				-webkit-transform: translate(-50%, 0);
+				background: $colorW;
+		    overflow: hidden;
+		    border: 1px solid $colorBu;
+		    border-radius: 10px;
+				visibility: hidden;
+		    opacity: 0;
+		    ul {
+		    	li {
+		    		height: 40px;
+		    		line-height: 40px;
+		    		color: $colorGy;
+						&.selected {
+							color: $colorBu;
+							padding-bottom: 10px;
+						}
+		    	}
+		    }
+				&.selected {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}

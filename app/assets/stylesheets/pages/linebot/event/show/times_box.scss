@@ -1,0 +1,46 @@
+
+#linebot_event_show {
+	#form_box {
+		.time_box {
+			padding: 10px 0px;
+			.segment_box {
+				color: $colorBu;
+				.title {
+					font-size: fs_21p;
+					line-height: lh_26p;
+					padding: 10px 0;
+					text-align: center;
+				}
+				ul.hours_box {
+					display: flex;
+					justify-content: space-between;
+					padding: 5px 0;
+					li {
+						text-align: center;
+						width: 20%;
+						a {
+							display: inline-block;
+							width: 100%;
+							color: $colorBu;
+							border: 1px solid $colorBu;
+							padding: 2px 0px;
+							border-radius: 5px;
+							&.selected {
+								color: $colorW;
+								border: 1px solid $colorBu;
+								background: $colorBu;
+							}
+						}
+						input {
+							display: none;
+						}
+						input:disabled + a {
+							color: $colorBu_l;
+							border: 1px solid $colorBu_l;						
+						}
+					}
+				}
+			}
+		}
+	}
+}
