@@ -5,12 +5,12 @@
 			padding-bottom: 5px;
 			/*display: flex;*/
 			width: 100%;
+			position: relative;
+			z-index: 1;
 			.doctor {
 				float: left;
 				display: inline-block;
 				/*min-width: 200px;*/
-				position: relative;
-				z-index: 1;
 				.value {
 					.bg_center_image {
 						margin: 0 auto;
@@ -23,7 +23,9 @@
 				.doctors_dropdown {
 					position: absolute;
 					top: 80px;
-					left: 0;
+					left: 50%;
+					transform: translate(-50%, 0);
+					-webkit-transform: translate(-50%, 0);
 					width: 96vw;
 					max-width: 500px;
 					background: $colorW;
@@ -70,6 +72,17 @@
 						visibility: visible;
 						opacity: 1;
 					}
+		 			&:before {
+		 				position: absolute;
+		 				top: 12px;
+		 				right: 0;
+				    display: block;
+				    width: 0; 
+				    height: 0; 
+				    border: 5px solid;
+				    border-color: $colorW transparent transparent transparent;
+		 				content: ""
+		 			}
 				}				
 			}
 			.title{
