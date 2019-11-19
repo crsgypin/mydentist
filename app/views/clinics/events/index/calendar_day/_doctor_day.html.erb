@@ -17,10 +17,10 @@
 	        hour_segments: doctor_day_segment_hour_event[:hour_segments],
 	        row_height: row_height,
 	        onclick_event: proc do |event|
-	          "$.getScript('#{url_for(action: :edit, id: event)}');"
+	          # "$.getScript('#{url_for(action: :edit, id: event)}');"
 	        end,
 	        onclick_new_event: proc do |hour, minute|
-	          "$.getScript('#{url_for(action: :new, hour: hour, minute: minute)}');"
+	          # "$.getScript('#{url_for(action: :new, hour: hour, minute: minute)}');"
 	        end
 	      } %>
 	    </div>

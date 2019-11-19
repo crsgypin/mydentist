@@ -20,7 +20,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     new_edit_set_doctor
     new_edit_set_date
     new_edit_set_patient
-    new_edit_set_duration
+    new_edit_set_time_duration
   end
 
   def edit
@@ -29,7 +29,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     new_edit_set_doctor
     new_edit_set_date
     new_edit_set_patient
-    new_edit_set_duration
+    new_edit_set_time_duration
   end
 
   def create
@@ -58,6 +58,11 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def update
     @event = @clinic.events.find_by(id: params[:id])
     @event.update(event_params)
+  end
+
+  def destroy
+    @event = @clinic.events.find_by(id: params[:id])
+    @event.destroy
   end
 
   private
@@ -171,8 +176,28 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @patient = @clinic.patients.new
   end
 
-  def new_edit_set_duration
+  def new_edit_set_time_duration
     #duration 不從 event 取出，因為 service 與 doctor 就可以決定
+
+    #hour
+    if params[:hour]
+      @hour = params[:hour].to_i
+    elsif @event.present?
+      @hour = @event.hour
+    else
+      @hour = nil
+    end
+
+    #minute
+    if params[:minute]
+      @minute = params[:minute].to_i
+    elsif @event.present?
+      @minute = @event.minute
+    else
+      @minute = nil
+    end
+
+    #duration
     @doctor_service = @service.doctor_services.find{|s| s.doctor == @doctor}
     @duration = @doctor_service.duration_number
   end
