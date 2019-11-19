@@ -11,10 +11,10 @@
 				/*min-width: 200px;*/
 				position: relative;
 				z-index: 1;
-				.bg_center_image {
-					margin: 0 auto;
-				}
 				.value {
+					.bg_center_image {
+						margin: 0 auto;
+					}
 					text-align: center;
 					font-size: $fs_12p;
 					height: 20px;
@@ -32,6 +32,8 @@
 					visibility: hidden;
 			    opacity: 0;
 				  box-shadow: 0 2px 12px 0 rgba(110, 110, 110, 0.5);
+				  overflow: scroll;
+				  max-height: 80vh;
 			    ul {
 			    	li {
 			    		font-size: $fs_12p;

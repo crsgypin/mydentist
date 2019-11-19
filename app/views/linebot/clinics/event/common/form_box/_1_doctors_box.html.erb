@@ -1,9 +1,9 @@
 
 <div class="doctors_box">
 	<div class="doctor">
-		<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
-		</div>
 		<div class="value">
+			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
+			</div>
 			<%= hidden_field_tag "event[doctor_id]", @doctor.id, id: "doctor_input" %>
 			<%= "#{@doctor.name}#{@doctor.title}" %>
 		</div>
