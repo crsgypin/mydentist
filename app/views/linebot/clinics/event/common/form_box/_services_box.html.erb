@@ -8,6 +8,7 @@
 	</div>
 	<div class="service_dropdown">
 		<ul>
+			<li class="selected"><%= "#{@doctor_service.service.name} (#{@doctor_service.service.duration})" %></li>
 		<% @doctor_services.each do |doctor_service| %>
 			<li data-id="<%= doctor_service.service_id %>">
 				<%= "#{doctor_service.service.name} (#{doctor_service.service.duration})" %>

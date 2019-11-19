@@ -34,6 +34,7 @@
 				border: 1px solid $colorBu;
 				border-radius: 10px;
 				width: 250px;
+				color: $colorBu;
 			}
 			.service_dropdown {
 				position: absolute;
@@ -54,6 +55,11 @@
 		    	li {
 		    		height: 40px;
 		    		line-height: 40px;
+		    		color: $colorGy;
+						&.selected {
+							color: $colorBu;
+							padding-bottom: 10px;
+						}
 		    	}
 		    }
 				&.selected {
