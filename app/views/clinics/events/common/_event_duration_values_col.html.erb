@@ -27,7 +27,7 @@
 	    <% end %>
 	  <% else %>
 	  <div class="patient_event"
-	  	data-doctor_id="<%= @doctor.try(:id) %>"
+	  	data-doctor_id="<%= doctor.id %>"
 	  	data-date="<%= @date %>" 
 	  	data-hour="<%= hour %>"
 	  	data-minute="<%= minute %>"

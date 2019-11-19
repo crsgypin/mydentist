@@ -98,21 +98,25 @@
 
 		[doctorInput, serviceInput].forEach(function(input){
 			$(input).on("change", function(){
-				$.ajax({
-					url: "<%= url_for %>",
-					method: "get",
-					data: {
-						patient_id: patientInput.val(),
-						service_id: serviceInput.val(),
-						doctor_id: doctorInput.val(),
-						date: dateInput.val(),
-						hour: hourInput.val(),
-						minute: minuteInput.val(),
-						// duration: durationInput.val(),
-					}
-				})
+				window.reloadEventForm();
 			})
 		});
+
+		window.reloadEventForm = function(){
+			$.ajax({
+				url: "<%= url_for %>",
+				method: "get",
+				data: {
+					patient_id: patientInput.val(),
+					service_id: serviceInput.val(),
+					doctor_id: doctorInput.val(),
+					date: dateInput.val(),
+					hour: hourInput.val(),
+					minute: minuteInput.val(),
+					// duration: durationInput.val(),
+				}
+			});			
+		}
 	});
 </script>
 
