@@ -13,6 +13,8 @@ $("#search_box input").on("keydown", function(){
 
 $("#search_box").on("click", ".search_result ul li", function(){
 	var id = $(this).data("id");
-	$.getScript("<%= new_clinic_event_path(@clinic) %>?patient_id=" + id);
+	// $.getScript("<%= new_clinic_event_path(@clinic) %>?patient_id=" + id);
+	$("[name='patient_id']").val(id);
+	window.reloadEventForm();
 });
 

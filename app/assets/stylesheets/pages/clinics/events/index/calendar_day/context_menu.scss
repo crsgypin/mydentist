@@ -1,0 +1,25 @@
+
+#events_index #context_menu {
+	position: fixed;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+  background: $colorW;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 1000;
+	&.selected {
+		opacity: 1;
+		visibility: visible;
+	}
+	ul {
+		li {
+			padding: 10px;
+			line-height: 20px;
+			border-bottom: 1px solid $colorGy_l;
+			cursor: pointer;	
+			&:hover {
+				color: $colorW;
+				background: $colorBu;
+			}
+		}
+	}
+}

@@ -15,11 +15,12 @@
       <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
         hour_segments: doctor_obj[:hour_segments],
         row_height: row_height,
+        doctor: doctor_obj[:doctor],
         onclick_event: proc do |event|
-          "$.getScript('#{url_for(action: :edit, id: event)}');"
+          # "$.getScript('#{url_for(action: :edit, id: event)}');"
         end,
         onclick_new_event: proc do |hour, minute|
-          "$.getScript('#{url_for(action: :new, date: @date, hour: hour, minute: minute)}');"
+          # "$.getScript('#{url_for(action: :new, date: @date, hour: hour, minute: minute)}');"
         end
       } %>
     </div>

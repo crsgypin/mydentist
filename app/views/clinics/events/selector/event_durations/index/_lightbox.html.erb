@@ -28,6 +28,7 @@
             <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
               hour_segments: doctor_week_hour_event[:hour_segments],
               row_height: row_height,
+              doctor: @doctor,
               onclick_event: proc do |event|
 
               end,
