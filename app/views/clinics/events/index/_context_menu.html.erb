@@ -1,0 +1,40 @@
+
+<div id="context_menu">
+	<ul>
+		<li>移除</li>
+		<li>移除</li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		var contextMenu = $("#context_menu");
+    $("#calendar_day .table_box")[0].addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      if($(e.target).closest('#calendar_day').length > 0){
+	      contextMenu.addClass("selected");
+	      var x = e.clientX;
+	      var y = e.clientY;
+	      contextMenu.css({top: y, left: x});
+	      console.log(e.target);
+	      var patientElm = function(){
+	      	console.log('is', $(e.target).is(".patient_event"));
+	      	if($(e.target).is(".patient_event")){
+	      		return $(e.target);
+	      	} else {
+	      		return $(e.target).closest(".patient_event")
+	      	}
+	      }();
+	      
+
+      } else {
+      	contextMenu.removeClass("selected");
+      }
+    }, false);
+    $("body").click(function(){
+    	contextMenu.removeClass("selected");
+    })
+	})
+	
+</script>
+
