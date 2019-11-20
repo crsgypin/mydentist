@@ -26,8 +26,9 @@ module LinebotWebhook::Replies::BookingEventsReply
 			columns: [
 				{
 					image_url: @doctor.photo.url,
-					title: "前次主治醫生為 #{@doctor.title_name}",
+					title: "前次主治醫生為#{@doctor.title_name}",
 					text: "請問這次要選擇哪位醫生進行看診？",
+					name: @doctor.title_name,
 					actions: [
 						{
 							type: "uri",
@@ -57,7 +58,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 					image_url: doctor.photo.url,
 					title: "#{doctor.title_name}",
 					text: short_string(doctor.pro, 39),
-					name: doctor.name,
+					name: doctor.title_name,
 					# default_action: {
 					# 	type: "postback",
 					# 	label: doctor.name,
