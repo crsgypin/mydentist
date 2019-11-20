@@ -2,7 +2,7 @@ class LinebotWebhook::Controllers::EventsController < LinebotWebhook::Controller
 	include LinebotWebhook::Replies::EventsReply
 
 	def index
-		@events = @line_account.events.where(status: "已預約")
+		@events = @line_account.events.where(status: "已預約").last(9)
 		if @events.length > 0
 			reply_events
 		else
