@@ -3,7 +3,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 	def reply_booking_event_services
 		reply_message({
 			type: "quick_reply_buttons",
-			text: "請選擇服務項目",
+			text: "請問您想要預約的診療項目為何呢？",
 			items: @clinic.services.map do |service|
 				r = {
 					type: "postback",
