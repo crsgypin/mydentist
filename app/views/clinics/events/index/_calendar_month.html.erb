@@ -1,12 +1,11 @@
 
-<div id="calendar-month">
+<div id="calendar_month">
   <%= hidden_field_tag "date", @date, id: "date_input" %>
   <div class="title">
     行事曆
   </div>
-  <div id="calender-view-container">
+  <div id="calender_view_container">
     <div class="header">
-      <h3><%= roc_format(@date, 2) %></h3>
       <div class="month-box">
         <%= link_to icon_tag(:angle_left), "", id: "month-last" %>
         <div>

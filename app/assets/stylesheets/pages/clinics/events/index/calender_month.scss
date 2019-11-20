@@ -1,5 +1,5 @@
 
-#events_index #calendar-month{ 
+#events_index #calendar_month{ 
   background-color: rgba(218, 223, 234, 0.1);
   padding-bottom: 40px;
   .title {
@@ -7,7 +7,7 @@
   	font-size: $fs_16p;
   	border-bottom: 1px solid $colorGy;
   }
-	#calender-view-container {
+	#calender_view_container {
 		.header {
 			h3 {
 				font-size: $fs_22p;
@@ -16,6 +16,9 @@
 				text-align-last: justify;
 			}
 			.month-box {
+				height: 40px;
+				line-height: 40px;
+				font-weight: bold;
 				display: flex;
 				justify-content: space-between;				
 				font-size: $fs_14p;
@@ -46,8 +49,28 @@
 		.dp-prev, .dp-next {
 		  color: #60b8b7;
 		}
+		.dp-col-header {
+			border-bottom: 1px solid $colorGy1;
+			color: $colorGy;
+			padding-bottom: 3px;
+		}
 		.dp-permanent footer {
 		  display: none;
+		}
+		.dp-day {
+			height: 40px;
+			&.dp-day-today {
+				&:after {
+					width: 100%;
+					height: 100%;
+					border: 1px solid $colorBu;
+					border-radius: 50%;
+				}
+			}
+			&.dp-selected {
+			  background-image: linear-gradient(to bottom, #29d3fd, #12a7fb);
+			  border-radius: 50%;
+			}
 		}
 	}
 }
