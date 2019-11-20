@@ -51,7 +51,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     end
     rescue Exception => e
       Rails.logger.info "fail to create event: #{e.to_s}, #{e.backtrace.first(10)}"
-      @error_message = e.to_s
+      js_render_error e.to_s
     end
   end
 

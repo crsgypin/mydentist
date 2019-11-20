@@ -1,9 +1,6 @@
 
-<% if @error_message.present? %>
-	alert("<%= @error_message.html_safe %>");
-<% else %>
-	alert('ok');
-	$("#clinic_event_form").remove();
-	window.location.reload();
-<% end %>
+$("body").append("<%= j render_relative_partial 'create/event_created_lightbox' %>");
+// alert('預約＆新增病患成功');
+$("#clinic_event_form").remove();
+// window.location.reload();
 
