@@ -132,12 +132,19 @@ module Common::DateTimeDurationHelper
 				last_w_duration = w_duration
 			end
 		end
-		all_segments.map do |wday, w_segments|
+		[1,2,3,4,5,6,0].map do |wday|
+		# all_segments.map do |wday, w_segments|
+			w_segments = all_segments[wday]
 			cw = ch_wday(wday)
-			w_segments_note = w_segments.map do |w_segment|
-				"#{w_segment.first.hour_minute} ~ #{w_segment.last.end_hour_minute}"
-			end.join(", ")
-			"#{cw} #{w_segments_note}"
+
+			if w_segments.present?
+				w_segments_note = w_segments.map do |w_segment|
+					"#{w_segment.first.hour_minute} ~ #{w_segment.last.end_hour_minute}"
+				end.join(", ")
+				"#{cw} #{w_segments_note}"
+			else
+				"#{cw} 無"
+			end
 		end.join("\n")
 	end
 
