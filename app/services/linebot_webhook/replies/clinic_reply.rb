@@ -28,13 +28,18 @@ module LinebotWebhook::Replies::ClinicReply
 					}
 				},
 				{
-					type: "postback",
+					type: "uri",
 					label: "聯絡診所",
-					data: {
-						controller: "clinic",
-						action: "show",
-						type: "contact"
-					}
+					uri: "tel:#{@clinic.phone}"
+				}
+				# {
+				# 	type: "postback",
+				# 	label: "聯絡診所",
+				# 	data: {
+				# 		controller: "clinic",
+				# 		action: "show",
+				# 		type: "contact"
+				# 	}
 				}
 			]
 		})
