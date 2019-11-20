@@ -5,8 +5,8 @@ module LinebotWebhook::Replies::ClinicReply
 		r = reply_message({
 			type: "reply_button",
 			alt_text: "選擇查詢資訊",
-			title: "選擇時間",
-			text: "點選內容，選擇時間",
+			title: "診所資訊",
+			text: "點選欲查詢的資料",
       # image_url: @clinic.photo.url,
 			actions: [
 				{
