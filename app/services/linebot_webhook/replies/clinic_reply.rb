@@ -40,7 +40,6 @@ module LinebotWebhook::Replies::ClinicReply
 				# 		action: "show",
 				# 		type: "contact"
 				# 	}
-				}
 			]
 		})
 		r
