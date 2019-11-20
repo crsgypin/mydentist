@@ -22,15 +22,32 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 	def update_service
 		@booking_event = @line_account.booking_events.last || @line_account.booking_events.new
 		@service = @clinic.services.find_by(id: @message[:data][:service_id])		
-		return reply_booking_event_no_servie if !@service
+		if !@service
+			reply_booking_event_no_servie
+			return 
+		end
 		@booking_event.update(service: @service)
 
-		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
-		if @booking_event.doctor.nil?
-			reply_booking_event_doctors
-		else
-			reply_booking_event_doctors
+		@patient = @line_account.patient
+		if @patient.present? && @patient.default_doctor.present?
+			@doctor = @patient.default_doctor
+			reply_default_doctor
+			return
 		end
+
+		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
+		reply_booking_event_doctors
+	end
+
+	def other_doctors
+		@booking_event = @line_account.booking_events.last || @line_account.booking_events.new
+		@service = @booking_event.service
+		if !@sercice
+			reply_booking_event_no_servie
+			return
+		end
+		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
+		reply_booking_event_doctors
 	end
 
 	def update_doctor

@@ -30,6 +30,10 @@ class Doctor < ApplicationRecord
 		end
 	end
 
+	def title_name
+		"#{self.name}#{self.title}"
+	end
+
 	def day_events(date)
 		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
 	end

@@ -19,6 +19,35 @@ module LinebotWebhook::Replies::BookingEventsReply
 		})
 	end
 
+	def reply_default_doctor
+		reply_message({
+			type: "carousel",
+			text: "請選擇醫生",
+			columns: [
+				{
+					image_url: @doctor.photo.url,
+					title: "前次主治醫生為 #{@doctor.title_name}",
+					text: "請問這次要選擇哪位醫生進行看診？",
+					actions: [
+						{
+							type: "uri",
+							label: "一樣",
+							uri: liff_line_event_url(@clinic, @line_account, {doctor_id: @doctor.id})
+						},
+						{
+							type: "postback",
+							label: "其他醫生",
+							data: {
+								controller: "booking_events",
+								action: "other_doctors"
+							}
+						}
+					]
+				}
+			]
+		})
+	end
+
 	def reply_booking_event_doctors		
 		reply_message({
 			type: "carousel",
@@ -26,7 +55,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 			columns: @doctors.map do |doctor|
 				r = {
 					image_url: doctor.photo.url,
-					title: "#{doctor.name} #{doctor.title}",
+					title: "#{doctor.title_name}",
 					text: short_string(doctor.pro, 39),
 					name: doctor.name,
 					# default_action: {
