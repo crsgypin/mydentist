@@ -28,7 +28,7 @@ module LinebotWebhook::Replies::BookingEventsReply
 					image_url: @doctor.photo.url,
 					title: "前次主治醫生為#{@doctor.title_name}",
 					text: "請問這次要選擇哪位醫生進行看診？",
-					name: @dcotor.title_name,
+					name: @doctor.title_name,
 					actions: [
 						{
 							type: "uri",

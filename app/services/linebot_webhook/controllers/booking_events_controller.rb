@@ -29,8 +29,8 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 
 		@patient = @line_account.patient
 		if @patient.present? && @patient.default_doctor.present?
-			@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
-			return reply_booking_event_doctors
+			# @doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
+			# return reply_booking_event_doctors
 			@doctor = @patient.default_doctor
 			reply_default_doctor
 		else
