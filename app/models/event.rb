@@ -25,6 +25,14 @@ class Event < ApplicationRecord
 		["已預約", "報到", "爽約"].include? self.status
 	end
 
+	def expired?
+		Time.now > self.date_time
+	end
+
+	def date_time
+		Time.parse("#{self.date} #{self.hour}:#{self.minute}")
+	end
+
 	def hour_minute=(str)
 		t = parse_hour_minute_format(str)
 		self.hour = t[:hour]

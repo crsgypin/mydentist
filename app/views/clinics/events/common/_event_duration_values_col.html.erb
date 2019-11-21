@@ -8,18 +8,26 @@
 	<% zindex = 1000 - index %>
 	<div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
 	  <% if events.length > 0 %>
-	  	<% event = events.find{|e| e.hour == hour && e.minute = minute && e.is_valid_in_line?} %>
+	  	<% event = events.find{|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %>
 	    <% if event.present? %>
-	    <% source_class = {"網路" => "web", "現場" => "counter"}[event.source] %>
-	    <div class="patient_event <%= source_class %>" 
+	    <div class="patient_event exist <%= event.expired? ? "expired" : nil %>" 
 	    	data-id="<%= event.id %>"
 	      style="height: <%= event.event_durations_count * row_height %>px; z-index: <%= zindex %>;" 
 	      onclick="<%= onclick_event.call(event) %>">
-	      <div class="patient"><%= event.patient.name %></div>
-	      <div class="service"><%= event.service.name %></div>
+	      <div class="info">
+		      <div class="patient"><%= event.patient.name %></div>
+		      <div class="service"><%= event.service.name %></div>
+		    </div>
 	      <div class="status">
-	        <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>"><%= icon_tag(:check_circle) %></div>
-	        <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>"><%= icon_tag(:check_circle) %></div>
+	      	<div class="line_box <%= "selected" if event.source == "網路" %>" id= "<%= "check_id_#{event.id}"%>">
+	      		<%= image_tag clinic_static_image_url(:line_bot) %>
+	      	</div>
+	        <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>">
+	        	<%= image_tag clinic_static_image_url(:checked_green) %>
+	        </div>
+	        <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>">
+	        	<%= image_tag clinic_static_image_url(:cross_red) %>
+        	</div>
 	      </div>
 	    </div>
 	    <% else %>
