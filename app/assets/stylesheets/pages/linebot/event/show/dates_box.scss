@@ -18,9 +18,9 @@
 						a {
 							display: inline-block;
 						}
-						&.select {
+						&.sunday {
 							a {
-								color: $colorGy_l;		
+								color: $colorGy1;
 							}
 						}
 					}
@@ -47,6 +47,11 @@
 						a.today {
 							border: 1px solid $colorBl;
 							border-radius: 50%;							
+						}
+						&.sunday {
+							a {
+								color: $colorGy1;
+							}
 						}
 						input:checked + a {
 							color: $colorW;

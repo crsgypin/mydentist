@@ -11,7 +11,7 @@
 	<div class="wday_box">
 		<ul>
 		<% ch_wdays.each do |wday, ch_wday| %>
-			<li class="<%= 'select' if wday == @date.wday %>">
+			<li class="<%= 'sunday' if wday == 0 %>">
 				<%= link_to ch_wday, "javascript:" %>
 			</li>	
 		<% end %>
@@ -22,7 +22,7 @@
 			<% sunday = @date - @date.wday.day %>
 			<% (0..6).each do |i| %>
 			<% date = (sunday + i.day) %> 
-			<li>
+			<li class="<%= 'sunday' if i == 0 %>">
 				<%= radio_button_tag "event[date]", date.strftime('%Y/%m/%d'), @date.day == date.day %>
 				<%= link_to "#{date.day}日", "javascript:", id: "day_input", onclick: "event.preventDefault(); $(this).siblings('input').click();", class: "#{'today' if date == Date.today}" %>
 			</li>
