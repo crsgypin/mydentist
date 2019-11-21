@@ -1,6 +1,11 @@
 
 #events_index {
-	#doctors-nav {
+	#doctors_nav {
 		padding-bottom: 20px;
+		select {
+			width: 140px;
+			height: 40px;
+			line-height: 40px;
+		}
 	}
 }

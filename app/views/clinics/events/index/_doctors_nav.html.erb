@@ -1,4 +1,4 @@
 
-<div id="doctors-nav">
+<div id="doctors_nav">
 	<%= select_field_tag "doctor_id", @doctor_id, [[nil, "診所醫生"]] + @clinic.doctors.map{|d| [d.id, d.name]}, id: "doctor_input", onchange: "window.reloadFrame();" %>
 </div>
