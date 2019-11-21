@@ -10,7 +10,7 @@ module LinebotWebhook::Replies::ClinicLineKnowledgeCategoriesReply
 					title: clinic_line_knowledge_category.name,
 					text: clinic_line_knowledge_category.name,
 					name: clinic_line_knowledge_category.name,
-					actions: clinic_line_knowledge_category.knowledges.map do |knowledge|
+					actions: clinic_line_knowledge_category.knowledges.first(3).map do |knowledge|
 						r = {
 							type: "postback",
 							label: knowledge.line_template.title,

@@ -8,7 +8,7 @@
 		</div>
 		<div class="reply">
 			<span class="title">A</span>
-			<span class="content"><%= cols[:a].call(resource) %></span>
+			<span class="content"><%= short_string(cols[:a].call(resource), 30) %></span>
 		</div>
 		<div class="buttons_box">
 			<%= link_to "編輯", cols[:edit_path].call(resource), class: "btnBu" %>
