@@ -13,6 +13,7 @@ class Doctor < ApplicationRecord
 	mount_uploader :photo, PhotoUploader
 	accepts_nested_attributes_for :doctor_services
 	include Common::DateTimeDurationHelper
+	include Common::StaticImageHelper
 
 	def update_doctor_durations_note!
 		self.update!(:doctor_durations_note => wday_durations_note(self.doctor_durations))

@@ -1,4 +1,5 @@
 class ::Clinics::DoctorsController < ::Clinics::ApplicationController
+  before_action -> {@doctor_sidemenu = 1 }, only: :new
   before_action -> {
     access_config({
       variable_name: "doctor",
@@ -11,6 +12,10 @@ class ::Clinics::DoctorsController < ::Clinics::ApplicationController
   def index
     @doctors = @clinic.doctors
     @doctors = @doctors.page(params[:page]).per(20)
+  end
+
+  def new
+    @doctor = @clinic.doctors.new
   end
 
   def show
