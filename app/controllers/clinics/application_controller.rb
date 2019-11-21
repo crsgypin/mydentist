@@ -4,6 +4,12 @@ class Clinics::ApplicationController < ApplicationController
 	before_action :set_member
   include JsCrudConcern
 	rescue_from ActiveRecord::RecordInvalid, with: :show_errors
+	before_action :set_head
+
+	def set_head
+		@head_image_url = @clinic.photo_url
+		@head_title = @clinic.name
+	end
 
 	def set_clinic
 		@clinic = Clinic.find_by(friendly_id: params[:clinic_id])
