@@ -64,13 +64,19 @@
 		  &.exist {
 		  	color: $colorW;
 		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8); 	
-			  &.expired {
-		  	  background-color: rgba(255, 255, 255, 0.6);
-			  }
 		  }
 			&:hover {
 				color: $colorGy_l;
 			}
+		  .expired_cover {
+	  	  background-color: rgba(255, 255, 255, 0.6);
+	  	  position: absolute;
+	  	  top: 0;
+	  	  left: 0;
+	  	  right: 0;
+	  	  bottom: 0;
+	  	  z-index: 10;
+		  }
 			.info {
 				line-height: 1.2;
 				text-align: left;

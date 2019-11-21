@@ -10,10 +10,13 @@
 	  <% if events.length > 0 %>
 	  	<% event = events.find{|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %>
 	    <% if event.present? %>
-	    <div class="patient_event exist <%= event.expired? ? "expired" : nil %>" 
+	    <div class="patient_event exist" 
 	    	data-id="<%= event.id %>"
 	      style="height: <%= event.event_durations_count * row_height %>px; z-index: <%= zindex %>;" 
 	      onclick="<%= onclick_event.call(event) %>">
+	      <% if event.expired? %>
+				<div class="expired_cover"></div>
+	      <% end %>
 	      <div class="info">
 		      <div class="patient"><%= event.patient.name %></div>
 		      <div class="service"><%= event.service.name %></div>

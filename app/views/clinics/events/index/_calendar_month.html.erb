@@ -6,13 +6,13 @@
   </div>
   <div id="calender_view_container">
     <div class="header">
-      <div class="month-box">
-        <%= link_to icon_tag(:angle_left), "", id: "month-last" %>
+      <div class="month_box">
+        <%= link_to icon_tag(:angle_left), "", id: "month_last" %>
         <div>
           民國<span class="year"><%= roc_year(@date) %></span>年
           <span class="month"><%= @date.month %></span>月
         </div>
-        <%= link_to icon_tag(:angle_right), "", id: "month-next" %>
+        <%= link_to icon_tag(:angle_right), "", id: "month_next" %>
       </div>
     </div>
   	<div id="calender-view"></div>
@@ -21,21 +21,21 @@
 
 <script type="text/javascript">
 	$(function(){
-    var container = $("#calendar-month");
-    container.find("#month-last").click(function(e){
+    var container = $("#calendar_month");
+    container.find("#month_last").click(function(e){
       e.preventDefault();
       $('.dp-prev').click();
       changeMonth("last");
     });
-    container.find("#month-next").click(function(e){
+    container.find("#month_next").click(function(e){
       e.preventDefault();
       $('.dp-next').click();
       changeMonth("next");
     });
 
     function changeMonth(category){
-      var year = parseInt(container.find(".month-box .year").text());
-      var month = parseInt(container.find(".month-box .month").text());
+      var year = parseInt(container.find(".month_box .year").text());
+      var month = parseInt(container.find(".month_box .month").text());
       if(category == "last"){
         month -= 1;
         if(month == 0){month = 12; year -= 1}
@@ -43,8 +43,8 @@
         month += 1;
         if(month == 13){month = 1; year += 1}        
       }
-      container.find(".month-box .year").text(year);
-      container.find(".month-box .month").text(month);
+      container.find(".month_box .year").text(year);
+      container.find(".month_box .month").text(month);
     }
 
 		var t = TinyDatePicker("#calender-view", {
