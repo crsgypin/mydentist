@@ -2,5 +2,5 @@
 $("body").append("<%= j render_relative_partial 'create/event_created_lightbox' %>");
 // alert('預約＆新增病患成功');
 $("#clinic_event_form").remove();
-// window.location.reload();
+$.getScript(window.location.href);
 

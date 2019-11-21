@@ -1,18 +1,42 @@
 
-<div id="event_created_lightbox" class="lightbox">
+<% if params[:patient_id].present? %>
+	<% title = "預約成功" %>
+<% else %>
+	<% title = "預約&新增病患成功" %>
+<% end %>
+
+<% if !@patient.line_account.present? %>
+<div id="event_created_lightbox" class="lightbox clinic_lightbox">
 	<div class="inbox">
 		<div class="header_box">
 		</div>
 		<div class="content_box">
-			<h1><%= icon_tag(:check_circle) %></h1>
-			<h2>預約&新增病患成功</h2>
+			<h1><%= image_tag clinic_static_image_url(:blue_check), class: "blue_check" %></h1>
+			<h2><%= title %></h2>
 			<p>此病患沒有綁定Line，須先綁定帳號才能傳送訊息。</p>
 			<p>請問您是否進行綁定？</p>
 			<p class="pt10 colorGy1">刷QRcode，輸入手機號碼即可綁定成功喔！</p>
 		</div>
 		<div class="buttons_box">
 			<%= link_to "略過", "javascript: $('#event_created_lightbox').remove()", class: "btnW" %>
-			<%= submit_tag "馬上綁定", class: "btnBu" %>
+			<%= link_to "馬上綁定", new_clinic_events_selector_line_account_path(@clinic), class: "btnBu", remote: true %>
 		</div>
 	</div>
 </div>
+
+<% else %>
+<div id="event_created_lightbox" class="lightbox clinic_lightbox">
+	<div class="inbox">
+		<div class="header_box">
+		</div>
+		<div class="content_box">
+			<h1><%= image_tag clinic_static_image_url(:blue_check), class: "blue_check" %></h1>
+			<h2><%= title %></h2>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "關閉", "javascript: $('#event_created_lightbox').remove()", class: "btnW" %>
+		</div>
+	</div>
+</div>
+
+<% end %>

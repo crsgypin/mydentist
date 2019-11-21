@@ -9,8 +9,15 @@
 			</div>
 		</div>
 		<div class="buttons_box">
-			<%= link_to "關閉", "$('#clinc_line_account_lightbox').remove();", class: "btnBu" %>
+			<%= link_to "關閉", "javascript: $('#clinc_line_account_lightbox').remove();", class: "btnBu" %>
 		</div>
 	</div>
 </div>
 
+<script type="text/javascript">
+	$("#clinc_line_account_lightbox").find(".qrcode_box").qrcode({
+		width: 200, 
+		height: 200, 
+		text: '<%= @clinic.line_binding_url %>'
+	});
+</script>
