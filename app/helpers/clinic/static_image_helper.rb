@@ -18,7 +18,8 @@ module Clinic::StaticImageHelper
 			checked_blue: "/imgs/clinics/checked_blue.png",
 			checked_green: "/imgs/clinics/checked_green.png",
 			cross_red: "/imgs/clinics/cross_red.png",
-			line_bot: "/imgs/clinics/line_bot.png"
+			line_bot: "/imgs/clinics/line_bot.png",
+			search: "/imgs/clinics/search.png"
 		}
 	end
 

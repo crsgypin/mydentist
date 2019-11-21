@@ -21,8 +21,9 @@ Rails.application.routes.draw do
     resources :events
     namespace :events do
       namespace :selector do
-        resources :event_durations, only: [:index, :create]
+        resources :event0_durations, only: [:index, :create]
         resources :line_accounts, only: [:new]
+        resources :search_events, only: [:index]
       end
     end
 

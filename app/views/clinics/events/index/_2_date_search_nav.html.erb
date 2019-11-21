@@ -10,5 +10,9 @@
     </li>
     <% end %>
   </ul>
+  <div class="search_box">
+    <%= text_field_tag "", "", placeholder: "輸入病患名稱以查詢", class: "clinic_search_input", data: {url: clinic_events_selector_search_events_path(@clinic)} %>
+    <%= image_tag clinic_static_image_url(:search) %>
+  </div>
 </div>
 

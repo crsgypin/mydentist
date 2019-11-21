@@ -2,6 +2,8 @@
 #events_index {
 	#date_search_nav {
 		padding-bottom: 30px;
+		display: flex;
+		justify-content: space-between;
 		ul.date_select {
 			display: flex;
 			height: 36px;
@@ -41,5 +43,31 @@
 				}
 			}
 		}
+		.search_box {
+			padding: 5px;
+			border: solid 1px $colorGy1;
+			border-radius: 5px;
+			display: flex;
+			align-items: center;
+			input {
+				border: none;
+				height: 25px;
+				&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+				  color: $colorGy1;
+				  opacity: 1; /* Firefox */
+				}
+
+				&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+				  color: $colorGy1;
+				}
+
+				&::-ms-input-placeholder { /* Microsoft Edge */
+				  color: $colorGy1;
+				}
+			}
+			img {
+				height: 25px;
+			}
+		}		
 	}
 }
