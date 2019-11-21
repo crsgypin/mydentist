@@ -14,7 +14,11 @@ module Clinic::StaticImageHelper
 			bot: "/imgs/clinics/bot.png",
 			doctor: "/imgs/clinics/doctor.png",
 			plus_circle: "/imgs/clinics/plus_circle.png",
-			teeth: "/imgs/clinics/teeth.png"
+			teeth: "/imgs/clinics/teeth.png",
+			checked_blue: "/imgs/clinics/checked_blue.png",
+			checked_green: "/imgs/clinics/checked_green.png",
+			cross_red: "/imgs/clinics/cross_red.png",
+			line_bot: "/imgs/clinics/line_bot.png"
 		}
 	end
 

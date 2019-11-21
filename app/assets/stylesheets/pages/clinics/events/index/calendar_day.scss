@@ -61,43 +61,46 @@
     	border-radius: 5px;
 			display: inline-block;
 			cursor: pointer;
-			&.web {
-				color: $colorW;
-				background-image:  linear-gradient(to bottom, #4ccdea, #2193b0);
-			}
-			&.counter {
-				color: $colorW;
-				background-image: linear-gradient(to bottom, #a7bfe8, #6190e8);				
-			}
+		  &.exist {
+		  	color: $colorW;
+		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8); 	
+		  }
 			&:hover {
 				color: $colorGy_l;
 			}
-			.patient {
-				font-size: $fs_14p;
+		  .expired_cover {
+	  	  background-color: rgba(255, 255, 255, 0.6);
+	  	  position: absolute;
+	  	  top: 0;
+	  	  left: 0;
+	  	  right: 0;
+	  	  bottom: 0;
+	  	  z-index: 10;
+		  }
+			.info {
 				line-height: 1.2;
-			}
-			.service {
-				font-size: $fs_12p;
-				line-height: 1.2;
+				text-align: left;
+				.patient {
+					font-size: $fs_14p;
+				}
+				.service {
+					font-size: $fs_12p;
+				}				
 			}
 			.status {
 				position: absolute;
-				right: 0px;
-				bottom: -7px;
-				.check_in {
-					color: $colorGn;
-					display: none;
-					&.selected {
-						display: block;
-					}
+				right: 3px;
+				bottom: 0px;
+				line-height: 1;
+				img {
+					height: 15px;
 				}
-				.break {
-					color: $colorR;
+				>div {
 					display: none;
 					&.selected {
 						display: block;
-					}
-				}				
+					}					
+				}
 			}
     }
   }

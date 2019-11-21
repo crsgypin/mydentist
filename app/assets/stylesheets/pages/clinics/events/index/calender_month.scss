@@ -15,7 +15,7 @@
 				padding: 15px 0;
 				text-align-last: justify;
 			}
-			.month-box {
+			.month_box {
 				height: 40px;
 				line-height: 40px;
 				font-weight: bold;
@@ -70,6 +70,10 @@
 			&.dp-selected {
 			  background-image: linear-gradient(to bottom, #29d3fd, #12a7fb);
 			  border-radius: 50%;
+			}
+			&:hover {
+			  background-image: linear-gradient(to bottom, #29d3fd, #12a7fb);
+			  border-radius: 50%;				
 			}
 		}
 	}

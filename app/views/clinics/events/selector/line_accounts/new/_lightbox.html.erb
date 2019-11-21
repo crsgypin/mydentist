@@ -1,0 +1,23 @@
+
+<div id="clinc_line_account_lightbox" class="lightbox">
+	<div class="inbox">
+		<div class="header_box">
+		</div>
+		<div class="content_box">
+			<p>掃描QR code進行綁定，並在智慧型手機輸入電話號碼。</p>
+			<div class="qrcode_box">
+			</div>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "關閉", "javascript: $('#clinc_line_account_lightbox').remove();", class: "btnBu" %>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("#clinc_line_account_lightbox").find(".qrcode_box").qrcode({
+		width: 200, 
+		height: 200, 
+		text: '<%= @clinic.line_binding_url %>'
+	});
+</script>
