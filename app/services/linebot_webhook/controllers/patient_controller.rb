@@ -107,7 +107,11 @@ class LinebotWebhook::Controllers::PatientController < LinebotWebhook::Controlle
 
 	def fill_phone
 		phone = @message[:text].to_s
-		if phone.length < 6
+		phone = phone.gsub("-", "")
+		if phone.scan(/[^0-9]).length > 0
+			return false
+		end
+		if phone[0..1] == "09" && phone.length != 10
 			return false
 		end
 		@patient.phone = phone
