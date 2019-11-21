@@ -5,23 +5,25 @@
   </div>
   <ul>
     <% [
-      {name: "看診日曆", link: clinic_events_path},
-      {name: "病患管理", link: clinic_patients_path},
-      {name: "診所管理", link: clinic_info_path},
-      {name: "醫師管理", link: clinic_doctors_path},
-      {name: "關鍵字管理", link: clinic_clinic_line_keywords_path},
-      {name: "帳號管理", link: clinic_members_path},
+      {name: "看診日曆", link: clinic_events_path, image_url: clinic_static_image_url(:account)},
+      {name: "病患管理", link: clinic_patients_path, image_url: clinic_static_image_url(:teeth)},
+      {name: "診所管理", link: clinic_info_path, image_url: clinic_static_image_url(:plus_circle)},
+      {name: "醫師管理", link: clinic_doctors_path, image_url: clinic_static_image_url(:doctor)},
+      {name: "關鍵字管理", link: clinic_clinic_line_keywords_path, image_url: clinic_static_image_url(:account)},
+      {name: "帳號管理", link: clinic_members_path, image_url: clinic_static_image_url(:account)},
       ].each do |elm| %>
       <% if request.fullpath.include?(elm[:link]) %>
       <li class="selected">
         <%= link_to elm[:link] do %>
-          <%= icon_tag(:star) %><%= elm[:name] %>
+          <%= bg_center_image elm[:image_url] %>
+          <p><%= elm[:name] %></p>
         <% end %>
       </li>
       <% else %>
       <li>
         <%= link_to elm[:link] do %>
-          <%= icon_tag(:star) %><%= elm[:name] %>
+          <%= bg_center_image elm[:image_url] %>
+          <p><%= elm[:name] %></p>
         <% end %>
       </li>
       <% end %>

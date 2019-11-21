@@ -25,16 +25,21 @@
   	}
   }
   ul {
-		padding-top: 50px;
+		padding-top: 30px;
 		li {
 			position: relative;
-			height: 60px;
-			padding-top: 10px;
+      padding: 10px 0;
 			a {
-				i {
-					display: block;
-					text-align: center;
-				}
+        .bg_center_image {
+          width: 25px;
+          height: 25px;
+          margin: 0 auto 5px;
+        }
+        p {
+          font-size: $fs_14p;
+          height: 20px;
+          line-height: 20px;
+        }
 			}
 			&.selected {
 				&:before {

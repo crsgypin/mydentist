@@ -9,6 +9,11 @@ module Clinic::StaticImageHelper
 
 	def clinic_static_image_urls
 		r = {
+			account: "/imgs/clinics/account.png",
+			bot: "/imgs/clinics/bot.png",
+			doctor: "/imgs/clinics/doctor.png",
+			plus_circle: "/imgs/clinics/plus_circle.png",
+			teeth: "/imgs/clinics/teeth.png"
 		}
 	end
 
