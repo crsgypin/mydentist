@@ -5,7 +5,10 @@
 			<div class="bg_center_image round" style="background-image: url(<%= @doctor.photo.url %>);" data-image_urls="<%= @clinic.doctors.map{|a| [a.id, a.photo.url]}.to_h.to_json %>" id="doctor_img">
 			</div>
 			<%= hidden_field_tag "event[doctor_id]", @doctor.id, id: "doctor_input" %>
-			<%= "#{@doctor.name}#{@doctor.title}" %>
+			<div>
+				<span class="doctor_title"><%= @doctor.title %></span>
+				<span class="doctor_name"><%= @doctor.name %></span>
+			</div>
 		</div>
 		<div class="doctors_dropdown">
 			<ul>

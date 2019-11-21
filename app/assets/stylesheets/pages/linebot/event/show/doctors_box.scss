@@ -16,9 +16,17 @@
 						margin: 0 auto;
 					}
 					text-align: center;
-					font-size: $fs_12p;
 					height: 20px;
 					line-height: 20px;
+					font-size: $fs_12p;
+					.doctor_name {
+						display: inline-block;
+						width: 40px;
+					}
+					.doctor_title {
+						display: inline-block;
+						width: 60px;
+					}
 				}
 				.doctors_dropdown {
 					position: absolute;
