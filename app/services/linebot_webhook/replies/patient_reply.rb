@@ -2,6 +2,14 @@ module LinebotWebhook::Replies::PatientReply
 	include Common::DateHelper
   include Linebot::MessagesHelper
 
+  def patient_info(patient)
+  	r = ""
+		r += "姓名: #{patient.name}\n"
+		r += "生日: #{patient.birthday.strftime("%Y年%m月%d日")}\n"
+		r += "手機: #{patient.phone}\n"
+		r
+  end
+
 	def reply_to_fill_name
 		reply_message({
 			type: "text",
@@ -15,10 +23,7 @@ module LinebotWebhook::Replies::PatientReply
 			alt_text: "個人資料",
 			title: "個人資料",
 			text: proc do
-				r = ""
-				r += "姓名: #{@patient.name}\n"
-				r += "生日: #{roc_format(@patient.birthday,2)}\n"
-				r += "手機: #{@patient.phone}\n"
+				r = patient_info(@patient)
 				r
 			end.call,
 			actions: [
@@ -93,9 +98,7 @@ module LinebotWebhook::Replies::PatientReply
 			type: "text",
 			text: proc do
 				r = "您的個人資料為\n"
-				r += "姓名: #{@patient.name}\n"
-				r += "生日: #{@patient.birthday.strftime("%Y/%m/%d")}\n"
-				r += "電話: #{@patient.phone}\n"
+				r += patient_info(@patient)
 				r
 			end.call
 		})
