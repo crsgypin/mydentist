@@ -1,3 +1,4 @@
 
-$("#date_search_nav .search_box .search_result").replaceWith("<%= j render_relative_partial 'index/table' %>");
+$("#date_search_nav .search_box .search_result").remove();
+$("#date_search_nav .search_box").append("<%= j render_relative_partial 'index/table' %>");
 

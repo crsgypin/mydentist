@@ -12,6 +12,7 @@ class Event < ApplicationRecord
 	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45, "缺少病患資料" => 55}
 	enum source: {"網路" => 1, "現場" => 2}
   enum health_insurance_status: {"有" => 1, "無" => 2}
+  scope :valid_events, -> {where(status: ["已預約", "報到", "爽約"])}
 	validates_presence_of :status, :source, :duration
 	before_validation :check_for_source, on: :create
 	before_validation :check_duration
