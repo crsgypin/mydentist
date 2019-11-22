@@ -11,8 +11,30 @@
     <% end %>
   </ul>
   <div class="search_box">
-    <%= text_field_tag "", "", placeholder: "輸入病患名稱以查詢", class: "clinic_search_input", data: {url: clinic_events_selector_search_events_path(@clinic)} %>
-    <%= image_tag clinic_static_image_url(:search) %>
+    <div class="inbox">
+      <%= text_field_tag "", @event.present? ? @event.patient.name : "", placeholder: "輸入病患名稱以查詢", class: "clinic_search_input", data: {url: clinic_events_selector_search_events_path(@clinic)} %>
+      <%= hidden_field_tag "event_id", @event.id %>
+      <%= image_tag clinic_static_image_url(:search) %>
+    </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    $("#date_search_nav .search_box input").on("keydown", function(){
+      var key = $(this).val();
+      if(key.length){
+        var path = "<%= clinic_events_selector_search_events_path %>";
+        path = path + "?key=" + key;
+        $.getScript(path);
+      } else {
+        $("#search_box .search_result").html('');
+      }
+    });
+    $("#date_search_nav").on("click", ".search_result ul li", function(){
+      var id = $(this).data("id");
+      window.location.href = "<%= url_for %>?event_id=" + id;
+    });
+  })
+</script>
 

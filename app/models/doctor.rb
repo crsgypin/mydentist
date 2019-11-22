@@ -39,7 +39,7 @@ class Doctor < ApplicationRecord
 		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
 	end
 
-	def day_hour_events(date, hours = nil)
+	def day_hour_events(date, hours = nil, options = {})
 		events = day_events(date)
 		if hours.nil?
 			hours = segment_hours("整日")
@@ -52,9 +52,13 @@ class Doctor < ApplicationRecord
 			 		m = {
 			 			minute: minute,
 			 			events: events.select do |event|
-			 				event.event_durations.find do |event_duration|
+			 				r = event.event_durations.find do |event_duration|
 				 				event_duration.hour == hour && event_duration.minute == minute
 			 				end
+			 				if r && options[:event_id].present?
+			 					r = (event.id == options[:event_id].to_i)
+			 				end
+			 				r
 			 			end
 			 		}
 			 		# m[:event_duration] = m[:event] ? m[:event].event_durations : nil

@@ -7,8 +7,9 @@ class ::Clinics::Events::Selector::SearchEventsController < ::Clinics::Applicati
 			return
 		end
 
-		@events = @clinic.events.all
+		@events = @clinic.events.valid_events
 		ids = @events.joins(:patient).where("patients.name like ?", "%#{@key}%")
+		@events = @events.order(date: :desc)
 		@events = @events.where(id: ids)
 	end
 

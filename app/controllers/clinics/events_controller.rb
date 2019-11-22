@@ -2,10 +2,20 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   include Common::DateTimeDurationHelper
 
   def index
+    if params[:event_id].present?
+      #for search
+      @event = @clinic.events.find(params[:event_id])
+      @date = @event.date
+      @category = params[:category]
+      @events = [@event]
+      return index_search_event
+    end
+ 
     @doctor_id = params[:doctor_id]
     @date = Date.parse(params[:date]) rescue  Date.today
+    @category = params[:category]
   
-    @events = @clinic.events.where(date: @date, status: ["已預約", "報到", "爽約"]).includes(:doctor, :service, :patient).includes(:event_durations)
+    @events = @clinic.events.valid_events.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
 
     if !@doctor_id.present?
       index_set_for_all_doctors
@@ -66,6 +76,21 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   private
+
+  def index_search_event
+    @range_segments = segments.map{|s| s[:name]}
+    @segment = params[:segment]
+    @segment = "整日" if !@range_segments.include?(@segment) 
+
+    @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)
+    @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
+    @doctor_objs = @doctors.map do |doctor|
+      r = {
+        doctor: doctor,
+        hour_segments: doctor.day_hour_events(@date, @clinic_wday_hours, event_id: @event.id)
+      }
+    end
+  end
 
   def index_set_for_all_doctors
     @range_segments = segments.map{|s| s[:name]}
