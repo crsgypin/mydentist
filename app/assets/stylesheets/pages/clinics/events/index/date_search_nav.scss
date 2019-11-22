@@ -1,0 +1,119 @@
+
+#events_index {
+	#date_search_nav {
+		padding-bottom: 30px;
+		display: flex;
+		justify-content: space-between;
+		ul.date_select {
+			display: flex;
+			height: 36px;
+			line-height: 36px;
+			li {
+				width: 72px;
+				height: 100%;
+				box-sizing: border-box;
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+				text-align: center;
+				&:first-child {
+					border-left: 1px solid #ccc;
+					border-top-left-radius: 20px;
+					border-bottom-left-radius: 20px;
+					a {					
+						border-top-left-radius: 20px;
+						border-bottom-left-radius: 20px;
+					}
+				}
+				&:last-child {
+					border-right: 1px solid #ccc;
+					border-top-right-radius: 20px;
+					border-bottom-right-radius: 20px;
+					a {					
+						border-top-right-radius: 20px;
+						border-bottom-right-radius: 20px;
+					}
+				}
+				a {
+					display: block;
+					height: 100%;
+					&.selected {
+						color: $colorW;
+						background: $colorBu;
+					}
+				}
+			}
+		}
+		.search_box {
+			padding: 5px;
+			border: solid 1px $colorGy1;
+			border-radius: 5px;
+			min-width: 300px;
+			position: relative;
+			.inbox {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				input {
+					width: calc(100% - 25px);
+					border: none;
+					height: 25px;
+					&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+					  color: $colorGy1;
+					  opacity: 1; /* Firefox */
+					}
+
+					&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+					  color: $colorGy1;
+					}
+
+					&::-ms-input-placeholder { /* Microsoft Edge */
+					  color: $colorGy1;
+					}
+				}
+				img {
+					height: 25px;
+				}
+			}
+			.search_result {
+				left: 0;
+				top: 35px;
+				position: absolute;
+				background: $colorW;
+				border: 1px solid $colorGy1;
+				z-index: 10000;
+				max-height: 200px;
+				overflow-y: scroll;
+				width: 300px;
+				ul {
+					li {
+						padding: 5px;
+						display: flex;
+						padding-bottom: 10px;
+						&:hover {
+							cursor: pointer;
+							background: $colorGy_l;
+						}
+						span {
+							display: inline-block;
+							line-height: 1.3;
+							font-size: $fs_12p;
+							&:nth-child(1){
+								width: 50px;
+							}
+							&:nth-child(2){
+								width: 80px;
+							}
+							&:nth-child(3){
+								width: 80px;
+							}
+							&:nth-child(4){
+								width: 80px;
+							}
+						}
+					}
+				}
+			}
+		}		
+	}
+}
