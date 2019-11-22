@@ -13,7 +13,7 @@
   <div class="search_box">
     <div class="inbox">
       <%= text_field_tag "", @event.present? ? @event.patient.name : "", placeholder: "輸入病患名稱以查詢", class: "clinic_search_input", data: {url: clinic_events_selector_search_events_path(@clinic)} %>
-      <%= hidden_field_tag "event_id", @event.id %>
+      <%= hidden_field_tag "event_id", @event.present? ? @event.id : nil %>
       <%= image_tag clinic_static_image_url(:search) %>
     </div>
   </div>
