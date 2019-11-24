@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20191124040301) do
 
   create_table "event_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "event_id"
-    t.integer "new_event_id"
+    t.integer "patient_id"
     t.integer "booking_event_id"
     t.integer "line_account_id"
     t.integer "line_sending_id"
@@ -242,9 +242,9 @@ ActiveRecord::Schema.define(version: 20191124040301) do
     t.index ["event_id"], name: "index_event_notifications_on_event_id"
     t.index ["line_account_id"], name: "index_event_notifications_on_line_account_id"
     t.index ["line_sending_id"], name: "index_event_notifications_on_line_sending_id"
-    t.index ["new_event_id"], name: "index_event_notifications_on_new_event_id"
     t.index ["notification_schedule_id"], name: "index_event_notifications_on_notification_schedule_id"
     t.index ["notification_template_id"], name: "index_event_notifications_on_notification_template_id"
+    t.index ["patient_id"], name: "index_event_notifications_on_patient_id"
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

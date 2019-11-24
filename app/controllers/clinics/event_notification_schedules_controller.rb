@@ -5,35 +5,36 @@ class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationCo
 
 		@event_notification_schedule = @clinic.event_notification_schedules.new
 
- 		if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? @event_notification_schedule.category
-			@event_objs = []
-			params[:events] && params[:events].each do |a,v| 
+ 		if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? params[:category]
+			@notifications = []
+			params[:notifications] && params[:notifications].each do |a,notification| 
 				r = {
-					event: @clinic.events.find_by(id: v[:id]),
-					args: v[:args]
+					event_id: notification[:id],
+					args: notification[:args]
 				}
-				@event_objs << r
+				@notifications << r
 			end
-			return js_render_error "你尚未選擇推播病患" if @event_objs.length == 0
+			return js_render_error "你尚未選擇推播病患" if @notifications.length == 0
 		elsif ["回診推播"].include? @event_notification_schedule.category
-			@patient_objs = []
-			params[:patients] && params[:patients].each do |a, v|
+			@notifications = []
+			params[:notifications] && params[:notifications].each do |a, notification|
 				r = {
-					patient: @clinic.patients.find_by(id: v[:id]),
-					args: v[:args]
+					patient_id: notifications[:patient_id],
+					args: notification[:args]
 				}
-				@patient_objs << r
+				@notifications << r
 			end
-			return js_render_error "你尚未選擇推播病患" if @patient_objs.length == 0
+			return js_render_error "你尚未選擇推播病患" if @notifications.length == 0
 		end
 	end
 
 	def create
 		@event_notification_schedule = @clinic.event_notification_schedules.new
-
-				
-
 	end
+
+	private
+
+	
 
 end
 

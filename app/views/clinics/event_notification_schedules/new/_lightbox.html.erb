@@ -2,21 +2,12 @@
 <div id="event_notification_schedule_lightbox" class="lightbox">
 	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
 
-		<% @event_objs.present? && @event_objs.each_with_index do |event_obj, index| %>
-			<% event = event_obj[:event] %>
-			<% args = event_obj[:args] %>
-			<%= hidden_field_tag "events[#{index}][id]", event.id %>
+		<% @notifications.each_with_index do |notification, index| %>
+			<% event = notification[:event] %>
+			<% args = notification[:args] %>
+			<%= hidden_field_tag "notifications[#{index}][id]", notification.id %>
 			<% args.each do |name, value| %>
-				<%= hidden_field_tag "events[#{index}][args][#{name}]", value %>
-			<% end %>
-		<% end %>
-
-		<% @patient_objs.present? && @patient_objs.each_with_index do |patient_obj, index| %>
-			<% patient = patient_obj[:patient] %>
-			<% args = patient_obj[:args] %>
-			<%= hidden_field_tag "patients[#{index}][id]", patient.id %>
-			<% args.each do |name, value| %>
-				<%= hidden_field_tag "patients[#{index}][args][#{name}]", value %>
+				<%= hidden_field_tag "notification[#{index}][args][#{name}]", value %>
 			<% end %>
 		<% end %>
 
