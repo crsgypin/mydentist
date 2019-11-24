@@ -29,8 +29,15 @@
       <% end %>
     <% end %>
   </ul>  
-  <div class="bottom-box" onclick="showLogOutModal()">
-    <%= link_to "登出", destroy_member_session_path, method: "delete" %>
+  <div class="bottom_box" onclick="showLogOutModal()">
+    <div class="photo_box">
+      <%= bg_center_image current_member.photo_url, class: "" %>
+      <p> <%= current_member.username %></p>
+    </div>
+    <%= link_to destroy_member_session_path, method: "delete", class: "logout", data: {confirm: "確定登出"} do %>
+      <%= image_tag clinic_static_image_url(:logout) %>
+      <p>登出</p>
+    <% end %>
   </div>
 </sidemenu>
 

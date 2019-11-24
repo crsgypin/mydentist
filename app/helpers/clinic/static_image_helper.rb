@@ -1,6 +1,5 @@
 module Clinic::StaticImageHelper
 
-
 	def clinic_static_image_url(key)
 		r = clinic_static_image_urls[key.to_sym]
 		raise "invalid key: #{key}" if r.nil?
@@ -19,7 +18,8 @@ module Clinic::StaticImageHelper
 			checked_green: "/imgs/clinics/checked_green.png",
 			cross_red: "/imgs/clinics/cross_red.png",
 			line_bot: "/imgs/clinics/line_bot.png",
-			search: "/imgs/clinics/search.png"
+			search: "/imgs/clinics/search.png",
+			logout: "/imgs/clinics/logout.png",
 		}
 	end
 

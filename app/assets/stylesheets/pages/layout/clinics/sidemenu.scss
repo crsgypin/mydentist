@@ -56,11 +56,32 @@
 			}
 		}
   }
-  .bottom-box {
+  .bottom_box {
   	position: absolute;
   	bottom: 0;
   	width: 100%;
-  	line-height: 100px;
+  	line-height: 1;
   	text-align: center;
+    p {
+      font-size: $fs_12p;
+    }
+    .photo_box {
+      margin-bottom: 10px;
+      .bg_center_image {
+        margin: 0 auto;
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .logout {
+      img {
+        width: 25px;
+      }
+      &:hover {
+        p {
+          color: $colorBu;
+        }
+      }
+    }
   }
 }
