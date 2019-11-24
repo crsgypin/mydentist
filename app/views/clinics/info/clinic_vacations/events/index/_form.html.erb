@@ -1,13 +1,14 @@
 
 <%= render partial: 'clinics/common/vacations_form/event_notifications_table', locals: {
-	event_objs: @events.map do |event|
+	notifications: @events.map do |event|
 		r = {
 			event: event,
 			args: {
 				clinic_name: @clinic.name
-			}
+			}.to_json
 		}
 	end,
 	query_path: url_for,
-	notification_template_path: clinic_event_notification_template_path(@clinic, @event_notification_template),
+	category: "診所休假修改掛號",
+	notification_schedule_path: new_clinic_event_notification_schedule_path(@clinic),
 } %>

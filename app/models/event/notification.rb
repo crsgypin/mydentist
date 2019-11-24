@@ -2,14 +2,17 @@ class Event::Notification < ApplicationRecord
 	#修改掛號通知
 	self.table_name = "event_notifications"	
 	belongs_to :notification_template
+  belongs_to :notification_schedule
 	belongs_to :line_account, class_name: "Line::Account"
 	belongs_to :event, class_name: "Event", optional: true
+  belongs_to :patient, class_name: "Patient", optional: true
 	belongs_to :new_event, class_name: "Event", foreign_key: :new_event_id, optional: true
 	belongs_to :booking_event, class_name: "BookingEvent", optional: true
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true
 	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
-	after_create :send_message
+  before_validation :set_line_account, on: :create
   json_format :args
+  # after_create :send_message
 	# validates_presence_of :category
 	# include EventNotificationConcern 
 
@@ -17,6 +20,7 @@ class Event::Notification < ApplicationRecord
   include Common::LineShareHelper
 
   def send_message
+    #called by notification_schedule
     sending = self.line_account.sendings.create!({
       source: "server",
       server_type: "push",
@@ -54,6 +58,19 @@ class Event::Notification < ApplicationRecord
 
   def arg_content
     @arg_content ||= self.notification_template.arg_content(self.args_json)
+  end
+
+  private
+
+  def set_line_account
+    if self.event.present?
+      self.patient = self.event.patient
+      self.line_account = self.patient.line_account
+    elsif self.patient.present?
+      self.line_account = self.patient.line_account
+      self.booking_event = self.patient.booking_events.last || self.patient.build_booking_event
+    end
+    true
   end
 
 end

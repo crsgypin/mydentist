@@ -1,10 +1,12 @@
 <%= render partial: "admin/common/show_table" , locals: {
-  id: "event_notification",
-  resource: @event_notification,
+  id: "notification",
+  resource: @notification,
   fields: [
     {k: "id", v: proc{|a| a.id }},
-    {k: "status", v: proc{|a| a.status }},
-    {k: "args", v: proc{|a| a.args }},
+    {t: "event_id", v: proc{|a| a.event_id }},
+    {t: "booking_event_id", v: proc{|a| a.event_id }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "參數", v: proc{|a| a.args }},
     {t: "Line訊息", v: proc{|a| a.line_sending.messages }},
     {t: "掛號", v: proc{|a| 
       if a.event.present?
