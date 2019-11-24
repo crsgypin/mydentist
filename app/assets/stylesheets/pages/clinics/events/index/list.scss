@@ -1,14 +1,26 @@
 
 #events_index #list {
+	height: 100%;
 	.title {
+		height: 32px;
+		line-height: 32px;
 		font-size: $fs-16p;
 		font-weight: bold;
+		a {
+			padding: 5px 10px;
+			font-size: $fs_14p;
+		}
 	}	
 	.note {
+		height: 24px;
+		line-height: 24px;
+		font-size: $fs_12p;
 		text-align: right;
 		border-bottom: 1px solid $colorGy;
 	}
 	.table_box {
+		overflow-y: scroll;
+		height: calc(100% - 32px - 24px);
 		.title_row {
 			font-size: $fs_12p;
 		}

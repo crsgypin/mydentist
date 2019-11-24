@@ -1,16 +1,33 @@
 
 #events_index {
+	height: calc(100vh - 60px);
 	form {
+		height: 100%;
 		display: flex;
 		.main_box {
-			width: calc(100% - 360px);
-			padding: 25px;
+			width: calc(100% - 300px);
+			padding: 0 25px;
+			.doctor_nav_container {
+				height: 60px;
+			}
+			.date_search_nav_container {
+				height: 60px;
+			}
+			.calendar_day_container {
+				height: calc(100% - 60px - 80px);
+			}
 		}
 		.side_box {
-			width: 360px;
+			width: 300px;
 			padding-left: 20px;
 			padding-right: 20px;
 			background: $colorGy_l;
+			.calendar_month_container {
+				height: 320px;
+			}
+			.list_container {
+				height: calc(100% - 320px);
+			}
 		}
 	}
 }

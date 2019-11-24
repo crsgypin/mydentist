@@ -1,7 +1,7 @@
 
 #events_index #calendar_month{ 
   background-color: rgba(218, 223, 234, 0.1);
-  padding-bottom: 40px;
+  height: 100%;
   .title {
   	line-height: 40px;
   	font-size: $fs_16p;
@@ -58,7 +58,7 @@
 		  display: none;
 		}
 		.dp-day {
-			height: 40px;
+			height: 33px;
 			&.dp-day-today {
 				&:after {
 					width: 100%;

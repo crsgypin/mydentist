@@ -1,14 +1,24 @@
 <div id="events_index">
 	<%= form_tag url_for, method: "get" do %>
 	<div class="main_box">
-		<%= render_relative_partial "index/1_doctors_nav" %>
-		<%= render_relative_partial "index/2_date_search_nav" %>
-		<%= render_relative_partial "index/3_calendar_day" %>
+		<div class="doctor_nav_container">
+			<%= render_relative_partial "index/1_doctors_nav" %>
+		</div>
+		<div class="date_search_nav_container">
+			<%= render_relative_partial "index/2_date_search_nav" %>
+		</div>
+		<div class="calendar_day_container">
+			<%= render_relative_partial "index/3_calendar_day" %>
+		</div>
 		<%= render_relative_partial "index/context_menu" %>
 	</div>
 	<div class="side_box">
-		<%= render_relative_partial "index/4_calendar_month" %>
-		<%= render_relative_partial "index/5_list" %>
+		<div class="calendar_month_container">
+			<%= render_relative_partial "index/4_calendar_month" %>
+		</div>
+		<div class="list_container">
+			<%= render_relative_partial "index/5_list" %>
+		</div>
 	</div>
 	<% end %>
 </div>
