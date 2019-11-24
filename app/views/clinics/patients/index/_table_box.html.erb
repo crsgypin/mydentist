@@ -43,7 +43,7 @@
                 clinic_name: @clinic.name,
                 patient_name: a.name
               }.each do |name, value|
-                r += check_box_tag("patients[#{index}][args][#{name}]", value, false, class: "")
+                r += check_box_tag("patients[#{index}][args][#{name}]", value, false, class: "hidden")
               end
               r.html_safe
             }
