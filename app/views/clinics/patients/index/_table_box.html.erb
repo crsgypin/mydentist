@@ -1,4 +1,6 @@
-<%= form_tag new_clinic_event_notification_schedule_path(@clinic, category: "回診推播"), method: "get", id: "patient_table_box", remote: true do %>
+<%= form_tag new_clinic_event_notification_schedule_path(@clinic), method: "get", id: "patient_table_box", remote: true do %>
+  <%= hidden_field_tag "event_notification_schedule[category]", "回診推播" %>
+  <%= hidden_field_tag "event_notification_schedule[schedule_type]", "立即發送" %>
   <%= render partial: "clinics/common/clinic_table" , locals: {
     id: "patients",
     class: "ht80",
@@ -37,14 +39,8 @@
       if @category == "notification"
         r = [
           {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{ |a, index| 
-              r = check_box_tag("patients[#{index}][id]", a.id, false, class: "notification_check")
-              
-              {
-                clinic_name: @clinic.name,
-                patient_name: a.name
-              }.each do |name, value|
-                r += check_box_tag("patients[#{index}][args][#{name}]", value, false, class: "hidden")
-              end
+              r = check_box_tag("event_notification_schedule[notifications_attributes][#{index}][patient_id]", a.id, false, class: "notification_check")
+              r += check_box_tag("event_notification_schedule[notifications_attributes][#{index}][args]", {clinic_name: @clinic.name,patient_name: a.name}.to_json, false, class: "hidden")
               r.html_safe
             }
           }

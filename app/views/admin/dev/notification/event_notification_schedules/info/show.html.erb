@@ -1,0 +1,14 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "event_notification_schedule",
+  resource: @event_notification_schedule,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {k: "notification_template_id", v: proc{|a| a.notification_template_id }},
+    {k: "category", v: proc{|a| a.category }},
+    {k: "schedule_type", v: proc{|a| a.schedule_type }},
+    {k: "status", v: proc{|a| a.status }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

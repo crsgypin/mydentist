@@ -1,7 +1,8 @@
 
 <div class="container">
 <% [
-	{name: "掛號通知", link: admin_dev_notification_event_notifications_path},
+	{name: "掛號通知排成", link: admin_dev_notification_event_notification_schedules_path},
+	{name: "所有掛號通知", link: admin_dev_notification_event_notifications_path},
 	{name: "掛號通知樣板", link: admin_dev_notification_event_notification_templates_path},
 	].each do |elm| %>
 	<% if request.url.include? elm[:link] %>

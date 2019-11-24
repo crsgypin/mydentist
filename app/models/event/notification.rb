@@ -68,6 +68,7 @@ class Event::Notification < ApplicationRecord
       self.line_account = self.patient.line_account
     elsif self.patient.present?
       self.line_account = self.patient.line_account
+      self.booking_event = self.patient.booking_events.last || self.patient.build_booking_event
     end
     true
   end

@@ -1,0 +1,14 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "event_notification_schedules",
+  resources: @event_notification_schedules,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "排程", v: proc{|a| a.schedule_type }},
+    {t: "狀態", v: proc{|a| a.status }}
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

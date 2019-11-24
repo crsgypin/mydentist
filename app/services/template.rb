@@ -10,7 +10,7 @@ class Template
 			base_dir: "admin/dev/notification",
 			resources: [
 				{
-					class_name: "Event::NotificationTemplate",
+					class_name: "Event::NotificationSchedule",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
 					# associated_resources: [
@@ -21,11 +21,11 @@ class Template
 					# 	},
 					# ]
 				},
-				{
-					class_name: "Event::Notification",
-					index_columns: %w(id),
-					except_show_columns: %w(uploaded_at),
-				}
+				# {
+				# 	class_name: "Event::Notification",
+				# 	index_columns: %w(id),
+				# 	except_show_columns: %w(uploaded_at),
+				# }
 			],
 		})
 	end

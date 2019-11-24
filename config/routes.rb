@@ -46,7 +46,6 @@ Rails.application.routes.draw do
       resources :doctor_vacations
       resources :doctor_vacations, only: [], module: :doctor_vacations do
         resources :events, only: [:index]
-        # resources :event_notifications, only: [:index, :create]
       end
     end
 
@@ -57,7 +56,6 @@ Rails.application.routes.draw do
       resources :clinic_vacations, only: [:index, :new, :create, :update, :destroy]
       resources :clinic_vacations, only: [], module: :clinic_vacations do
         resources :events, only: [:index]
-        # resources :event_notifications, only: [:index, :create]
       end
       resources :services, only: [:index, :new, :create, :destroy]
       resource :photo, only: [:new, :create], controller: :photo
@@ -167,6 +165,11 @@ Rails.application.routes.draw do
       namespace :notification do
         resources :event_notification_templates
         resources :event_notification_templates, only: [], module: :event_notification_templates do
+          resource :info, only: [:show], controller: :info
+          resources :notifications
+        end
+        resources :event_notification_schedules
+        resources :event_notification_schedules, only: [], module: :event_notification_schedules do
           resource :info, only: [:show], controller: :info
           resources :notifications
         end
