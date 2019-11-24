@@ -16,7 +16,12 @@
 		    # {t: "", v: proc{|a|
 		    # 	link_to "變更", url_for(action: :show, id: a), class: "btnW"
 		    #  }},
-		  ]
+		  ],
+		  row: {
+		  	link: proc { |a|
+		  		url_for(action: :show, id: a)
+		  	}
+		  }
 		}
 		%>
 	</div>

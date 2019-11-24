@@ -49,6 +49,13 @@ class ::Clinics::MembersController < ::Clinics::ApplicationController
     end
   end
 
+  def destroy
+    @member = @clinic.members.find(params[:id])
+    if !@member.destroy
+      return js_render_model_error @member
+    end
+  end
+
   private
 
   def member_params

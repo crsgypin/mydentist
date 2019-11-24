@@ -40,5 +40,8 @@
       %>
     </div>
   <% end %>
+  <div class="remove_box" style="position: absolute; bottom: 10px;">
+    <%= link_to "刪除會員", url_for(action: :destroy, id: @member), style: "text-decoration: underline;", data: {confirm: "確認移除?"}, method: "delete", remote: true %>
+  </div>
 </div>
 
