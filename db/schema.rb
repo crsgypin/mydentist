@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191124040301) do
+ActiveRecord::Schema.define(version: 20191124114820) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(version: 20191124040301) do
     t.string "account"
     t.string "username"
     t.string "email", default: "", null: false
+    t.string "photo"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

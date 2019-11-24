@@ -26,8 +26,8 @@
   background-size: cover;
   background-position: 50%;
   background-repeat: no-repeat;
+  background-color: $colorGy1;
   &.round {
     border-radius: 50%;
-    border: 1px solid rgba(0,0,0,0.3);
   }
 }

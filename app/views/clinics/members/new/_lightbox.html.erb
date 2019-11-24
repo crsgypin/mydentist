@@ -1,15 +1,15 @@
 
 <div id="clinic_member_form" class="lightbox">
-	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox" do %>
+	<%= form_tag url_for(action: :create), method: "post", remote: true, class: "inbox", autocomplete: "off" do %>
 		<div class="header_box">
 			新增使用者
 		</div>
 		<div class="content_box clinic_form">
 			<% [
 				{v: select_field_tag("member[level]", @member.level, [["操作人員", "操作人員"]])},
-				{v: text_field_tag("member[username]", @member.username, placeholder: "輸入的使用者名稱")},
-				{v: email_field_tag("member[username]", @member.username, placeholder: "輸入使用者Email信箱")},
-				{v: password_field_tag("member[password]", @member.username, placeholder: "輸入密碼")},
+				{v: text_field_tag("member[username]", @member.username, placeholder: "輸入的使用者名稱", autocomplete: "off")},
+				{v: email_field_tag("member[email]", @member.username, placeholder: "輸入使用者Email信箱", autocomplete: "off")},
+				{v: password_field_tag("member[password]", @member.username, placeholder: "輸入密碼", autocomplete: "off")},
 				].each do |elm|%>
 			<div class="field">
 				<%= elm[:v] %>

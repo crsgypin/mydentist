@@ -9,6 +9,16 @@ class Member < ApplicationRecord
   #validates_inclusion_of :level, in: [0, 100, 200, 500]
   has_one :doctor
   before_destroy :check_level_for_destroy
+  mount_uploader :photo, PhotoUploader
+  include Clinic::StaticImageHelper
+
+  def photo_url
+    if self.photo.present?
+      self.photo.url
+    else
+      clinic_static_image_url(:doctor)
+    end
+  end
 
   def level_number
     self.class.levels[self.level]

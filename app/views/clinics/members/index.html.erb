@@ -8,11 +8,14 @@
 		  class: "ht80",
 		  resources: @members,
 		  cols: [
+		    {t: "使用者名稱", v: proc{|a| 
+		    	bg_center_image a.photo_url
+		    }},
 		    {t: "使用者名稱", v: proc{|a| a.username }},
 		    {t: "權限", v: proc{|a| a.level }},
-		    {t: "", v: proc{|a|
-		    	link_to "變更", url_for(action: :show, id: a), class: "btnW"
-		     }},
+		    # {t: "", v: proc{|a|
+		    # 	link_to "變更", url_for(action: :show, id: a), class: "btnW"
+		    #  }},
 		  ]
 		}
 		%>
