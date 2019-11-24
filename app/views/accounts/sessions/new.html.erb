@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login-box"}) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login_box"}) do |f| %>
   <div class="field">
     <%= f.label "帳號" %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "輸入您的Email" %>
@@ -7,6 +7,9 @@
   <div class="field">
     <%= f.label "密碼" %>
     <%= f.password_field :password, autocomplete: "current-password" %>
+    <p class="alignR">
+      <%= link_to "忘記密碼?", new_member_password_path, class: "underline" %>
+    </p>
   </div>
 
   <% if false && devise_mapping.rememberable? %>

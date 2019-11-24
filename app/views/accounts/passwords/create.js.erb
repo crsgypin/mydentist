@@ -1,0 +1,9 @@
+
+<% if @result == 1 %>
+	alert("錯誤的email");
+<% elsif @result == 2 %>
+	$(".login_box").replaceWith("<%= j render_relative_partial 'create/no_permission' %>");	
+<% elsif @result == 3 %>
+	$(".login_box").replaceWith("<%= j render_relative_partial 'create/email_sent' %>");
+<% end %>
+

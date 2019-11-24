@@ -45,19 +45,20 @@
       }
     }
   }
-  input, textarea {
-    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: $colorGy1;
-      opacity: 1; /* Firefox */
-    }
+}
 
-    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: $colorGy1;
-    }
+input, textarea {
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $colorGy1;
+    opacity: 1; /* Firefox */
+  }
 
-    &::-ms-input-placeholder { /* Microsoft Edge */
-      color: $colorGy1;
-    }
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $colorGy1;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+    color: $colorGy1;
   }
 }
 

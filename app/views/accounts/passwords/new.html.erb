@@ -1,16 +1,18 @@
-<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "login_box", remote: true }) do |f| %>
+	<h2>
+		重新設定密碼
+	</h2>
+	<p class="subtext">
+		輸入您的Email信箱，我們將會寄送”重新設定密碼“連結給您
+	</p>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "輸入您的Email信箱" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "確認", class: "btnBu" %>
   </div>
 <% end %>
 
-<%= render "accounts/shared/links" %>

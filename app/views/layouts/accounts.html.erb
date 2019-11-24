@@ -9,5 +9,10 @@
   	<div class="inbox">
 	    <%= yield %>
 	  </div>
+	  <% if request.fullpath != member_session_path %>
+	  <p class="back_to_login">
+	  	<%= link_to "返回登入頁面", member_session_path, class: "underline" %>
+	  </p>
+	  <% end%>
   </body>
 </html>

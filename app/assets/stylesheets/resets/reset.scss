@@ -16,8 +16,6 @@ body{line-height:1}
 ol,ul{list-style:none}
 blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}
-ins{text-decoration:none}
-del{text-decoration:line-through}
 table{border-collapse:collapse;border-spacing:0}
 address{ display: inline; font-style: normal;}
 
@@ -559,12 +557,16 @@ ul {
 
 /* reset css */
 a{
-  color: #000; /* to override bootstrap reset */
+  color: #4a4a4a; /* to override bootstrap reset */
   text-decoration: none;
 }
 
 a:focus, a:hover{
   text-decoration: none;
+}
+
+a.underline {
+  text-decoration: underline;
 }
 
 ul, li{

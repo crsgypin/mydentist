@@ -1,15 +1,26 @@
 # frozen_string_literal: true
 
 class Accounts::PasswordsController < Devise::PasswordsController
+  layout 'accounts'
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    # super
+    @member = Member.find_by(email: params[:member][:email])
+    if !@member.present?
+      @result = 1
+      return
+    end
+    if @member.level_number <= 100
+      @result = 2
+      return
+    end
+    @result = 3
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
