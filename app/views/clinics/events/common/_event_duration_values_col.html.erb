@@ -5,14 +5,15 @@
   <% minute = minute_segment[:minute] %>
   <% events = minute_segment[:events] %>
 	<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-	<% zindex = 1000 - index %>
+	<% zindex = 100 + index %>
 	<div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
 	  <% if events.length > 0 %>
-	  	<% event = events.find{|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %>
-	    <% if event.present? %>
+	  	<% select_events = events.select {|e| e.hour == hour && e.minute == minute && e.is_valid_in_line? } %>
+			<% width = "#{80 / select_events.length}%" if select_events.length > 0 %>
+  		<% select_events.each do |event| %>
 	    <div class="patient_event exist" 
 	    	data-id="<%= event.id %>"
-	      style="height: <%= event.event_durations_count * row_height %>px; z-index: <%= zindex %>;" 
+	      style="height: <%= event.event_durations_count * row_height %>px; z-index: <%= zindex %>; width: <%= width %>;" 
 	      onclick="<%= onclick_event.call(event) %>">
 	      <% if event.expired? %>
 				<div class="expired_cover"></div>
@@ -33,8 +34,6 @@
         	</div>
 	      </div>
 	    </div>
-	    <% else %>
-	    <%# 第一個的 event_duration 則不顯示 %>
 	    <% end %>
 	  <% else %>
 	  <div class="patient_event"
@@ -42,7 +41,7 @@
 	  	data-date="<%= @date %>" 
 	  	data-hour="<%= hour %>"
 	  	data-minute="<%= minute %>"
-	  	style="height: <%= row_height %>px; z-index: <%= zindex %>;" 
+	  	style="height: <%= row_height %>px; z-index: <%= zindex %>; width: 100%;" 
 	  	onclick="<%= onclick_new_event.call(hour, minute) %>">
 	  </div>
 	  <% end %>
