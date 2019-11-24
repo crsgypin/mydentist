@@ -1,7 +1,7 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "login-box"}) do |f| %>
   <div class="field">
     <%= f.label "帳號" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "輸入您的Email" %>
   </div>
 
   <div class="field">

@@ -1,6 +1,6 @@
 
 #accounts {
-  background-image: linear-gradient(126deg, #36c2dc, #44a2e7);
+  background-image: linear-gradient(126deg, #36c2dc 14%, #44a2e7 87%);
   .account_lightbox {
   	position: fixed;
 	  top: 50px; 
@@ -23,16 +23,16 @@
 	    .login-box {
 	    	padding: 10px 0;
 	    	.field {
-	    		padding-top: 44px;
+	    		padding-top: 30px;
 	    		label {
 	    			font-size: $fs_14p;
-	    			color: $colorGy_l;
+	    			color: $colorGy1;
 	    			padding-bottom: 6px;
 	    		}
     			input[type=email], input[type=password] {
     				font-size: $fs_20p;
     				width: 100%;
-    				padding-bottom: 11px;
+    				padding-bottom: 3px;
     				border: none;
     				box-shadow: none;
     				border-bottom: 1px solid $colorBu;
@@ -40,14 +40,12 @@
     			}
 	    	}
 	    	.actions {
-	    		padding-top: 80px;
-					input {
-						display: block;
-						width: 240px;
-						font-size: $fs_20p;
-						line-height: 50px;
-						margin: 0 auto;
-					}
+	    		padding-top: 40px;
+	    		input {
+	    			width: 100%;
+	    			height: 50px;
+	    			line-height: 1;
+	    		}
 	    	}
 	    }
 	  }  	
@@ -63,11 +61,4 @@
 		text-align: right;
 		margin: 0 auto;
 	}
-/*	input[type="email"], input[type="password"] {
-		border-radius: 5px;
-		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-		width: 100%;
-		padding: 0 5px;
-		font-size: $fs_16p;
-	}
-*/}
+}
