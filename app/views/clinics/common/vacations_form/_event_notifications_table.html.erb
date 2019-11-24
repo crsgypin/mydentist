@@ -27,6 +27,8 @@
 		</ul>
 	<% end %>
 	<%= form_tag notification_schedule_path , method: "get", remote: true, class: "content_box" do %>
+		<%= hidden_field_tag "event_notification_schedule[category]", category %>
+		<%= hidden_field_tag "event_notification_schedule[schedule_type]", "立即發送" %>
 		<div class="events_box">
 			<table>
 				<tr>
@@ -44,8 +46,8 @@
 					<td>
 						<% if event.patient.has_line_account? %>
 							<% if event.event_notifications.length == 0 %>
-								<%= check_box_tag "notifications[#{index}][args]", notification[:args], false, class: "args_input hidden" %>
-								<%= check_box_tag "notifications[#{index}][event_id]", event.id, false, onchange: "updateEventsCount(); updateArgInputs(this);", class: "sel_event" %>
+								<%= check_box_tag "event_notification_schedule[notifications_attributes][#{index}][args]", notification[:args], false, class: "args_input hidden" %>
+								<%= check_box_tag "event_notification_schedule[notifications_attributes][#{index}][event_id]", event.id, false, onchange: "updateEventsCount(); updateArgInputs(this);", class: "sel_event" %>
 							<% else %>
 								<%= check_box_tag "", "", false, disabled: true %>
 							<% end %>

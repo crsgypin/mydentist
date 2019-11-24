@@ -10,5 +10,6 @@
 		}
 	end,
 	query_path: url_for,
-	notification_schedule_path: new_clinic_event_notification_schedule_path(@clinic, category: "診所休假修改掛號"),
+	category: "診所休假修改掛號",
+	notification_schedule_path: new_clinic_event_notification_schedule_path(@clinic),
 } %>

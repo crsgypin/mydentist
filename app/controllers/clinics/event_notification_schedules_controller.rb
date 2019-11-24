@@ -1,11 +1,14 @@
 class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
 	def new
-		@event_notification_template = @clinic.event_notification_templates.find_by!(category: params[:category])
 
 		@event_notification_schedule = @clinic.event_notification_schedules.new
 
-		@notifications = params[:notifications]
+		@schedule = params[:event_notification_schedule]
+
+		@event_notification_template = @clinic.event_notification_templates.find_by!(category: @schedule[:category])
+
+		# @notifications = params[:notifications]
  	  # if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? params[:category]
 		# 	@notifications = []
 		# 	params[:notifications] && params[:notifications].each do |a,notification| 
@@ -31,15 +34,17 @@ class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationCo
 
 	def create
 		@event_notification_schedule = @clinic.event_notification_schedules.new
-		@event_notification_schedule.notification_template = @clinic.event_notification_templates.find_by!(event_notification_template_id: params[:event_notification_template_id])
+		@event_notification_schedule.notification_template = @event_notification_template
 		@event_notification_schedule.assign_attributes(event_notification_schedule_params)
-
+		if !@event_notification_schedule.save
+			return js_render_model_error @event_notification_schedule
+		end
 	end
 
 	private
 
 	def event_notification_schedule_params
-		params.require(:event_notification_schedule).permit(notifications_attributes: [:event_id, :patient_id, :args])
+		params.require(:event_notification_schedule).permit(:schedule_type, :notification_template_id, notifications_attributes: [:event_id, :patient_id, :args, :notification_template_id])
 		# params.require(:line_template).permit(keywords_attributes: [:name], template_messages_attributes: [:content])
 	end
 
