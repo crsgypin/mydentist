@@ -4,7 +4,9 @@
   cols: [
     {k: "id", v: proc{|a| a.id }},
     {t: "排程", v: proc{|a| a.schedule_type }},
-    {t: "狀態", v: proc{|a| a.status }}
+    {t: "類別", v: proc{|a| a.notification_template.category }},
+    {t: "狀態", v: proc{|a| a.status }},
+    {t: "時間", v: proc{|a| a.created_at }}
   ],
   row: {
 	  default_sel_index: 0,

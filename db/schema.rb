@@ -208,7 +208,6 @@ ActiveRecord::Schema.define(version: 20191124040301) do
   create_table "event_notification_schedules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
     t.integer "notification_template_id"
-    t.integer "category", limit: 1
     t.integer "schedule_type", limit: 1, default: 1
     t.integer "status", limit: 1, default: 0
     t.datetime "created_at", null: false
