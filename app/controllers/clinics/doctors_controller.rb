@@ -1,13 +1,5 @@
 class ::Clinics::DoctorsController < ::Clinics::ApplicationController
   before_action -> {@doctor_sidemenu = 1 }, only: :new
-  before_action -> {
-    access_config({
-      variable_name: "doctor",
-      new_resource: proc { @clinic.doctors.new},
-      find_resource: proc { @clinic.doctors.find(params[:id])},
-      resource_params: proc { params.require(:doctor).permit(@doctor.class.accessable_atts)}
-    })
-  }
 
   def index
     @doctors = @clinic.doctors
@@ -20,6 +12,26 @@ class ::Clinics::DoctorsController < ::Clinics::ApplicationController
 
   def show
     redirect_to clinic_doctor_info_path(@clinic, params[:id])
+  end
+
+  def create
+    @doctor = @clinic.doctors.new(doctor_params)
+    if !@doctor.save
+      return js_render_model_error(@doctor)
+    end
+  end
+
+  def destroy
+    @doctor = @clinic.doctors.find(params[:id])
+    if !@doctor.destroy
+      return js_render_model_error(@doctor)
+    end
+  end
+
+  private
+
+  def doctor_params
+    params.require(:doctor).permit(:name, :title, :experience, :intro, :pro)
   end
 
 end

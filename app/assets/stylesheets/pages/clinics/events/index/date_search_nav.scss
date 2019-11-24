@@ -58,18 +58,6 @@
 					width: calc(100% - 25px);
 					border: none;
 					height: 25px;
-					&::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-					  color: $colorGy1;
-					  opacity: 1; /* Firefox */
-					}
-
-					&:-ms-input-placeholder { /* Internet Explorer 10-11 */
-					  color: $colorGy1;
-					}
-
-					&::-ms-input-placeholder { /* Microsoft Edge */
-					  color: $colorGy1;
-					}
 				}
 				img {
 					height: 25px;

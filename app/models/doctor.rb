@@ -14,6 +14,7 @@ class Doctor < ApplicationRecord
 	accepts_nested_attributes_for :doctor_services
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
+	include Clinic::StaticImageHelper
 
 	def update_doctor_durations_note!
 		self.update!(:doctor_durations_note => wday_durations_note(self.doctor_durations))
@@ -27,7 +28,7 @@ class Doctor < ApplicationRecord
 		if self.photo.present?
 			self.photo.url
 		else
-			common_static_image_url(:dentist3)
+			clinic_static_image_url(:doctor)
 		end
 	end
 

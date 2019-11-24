@@ -1,16 +1,37 @@
 
 <aside id="show_layout_sidemenu">
-	<%= bg_center_image @doctor.photo.url%>
-  <p><%= "#{@doctor.name}#{@doctor.title}" %></p>
+	<div class="photo">
+		<%= bg_center_image @doctor.photo_url%>
+	</div>
+  <p><%= @doctor.new_record? ? "醫師姓名" : "#{@doctor.title_name}" %></p>
 	<ul>
-	<% [
-		{name: "基本資料", link: clinic_doctor_info_path(@clinic, @doctor)},
-		{name: "排診時段", link: clinic_doctor_doctor_durations_path(@clinic, @doctor)},
-		{name: "診療時程", link: clinic_doctor_doctor_services_path(@clinic, @doctor)},
-		{name: "休假日期", link: clinic_doctor_doctor_vacations_path(@clinic, @doctor)},
-	].each do |elm| %>
+	<% if @doctor.new_record?
+		side_menus = [
+			{name: "基本資料", link: url_for},
+			{name: "排診時段"},
+			{name: "診療時程"},
+			{name: "休假日期"},
+		]
+	else
+		side_menus = [
+			{name: "基本資料", link: clinic_doctor_info_path(@clinic, @doctor)},
+			{name: "排診時段", link: clinic_doctor_doctor_durations_path(@clinic, @doctor)},
+			{name: "診療時程", link: clinic_doctor_doctor_services_path(@clinic, @doctor)},
+			{name: "休假日期", link: clinic_doctor_doctor_vacations_path(@clinic, @doctor)},
+		]
+	end %>
+	<% side_menus.each do |elm| %>
+		<% if elm[:link].present? %>
     <li class="<%= "selected" if request.fullpath == elm[:link] %>"><%= link_to elm[:name], elm[:link] %></li>
+    <% else %>
+		<li><%= elm[:name] %></li>
+    <% end %>
 	<% end %>
   </ul>		
+  <div class="remove_box">
+  	<% if @doctor.persisted? %>
+  	<%= link_to "移除醫師", clinic_doctor_path(@clinic, @doctor), remote: true, method: :delete, data: {confirm: "確定移除？"} %>
+  	<% end %>
+  </div>
 </aside>
 

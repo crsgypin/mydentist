@@ -2,7 +2,7 @@
 <div id="context_menu">
 	<ul class="new_mode">
 		<li id="new">新增</li>
-		<li id="broadcast">推播</li>
+		<li id="broadcast">洗牙推播</li>
 	</ul>
 	<ul class="edit_mode">
 		<li id="edit">編輯</li>
@@ -78,6 +78,18 @@
 				method: "get",
 				dataType: "script",
 			})
+    });
+    contextMenu.find("#broadcast").click(function(){
+    	$.ajax({
+    		url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
+    		method: "get",
+    		data: {
+    			event_notification_schedule: {
+    				category: "回診推播"
+    			}
+    		},
+    		dataType: "script"
+    	})
     });
     $("body").click(function(){
     	contextMenu.removeClass("selected");

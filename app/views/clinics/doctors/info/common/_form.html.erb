@@ -3,36 +3,38 @@
   resource: @doctor,
   fields: [
     {t: "照片", v: proc{ |a| 
-    	if a.persisted?
-	      r = "<div class='clinic_photo_box'>"
-	      r += bg_center_image a.photo_url
-	      r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_doctor_info_photo_path(@clinic, a)}');"
-	      r += "</div>"
-	      r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
-	      r.html_safe
-    	end
+      if a.persisted?
+      r = ""
+      r += link_to new_clinic_doctor_info_photo_path(@clinic, a), class: "clinic_photo_box", remote: true do
+        r1 = bg_center_image a.photo_url
+        r1 += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: ""
+        r1
+      end
+      r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
+      r.html_safe
+      end
     }},
     {t: "醫師姓名", v: proc{|a|
       r = "<div class='flx both'>"
-      r +=  text_field_tag "doctor[name]", a.name 
-      r +=  text_field_tag "doctor[title]", a.title
+      r +=  text_field_tag "doctor[title]", a.title, placeholder: "輸入醫師職稱"
+      r +=  text_field_tag "doctor[name]", a.name, placeholder: "輸入醫師姓名"
       r += "</div>"
       r.html_safe
     }},
     {t: "主治", v: proc{|a| 
-      text_area_tag "doctor[pro]", a.pro 
+      text_area_tag "doctor[pro]", a.pro, placeholder: "輸入主要項目(必填) 例：主治：兒童牙齒"
     }},
     {t: "學經歷", v: proc{|a| 
-      text_area_tag "doctor[experience]", a.experience 
+      text_area_tag "doctor[experience]", a.experience, placeholder: "輸入學經歷(必填) 例：學經歷：臺北醫學大學畢業"
     }},
     {t: "網頁連結", v: proc{|a| 
-      text_field_tag "doctor[web_link]", a.web_link 
+      text_field_tag "doctor[web_link]", a.web_link, placeholder: "輸入網址"
     }},
     {t: "聯絡電話", v: proc{|a| 
-      text_field_tag "doctor[phone]", a.phone 
+      text_field_tag "doctor[phone]", a.phone, placeholder: "輸入聯絡電話(必填)"
     }},
     {t: "備註", v: proc{|a| 
-      text_field_tag "doctor[note]", a.note
+      text_field_tag "doctor[note]", a.note, placeholder: "輸入備註"
     }},
   ]
 }
