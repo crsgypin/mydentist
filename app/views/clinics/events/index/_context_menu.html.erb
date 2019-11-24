@@ -15,34 +15,34 @@
 		var contextMenu = $("#context_menu");
 		var eventId, doctorId, date, hour, minute;
     $("body")[0].addEventListener('contextmenu', function(e) {
-      if($(e.target).closest('#calendar_day').length > 0){
-	      e.preventDefault();
-	      var patientElm = function(){
-	      	if($(e.target).is(".patient_event")){
-	      		return $(e.target);
-	      	} else {
-	      		return $(e.target).closest(".patient_event")
-	      	}
-	      }();
-	      contextMenu.addClass("selected");
-	      var x = e.clientX;
-	      var y = e.clientY;
-	      contextMenu.css({top: y, left: x});
+      if(!$(e.target).closest('#calendar_day').length > 0){
+        contextMenu.removeClass("selected");
+        return;
+      }
+      e.preventDefault();
+      var patientElm = function(){
+      	if($(e.target).is(".patient_event")){
+      		return $(e.target);
+      	} else {
+      		return $(e.target).closest(".patient_event")
+      	}
+      }();
+      var x = e.clientX;
+      var y = e.clientY;
+      contextMenu.css({top: y, left: x});
+      contextMenu.addClass("selected");
 
-	      eventId = patientElm.data("id");
-	      if(!eventId){
-	      	contextMenu.find(".new_mode").removeClass("hidden");
-	      	contextMenu.find(".edit_mode").addClass("hidden");
-	      	doctorId = patientElm.data("doctor_id");
-	      	date = patientElm.data("date");
-	      	hour = patientElm.data("hour");
-	      	minute = patientElm.data("minute");
-	      } else {
-	      	contextMenu.find(".new_mode").addClass("hidden");
-	      	contextMenu.find(".edit_mode").removeClass("hidden");
-	      }
+      eventId = patientElm.data("id");
+      if(!eventId){
+      	contextMenu.find(".new_mode").removeClass("hidden");
+      	contextMenu.find(".edit_mode").addClass("hidden");
+      	doctorId = patientElm.data("doctor_id");
+      	date = patientElm.data("date");
+      	hour = patientElm.data("hour");
+      	minute = patientElm.data("minute");
       } else {
-      	contextMenu.removeClass("selected");
+      	contextMenu.find(".new_mode").addClass("hidden");
+      	contextMenu.find(".edit_mode").removeClass("hidden");
       }
     }, false);
     contextMenu.find("#new").click(function(){
