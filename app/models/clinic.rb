@@ -15,6 +15,7 @@ class Clinic < ApplicationRecord
 	has_many :clinic_line_systems, class_name: "ClinicLine::System"
 	has_many :clinic_line_broadcasts, class_name: "ClinicLine::Broadcast"
 	has_many :event_notification_templates, class_name: "Event::NotificationTemplate"
+	has_many :event_notification_schedules, class_name: "Event::NotificationSchedule"
 	accepts_nested_attributes_for :services
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader

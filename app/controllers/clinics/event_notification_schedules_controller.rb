@@ -1,9 +1,9 @@
-class ::Clinics::EventNotificationTemplatesController < ::Clinics::ApplicationController
+class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
-	def show
-		@event_notification_template = @clinic.event_notification_templates.find(params[:id])
+	def new
+		@event_notification_schedule = @clinic.event_notification_schedules.new
 
-		if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? @event_notification_template.category
+ 		if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? @event_notification_schedule.category
 			@event_objs = []
 			params[:events] && params[:events].each do |a,v| 
 				r = {
@@ -13,7 +13,7 @@ class ::Clinics::EventNotificationTemplatesController < ::Clinics::ApplicationCo
 				@event_objs << r
 			end
 			return js_render_error "你尚未選擇推播病患" if @event_objs.length == 0
-		elsif ["回診推播"].include? @event_notification_template.category
+		elsif ["回診推播"].include? @event_notification_schedule.category
 			@patient_objs = []
 			params[:patients] && params[:patients].each do |a, v|
 				r = {
@@ -24,6 +24,13 @@ class ::Clinics::EventNotificationTemplatesController < ::Clinics::ApplicationCo
 			end
 			return js_render_error "你尚未選擇推播病患" if @patient_objs.length == 0
 		end
+	end
+
+	def create
+		@event_notification_schedule = @clinic.event_notification_schedules.new
+
+				
+
 	end
 
 end
