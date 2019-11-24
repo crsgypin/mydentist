@@ -1,0 +1,8 @@
+
+<%= render partial: "clinics/common/upload_photo_lightbox", locals: {
+	form_url: url_for(action: :create),
+	form_method: "post",
+	photo_url: @member.photo_url,
+	photo_input_name: "member[photo]"
+} %>
+

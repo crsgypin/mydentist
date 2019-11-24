@@ -2,7 +2,7 @@ class ::Clinics::Members::ApplicationController < ::Clinics::ApplicationControll
 	before_action :set_member
 
 	def set_member
-		@member = @clinc.members.find(params[:member_id])
+		@member = @clinic.members.find(params[:member_id])
 	end
 
 end

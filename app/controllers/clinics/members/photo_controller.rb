@@ -1,7 +1,6 @@
 class ::Clinics::Members::PhotoController < ::Clinics::Members::ApplicationController
 
 	def new
-
 	end
 
 	def create

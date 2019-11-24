@@ -72,6 +72,9 @@ Rails.application.routes.draw do
       resources :broadcasts
     end
     resources :members
+    resources :members, only: [], module: :members do
+      resource :photo, only: [:new, :create], controller: :photo
+    end
     resources :event_notification_schedules, only: [:new, :create]
     # resources :event_notification_templates, only: [], module: :event_notification_templates do
       # resources :notifications, only: [:create]
