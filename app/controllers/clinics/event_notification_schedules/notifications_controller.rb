@@ -1,4 +1,4 @@
-class ::Clinics::EventNotificationTemplates::NotificationsController < ::Clinics::EventNotificationTemplates::ApplicationController
+class ::Clinics::EventNotificationSchedules::NotificationsController < ::Clinics::EventNotificationSchedules::ApplicationController
 	
 	def create
     ActiveRecord::Base.transaction do			
