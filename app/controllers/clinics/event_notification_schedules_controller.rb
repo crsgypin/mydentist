@@ -1,6 +1,8 @@
 class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
 	def new
+		@event_notification_template = @clinic.event_notification_templates.find_by!(category: params[:category])
+
 		@event_notification_schedule = @clinic.event_notification_schedules.new
 
  		if ["回診修改掛號", "診所休假修改掛號", "醫生休假修改掛號"].include? @event_notification_schedule.category

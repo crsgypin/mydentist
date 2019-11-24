@@ -1,4 +1,4 @@
-<%= form_tag clinic_event_notification_template_path(@clinic, @event_notification_template), method: "get", id: "patient_table_box", remote: true do %>
+<%= form_tag new_clinic_event_notification_schedule_path(@clinic, category: "回診推播"), method: "get", id: "patient_table_box", remote: true do %>
   <%= render partial: "clinics/common/clinic_table" , locals: {
     id: "patients",
     class: "ht80",

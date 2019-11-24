@@ -74,10 +74,10 @@ Rails.application.routes.draw do
       resources :broadcasts
     end
     resources :members
-    resources :event_notification_templates, only: [:show]
-    resources :event_notification_templates, only: [], module: :event_notification_templates do
-      resources :notifications, only: [:create]
-    end
+    resources :event_notification_schedules, only: [:new, :create]
+    # resources :event_notification_templates, only: [], module: :event_notification_templates do
+      # resources :notifications, only: [:create]
+    # end
   end
 
   namespace :admin do

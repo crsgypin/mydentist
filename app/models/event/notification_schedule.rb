@@ -7,7 +7,7 @@ class Event::NotificationSchedule < ApplicationRecord
 	enum status: {"尚未發送" => 0, "發送中" => 1, "已發送" => 2, "取消" => 3}
 	json_format :data
 	before_validation :check_status, on: :update
-	befoer_create :set_notifications
+	before_create :set_notifications
 	attr_accessor :event_objs
 	attr_accessor :patient_objs
 

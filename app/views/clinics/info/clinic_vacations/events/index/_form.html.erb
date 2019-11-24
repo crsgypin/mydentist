@@ -9,5 +9,5 @@
 		}
 	end,
 	query_path: url_for,
-	notification_template_path: clinic_event_notification_template_path(@clinic, @event_notification_template),
+	notification_template_path: new_clinic_event_notification_schedule_path(@clinic, category: "醫生休假修改掛號"),
 } %>
