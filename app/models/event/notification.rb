@@ -12,6 +12,7 @@ class Event::Notification < ApplicationRecord
 	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
   before_validation :set_line_account, on: :create
   json_format :args
+  attr_accessor :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category
 	# include EventNotificationConcern 
@@ -80,7 +81,8 @@ class Event::Notification < ApplicationRecord
       self.line_account = self.patient.line_account
     elsif self.patient.present?
       self.line_account = self.patient.line_account
-      self.booking_event = self.patient.booking_events.last || self.patient.build_booking_event
+      self.booking_event = self.patient.booking_events.last || self.patient.booking_events.new
+      #no save due to on create
     end
     true
   end

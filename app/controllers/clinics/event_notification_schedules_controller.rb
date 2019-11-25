@@ -13,7 +13,7 @@ class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationCo
 		@event_notification_schedule.assign_attributes(event_notification_schedule_params)
 		if !@event_notification_schedule.save
 			return js_render_model_error @event_notification_schedule
-		end
+ 		end
 	end
 
 	private

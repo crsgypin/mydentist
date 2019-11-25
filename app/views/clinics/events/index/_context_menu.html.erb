@@ -80,16 +80,16 @@
 			})
     });
     contextMenu.find("#broadcast").click(function(){
-    	$.ajax({
-    		url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
-    		method: "get",
-    		data: {
-    			event_notification_schedule: {
-    				category: "回診推播",
-    			}
-    		},
-    		dataType: "script"
-    	})
+      $.ajax({
+        url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
+        method: "get",
+        data: {
+          event_notification_schedule: {
+            category: "回診推播",
+            schedule_type: "排程發送"
+          }
+        }
+      })
     });
     $("body").click(function(){
     	contextMenu.removeClass("selected");
