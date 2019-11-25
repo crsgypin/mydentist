@@ -26,14 +26,12 @@
 			</li>
 		</ul>
 	<% end %>
-	<%= form_tag notification_schedule_path , method: "get", remote: true, class: "content_box" do %>
-		<%= hidden_field_tag "event_notification_schedule[category]", category %>
-		<%= hidden_field_tag "event_notification_schedule[schedule_type]", "立即發送" %>
+	<div class="content_box">
 		<div class="events_box">
 			<table>
 				<tr>
 					<th>
-						<%= check_box_tag "", "", false, id: "all_check", onchange: "updateAllEventsCount();" %>
+						<%= check_box_tag "", "", false, id: "all_check", onchange: "window.onClickAllNotification();" %>
 					</th>
 					<th>病患</th>
 					<th>日期</th>
@@ -46,8 +44,7 @@
 					<td>
 						<% if event.patient.has_line_account? %>
 							<% if event.event_notifications.length == 0 %>
-								<%= check_box_tag "event_notification_schedule[notifications_attributes][#{index}][args]", notification[:args], false, class: "args_input hidden" %>
-								<%= check_box_tag "event_notification_schedule[notifications_attributes][#{index}][event_id]", event.id, false, onchange: "updateEventsCount(); updateArgInputs(this);", class: "sel_event" %>
+								<%= check_box_tag "", "", false, onchange: "window.onClickNotification()", class: "sel_event", data: {event_id: event.id, args: notification[:args]} %>
 							<% else %>
 								<%= check_box_tag "", "", false, disabled: true %>
 							<% end %>
@@ -83,35 +80,55 @@
 		</div>
 		<div class="preview_box">
 			<div class="sending_box">
-				<%= link_to "javascript:;", onclick: "$(this).closest('form').submit();", class: "btnBu" do %>
+				<%= link_to "javascript: window.pushNotification();", class: "btnBu" do %>
 					推播(<span class="number">0</span>)
 				<% end %>
 			</div>
 		</div>
-	<% end %>
+	</div>
 </div>
 
 <script type="text/javascript">
+	window.onClickNotification = function(){
+		updateEventsCount();
+	};
+	window.onClickAllNotification = function(){
+		var checked = $("#all_check")[0].checked;
+		$("#event_notifications_box .events_box input.sel_event").each(function(i, elm){
+			elm.checked = checked;
+			// updateArgInputs(elm);
+		});
+		updateEventsCount();
+	}
 	function updateEventsCount(){
 		var count = $("#event_notifications_box .events_box input.sel_event:checked").length;
 		var n = $("#event_notifications_box").find(".sending_box .number")
 		n.text(count);
 	}
-	function updateAllEventsCount(){
-		var checked = $("#all_check")[0].checked;
-		$("#event_notifications_box .events_box input.sel_event").each(function(i, elm){
-			elm.checked = checked;
-			updateArgInputs(elm);
-		});
-		updateEventsCount();
-	}
-	function updateArgInputs(input){
-		$(input).closest("td").find(".args_input").each(function(i, elm){
-			elm.checked = input.checked;
-		});
-	}
 	function completePushNotification(){
-		<%# callback %>
+		<%# callback method after schedule %>
 		$("#event_notifications_box form.query_box").submit();
+	}
+	window.pushNotification = function(){
+		var selNotifications = $("#event_notifications_box .events_box input.sel_event:checked").toArray().map(function(elm){
+			var data = $(elm).data();
+			return {
+				event_id: data.eventId,
+				args: JSON.stringify(data.args)
+			}
+		});
+
+		$.ajax({
+			url: "<%= notification_schedule_path %>",
+			method: "get",
+			dataType: "script",
+			data: {
+				event_notification_schedule: {
+					category: "<%= category %>",
+					schedule_type: "立即發送",
+					notifications_attributes: selNotifications					
+				}
+			}
+		})
 	}
 </script>

@@ -47,13 +47,15 @@ class Event::Notification < ApplicationRecord
             type: "uri",
             label: "是，預約",
             uri: proc do 
+              clinic = self.notification_template.clinic
               if self.category == "回診推播"
-                liff_line_event_url(self.clinic, self.line_account, {
+                liff_line_event_url(clinic, self.line_account, {
                   booking_event_id: self.booking_event.id, 
                   event_notification_id: self.id #for response
                 })
+
                else
-                liff_line_event_url(self.clinic, self.line_account, {
+                liff_line_event_url(clinic, self.line_account, {
                   event_id: self.event.id, 
                   event_notification_id: self.id #for response
                 })
