@@ -150,19 +150,6 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @doctor = @doctors.first    
   end
 
-  # def new_edit_set_doctor_service
-  #   @doctor_services = @doctor.doctor_services.includes(:service)
-  #   if params[:service_id].present?
-  #     @doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id]}
-  #     return if @doctor_service.present?
-  #   end
-  #   if @event.present?
-  #     @doctor_service = @doctor_services.find{|d| d.service == @event.service}
-  #     return if @doctor_service.present?
-  #   end
-  #   @doctor_service = @doctor_services.first    
-  # end
-
   def new_edit_set_service
     @services = @clinic.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}
     if params[:service_id].present?

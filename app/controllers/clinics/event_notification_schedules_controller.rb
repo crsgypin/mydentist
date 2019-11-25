@@ -1,11 +1,10 @@
 class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
 	def new
-
 		@event_notification_schedule = @clinic.event_notification_schedules.new
 
 		@schedule = params[:event_notification_schedule]
-
+		
 		@event_notification_template = @clinic.event_notification_templates.find_by!(category: @schedule[:category])
 	end
 
