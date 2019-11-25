@@ -4,7 +4,7 @@ class Patient < ApplicationRecord
   has_many :booking_events
   has_one :line_account, class_name: "Line::Account"
   has_one :clinic_patient_notification, class_name: "Clinic::PatientNotification"
-  has_one :event_notification, class_name: "Event::Notification"
+  has_many :event_notifications, class_name: "Event::Notification"
   belongs_to :default_doctor, class_name: "::Doctor", foreign_key: :default_doctor_id, optional: true
   belongs_to :current_event, class_name: "::Event", foreign_key: :current_event_id, optional: true
   belongs_to :last_tooth_cleaning_event, class_name: "::Event", foreign_key: :last_tooth_cleaning_event_id, optional: true

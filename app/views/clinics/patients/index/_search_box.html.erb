@@ -2,7 +2,7 @@
 <div id="search_box">
 	<%= form_tag url_for, method: "get" do %>
 	<% if @category == "notification" %>
-	<%= link_to "javascript: $('#patient_table_box').submit();", class: "btnW" do %>
+	<%= link_to "javascript: window.pushNotification();", class: "btnW" do %>
 		回診推播(<span class="number">0</span>)
 	<% end %>
 	<% end %>

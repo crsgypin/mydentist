@@ -1,12 +1,29 @@
-<%= form_tag new_clinic_event_notification_schedule_path(@clinic), method: "get", id: "patient_table_box", remote: true do %>
-  <%= hidden_field_tag "event_notification_schedule[category]", "回診推播" %>
-  <%= hidden_field_tag "event_notification_schedule[schedule_type]", "立即發送" %>
+<div id="patient_table_box">
   <%= render partial: "clinics/common/clinic_table" , locals: {
     id: "patients",
     class: "ht80",
     resources: @patients,
     cols: proc do 
-      r = [
+      r = []
+      if @category == "notification"
+        r += [
+          {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{ |a, index| 
+              event_notification = a.event_notifications.find{|a| a.category == "回診推播"} 
+              r = check_box_tag("", "", false, class: "notification_check", data: {patient_id: a.id, args: {clinic_name: @clinic.name, patient_name: a.name}}, disabled: event_notification.present?)
+              r.html_safe
+            }
+          },
+          {t: "推播訊息狀態", v: proc { |a|
+            event_notification = a.event_notifications.find{|a| a.category == "回診推播"} 
+            if event_notification.present?
+              r = "<p> #{event_notification.status} </p>"
+              r += "<p class='fs10 colorGy1'> #{roc_format(event_notification.created_at, 3)} 已推播</p>"
+              r.html_safe
+            end
+          }}
+        ]
+      end
+      r += [
         {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
         {t: "性別", v: proc{|a| a.gender }},
         {t: "身分證號碼", v: proc{|a| a.person_id }},
@@ -36,16 +53,6 @@
           }}
         ]
       end
-      if @category == "notification"
-        r = [
-          {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{ |a, index| 
-              r = check_box_tag("event_notification_schedule[notifications_attributes][#{index}][patient_id]", a.id, false, class: "notification_check")
-              r += check_box_tag("event_notification_schedule[notifications_attributes][#{index}][args]", {clinic_name: @clinic.name,patient_name: a.name}.to_json, false, class: "hidden")
-              r.html_safe
-            }
-          }
-        ] + r
-      end
      r
    end.call,
     row: {
@@ -55,7 +62,7 @@
     }
   }
   %>
-<% end %>
+</div>
 
 <script type="text/javascript">
   $(function(){
@@ -73,16 +80,21 @@
     });
 
     window.pushNotification = function(){
-      var eventIds = 
+      var selNotifications = $("#patient_table_box input.notification_check:checked").toArray().map(function(elm){
+        var data = $(elm).data();
+        return {
+          patient_id: data.patientId,
+          args: JSON.stringify(data.args)
+        }
+      });
       $.ajax({
         url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
         method: "get",
         data: {
           event_notification_schedule: {
-            category: 
-            notifications_attributes: {
-              
-            }
+            category: "回診推播",
+            schedule_type: "立即發送",
+            notifications_attributes: selNotifications
           }
         }
       })

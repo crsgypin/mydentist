@@ -11,7 +11,7 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
   def index
     @category = params[:category].present? ? params[:category] : "all"
     if @category == "all"
-      @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+      @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event, :event_notifications => [:notification_template])
     elsif @category == "notification"
       @patients = @clinic.clinic_notification_patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
     else
