@@ -20,6 +20,8 @@ class Clinic < ApplicationRecord
 	accepts_nested_attributes_for :services
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
+	mount_uploader :map_photo, PhotoUploader
+	before_update :check_map
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Common::ImageHelper
@@ -83,5 +85,18 @@ class Clinic < ApplicationRecord
 		self.clinic_durations_note.gsub("\n", "<br>")
 	end
 
+	def check_map
+		if self.changes[:address].present?
+			self.class.include Common::GeocoderHelper
+			self.class.include GoogleStaticMap
+
+			loc = get_lat_lang_by_address(self.address)
+			self.lat = loc[:lat]
+			self.lng = loc[:lng]
+			path = GoogleStaticMap.get_map_photo(loc[:lat], loc[:lng])
+			self.map_photo = File.open(path)
+		end		
+		true
+	end
 	
 end
