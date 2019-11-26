@@ -77,7 +77,11 @@ Rails.application.routes.draw do
     resources :members, only: [], module: :members do
       resource :photo, only: [:new, :create], controller: :photo
     end
-    resources :event_notification_schedules, only: [:new, :create]
+
+    namespace :lightbox do
+      resources :event_notification_schedules, only: [:new, :create]
+      resources :clinic_notifications, only: [:index]
+    end
     # resources :event_notification_templates, only: [], module: :event_notification_templates do
       # resources :notifications, only: [:create]
     # end

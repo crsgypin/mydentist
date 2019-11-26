@@ -12,13 +12,13 @@ class Event::Notification < ApplicationRecord
 	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
   before_validation :set_line_account, on: :create
   json_format :args
+  after_update :check_notification
   attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category
-	# include EventNotificationConcern 
+	include EventNotificationConcern 
 
   include LinebotWebhook::Helper::RepliedMessageHelper
-  include Common::LineShareHelper
 
   def category
     self.notification_template.category
@@ -97,6 +97,15 @@ class Event::Notification < ApplicationRecord
       #no save due to on create
     end
     true
+  end
+
+  def check_notification
+    if self.changes[:status].present?
+      if !["同意", "取消"].include?(self.status)
+        return true
+      end
+      Clinic::Notification.on_change_event_notification(self)
+    end
   end
 
 end

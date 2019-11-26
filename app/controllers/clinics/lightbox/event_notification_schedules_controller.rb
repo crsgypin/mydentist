@@ -1,4 +1,4 @@
- class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
+ class ::Clinics::Lightbox::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
 	def new
 		@event_notification_schedule = @clinic.event_notification_schedules.new

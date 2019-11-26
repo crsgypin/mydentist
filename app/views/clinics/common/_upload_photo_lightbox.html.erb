@@ -1,16 +1,23 @@
 
 <div id="upload_photo_lightbox" class="lightbox">
 	<%= form_tag form_url, method: form_method, remote: true, class: "inbox" do %>
-	<div class="content_box">
-		<div class='clinic_photo_box' onclick="$(this).siblings('input').click();">
-			<%= bg_center_image photo_url %>
-			<%= image_tag common_static_image_url(:pic_edit3), class: "pic_edit" %>
-		</div>
-		<%= file_field_tag photo_input_name, class: "hidden", onchange: "window.showFileImage(this, $(this).siblings('.clinic_photo_box').find('.bg_center_image'), 1);" %>
+	<div class="header_box">
+		上傳圖片
 	</div>
-	<div class="buttons_box">
-		<%= content_tag :div, "取消", onclick: "$(this).closest('.lightbox').remove();", class: "btnW cursor_pointer" %>
-		<%= submit_tag "儲存", class: "btnBu" %>
+	<div class="content_box">
+		<div class="image_box">
+			<%= image_tag photo_url, id: "upload_photo_img" %>
+		</div>
+		<div class="center_title">
+			<p>將圖片/影片拖曳到這裡</p>
+			<p>或者</p>
+			<%= link_to "選擇要上傳的圖片/影片", "javascript:;", class: "btnBu", onclick: "$('#photo_file_input').click();" %>
+		</div>
+		<%= file_field_tag photo_input_name, class: "hidden", id: "photo_file_input", onchange: "window.showFileImage(this, $('#upload_photo_img'));" %>
+	</div>
+	<div class="buttons_box form_buttons_box">
+		<%= link_to "取消", "javascript:;", onclick: "$(this).closest('.lightbox').remove();", class: "btnW cursor_pointer" %>
+		<%= submit_tag "確定", class: "btnBu" %>
 	</div>
 	<% end %>
 </div>

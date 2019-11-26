@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191126063229) do
+ActiveRecord::Schema.define(version: 20191126125026) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 20191126063229) do
     t.integer "category", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "clinic_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.integer "category"
+    t.integer "patient_id"
+    t.string "args"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_clinic_notifications_on_clinic_id"
   end
 
   create_table "clinic_patient_notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
