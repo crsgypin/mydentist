@@ -68,6 +68,15 @@
 		  	color: $colorW;
 		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8); 	
 		  }
+		  &.new {
+		  	&:hover {
+		  		background-color: rgba(18, 167, 251, 0.2);
+		  	}
+		  }
+		  &.broadcast {
+		  	background-color: #a4bde8;
+		  	color: $colorW;
+		  }
 			&:hover {
 				color: $colorGy_l;
 			}

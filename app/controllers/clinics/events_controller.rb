@@ -15,7 +15,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @date = Date.parse(params[:date]) rescue  Date.today
     @category = params[:category]
   
-    @events = @clinic.events.valid_events.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
+    @events = @clinic.events.valid_events_with_broadcast.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
 
     if !@doctor_id.present?
       index_set_for_all_doctors
