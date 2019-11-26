@@ -2,6 +2,7 @@ class LinebotWebhook::Controllers::FollowsController < LinebotWebhook::Controlle
 	include LinebotWebhook::Replies::FollowsReply
 
 	def create
+		@message = ClinicLine::System.find_by(category: "歡迎").line_template.message_contents.join(",")
 		reply_follows_create
 	end
 

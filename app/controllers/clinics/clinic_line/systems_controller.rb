@@ -1,7 +1,7 @@
 class ::Clinics::ClinicLine::SystemsController < ::Clinics::ClinicLine::ApplicationController
 
 	def index
-		@clinic_line_systems = @clinic.clinic_line_systems.includes(:line_template)				
+		@clinic_line_systems = @clinic.clinic_line_systems.includes(:line_template).first(2)
 	end
 
 	def edit
