@@ -10,8 +10,10 @@ class Line::Account < ApplicationRecord
 	validates_presence_of :line_user_id
 	before_save :get_and_set_profle_for_validation
 	before_save :check_reply_token
+	after_update :check_notification
 	# after_create :create_or_update_richmenu_to_user #over 1000, so depreciated at 2019/7/4
 	include ApplicationHelper
+	include Common::DateHelper
 
 	def get_and_set_profle_for_validation
 		if self.status == "follow"
@@ -90,4 +92,16 @@ class Line::Account < ApplicationRecord
     }
   end	
 
+  def check_notification
+  	if self.changes[:patient_id].present? && self.patient.present?
+	  	t = Time.now
+	  	n = self.clinic.clinic_notifications.create({
+	  		category: "已綁定", 
+	  		patient: self.patient,
+	  		args_json: {
+	  			date: "#{roc_format(t, 3)} #{t.hour}:#{t.min}"
+	  		}
+	  	})
+	  end
+  end
 end

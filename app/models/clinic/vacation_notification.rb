@@ -1,4 +1,5 @@
 class Clinic::VacationNotification < ApplicationRecord
+	#replaced by event_notification
 	belongs_to :vacation
 	belongs_to :event
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true

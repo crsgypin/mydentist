@@ -30,9 +30,11 @@ module Common::DateHelper
 	def roc_format(date, format=1)
 		return nil if date.nil?
 		if format == 1
+			# 82年10月15日
 			"#{date.year - 1911}年#{date.month}月#{date.day}日"
 		elsif format == 2
 			# ch_wday = ["日", "一", "二", "三", "四", "五", "六"]
+			# 民國82年10月15日
 			"民國#{date.year - 1911}年#{date.month}月#{date.day}日(#{ch_wday(date.wday)})"
 		elsif format == 3
 			# 108/2/3
