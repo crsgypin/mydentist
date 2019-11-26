@@ -21,6 +21,22 @@ module Common::DateHelper
 				end				
 			elsif type == 2
 				datetime.strftime('%Y/%m/%d %X')
+			elsif type == 3
+				time_now = Time.now.to_i
+				delta = time_now - datetime.to_i
+				if delta < 3600
+					"#{(delta.to_f/60).ceil}#{I18n.locale == :"zh-TW" ? "分鐘前" : " mins ago"}"
+				elsif delta < 24 * 3600
+					"#{(delta/3600).floor}#{I18n.locale == :"zh-TW" ? "小時前" : " hours ago"}"
+				elsif delta < 30 * 24 * 3600
+					"#{(delta/24/3600).floor}#{I18n.locale == :"zh-TW" ? "天前" : " days ago"}"
+				elsif delta	< 365 * 24 * 3600
+					"#{(delta/30/24/3600)}#{I18n.locale == :"zh-TW" ? "個月前" : " months ago"}"
+				elsif delta < 10 * 365 * 24 * 3600
+					"#{(delta/365/24/3600)}#{I18n.locale == :"zh-TW" ? "年前" : " years ago"}"
+				else
+					"#{datetime.year}/#{datetime.month}/#{datetime.day}"
+				end
 			end
 		else
 			""

@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
 
-  .title {
+  >.title {
     line-height: 60px;
     font-size: $fs_21p;
     font-weight: bold;
@@ -25,7 +25,7 @@
     text-align: center;
     line-height: 60px;
     font-size: $fs_24p;
-    a {
+    >a {
     	color: $colorY;
     }
 	}

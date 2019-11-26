@@ -1,0 +1,43 @@
+
+#clinic_nav {
+	.notification {
+		position: relative;
+		#clinic_notification_box {
+			position: absolute;
+			width: 330px;
+			padding: 15px;
+			top: calc(60px);
+			right: 0;
+			background: $colorGy_l;
+			display: none;
+			line-height: 1.2;
+			&.selected {
+				display: block;
+			}
+			.inbox {
+				height: calc(100vh - 120px);
+				overflow-y: scroll;
+				ul {
+					li {
+						padding: 10px;
+						margin-bottom: 10px;
+						color: $colorGy;
+						background: $colorW;
+						text-align: left;
+						.title {
+							font-size: $fs_14p;
+							padding-bottom: 10px;
+						}
+						.content {
+							font-size: $fs_12p;
+							padding-bottom: 5px;
+						}
+						.date {
+							font-size: $fs_12p;
+						}
+					}
+				}
+			}
+		}		
+	}
+}

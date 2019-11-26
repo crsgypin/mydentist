@@ -7,6 +7,11 @@ class Clinic::Notification < ApplicationRecord
 	json_format :args
 	extend ClinicNotificationConcern
 
+	def title
+		e = self.class.category_contents.find{|a| a[:category] == self.category}
+		e[:title]
+	end
+
 	def content
 		e = self.class.category_contents.find{|a| a[:category] == self.category}
 		c = e[:content]

@@ -4,8 +4,9 @@
 		<%= roc_format(Date.today, 2) %>
 	</div>
 	<div class="notification">
-		<%= link_to "", onclick: "event.preventDefault(); showNews();" do %>
+		<%= link_to clinic_lightbox_clinic_notifications_path(@clinic), remote: true do %>
 			<%= icon_tag(:bell) %>
 	  <% end %>
+	  <div id="clinic_notification_box"></div>
 	 </div>
 </div>

@@ -1,0 +1,29 @@
+
+<div id="clinic_notification_box" class="selected">
+	<div class="inbox">
+		<ul>
+			<% @clinic_notifications.each do |clinic_notification| %>
+			<li>
+				<div class="title">
+					<%= clinic_notification.title %>
+				</div>
+				<div class="content">
+					<%= clinic_notification.content %>
+				</div>
+				<div class="date">
+					<%= datetime_format(clinic_notification.created_at, 3) %>
+				</div>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("body").on("click.clinic_notification", function(e){
+		if($(e.target).closest("#clinic_notification_box").length == 0){
+			$("#clinic_notification_box").remove();
+			$("body").off("click.clinic_notification")
+		}
+	});
+</script>
