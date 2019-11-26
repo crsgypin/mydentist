@@ -1,0 +1,47 @@
+
+#upload_photo_lightbox {
+	.inbox {
+		.header_box {
+			font-size: $fs_16p;
+		}
+		.content_box {
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 350px;
+			position: relative;
+			border: solid 1px $colorBu;
+			border-radius: 10px;
+			.image_box {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				z-index: 1;
+				img {
+					display: block;
+					height: 100%;
+					margin: 0 auto;
+				}
+				&:after {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+				  background-color: rgba(246, 246, 246, 0.5);
+				}
+			}
+			.center_title {
+				position: absolute;
+				z-index: 10;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				line-height: 3;
+			}
+		}
+	}
+}
