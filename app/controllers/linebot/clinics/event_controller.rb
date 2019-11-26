@@ -83,7 +83,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
     	server_type: "push",
     	messages: {
     		type: "text", 
-    		text: "您的掛號已修正成功，醫師: #{@event.doctor.name}, 時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
+    		text: "您的掛號已修正成功\n醫師: #{@event.doctor.name}\n時間: #{roc_format(@event.date,3) } #{@event.duration_desc}"
     	}
     })
 
