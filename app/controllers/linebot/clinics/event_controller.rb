@@ -174,7 +174,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	def check_event_notification
 		if params[:event_notification_id].present?
 			@event_notification = Event::Notification.find_by(id: params[:event_notification_id])
-			@event_notification.update!(status: "同意")
+			@event_notification.update!(status: "同意", event: @event)
 		end
 	end
 

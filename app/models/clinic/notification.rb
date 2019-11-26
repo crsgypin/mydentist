@@ -5,11 +5,12 @@ class Clinic::Notification < ApplicationRecord
 	  enum category: self.category_contents.map{|a| [a[:category], a[:index]]}.to_h
 	end
 	json_format :args
+	extend ClinicNotificationConcern
 
 	def content
 		e = self.class.category_contents.find{|a| a[:category] == self.category}
-		c = c[:content]
-		c[:args].each do |key, value|
+		c = e[:content]
+		self.args_json.each do |key, value|
 			c = c.gsub("{#{key}}", value)
 		end
 		c

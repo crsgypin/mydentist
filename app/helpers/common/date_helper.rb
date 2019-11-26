@@ -42,6 +42,12 @@ module Common::DateHelper
 		elsif format == 4
 			# 108/2/3 (週ㄧ)
 			"#{date.year - 1911}/#{date.month}/#{date.day} (#{ch_wday(date.wday)})"
+		elsif format == 5
+			# 108/2/3 18:10
+			datetime = date
+			hour = datetime.hour < 10 ? "0#{datetime.hour}" : "#{datetime.hour}"
+			minute = datetime.min < 10 ? "0#{datetime.min}" : "#{datetime.min}"
+			"#{datetime.year - 1911}/#{datetime.month}/#{datetime.day} #{hour}:#{minute}"
 		end
 	end
 

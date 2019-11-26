@@ -94,14 +94,7 @@ class Line::Account < ApplicationRecord
 
   def check_notification
   	if self.changes[:patient_id].present? && self.patient.present?
-	  	t = Time.now
-	  	n = self.clinic.clinic_notifications.create({
-	  		category: "已綁定", 
-	  		patient: self.patient,
-	  		args_json: {
-	  			date: "#{roc_format(t, 3)} #{t.hour}:#{t.min}"
-	  		}
-	  	})
+      Clinic::Notification.on_line_account_add_patient(self)
 	  end
   end
 end
