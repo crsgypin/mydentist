@@ -16,7 +16,7 @@ class Event::Notification < ApplicationRecord
   attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category
-	# include EventNotificationConcern 
+	include EventNotificationConcern 
 
   include LinebotWebhook::Helper::RepliedMessageHelper
 

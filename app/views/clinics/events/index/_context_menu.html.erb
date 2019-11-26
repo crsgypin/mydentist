@@ -90,7 +90,7 @@
     });
     contextMenu.find(".broadcast").click(function(){
       $.ajax({
-        url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
+        url: "<%= new_clinic_lightbox_event_notification_schedule_path(@clinic) %>",
         method: "get",
         data: {
           event_notification_schedule: {
