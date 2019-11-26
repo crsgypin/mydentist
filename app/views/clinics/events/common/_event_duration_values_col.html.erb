@@ -7,11 +7,24 @@
 	<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 	<% zindex = 100 + index %>
 	<div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
-  	<% selected_events = events.select {|e| e.hour == hour && e.minute == minute && e.is_valid_in_line? } %>
+		<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
+		<% if broadcast_event.present? %>
+			<% height = broadcast_event.event_durations_count * row_height %>
+			<div class="patient_event broadcast"
+				data-mode="broadcast"
+	    	data-id="<%= broadcast_event.id %>"
+	      style="height: <%= height %>px; line-height: <%= height %>px; z-index: <%= zindex %>; width: 100%;">
+	      推播中
+			</div>
+		<% else %>
+
+  	<% selected_events = events.select {|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %>
 	  <% if events.length > 0 %>
 			<% width = "#{80 / selected_events.length}%" if selected_events.length > 0 %>
   		<% selected_events.each do |event| %>
+  		<% if event.is_valid_in_line? %>
 	    <div class="patient_event exist" 
+				data-mode="exist"
 	    	data-id="<%= event.id %>"
 	      style="height: <%= event.event_durations_count * row_height %>px; z-index: <%= zindex %>; width: <%= width %>;" 
 	      onclick="<%= onclick_event.call(event) %>">
@@ -35,9 +48,11 @@
 	      </div>
 	    </div>
 	    <% end %>
+	    <% end %>
 	  <% end %>
 	  <% new_event_width = "#{selected_events.length > 0 ? 20 : 100}%" %>
-	  <div class="patient_event"
+	  <div class="patient_event new"
+			data-mode="new"
 	  	data-doctor_id="<%= doctor.id %>"
 	  	data-date="<%= @date %>" 
 	  	data-hour="<%= hour %>"
@@ -45,6 +60,7 @@
 	  	style="height: <%= row_height %>px; z-index: <%= zindex %>; width: <%= new_event_width %>;" 
 	  	onclick="<%= onclick_new_event.call(hour, minute) %>">
 	  </div>
+		<% end %>
 	</div>
 <% end %>
 <% end %>

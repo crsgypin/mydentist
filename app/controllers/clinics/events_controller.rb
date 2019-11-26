@@ -15,7 +15,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @date = Date.parse(params[:date]) rescue  Date.today
     @category = params[:category]
   
-    @events = @clinic.events.valid_events.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
+    @events = @clinic.events.valid_events_with_broadcast.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
 
     if !@doctor_id.present?
       index_set_for_all_doctors
@@ -149,19 +149,6 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     end
     @doctor = @doctors.first    
   end
-
-  # def new_edit_set_doctor_service
-  #   @doctor_services = @doctor.doctor_services.includes(:service)
-  #   if params[:service_id].present?
-  #     @doctor_service = @doctor_services.find{|d| d.service_id == params[:service_id]}
-  #     return if @doctor_service.present?
-  #   end
-  #   if @event.present?
-  #     @doctor_service = @doctor_services.find{|d| d.service == @event.service}
-  #     return if @doctor_service.present?
-  #   end
-  #   @doctor_service = @doctor_services.first    
-  # end
 
   def new_edit_set_service
     @services = @clinic.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}

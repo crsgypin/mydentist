@@ -9,16 +9,19 @@ class Event < ApplicationRecord
 	has_one :new_event, -> { order(id: :desc)}, class_name: "Event", foreign_key: :ori_event_id
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	has_many :event_notifications, class_name: "Event::Notification", dependent: :destroy
-	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45, "缺少病患資料" => 55}
+	has_one :event_notification_schedule, class_name: "Event::NotificationSchedule"
+	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45, "缺少病患資料" => 55, "推播中" => 60}
 	enum source: {"網路" => 1, "現場" => 2}
   enum health_insurance_status: {"有" => 1, "無" => 2}
   scope :valid_events, -> {where(status: ["已預約", "報到", "爽約"])}
+  scope :valid_events_with_broadcast, -> {where(status: ["已預約", "報到", "爽約", "推播中"])}
 	validates_presence_of :status, :source, :duration
 	before_validation :check_for_source, on: :create
 	before_validation :check_duration
 	after_save :check_hour_minute_duration
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
+	after_destroy :set_cancel_to_schedule
 	include Common::DateTimeDurationHelper
 	include Common::DateHelper
 
@@ -128,6 +131,12 @@ class Event < ApplicationRecord
 		if !self.patient.default_doctor.present? || self.doctor != self.patient.default_doctor
 			self.patient.update(default_doctor: self.doctor)
 			true
+		end
+	end
+
+	def set_cancel_to_schedule
+		if self.event_notification_schedule.present?
+			self.event_notification_schedule.update(status: "取消", event: nil)
 		end
 	end
 

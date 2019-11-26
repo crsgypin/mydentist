@@ -46,7 +46,7 @@ class Event::NotificationTemplate < ApplicationRecord
 					clinic_name: "診所名稱",
 					doctor_name: "醫生名稱"
 				}
-			}
+			},
 		}
 	end
 
