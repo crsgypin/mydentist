@@ -9,7 +9,7 @@ class Event < ApplicationRecord
 	has_one :new_event, -> { order(id: :desc)}, class_name: "Event", foreign_key: :ori_event_id
 	has_many :event_durations, class_name: "Event::Duration", dependent: :destroy
 	has_many :event_notifications, class_name: "Event::Notification", dependent: :destroy
-	has_one :event_notification_schedule, class_name: "Event::NotificationSchedule", dependent: :nullify
+	has_one :event_notification_schedule, class_name: "Event::NotificationSchedule"
 	enum status: {"已預約" => 10, "報到" => 15, "爽約" => 20, "已改約" => 30, "取消" => 40, "暫停" => 45, "缺少病患資料" => 55, "推播中" => 60}
 	enum source: {"網路" => 1, "現場" => 2}
   enum health_insurance_status: {"有" => 1, "無" => 2}
@@ -136,7 +136,7 @@ class Event < ApplicationRecord
 
 	def set_cancel_to_schedule
 		if self.event_notification_schedule.present?
-			self.event_notification_schedule.update(status: "取消")
+			self.event_notification_schedule.update(status: "取消", event: nil)
 		end
 	end
 

@@ -2,6 +2,7 @@ class Event::NotificationSchedule < ApplicationRecord
 	belongs_to :clinic
 	belongs_to :notification_template, class_name: "Event::NotificationTemplate", foreign_key: :notification_template_id
 	belongs_to :event, optional: true #for 排程發送
+  belongs_to :doctor
 	has_many :notifications, dependent: :destroy
 	# enum category: {"回診修改掛號" => 1, "診所休假修改掛號" => 2, "醫生休假修改掛號" => 3, "回診推播" => 4}
 	enum schedule_type: {"立即發送" => 1, "排程發送" => 2}
@@ -71,6 +72,7 @@ class Event::NotificationSchedule < ApplicationRecord
         duration: self.duration,
         service_id: self.service_id || self.clinic.services.first.id
       })
+      self.save
     end
     true
   end
