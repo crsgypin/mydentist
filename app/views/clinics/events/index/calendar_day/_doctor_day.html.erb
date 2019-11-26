@@ -17,6 +17,7 @@
 	        hour_segments: doctor_day_segment_hour_event[:hour_segments],
 	        row_height: row_height,
 	        doctor: @doctor,
+	        has_vacation: @doctor.has_vacation?(@date),
 	        onclick_event: proc do |event|
 	          # "$.getScript('#{url_for(action: :edit, id: event)}');"
 	        end,

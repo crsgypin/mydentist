@@ -36,6 +36,11 @@ class Doctor < ApplicationRecord
 		"#{self.name}#{self.title}"
 	end
 
+	def has_vacation?(date)
+		date_vacation = self.doctor_vacations.find_by("start_date <= ? and end_date >= ?", date, date)		
+		date_vacation.present?
+	end
+
 	def day_events(date)
 		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
 	end
@@ -45,12 +50,15 @@ class Doctor < ApplicationRecord
 		if hours.nil?
 			hours = segment_hours("整日")
 		end
+		has_vacation = self.has_vacation?(date)
+
 		hours.map do |hour|
 			 r = {
 			 	hour: hour,
 			 	minute_segments: (60 / Clinic.default_duration).times.map do |time|
 			 		minute = Clinic.default_duration * time
 			 		m = {
+			 			has_vacation: has_vacation,
 			 			minute: minute,
 			 			events: events.select do |event|
 			 				r = event.event_durations.find do |event_duration|
