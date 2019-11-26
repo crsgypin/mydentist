@@ -12,7 +12,7 @@ class Event::Notification < ApplicationRecord
 	enum status: {"尚未發送" => 0, "尚未回覆" => 1, "同意" => 2, "取消" => 3}
   before_validation :set_line_account, on: :create
   json_format :args
-  attr_accessor :date, :hour, :minute, :duration #for booking_event
+  attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category
 	# include EventNotificationConcern 
@@ -52,12 +52,24 @@ class Event::Notification < ApplicationRecord
               if self.category == "回診推播"
                 liff_line_event_url(clinic, self.line_account, {
                   booking_event_id: self.booking_event.id, 
-                  event_notification_id: self.id #for response
+                  doctor_id: self.doctor_id,
+                  service_id: self.service_id,
+                  date: self.date,
+                  hour: self.hour,
+                  minute: self.minute,
+                  duration: self.duration,
+                  event_notification_id: self.id, #for response
                 })
 
                else
                 liff_line_event_url(clinic, self.line_account, {
                   event_id: self.event.id, 
+                  doctor_id: self.doctor_id,
+                  service_id: self.service_id,
+                  date: self.date,
+                  hour: self.hour,
+                  minute: self.minute,
+                  duration: self.duration,
                   event_notification_id: self.id #for response
                 })
               end

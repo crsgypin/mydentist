@@ -1,4 +1,4 @@
-class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
+ class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationController
 
 	def new
 		@event_notification_schedule = @clinic.event_notification_schedules.new
@@ -19,7 +19,7 @@ class ::Clinics::EventNotificationSchedulesController < ::Clinics::ApplicationCo
 	private
 
 	def event_notification_schedule_params
-		params.require(:event_notification_schedule).permit(:schedule_type, :notification_template_id, notifications_attributes: [:event_id, :patient_id, :args, :notification_template_id])
+		params.require(:event_notification_schedule).permit(:doctor_id, :date, :hour, :minute, :duration, :schedule_type, :notification_template_id, notifications_attributes: [:event_id, :patient_id, :args, :notification_template_id])
 		# params.require(:line_template).permit(keywords_attributes: [:name], template_messages_attributes: [:content])
 	end
 

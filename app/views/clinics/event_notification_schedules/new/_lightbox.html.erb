@@ -7,6 +7,9 @@
 			<%= hidden_field_tag "event_notification_schedule[notifications_attributes][#{index}][notification_template_id]", @event_notification_template.id %>
 			<% end %>
 		<% end %>
+		<% [:doctor_id, :date, :hour, :minute, :duration].each do |key| %>
+		<%= hidden_field_tag("event_notification_schedule[#{key}]", @schedule[key]) if @schedule[key].present? %>
+		<% end %>
 
 		<div class="header_box">
 			推播訊息

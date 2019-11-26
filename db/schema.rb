@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191124114820) do
+ActiveRecord::Schema.define(version: 20191126063229) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -210,9 +210,22 @@ ActiveRecord::Schema.define(version: 20191124114820) do
     t.integer "notification_template_id"
     t.integer "schedule_type", limit: 1, default: 1
     t.integer "status", limit: 1, default: 0
+    t.integer "event_id"
+    t.integer "doctor_id"
+    t.integer "service_id"
+    t.date "date"
+    t.integer "hour"
+    t.integer "minute"
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_event_notification_schedules_on_clinic_id"
+    t.index ["date"], name: "index_event_notification_schedules_on_date"
+    t.index ["doctor_id"], name: "index_event_notification_schedules_on_doctor_id"
+    t.index ["duration"], name: "index_event_notification_schedules_on_duration"
+    t.index ["event_id"], name: "index_event_notification_schedules_on_event_id"
+    t.index ["hour"], name: "index_event_notification_schedules_on_hour"
+    t.index ["minute"], name: "index_event_notification_schedules_on_minute"
     t.index ["notification_template_id"], name: "index_event_notification_schedules_on_notification_template_id"
   end
 
