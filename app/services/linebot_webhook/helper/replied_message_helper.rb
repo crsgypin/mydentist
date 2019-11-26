@@ -33,9 +33,8 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	def reply_message_image(data)
 		r = {
 			type: "image",
-			contentProvider: {
-				originalContentUrl: data[:image_url]
-			}
+			previewImageUrl: data[:image_url],
+			originalContentUrl: data[:image_url]
 		}
 	end
 
