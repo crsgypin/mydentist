@@ -4,6 +4,8 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 	def reply_message(data, option = {})
 		if data[:type] == "text"
 			r = reply_message_text(data)
+		elsif data[:type] == "image"
+			r = reply_message_image(data)
 		elsif data[:type] == "quick_reply_buttons"
 			r = reply_message_quick_replies(data)
 		elsif data[:type] == "confirm"
@@ -25,6 +27,15 @@ module LinebotWebhook::Helper::RepliedMessageHelper
 		r = {
       type: 'text',
       text: data[:text]
+		}
+	end
+
+	def reply_message_image(data)
+		r = {
+			type: "image",
+			contentProvider: {
+				originalContentUrl: data[:image_url]
+			}
 		}
 	end
 

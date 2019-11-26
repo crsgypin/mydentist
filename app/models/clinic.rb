@@ -21,7 +21,7 @@ class Clinic < ApplicationRecord
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :map_photo, PhotoUploader
-	before_update :check_map
+	before_validation :check_map, on: :update
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Common::ImageHelper
