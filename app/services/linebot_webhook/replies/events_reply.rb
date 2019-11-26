@@ -1,5 +1,6 @@
 module LinebotWebhook::Replies::EventsReply
   include Linebot::MessagesHelper
+  include Common::DateHelper
 
 	def reply_events
 		reply_message({
@@ -7,7 +8,7 @@ module LinebotWebhook::Replies::EventsReply
 			text: "您的診療紀錄",
 			columns: @events.map do |event|
 				r = {
-					title: event.date.strftime("%Y/%m/%d"),
+					title: roc_format(event.date, 3),
 					text: proc do 
 						r = "醫生: #{event.doctor.name}\n"
 						r += "項目: #{event.service.name}\n"
