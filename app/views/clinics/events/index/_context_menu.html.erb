@@ -1,13 +1,16 @@
 
 <div id="context_menu">
 	<ul class="new_mode">
-		<li id="new">新增</li>
-		<li id="broadcast">洗牙推播</li>
+		<li class="new">新增</li>
+		<li class="broadcast">洗牙推播</li>
 	</ul>
 	<ul class="edit_mode">
-		<li id="edit">編輯</li>
-		<li id="remove">移除</li>
+		<li class="edit">編輯</li>
+		<li class="remove">移除</li>
 	</ul>	
+  <ul class="broadcast_mode">
+    <li class="remove">移除</li>
+  </ul> 
 </div>
 
 <script type="text/javascript">
@@ -32,20 +35,26 @@
       contextMenu.css({top: y, left: x});
       contextMenu.addClass("selected");
 
-      eventId = patientElm.data("id");
-      if(!eventId){
+      mode = patientElm.data("mode");
+
+      contextMenu.find(".new_mode").addClass("hidden");
+      contextMenu.find(".edit_mode").addClass("hidden");
+      contextMenu.find(".broadcast_mode").addClass("hidden");
+      if(mode == "new"){
       	contextMenu.find(".new_mode").removeClass("hidden");
-      	contextMenu.find(".edit_mode").addClass("hidden");
       	doctorId = patientElm.data("doctor_id");
       	date = patientElm.data("date");
       	hour = patientElm.data("hour");
       	minute = patientElm.data("minute");
+      } else if(mode == "exist") {
+        contextMenu.find(".edit_mode").removeClass("hidden");
+        eventId = patientElm.data("id");
       } else {
-      	contextMenu.find(".new_mode").addClass("hidden");
-      	contextMenu.find(".edit_mode").removeClass("hidden");
+        contextMenu.find(".broadcast_mode").removeClass("hidden");
+        eventId = patientElm.data("id");
       }
     }, false);
-    contextMenu.find("#new").click(function(){
+    contextMenu.find(".new").click(function(){
     	$.ajax({
     		url: "<%= url_for(action: :new) %>",
     		method: "get",
@@ -59,7 +68,7 @@
     		}
     	});
     });
-    contextMenu.find("#remove").click(function(){
+    contextMenu.find(".remove").click(function(){
     	OkCancelLightbox.show({
     		content: "確定移除?",
     		ok: function(){
@@ -72,14 +81,14 @@
     		}
     	})
     });
-    contextMenu.find("#edit").click(function(){
+    contextMenu.find(".edit").click(function(){
 			$.ajax({
 				url: "<%= url_for(action: :edit, id: "tmp") %>".replace("tmp", eventId),
 				method: "get",
 				dataType: "script",
 			})
     });
-    contextMenu.find("#broadcast").click(function(){
+    contextMenu.find(".broadcast").click(function(){
       $.ajax({
         url: "<%= new_clinic_event_notification_schedule_path(@clinic) %>",
         method: "get",

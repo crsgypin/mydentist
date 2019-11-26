@@ -17,7 +17,11 @@ class Event::NotificationSchedule < ApplicationRecord
 
   def send_schedule_messages
   	if self.category == "回診推播"
-  		self.clinic.patients.includes(:event_notifications, :line_account).select do |patient|
+      if self.status == "取消"
+        #do nothing
+        return
+      end
+   		self.clinic.patients.includes(:event_notifications, :line_account).select do |patient|
   			patient.event_notifications.length == 0 && patient.line_account.present?
   		end.each do |patient|
   			self.notifications.create({
