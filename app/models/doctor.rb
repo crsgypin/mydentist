@@ -21,7 +21,7 @@ class Doctor < ApplicationRecord
 	end
 
 	def doctor_durations_note_html
-		self.doctor_durations_note.gsub("\n", "<br>")
+		self.doctor_durations_note.gsub("\r\n","<br>").gsub("\n", "<br>")
 	end
 
 	def photo_url
