@@ -1,13 +1,17 @@
 #patients_show {
+	height: calc(100vh - 60px);
 	background: $colorGy_l;
 	.content_box {
 		width: 100%;
+		height: calc(100% - 60px);
 		display: flex;
 		justify-content: space-between;
 		.main_box {
 			background: $colorW;
 			width: calc(100% - 300px);
+			height: 100%;
 			padding: 10px 100px;
+			overflow-y: scroll;
 			h1 {
 				text-align: center;
 				font-size: $fs_24p;
@@ -16,6 +20,7 @@
 		}	
 		.side_box {
 			width: 300px;
+			height: 100%;
 			padding: 10px 10px;
 			background: $colorBu_l;
 		}		

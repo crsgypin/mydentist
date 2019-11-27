@@ -1,0 +1,10 @@
+
+<div id="patient_line_messages_box">
+</div>
+<% if @patient.line_account.present? %>
+<script type="text/javascript">
+	$.getScript("<%= clinic_patient_line_sendings_path(@clinic, @patient) %>");
+</script>
+<% end %>
+
+

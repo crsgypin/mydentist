@@ -1,0 +1,17 @@
+
+<div id="patient_line_messages_box">
+	<ul>
+		<% @line_sending_messages.each do |line_message| %>
+		<% source_class = line_message.sending.source == "server" ? "host" : "client" %>
+		<li class="<%= source_class %>">
+			<div class="text">
+				<% if line_message.message_type == "text" %>
+				<%= line_message.content_json[:text] %>
+				<% elsif line_message.message_type == "message" %>
+				<%= line_message.content_json[:message]["text"] %>
+				<% end %>
+			</div>
+		</li>
+		<% end %>
+	</ul>
+</div>
