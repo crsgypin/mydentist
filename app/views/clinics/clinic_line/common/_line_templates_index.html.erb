@@ -1,5 +1,20 @@
 
 <ul class="line_templates_index" id="<%= id %>">
+	<% if local_assigns[:new].present? %>
+	<li>
+		<div class="question">
+			<span class="title">Q</span>
+			<span class="content"></span>
+		</div>
+		<div class="reply">
+			<span class="title">A</span>
+			<span class="content"></span>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "新增", new[:path].call, class: "btnBu" %>
+		</div>
+	</li>
+	<% end %>
 	<% resources.each do |resource| %>
 	<li id="line_template_<%= resource.id %>">
 		<div class="question">
@@ -18,21 +33,6 @@
 			<%= link_to icon_tag(:close), cols[:delete_path].call(resource), remote: true, method: "delete", data: {confirm: "確定移除?"} %>
 		</div>
 		<% end %>
-	</li>
-	<% end %>
-	<% if local_assigns[:new].present? %>
-	<li>
-		<div class="question">
-			<span class="title">Q</span>
-			<span class="content"></span>
-		</div>
-		<div class="reply">
-			<span class="title">A</span>
-			<span class="content"></span>
-		</div>
-		<div class="buttons_box">
-			<%= link_to "新增", new[:path].call, class: "btnBu" %>
-		</div>
 	</li>
 	<% end %>
 </ul>

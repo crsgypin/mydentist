@@ -1,7 +1,7 @@
 class ::Clinics::ClinicLine::KeywordsController < ::Clinics::ClinicLine::ApplicationController
 
 	def index
-		@clinic_line_keywords = @clinic.clinic_line_keywords.includes(:line_template)
+		@clinic_line_keywords = @clinic.clinic_line_keywords.order(id: :desc).includes(:line_template)
 	end
 
 	def new

@@ -22,6 +22,7 @@
   		height: 45px;
   		border-radius: 50%;
   		margin: 0 auto;
+      background-color: $colorGy_l;
   	}
   }
   ul {
@@ -30,8 +31,8 @@
 			position: relative;
       padding: 10px 0;
 			a {
-        .bg_center_image {
-          width: 25px;
+        img {
+          display: block;
           height: 25px;
           margin: 0 auto 5px;
         }
@@ -52,6 +53,7 @@
 					background: $colorW;
 					opacity: 0.5;
 					z-index: 1;
+          pointer-events: none;
 				}
 			}
 		}
