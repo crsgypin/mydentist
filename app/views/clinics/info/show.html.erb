@@ -54,8 +54,21 @@
             r += "</div>"
             r.html_safe
           }},
-          {k: "描述", v: proc{|a| 
+          {t: "描述", v: proc{|a| 
             text_field_tag "clinic[description]", a.description
+          }},
+          {t: "QR code", v: proc{|a| 
+            r = "<div class='line_qrcode_box'>"
+            r += "  <div id='line_official' class='qrcode'>"
+            r += "   <div class='text'></div>"
+            r += "   <p>Line官方帳號</p>"
+            r += "  </div>"
+            r += "  <div id='line_counter' class='qrcode'>"
+            r += "   <div class='text'></div>"
+            r += "   <p>現場綁定</p>"
+            r += "  </div>"
+            r += "</div>"
+            r.html_safe
           }},
         ]
       }
@@ -66,6 +79,23 @@
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    $("#line_official .text").html('');
+    $("#line_official .text").qrcode({
+      width: 120, 
+      height: 120, 
+      text: '<%= @clinic.add_line_friend_path %>'
+    });
+    $("#line_counter .text").html('');
+    $("#line_counter .text").qrcode({
+      width: 120, 
+      height: 120, 
+      text: '<%= @clinic.line_binding_url %>'
+    });    
+  });
+</script>
 
 <%# render :partial => "share/upload_img_modal" %>
 <%#

@@ -7,6 +7,15 @@
       table {
         tr {
           td {
+            .line_qrcode_box {
+              display: flex;
+              .qrcode {
+                margin-right: 40px;
+                p {
+                  text-align: center;
+                }
+              }
+            }
           }
         }
       }
