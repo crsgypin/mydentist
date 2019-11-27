@@ -27,6 +27,10 @@
 						.title {
 							font-size: $fs_14p;
 							padding-bottom: 10px;
+							.name {
+								font-weight: bold;
+								margin-right: 5px;
+							}
 						}
 						.content {
 							font-size: $fs_12p;

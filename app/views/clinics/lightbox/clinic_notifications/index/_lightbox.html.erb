@@ -5,7 +5,7 @@
 			<% @clinic_notifications.each do |clinic_notification| %>
 			<li>
 				<div class="title">
-					<%= clinic_notification.title %>
+					<span class="name"><%= clinic_notification.patient.name %></span> <%= clinic_notification.title %>
 				</div>
 				<div class="content">
 					<%= clinic_notification.content %>
