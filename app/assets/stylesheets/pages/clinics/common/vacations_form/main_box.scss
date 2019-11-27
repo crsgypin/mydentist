@@ -19,6 +19,9 @@
 				}
 				overflow: hidden;
 			}
+			&.selected {
+				background: $colorBu_l;
+			}
 			>.title {
 				text-align: left;
 				color: $colorGy;
