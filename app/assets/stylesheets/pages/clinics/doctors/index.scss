@@ -6,8 +6,8 @@
   table {
     tr {
       td {
-        img {
-          margin: -30px 0;
+        .fixed_height_image {
+          height: 80px;
         }
       }
     }

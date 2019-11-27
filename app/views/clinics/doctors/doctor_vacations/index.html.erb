@@ -7,3 +7,11 @@
 	end
 } %>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		if($("#doctor_vacations_index .main_box ul li").length > 0){
+			$("#doctor_vacations_index .main_box ul li").eq(0).trigger("click");
+		}
+	})
+</script>

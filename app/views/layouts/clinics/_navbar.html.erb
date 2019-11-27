@@ -3,7 +3,7 @@
 	<div class="title">
 		<%= roc_format(Date.today, 2) %>
 	</div>
-	<div class="notification">
+	<div class="notification" onclick="$(this).addClass('selected');">
 		<%= link_to clinic_lightbox_clinic_notifications_path(@clinic), remote: true do %>
 			<%= icon_tag(:bell) %>
 	  <% end %>

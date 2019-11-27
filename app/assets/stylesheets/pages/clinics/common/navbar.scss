@@ -26,7 +26,12 @@
     line-height: 60px;
     font-size: $fs_24p;
     >a {
-    	color: $colorY;
+    	color: $colorGy1;
+    }
+    &.selected {
+      > a {
+        color: $colorY;
+      }
     }
 	}
 }

@@ -1,7 +1,7 @@
 class ::Clinics::Doctors::DoctorVacationsController < ::Clinics::Doctors::ApplicationController
 
 	def index
-		@doctor_vacations = @doctor.doctor_vacations
+		@doctor_vacations = @doctor.doctor_vacations.order(id: :desc)
 	end
 
 	def new

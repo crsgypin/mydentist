@@ -59,7 +59,7 @@
 		  fields: [
 		    {class: "both", v: proc{|a| 
 		    	r = ""
-		    	r += select_field_tag "event[health_insurance_status]", "", [[nil, "健保狀態"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]}
+		    	r += select_field_tag "event[health_insurance_status]", "", [[nil, "診療健保狀態"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]}
 		    	r += select_field_tag "event[service_id]", @service.id, @services.map{|a| [a.id, a.name]}
 		    	r.html_safe
 		    }},

@@ -24,6 +24,7 @@
 		if($(e.target).closest("#clinic_notification_box").length == 0){
 			$("#clinic_notification_box").remove();
 			$("body").off("click.clinic_notification")
+			$("#clinic_nav .notification").removeClass("selected");
 		}
 	});
 </script>

@@ -1,5 +1,5 @@
 
-<li id="<%= li[:id] %>" class="vacation_view" data-url="<%= li[:vacation_events_path] %>" onclick="$(this).data('url') && $.getScript($(this).data('url'));">
+<li id="<%= li[:id] %>" class="vacation_view" data-url="<%= li[:vacation_events_path] %>" onclick="$('.vacation_view').removeClass('selected'); $(this).addClass('selected'); $(this).data('url') && $.getScript($(this).data('url'));">
 	<div class="vacation_close_box">
 		<% if vacation.new_record? %>
 		<%= link_to icon_tag(:close), "javascript:", onclick: "$(this).closest('li').remove();" %>
