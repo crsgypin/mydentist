@@ -18,7 +18,7 @@
 		<div class="content_box">
 			<%= hidden_field_tag "event_notification_schedule[schedule_type]", @schedule[:schedule_type] %>
 			<%= hidden_field_tag "event_notification_schedule[notification_template_id]", @event_notification_template.id %>
-			<%= text_area_tag "text_message", @event_notification_template.content %>
+			<%= text_area_tag "text_message", @event_notification_template.content, autofocus: true %>
 			<% @event_notification_template.args.each do |key, name| %>
 			<%= link_to name, "", class: "btnBu" %>
 			<% end %>

@@ -4,7 +4,9 @@ class Service < ApplicationRecord
 	has_many :doctor_services, class_name: "Doctor::Service"
 	has_many :doctors, through: :doctor_services
 	enum category: {"一般" => 0, "洗牙" => 1}
-	enum duration: {"依情況而定" => nil, "15分鐘" => 15, "30分鐘" => 30, "45分鐘" => 45, "1小時" => 60}
+	extend ServiceDurationsConcern
+	enum duration: self.init_durations
+
 	before_destroy :check_for_destroy
 	validates_presence_of :name
 
