@@ -69,7 +69,10 @@
 		  &.exist {
 	    	padding: 2px 5px;
 		  	color: $colorW;
-		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8); 	
+		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8);
+		    &:hover {
+		    	background-image: linear-gradient(to bottom, #a7bfe8, #2190e8);
+		    }
 		  }
 		  &.new {
 		  	&:hover {

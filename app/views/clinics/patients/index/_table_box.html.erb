@@ -26,8 +26,8 @@
       r += [
         {t: "病患姓名", v: proc{|a| "#{a.name} #{a.id}" }},
         {t: "性別", v: proc{|a| a.gender }},
-        {t: "身分證號碼", v: proc{|a| a.person_id }},
         {t: "出生年月日", v: proc{|a| roc_format(a.birthday, 3) }},
+        {t: "身分證號碼", v: proc{|a| a.person_id }},
         {t: "聯絡電話", v: proc{|a| a.phone }},
         {t: "看診醫生", v: proc{|a|
           if a.default_doctor
@@ -43,7 +43,7 @@
             ""
           end
         }},
-        {t: "下次就診日期", v: proc{|a| a.current_event.try(:date) }},
+        {t: "下次約診日期", v: proc{|a| a.current_event.try(:date) }},
       ]
 
       if @category == "all"
