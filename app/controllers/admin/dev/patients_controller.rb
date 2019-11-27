@@ -11,6 +11,9 @@ class Admin::Dev::PatientsController < Admin::Dev::ApplicationController
 
   def index
     @patients = ::Patient.all
+    if params[:name].present?
+      @patiens = @patients.where("name like ?", "%#{params[:name]}%")
+    end
     @patients = @patients.page(params[:page]).per(20)
   end
 

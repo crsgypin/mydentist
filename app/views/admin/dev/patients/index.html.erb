@@ -1,3 +1,7 @@
+<%= form_tag url_for, method: "get" do %>
+  <%= text_field_tag "name", params[:name] %>
+<% end %>
+<%= paginate @patients %>
 <%= render partial: "admin/common/index_table" , locals: {
   id: "patients",
   resources: @patients,

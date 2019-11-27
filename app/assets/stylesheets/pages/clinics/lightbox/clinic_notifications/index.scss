@@ -2,6 +2,7 @@
 #clinic_nav {
 	.notification {
 		position: relative;
+		z-index: 10000;
 		#clinic_notification_box {
 			position: absolute;
 			width: 330px;
