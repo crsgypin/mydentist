@@ -15,14 +15,14 @@
       <% if request.fullpath.include?(elm[:link]) %>
       <li class="selected">
         <%= link_to elm[:link] do %>
-          <%= image_tag elm[:image_url] %>
+          <%= fixed_height_image elm[:image_url] %>
           <p><%= elm[:name] %></p>
         <% end %>
       </li>
       <% else %>
       <li>
         <%= link_to elm[:link] do %>
-          <%= image_tag elm[:image_url] %>
+          <%= fixed_height_image elm[:image_url] %>
           <p><%= elm[:name] %></p>
         <% end %>
       </li>

@@ -1,14 +1,14 @@
 
 <div class="vacations_form">
 	<div class="main_box clinic_form">
+		<div class="add_btn_box alignR">
+			<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
+		</div>
 		<ul>
 			<% vacations.each do |vacation| %>
 			<%= li.call(vacation) %>
 			<% end %>
 		</ul>
-		<div class="add_btn_box alignR">
-			<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
-		</div>
 	</div>
 	<div class="side_box">
 	</div>

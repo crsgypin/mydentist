@@ -31,10 +31,9 @@
 			position: relative;
       padding: 10px 0;
 			a {
-        img {
-          display: block;
+        .fixed_height_image {
           height: 25px;
-          margin: 0 auto 5px;
+          margin-bottom: 5px;
         }
         p {
           font-size: $fs_14p;

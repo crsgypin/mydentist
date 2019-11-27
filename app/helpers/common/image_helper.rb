@@ -26,4 +26,18 @@ module Common::ImageHelper
 		r.html_safe
 	end
 
+	def fixed_height_image(image_url, options = {})
+		r = "<div class='fixed_height_image'>"
+		r += image_tag image_url
+		r += "</div>"
+		r.html_safe		
+	end
+
+	def fixed_width_image(image_url, options = {})
+		r = "<div class='fixed_width_image'>"
+		r += image_tag image_url
+		r += "</div>"
+		r.html_safe		
+	end
+
 end
