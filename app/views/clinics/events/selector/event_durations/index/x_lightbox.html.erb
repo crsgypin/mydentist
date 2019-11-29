@@ -25,7 +25,7 @@
 						</td>
 						<% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
 						<td>
-							<% day_hour_event = doctor_week_hour_event[:day_hour_events].find{|e| e[:hour] == hour} %>
+							<% day_hour_event = doctor_week_hour_event[:day_hour_minute_events].find{|e| e[:hour] == hour} %>
 							<% day_minute = day_hour_event[:minute_segments].find{|m| m.}
 						</td>
 						<% end %>

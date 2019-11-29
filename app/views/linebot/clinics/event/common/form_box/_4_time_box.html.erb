@@ -1,3 +1,4 @@
+
 <div class="time_box">
 	<% i = 0 %>
 	<% @doctor_day_segment_hour_events.each do |segment| %>
@@ -5,15 +6,14 @@
 		<div class="title">
 			<%= segment[:name] %>
 		</div>
-		<% segment[:hour_segments].each do |hour_segment| %>
-		<% hour = hour_segment[:hour] %>
+		<% times = (60 / Clinic.default_duration) %>
+		<% segment[:hour_minute_segments].in_groups_of(times).each do |hour_minute_segments| %>
 		<ul class="hours_box">
-			<% hour_segment[:minute_segments].each do |minute_segment| %>
-			<% minute = minute_segment[:minute] %>
+			<% hour_minute_segments.each do |hour_minute_segment| %>
+			<% hour = hour_minute_segment[:hour] %>
+			<% minute = hour_minute_segment[:minute] %>
 			<li class="minutes_box" data-click_duration_count="<%= @doctor_service.duration_number / Clinic.default_duration %>">
-				<% events = minute_segment[:events] %>
-				<% disabled = events.find{|e| e.is_valid_in_line?}.present? %>
-				<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @doctor_service.duration_number), false, disabled: disabled %>
+				<%= radio_button_tag "event[hour_minute_duration]", hour_minute_duration_format(hour, minute, @doctor_service.duration_number), false, disabled: !hour_minute_segment[:allow_booking]  %>
 				<%= link_to hour_minute_format(hour, minute), "javascript:;", class: "", data: {index: i}, onclick: "window.onClickEventDuration(this);" %>
 				<% i += 1 %>
 			</li>

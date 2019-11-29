@@ -1,9 +1,8 @@
 
-<% hour_segments.each do |hour_segment| %>
-<% hour = hour_segment[:hour] %>
-<% hour_segment[:minute_segments].each_with_index do |minute_segment, index| %>
-  <% minute = minute_segment[:minute] %>
-  <% events = minute_segment[:events] %>
+<% hour_minute_segments.each_with_index do |hour_minute_segment, index| %>
+	<% hour = hour_minute_segment[:hour] %>
+	<% minute = hour_minute_segment[:minute] %>
+  <% events = hour_minute_segment[:events] %>
 	<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 	<% zindex = 100 + index %>
 	<div class="d_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
@@ -62,6 +61,5 @@
 	  </div>
 		<% end %>
 	</div>
-<% end %>
 <% end %>
 

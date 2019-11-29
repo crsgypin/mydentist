@@ -87,7 +87,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @doctor_objs = @doctors.map do |doctor|
       r = {
         doctor: doctor,
-        hour_segments: doctor.day_hour_events(@date, @clinic_wday_hours, event_id: @event.id)
+        hour_minute_segments: doctor.day_hour_minute_events(@date, @clinic_wday_hours, event_id: @event.id)
       }
     end
   end
@@ -102,7 +102,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @doctor_objs = @doctors.map do |doctor|
       r = {
         doctor: doctor,
-        hour_segments: doctor.day_hour_events(@date, @clinic_wday_hours)
+        hour_minute_segments: doctor.day_hour_minute_events(@date, @clinic_wday_hours)
       }
     end
   end
@@ -122,7 +122,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
         r = {
           date: date,
           ch_wday: ch_wday(wday),
-          hour_segments: @doctor.day_hour_events(date, @clinic_wday_hours)
+          hour_minute_segments: @doctor.day_hour_minute_events(date, @clinic_wday_hours)
         }
       end
     elsif @segment == "整日"
@@ -131,7 +131,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
         r = {
           name: name,
           hours: hours,
-          hour_segments: @doctor.day_hour_events(@date, hours) 
+          hour_minute_segments: @doctor.day_hour_minute_events(@date, hours) 
         }
       end
     end
