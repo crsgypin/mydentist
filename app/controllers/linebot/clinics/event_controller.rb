@@ -157,21 +157,35 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 
 		#check for current_duration
 		current_duration = @doctor_service.duration
-		current_duration_count = @doctor_service.duration / Clinic.default_duration
+		current_duration_count = @doctor_service.duration_number / Clinic.default_duration
 
-		@doctor_day_segment_hour_events = @doctor_day_segment_hour_events.map do |doctor_day_hour_event|
+		@doctor_day_segment_hour_events = @doctor_day_segment_hour_events.map do |doctor_day_segment_hour_event|
+			hour_minute_segments = doctor_day_segment_hour_event[:hour_minute_segments]
 			r = {
-				name: doctor_day_hour_event[:name],
-				hour_minute_segments: doctor_day_hour_event[:hour_minute_segments].map do |hour_minute_segment|
+				name: doctor_day_segment_hour_event[:name],
+				hour_minute_segments: hour_minute_segments.map.with_index do |hour_minute_segment, index|
+					allow_booking = true
+					if hour_minute_segment[:has_vacation].present?
+						allow_booking = false
+					end
+					if allow_booking
+						current_duration_count.times do |subindex|
+							hs = hour_minute_segments[index + subindex]
+							if hs.present?
+								if hs[:events].find{|e| e.is_valid_in_line?}.present?
+									allow_booking = false
+								end
+							else
+								allow_booking = false
+							end
+						end
+					end
 					h = {
 						hour: hour_minute_segment[:hour],
-						minute_segments: hour_minute_segment[:minute_segments].map do |minute_segment|
-							r = {
-								has_vacation: minute_segment[:has_vacation],
-								minute: minute_segment[:minute],
-								events: minute_segment[:events]
-							}
-						end
+						minute: hour_minute_segment[:minute],
+						allow_booking: allow_booking,
+						has_vacation: hour_minute_segment[:has_vacation],
+						events: hour_minute_segment[:events],
 					}
 				end
 			}			
