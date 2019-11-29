@@ -2,7 +2,11 @@ module Linebot::MessagesHelper
 
 	def linebot_event_confirmation_messages(line_account, event)
 		r = []
-		r << "#{line_account.display_name}君"
+		if line_account.patient.present?
+			r << "#{line_account.patient.name}君"
+		else
+			r << "#{line_account.display_name}君"
+		end
 		r << "您的預約為："
 		r << "日期: #{event.desc_format(2)}"
 		r << "醫生: #{event.doctor.name}"
