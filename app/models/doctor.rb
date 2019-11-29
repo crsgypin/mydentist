@@ -45,34 +45,36 @@ class Doctor < ApplicationRecord
 		events = self.events.where(date: date).includes(:patient, :doctor, :service, :event_durations)
 	end
 
-	def day_hour_events(date, hours = nil, options = {})
+	def day_hour_minute_events(date, hours = nil, options = {})
 		events = day_events(date)
 		if hours.nil?
 			hours = segment_hours("整日")
 		end
 		has_vacation = self.has_vacation?(date)
 
-		hours.map do |hour|
-			 r = {
+		hour_minutes = hours.map do |hour|
+			(60 / Clinic.default_duration).times.map do |index|
+				minute = Clinic.default_duration * index
+				{hour: hour, minute: minute}
+			end
+		end.flatten
+
+		hour_minutes.map do |hour_minute|
+			hour = hour_minute[:hour]
+			minute = hour_minute[:minute]
+			r = {
 			 	hour: hour,
-			 	minute_segments: (60 / Clinic.default_duration).times.map do |time|
-			 		minute = Clinic.default_duration * time
-			 		m = {
-			 			has_vacation: has_vacation,
-			 			minute: minute,
-			 			events: events.select do |event|
-			 				r = event.event_durations.find do |event_duration|
-				 				event_duration.hour == hour && event_duration.minute == minute
-			 				end
-			 				if r && options[:event_id].present?
-			 					r = (event.id == options[:event_id].to_i)
-			 				end
-			 				r
-			 			end
-			 		}
-			 		# m[:event_duration] = m[:event] ? m[:event].event_durations : nil
-			 		m
-			 	end
+			 	minute: minute,
+	 			has_vacation: has_vacation,
+	 			events: events.select do |event|
+	 				r = event.event_durations.find do |event_duration|
+		 				event_duration.hour == hour && event_duration.minute == minute
+	 				end
+	 				if r && options[:event_id].present?
+	 					r = (event.id == options[:event_id].to_i)
+	 				end
+	 				r
+	 			end
 			}
 		end
 	end

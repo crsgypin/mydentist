@@ -1,3 +1,4 @@
+
 <div class="time_box">
 	<% i = 0 %>
 	<% @doctor_day_segment_hour_events.each do |segment| %>
@@ -5,10 +6,10 @@
 		<div class="title">
 			<%= segment[:name] %>
 		</div>
-		<% segment[:hour_segments].each do |hour_segment| %>
-		<% hour = hour_segment[:hour] %>
+		<% segment[:hour_minute_segments].each do |hour_minute_segment| %>
+		<% hour = hour_minute_segment[:hour] %>
 		<ul class="hours_box">
-			<% hour_segment[:minute_segments].each do |minute_segment| %>
+			<% hour_minute_segment[:minute_segments].each do |minute_segment| %>
 			<% minute = minute_segment[:minute] %>
 			<li class="minutes_box" data-click_duration_count="<%= @doctor_service.duration_number / Clinic.default_duration %>">
 				<% events = minute_segment[:events] %>

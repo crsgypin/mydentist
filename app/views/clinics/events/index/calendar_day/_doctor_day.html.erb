@@ -14,7 +14,7 @@
 	      	<%= doctor_day_segment_hour_event[:name] %>
 	      </div>
 	      <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
-	        hour_segments: doctor_day_segment_hour_event[:hour_segments],
+	        hour_minute_segments: doctor_day_segment_hour_event[:hour_minute_segments],
 	        row_height: row_height,
 	        doctor: @doctor,
 	        has_vacation: @doctor.has_vacation?(@date),

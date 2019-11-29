@@ -144,17 +144,37 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	end
 
 	def set_event_durations
-		# @select_event_durations = @doctor.current_event_durations(@date, @service.duration_number)
-
-		@doctor_day_hour_events = @doctor.day_hour_events(@date, @clinic.wday_hours(@date.wday))
-		@doctor_day_segment_hour_events = ["早上", "下午", "晚上"].map do |segment|
+		@doctor_day_hour_minute_events = @doctor.day_hour_minute_events(@date, @clinic.wday_hours(@date.wday))
+ 		@doctor_day_segment_hour_events = ["早上", "下午", "晚上"].map do |segment|
 			hours = segment_hours(segment)
 			r = {
 				name: segment,
-				hour_segments: @doctor_day_hour_events.select do |d|
+				hour_minute_segments: @doctor_day_hour_minute_events.select do |d|
 					hours.include?(d[:hour])
 				end
 			}
+		end
+
+		#check for current_duration
+		current_duration = @doctor_service.duration
+		current_duration_count = @doctor_service.duration / Clinic.default_duration
+
+		@doctor_day_segment_hour_events = @doctor_day_segment_hour_events.map do |doctor_day_hour_event|
+			r = {
+				name: doctor_day_hour_event[:name],
+				hour_minute_segments: doctor_day_hour_event[:hour_minute_segments].map do |hour_minute_segment|
+					h = {
+						hour: hour_minute_segment[:hour],
+						minute_segments: hour_minute_segment[:minute_segments].map do |minute_segment|
+							r = {
+								has_vacation: minute_segment[:has_vacation],
+								minute: minute_segment[:minute],
+								events: minute_segment[:events]
+							}
+						end
+					}
+				end
+			}			
 		end
 	end
 

@@ -17,7 +17,7 @@ class ::Clinics::Events::Selector::EventDurationsController < ::Clinics::Applica
       r = {
         date: date,
         ch_wday: ch_wday(wday),
-        hour_segments:  @doctor.day_hour_events(date, @clinic_wday_hours)
+        hour_minute_segments:  @doctor.day_hour_minute_events(date, @clinic_wday_hours)
       }
     end
 	end
