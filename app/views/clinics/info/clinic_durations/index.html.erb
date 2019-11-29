@@ -1,8 +1,8 @@
 
-<div id="clinic-durations-index">
-	<div class="title-box">
+<div id="clinic_durations_index">
+	<div class="title_box">
 	</div>
-	<div class="content-box">
+	<div class="content_box">
 		<%= form_tag url_for(action: :create), method: "post", remote: true do %>
 		<%= render partial: "clinics/common/durations-table", locals: {
 			durations: @clinic_durations,
