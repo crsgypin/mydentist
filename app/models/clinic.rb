@@ -21,7 +21,6 @@ class Clinic < ApplicationRecord
 	validates_presence_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :map_photo, PhotoUploader
-	before_validation :check_map, on: :update
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Common::ImageHelper
@@ -85,7 +84,16 @@ class Clinic < ApplicationRecord
 		self.clinic_durations_note.gsub("\n", "<br>")
 	end
 
+	def google_map_url
+		if self.address.present?
+			"https://www.google.com/maps?q=#{self.address}"
+		else
+			nil
+		end
+	end
+
 	def check_map
+		#no used
 		if self.changes[:address].present?
 			self.class.include Common::GeocoderHelper
 			self.class.include GoogleStaticMap

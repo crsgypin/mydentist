@@ -58,16 +58,10 @@ module LinebotWebhook::Replies::ClinicReply
 	end
 
 	def reply_clinic_traffic
-		[
-			reply_message({
-				type: "text",
-				text: @clinic.address
-			}),
-			reply_message({
-				type: "image",
-				image_url: @clinic.map_photo.url
-			})
-		]
+		reply_message({
+			type: "text",
+			text: "#{@clinic.address}\n #{@clinic.google_map_url}"
+		})
 	end
 
 	def reply_clinic_contact
