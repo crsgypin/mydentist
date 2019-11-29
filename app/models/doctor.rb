@@ -46,6 +46,8 @@ class Doctor < ApplicationRecord
 	end
 
 	def day_hour_minute_events(date, hours = nil, options = {})
+		event_id = options[:event_id] #show event_id only
+
 		events = day_events(date)
 		if hours.nil?
 			hours = segment_hours("整日")
@@ -62,19 +64,24 @@ class Doctor < ApplicationRecord
 		hour_minutes.map do |hour_minute|
 			hour = hour_minute[:hour]
 			minute = hour_minute[:minute]
+			time = Time.parse("#{date.strftime('%Y/%m/%d')} #{hour}:#{"%02d"%minute}")
+			es = events.select do |event|
+ 				r = event.event_durations.find do |event_duration|
+	 				event_duration.hour == hour && event_duration.minute == minute
+ 				end
+ 				if r && event_id.present?
+ 					r = (event.id == event_id.to_i)
+ 				end
+ 				r
+ 			end
 			r = {
+				date: date,
 			 	hour: hour,
 			 	minute: minute,
+			 	time: time,
+			 	expired: Time.now > time,
 	 			has_vacation: has_vacation,
-	 			events: events.select do |event|
-	 				r = event.event_durations.find do |event_duration|
-		 				event_duration.hour == hour && event_duration.minute == minute
-	 				end
-	 				if r && options[:event_id].present?
-	 					r = (event.id == options[:event_id].to_i)
-	 				end
-	 				r
-	 			end
+	 			events: es
 			}
 		end
 	end

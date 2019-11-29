@@ -168,6 +168,9 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 					if hour_minute_segment[:has_vacation].present?
 						allow_booking = false
 					end
+					if hour_minute_segment[:expired]
+						allow_booking = false
+					end
 					if allow_booking
 						current_duration_count.times do |subindex|
 							hs = hour_minute_segments[index + subindex]
