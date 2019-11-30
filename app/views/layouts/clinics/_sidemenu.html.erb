@@ -31,7 +31,7 @@
   </ul>  
   <div class="bottom_box" onclick="showLogOutModal()">
     <div class="photo_box">
-      <%= bg_center_image current_member.photo_url, class: "" %>
+      <%= bg_center_image current_member.photo_url, class: "round" %>
       <p> <%= current_member.username %></p>
     </div>
     <%= link_to destroy_member_session_path, method: "delete", class: "logout", data: {confirm: "確定登出"} do %>
