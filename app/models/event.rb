@@ -22,6 +22,7 @@ class Event < ApplicationRecord
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
 	after_destroy :set_cancel_to_schedule
+	after_create :check_notification
 	include Common::DateTimeDurationHelper
 	include Common::DateHelper
 
@@ -145,5 +146,9 @@ class Event < ApplicationRecord
 			self.errors.add("需填寫區間", "")
 			throw(:abort)
 		end
+	end
+
+	def check_notification
+    Clinic::Notification.on_add_event(self)
 	end
 end

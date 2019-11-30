@@ -1,6 +1,20 @@
 module ClinicNotificationConcern
 	include Common::DateHelper
 
+  def on_add_event(event)
+    if event.status == "已預約"
+      n = event.clinic.clinic_notifications.create!({
+        category: "已預約", 
+        patient: event.patient,
+        args_json: {
+          doctor_name: event.doctor.name,
+          date: roc_format(event.date_time, 5),
+          service_name: event.service.name
+        }
+      })      
+    end
+  end
+
 	def on_line_account_add_patient(line_account)
   	t = Time.now
   	n = line_account.clinic.clinic_notifications.create({
