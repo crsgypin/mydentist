@@ -26,6 +26,7 @@
 			padding: 10px 0;
 			border-top-left-radius: 50px;
 			border-top-right-radius: 50px;
+			border-bottom: 1px solid $colorGy_l;
 			h1 {
 				font-size: $fs_36p;
 				font-weight: bold;
@@ -43,8 +44,9 @@
 				li {
 					padding-bottom: 20px;
 					h3 {
-						font-size: $fs_20p;
-						color: $colorBl;
+						font-size: $fs_16p;
+						color: $colorGy_d;
+						font-weight: bold;
 					}
 					p {
 						font-size: $fs_14p;
