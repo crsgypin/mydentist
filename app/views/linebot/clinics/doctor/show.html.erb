@@ -2,7 +2,7 @@
 <% if @doctor.present? %>
 <div id="linebot_doctors_show">
 	<div class="image_box">
-		<%= image_tag @doctor.photo.url, alt: @doctor.name %>
+		<%= image_tag @doctor.photo_url, alt: @doctor.name %>
 	</div>
 	<div class="info-box">
 		<div class="title_box">

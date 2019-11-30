@@ -32,6 +32,10 @@ class Doctor < ApplicationRecord
 		end
 	end
 
+	def pro
+		self[:pro].present? ? self[:pro] : "(建置中)"
+	end
+
 	def title_name
 		"#{self.name}#{self.title}"
 	end
