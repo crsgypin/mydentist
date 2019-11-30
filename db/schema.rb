@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191126163918) do
+ActiveRecord::Schema.define(version: 20191130141803) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20191126163918) do
     t.string "lng"
     t.string "map_photo"
     t.string "clinic_durations_note", limit: 500, default: ""
+    t.datetime "clinic_notifications_read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -349,6 +350,7 @@ ActiveRecord::Schema.define(version: 20191126163918) do
     t.integer "template_id"
     t.integer "category"
     t.text "content"
+    t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_line_template_messages_on_template_id"

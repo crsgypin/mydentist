@@ -13,13 +13,13 @@
 			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: broadcast_title} %>
 			<% end %>
 		</div>
-		<div class="inbox template-messages-box">
+		<div class="inbox template_messages_box">
 			<ul>
 				<% line_template.template_messages.each_with_index do |line_template_message, index| %>
 				<%= render_relative_partial "line_template_form/template_message_input", locals: {line_template_message: line_template_message, index: index} %>
 				<% end %>
 			</ul>
-			<div class="add-box">
+			<div class="add_box">
 				<%= link_to icon_tag(:plus_circle), "javascript: window.addLineTemplateMessage();" %>
 			</div>
 		</div>
@@ -32,6 +32,6 @@
 
 <script type="text/javascript">
 	window.addLineTemplateMessage = function(){
-		$(".line-templates-form .template-messages-box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
+		$(".line-templates-form .template_messages_box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
 	}
 </script>
