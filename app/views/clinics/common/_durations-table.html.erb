@@ -3,7 +3,11 @@
 		<th></th>
 		<% [1,2,3,4,5,6,0].each do |wd| %>
 		<th>
+			<% if wdays.include?(wd) %>
+			<div class="btnBu"><%= ch_wday(wd) %></div>
+			<% else %>
 			<div class="btnGy_d"><%= ch_wday(wd) %></div>
+			<% end %>
 		</th>
 		<% end %>
 	</tr>

@@ -6,8 +6,8 @@
 }
 
 #patient_show_table {
-	ul {
-		li {
+	>ul {
+		>li {
 			display: flex;
 			margin-bottom: 20px;
 			input, select {

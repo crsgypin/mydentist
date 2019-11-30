@@ -22,6 +22,9 @@
   		}
   	}
     .d_col {
+    	&.title_col {
+    		text-align: center;
+    	}
     	.d_row {
     		min-width: 70px;
     		text-align: center;
@@ -40,10 +43,13 @@
 					width: 60px;
 				}
 	    	&.day_row {
-	    		background: $colorBu;
+	    		background: $colorBu_l;
 	    		color: $colorW;
+    			text-align: center;
+    			color: $colorGy_d;
 	    		p {
-	    			line-height: 1.2;
+	    			line-height: 40px;
+	    			margin: 0 auto;
 	    		}
 	    	}
 	    	&.vacation {
@@ -71,7 +77,18 @@
 		  	color: $colorW;
 		    background-image: linear-gradient(to bottom, #a7bfe8, #6190e8);
 		    &:hover {
-		    	background-image: linear-gradient(to bottom, #a7bfe8, #2190e8);
+		    	position: relative;
+		    	&:after {
+		    		position: absolute;
+		    		content: '';
+		    		top: 0;
+		    		left: 0;
+		    		bottom: 0;
+		    		right: 0;
+	 		      background-color: rgba(74, 74, 74, 0.45);
+	 		      z-index: 10;
+	 		      pointer-event: none;
+		    	}
 		    }
 		  }
 		  &.new {
