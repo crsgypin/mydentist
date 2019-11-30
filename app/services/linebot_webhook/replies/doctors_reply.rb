@@ -8,7 +8,7 @@ module LinebotWebhook::Replies::DoctorsReply
 				r = {
 					image_url: doctor.photo_url,
 					title: "#{doctor.name} #{doctor.title}",
-					text: short_string(doctor.pro || "(建置中)", 39),
+					text: short_string(doctor.pro.present? ? doctor.pro : "(建置中)", 39),
 					name: doctor.name,
 					actions: [
 						{
