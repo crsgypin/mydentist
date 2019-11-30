@@ -4,9 +4,9 @@ module LinebotWebhook::Replies::DoctorsReply
 		reply_message({
 			type: "carousel",
 			text: "請選擇醫生",
-			columns: @clinic.doctors.map do |doctor|
+			columns: @doctors.map do |doctor|
 				r = {
-					image_url: doctor.photo.url,
+					image_url: doctor.photo_url,
 					title: "#{doctor.name} #{doctor.title}",
 					text: short_string(doctor.pro, 39),
 					name: doctor.name,

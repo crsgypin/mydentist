@@ -40,7 +40,8 @@ module LinebotWebhook::Replies::BookingEventsReply
 							label: "其他醫生",
 							data: {
 								controller: "booking_events",
-								action: "other_doctors"
+								action: "other_doctors",
+								ori_id: @doctor.id
 							}
 						}
 					]

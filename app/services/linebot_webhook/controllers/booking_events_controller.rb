@@ -45,6 +45,7 @@ class LinebotWebhook::Controllers::BookingEventsController < LinebotWebhook::Con
 			return
 		end
 		@doctors = @service.doctors.where("doctor_services.has_line_booking = ?", Doctor::Service.has_line_bookings["有"])
+		@doctors = @doctors.where.not(id: @message[:data][:ori_id])
 		reply_booking_event_doctors
 	end
 

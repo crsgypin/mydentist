@@ -28,7 +28,7 @@ class Doctor < ApplicationRecord
 		if self.photo.present?
 			self.photo.url
 		else
-			clinic_static_image_url(:doctor)
+			"#{Rails.application.config_for(:api_key)["base_domain"]}#{clinic_static_image_url(:doctor)}"
 		end
 	end
 
