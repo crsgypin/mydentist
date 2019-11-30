@@ -8,7 +8,11 @@
 		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][duration]", doctor_service.duration, Doctor::Service.durations.keys %>
 	</td>
 	<td>
-		<%= select_field_tag "doctor[doctor_services_attributes][#{index}][has_line_booking]", doctor_service.has_line_booking, Doctor::Service.has_line_bookings.keys %>
+		<label class="toggle_switch">
+			<%= hidden_field_tag "doctor[doctor_services_attributes][#{index}][has_line_booking]", "無" %>
+			<%= check_box_tag "doctor[doctor_services_attributes][#{index}][has_line_booking]", "有",  doctor_service.has_line_booking == "有" %>
+		  <span class="slider round"></span>
+		</label>
 	</td>				
 	<td>
 		<% if doctor_service.new_record? %>

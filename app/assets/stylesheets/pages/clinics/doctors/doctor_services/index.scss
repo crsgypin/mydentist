@@ -7,15 +7,21 @@
 			display: inline-block;
 		}		
 	}
-	#doctor-service-table {
-		width: 100%;
-		.s-row {
-			display: flex;
-			justify-content: space-between;
-			height: 60px;
-			line-height: 60px;
-			.s-col {
-				width: 33%;
+	table.clinic_table {
+		tr {
+			td {
+				height: 50px;
+				line-height: 50px;
+				select {
+					margin-top: 5px;
+					height: 40px;
+					line-height: 40px;
+					border: 1px solid $colorGy1;
+				}
+				.toggle_switch {
+					position: relative;
+					top: 10px;
+				}
 			}
 		}
 	}
