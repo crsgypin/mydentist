@@ -7,9 +7,9 @@
         resource: @clinic,
         fields: [
           {t: "照片", v: proc{ |a| 
-            r = "<div class='clinic_photo_box'>"
+            r = "<div class='clinic_photo_box' onclick=\"$.getScript('#{new_clinic_info_photo_path(@clinic)}');\">"
             r += bg_center_image @clinic.photo_url
-            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit", onclick: "$.getScript('#{new_clinic_info_photo_path(@clinic)}');"
+            r += image_tag common_static_image_url(:pic_edit3), class: "pic_edit"
             r += "</div>"
             r += "<span class='photo_note'>請上傳 200 * 200 px 以上的照片</span>"
             r.html_safe

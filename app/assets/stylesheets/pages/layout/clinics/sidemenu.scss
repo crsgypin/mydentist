@@ -31,9 +31,9 @@
 			position: relative;
       padding: 10px 0;
 			a {
-        .fixed_height_image {
-          height: 25px;
-          margin-bottom: 5px;
+        .fixed_width_image {
+          width: 25px;
+          margin: 0 auto 5px;
         }
         p {
           font-size: $fs_14p;
@@ -59,7 +59,7 @@
   }
   .bottom_box {
   	position: absolute;
-  	bottom: 0;
+  	bottom: 20px;
   	width: 100%;
   	line-height: 1;
   	text-align: center;

@@ -5,7 +5,7 @@
   <% events = hour_minute_segment[:events] %>
 	<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 	<% zindex = 100 + index %>
-	<div class="d_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>" data-hour="<%= hour %>" style="margin-left: -20px; margin-right: -20px; height: <%= row_height %>px;">
+	<div class="d_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>" data-hour="<%= hour %>" style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
 		<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
 		<% if broadcast_event.present? %>
 			<% height = broadcast_event.event_durations_count * row_height %>

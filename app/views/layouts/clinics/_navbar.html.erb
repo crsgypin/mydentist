@@ -2,6 +2,11 @@
 <div id="clinic_nav">
 	<div class="title">
 		<%= roc_format(Date.today, 2) %>
+		<% if @back_to_today_url.present? %><%# for clinic events %>
+		<div class="back">
+			<%= link_to "< 返回今天", @back_to_today_url %>
+		</div>
+		<% end %>
 	</div>
 	<div class="notification" onclick="$(this).addClass('selected');">
 		<%= link_to clinic_lightbox_clinic_notifications_path(@clinic), remote: true do %>

@@ -6,6 +6,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
       #for search
       @event = @clinic.events.find(params[:event_id])
       @date = @event.date
+      @back_to_today_url = url_for if @date != Date.today
       @category = params[:category]
       @events = [@event]
       return index_search_event
@@ -13,6 +14,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
  
     @doctor_id = params[:doctor_id]
     @date = Date.parse(params[:date]) rescue  Date.today
+    @back_to_today_url = url_for if @date != Date.today
     @category = params[:category]
   
     @events = @clinic.events.valid_events_with_broadcast.where(date: @date).includes(:doctor, :service, :patient).includes(:event_durations)
