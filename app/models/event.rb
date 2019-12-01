@@ -151,4 +151,22 @@ class Event < ApplicationRecord
 	def check_notification
     Clinic::Notification.on_add_event(self)
 	end
+
+	def self.check_event_status
+		n = {pass: 0, fail: 0}
+		t = Time.now
+		events = self.where(status: "已預約")
+		ids_1 = events.where("date < ?", t.to_date)
+		ids_2 = events.where("date = ? and hour < ?", t.to_date, t.hour)
+		ids_3 = events.where("date = ? and hour = ? and minute < ?", t.to_date, t.hour, t.min)
+		events = events.where(id: ids_1 + ids_2 + ids_3)
+		# events.each do |event|
+		# 	if event.update(status: "爽約")
+		# 		n[:pass] += 1
+		# 	else
+		# 		n[:fail] += 1
+		# 	end
+		# end
+		# "pass: #{n[:pass]}, fail: #{n[:fail]}"
+	end
 end
