@@ -5,7 +5,7 @@
   <% hours.each do |hour| %>
   <% [0, 15, 30, 45].each do |minute| %>
   <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-  <div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" data-minute="<%= minute %>" style="height: <%= row_height %>px;  line-height: <%= row_height %>px;">
+  <div class="d_row hour_minute_tr <%= border_style %>" data-date="<%= @date.strftime('%Y/%m/%d') %>" data-hour="<%= hour %>" data-minute="<%= minute %>" style="height: <%= row_height %>px;  line-height: <%= row_height %>px;">
     <%# show time for 0 and 30 %>
     <% if minute%30 == 0 %>
     <span class="time" style="position: relative; top: <%= row_height/2 * -1 %>px;"><%= hour_minute_format(hour, minute) %></span>

@@ -1,0 +1,12 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "sys_log",
+  resource: @sys_log,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {k: "name", v: proc{|a| a.name }},
+    {k: "note", v: proc{|a| a.note }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

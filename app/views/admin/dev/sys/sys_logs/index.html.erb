@@ -1,0 +1,15 @@
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "sys_logs",
+  resources: @sys_logs,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "name", v: proc{|a| a.name }},
+    {t: "note", v: proc{|a| a.note }},
+    {t: "created_at", v: proc{|a| a.created_at }}
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  }
+}
+%>

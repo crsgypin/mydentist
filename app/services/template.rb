@@ -7,10 +7,10 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "admin/dev/notification",
+			base_dir: "admin/dev/sys",
 			resources: [
 				{
-					class_name: "Event::NotificationSchedule",
+					class_name: "Sys::Log",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
 					# associated_resources: [

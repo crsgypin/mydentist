@@ -75,24 +75,6 @@ $title_col_width: 50px;
 					border-bottom: none;
 	  		}    		
     	}
-    	/*
-	    &.event_duration_time_line {
-	    	position: absolute;
-	    	top: 0;
-	    	left: $title_col_width;
-	    	width: calc(100% - 50px);
-	    	z-index: 900;
-	    	pointer-events: none;
-	    	.d_row {
-	    		.current_time {
-	    			position: relative;
-	    			width: 100%;
-	    			height: 3px;
-						background: $colorBu;
-	    		}
-	    	}
-	    }
-	    */
     }
     .patient_event {
     	width: 100%;
