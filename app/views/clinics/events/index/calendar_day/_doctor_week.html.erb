@@ -8,10 +8,12 @@
       hours: @clinic_wday_hours
     } %>
     <% @doctor_week_hour_events.each do |doctor_week_hour_event| %>
-    <div class="d_col">
+    <div class="d_col value_col">
       <div class="d_row day_row" style="height: <%= row_height %>px;">
-        <p><%= doctor_week_hour_event[:date].strftime('%d') %></p>
-        <p><%= doctor_week_hour_event[:ch_wday] %></p>
+        <p style="line-height: <%= row_height / 2 %>px;">
+          <%= doctor_week_hour_event[:date].strftime('%d') %><br>
+          <%= doctor_week_hour_event[:ch_wday] %>
+        </p>
       </div>
       <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
         hour_minute_segments: doctor_week_hour_event[:hour_minute_segments],

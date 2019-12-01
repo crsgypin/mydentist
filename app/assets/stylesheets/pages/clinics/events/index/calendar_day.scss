@@ -39,6 +39,9 @@ $title_col_width: 50px;
 	    		}    			
     		}
     	}
+    	&.value_col {
+	    	min-width: 100px;
+    	}
     	.d_row {
     		min-width: 70px;
     		text-align: center;
