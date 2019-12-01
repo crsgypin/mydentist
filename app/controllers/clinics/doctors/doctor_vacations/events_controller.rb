@@ -2,7 +2,7 @@ class ::Clinics::Doctors::DoctorVacations::EventsController < ::Clinics::Doctors
 	include VacationEventsQueryConcern
 
 	def index
-		@events = @doctor_vacation.events.includes(:event_notifications, :patient => :line_account)
+		@events = @doctor_vacation.events.valid_events.includes(:event_notifications, :patient => :line_account)
 
 		query_vacation_events
 

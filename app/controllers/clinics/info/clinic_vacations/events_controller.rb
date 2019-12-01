@@ -4,7 +4,7 @@ class ::Clinics::Info::ClinicVacations::EventsController < ::Clinics::Info::Clin
 	def index
 		@key = params[:key] || "events"
 
-		@events = @clinic_vacation.events.includes(:event_notifications, :patient => :line_account)
+		@events = @clinic_vacation.events.valid_events.includes(:event_notifications, :patient => :line_account)
 
 		query_vacation_events
 
