@@ -9,38 +9,6 @@
 		height: 40px;
 		line-height: 40px;
 	}
-	>.tabs_box {
-		ul {
-			display: flex;
-			padding: 5px 0;
-			li {
-				padding: 0 10px;
-				border-bottom: 1px solid $colorGy;
-				&:not(:first-child){
-				}
-				&.selected {
-					color: $colorBu;
-					border-bottom: 3px solid $colorBu;
-				}
-			}			
-		}
-	}
-	>.query_box {
-		ul {
-			display: flex;
-			padding: 5px 0;			
-			li {
-				padding: 0 10px;
-				&:not(:first-child){
-				}
-				select {
-					height: 30px;
-					font-size: $fs_12p;
-					background: $colorW;
-				}
-			}			
-		}
-	}
 	>.content_box {
 		height: calc(500px - 140px);
 		.events_box {
@@ -48,17 +16,28 @@
 			height: calc(100% - 60px);
 			table {
 				width: 100%;
-				font-size: $fs_14p;
+				font-size: $fs_12p;
 				line-height: $lh_20p;
 				td {
+					color: $colorGy;
 					.title {
 						font-size: $fs_14p;
 					}
 					.value {
 						font-size: $fs_12p;
-						color: $colorGy1;
 						line-height: 1;
 					}
+				}
+				th {
+					&.notification_check {
+						width: 30px;
+					}
+					background-color: rgba(204, 204, 204, 0.21);
+					padding: 3px 0;
+				}
+				select {
+					border: none;
+					background: $colorW;
 				}
 			}				
 		}

@@ -13,7 +13,7 @@ class Event::Notification < ApplicationRecord
   before_validation :set_line_account, on: :create
   json_format :args
   after_update :check_notification
-  after_create :set_current_event_notification
+  after_create :set_event_notification
   attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category

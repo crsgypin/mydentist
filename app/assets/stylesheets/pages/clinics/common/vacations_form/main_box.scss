@@ -20,7 +20,7 @@
 				overflow: hidden;
 			}
 			&.selected {
-				background: $colorBu_l;
+				border: 2px solid $colorBu;
 			}
 			>.title {
 				text-align: left;
