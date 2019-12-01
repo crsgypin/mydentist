@@ -40,10 +40,12 @@
 			var d = $(this).data();
 			endTime = d.hour * 60 + d.minute;
 			var delta = Math.abs(endTime - startTime) + 15;
-	    var x = e.clientX;
-      var y = e.clientY;
-			window.showContentMenu("new", x, y);
-			e.stopPropagation();
+			if(delta > 15){
+		    var x = e.clientX;
+	      var y = e.clientY;
+				window.showContentMenu("new", x, y, delta);
+				window.durationNewMode = true;				
+			}
 		});
 
 		//current time

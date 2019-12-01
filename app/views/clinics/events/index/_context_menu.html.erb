@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	$(function(){
 		var contextMenu = $("#context_menu");
-		var eventId, doctorId, date, hour, minute;
+		var eventId, doctorId, date, hour, minute, duration;
     $("body")[0].addEventListener('contextmenu', function(e) {
       if(!$(e.target).closest('#calendar_day').length > 0){
         contextMenu.removeClass("selected");
@@ -37,7 +37,8 @@
       window.showContentMenu(mode, x, y);
     }, false);
 
-    window.showContentMenu = function(mode, x, y){
+    window.showContentMenu = function(mode, x, y, d){
+      duration = d;
       var patientElm = function(){
         if($(event.target).is(".patient_event")){
           return $(event.target);
@@ -74,7 +75,7 @@
     			date: date,
     			hour: hour,
     			minute: minute,
-    			duration: 15
+    			duration: duration
     		}
     	});
     });
@@ -116,6 +117,10 @@
       })
     });
     $("body").click(function(){
+      if(window.durationNewMode){
+        window.durationNewMode = false;
+        return;
+      }
     	contextMenu.removeClass("selected");
     })
 	})

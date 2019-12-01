@@ -212,8 +212,12 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     end
 
     #duration
-    @doctor_service = @service.doctor_services.find{|s| s.doctor == @doctor}
-    @duration = @doctor_service.duration_number
+    if params[:duration].present? && params[:duration].to_i > 15
+      @duration = params[:duration].to_i
+    else
+      @doctor_service = @service.doctor_services.find{|s| s.doctor == @doctor}
+      @duration = @doctor_service.duration_number
+    end
   end
 
   def event_params
