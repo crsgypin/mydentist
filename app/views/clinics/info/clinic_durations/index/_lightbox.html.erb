@@ -12,7 +12,7 @@
 				<div class="form_inbox">
 					<%= render partial: "clinics/common/durations-table", locals: {
 						durations: @clinic_durations,
-						wdays: @clinic_durations.group(:wday).count.keys, #[1,2,3,4]
+						wdays: @clinic.clinic_duration_wdays, #[1,2,3,4]
 						check_input: proc do |wday_hour_minute|
 							check_box_tag "clinic_durations[][wday_hour_minute]", wday_hour_minute, @clinic_durations.find{|d| d.wday_hour_minute == wday_hour_minute}
 						end

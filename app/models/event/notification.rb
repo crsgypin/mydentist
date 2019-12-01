@@ -5,7 +5,7 @@ class Event::Notification < ApplicationRecord
   belongs_to :notification_schedule
 	belongs_to :line_account, class_name: "Line::Account"
 	belongs_to :event, class_name: "Event", optional: true
-  belongs_to :patient, class_name: "Patient", optional: true
+  belongs_to :patient, class_name: "Patient", optional: true #to-do check if remove optional
 	# belongs_to :new_event, class_name: "Event", foreign_key: :new_event_id, optional: true
 	belongs_to :booking_event, class_name: "BookingEvent", optional: true
 	belongs_to :line_sending, class_name: "Line::Sending", optional: true
@@ -13,6 +13,7 @@ class Event::Notification < ApplicationRecord
   before_validation :set_line_account, on: :create
   json_format :args
   after_update :check_notification
+  after_create :set_current_event_notification
   attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
   # after_create :send_message
 	# validates_presence_of :category
@@ -86,6 +87,12 @@ class Event::Notification < ApplicationRecord
   end
 
   private
+
+  def set_event_notification
+    if self.patient
+      self.patient.check_current_event_notification
+    end
+  end
 
   def set_line_account
     if self.event.present?

@@ -5,7 +5,8 @@ class Patient < ApplicationRecord
   has_one :line_account, class_name: "Line::Account"
   has_one :clinic_patient_notification, class_name: "Clinic::PatientNotification", dependent: :destroy
   has_many :event_notifications, class_name: "Event::Notification"
-  has_one :event_notification, -> { order(id: :desc)}, class_name: "Event::Notification"
+  # has_one :event_notification, -> { order(id: :desc)}, class_name: "Event::Notification"
+  belongs_to :current_event_notification, class_name: "Event::Notification", foreign_key: :current_event_notification_id
   belongs_to :default_doctor, class_name: "::Doctor", foreign_key: :default_doctor_id, optional: true
   belongs_to :current_event, class_name: "::Event", foreign_key: :current_event_id, optional: true
   belongs_to :last_tooth_cleaning_event, class_name: "::Event", foreign_key: :last_tooth_cleaning_event_id, optional: true
@@ -55,6 +56,14 @@ class Patient < ApplicationRecord
     self.save
   end
 
+  def check_current_event_notification
+    if self.event_notifications.length > 0
+      self.current_event_notification = self.event_notifications.last
+      self.save
+    end
+    true
+  end
+
   private
 
   def set_birthday
@@ -89,5 +98,6 @@ class Patient < ApplicationRecord
     end
     true
   end
+
 
 end

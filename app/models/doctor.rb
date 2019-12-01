@@ -8,10 +8,11 @@ class Doctor < ApplicationRecord
 	has_many :event_durations, through: :events
 	enum status: {"在職" => 1, "離職" => 2}
 	before_validation :set_friendly_id, on: :create
-	validates_presence_of :friendly_id, :name
+	validates_presence_of :friendly_id, :name, :title
 	validates_uniqueness_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	accepts_nested_attributes_for :doctor_services
+	before_save :set_form_complete
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Clinic::StaticImageHelper
@@ -22,6 +23,25 @@ class Doctor < ApplicationRecord
 
 	def doctor_durations_note_html
 		self.doctor_durations_note.gsub("\r\n","<br>").gsub("\n", "<br>")
+	end
+
+	def doctor_duration_wdays
+		self.doctor_durations.group(:wday).count.keys #[1,3,4]
+	end
+
+	def set_form_complete
+		complete = 0
+		if self.name.present? && self.title.present?
+			complete += 1
+		end
+		if self.doctor_durations.length > 0
+			complete += 1
+		end
+		if self.services.length > 0
+			complete += 1
+		end
+		self.form_complete = complete
+		true
 	end
 
 	def photo_url

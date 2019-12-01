@@ -11,12 +11,17 @@
 		    {t: "圖片", v: proc{|a|
 		    	fixed_height_image a.photo_url
 		    }},
-		    {t: "名稱", v: proc{|a| a.name }},
-		    {t: "職銜", v: proc{|a| a.title }},
-		    {t: "經歷", v: proc{|a| short_string(a.experience, 10) }},
+		    {t: "醫師名稱", v: proc{|a| a.name }},
+		    {t: "職稱", v: proc{|a| a.title }},
 		    {t: "主治", v: proc{|a| short_string(a.pro, 10) }},
-		    {t: "", v: proc{|a|
-		    	link_to "詳細資料", url_for(action: :show, id: a)
+		    {t: "看診日", v: proc{|a| 
+		    	a.doctor_duration_wdays.map do |wday|
+		    		ch_wday(wday)
+		    	end.join("").gsub("週","")
+		    }},
+		    {t: "聯絡電話", v: proc{|a| a.phone }},
+		    {t: "資料填寫完成度", v: proc{|a|
+		    	"已可預約"
 		     }},
 		  ],
 		  row: {

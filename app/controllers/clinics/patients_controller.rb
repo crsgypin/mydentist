@@ -18,7 +18,7 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
       raise "invalid category"
     end
 
-    @patients = @patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event, :event_notification => [:notification_template])
+    @patients = @patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event, :current_event_notification => [:notification_template])
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
@@ -35,13 +35,13 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
     @event_notification_status = params[:event_notification_status]
     if @event_notification_status.present?
       if @event_notification_status == '1'
-        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["尚未回覆"])
+        ids = @patients.joins(:current_event_notification).where("event_notifications.status = ?", Event::Notification.statuses["尚未回覆"])
         @patients = @patients.where(id: ids)
       elsif @event_notification_status == '2'
-        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["同意"])
+        ids = @patients.joins(:current_event_notification).where("event_notifications.status = ?", Event::Notification.statuses["同意"])
         @patients = @patients.where(id: ids)
       elsif @event_notification_status == '3'
-        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["取消"])
+        ids = @patients.joins(:current_event_notification).where("event_notifications.status = ?", Event::Notification.statuses["取消"])
         @patients = @patients.where(id: ids)
       end
     end

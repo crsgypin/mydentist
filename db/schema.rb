@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191201075918) do
+ActiveRecord::Schema.define(version: 20191201162326) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20191201075918) do
     t.string "note", limit: 500
     t.string "web_link"
     t.string "doctor_durations_note", limit: 500, default: ""
+    t.integer "form_complete", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_doctors_on_clinic_id"
@@ -395,6 +396,7 @@ ActiveRecord::Schema.define(version: 20191201075918) do
     t.integer "last_tooth_cleaning_event_id"
     t.integer "profile_status", limit: 1, default: 0
     t.integer "source", limit: 1, default: 1
+    t.integer "current_event_notification_id"
     t.string "name", limit: 100
     t.string "phone", limit: 100
     t.string "phone2"
@@ -410,6 +412,7 @@ ActiveRecord::Schema.define(version: 20191201075918) do
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_patients_on_clinic_id"
     t.index ["current_event_id"], name: "index_patients_on_current_event_id"
+    t.index ["current_event_notification_id"], name: "index_patients_on_current_event_notification_id"
     t.index ["default_doctor_id"], name: "index_patients_on_default_doctor_id"
     t.index ["last_tooth_cleaning_event_id"], name: "index_patients_on_last_tooth_cleaning_event_id"
   end

@@ -50,6 +50,10 @@ class Clinic < ApplicationRecord
 		end
 	end
 
+	def clinic_duration_wdays
+		self.clinic_durations.group(:wday).count.keys
+	end
+
 	def max_min_hours
 		(8..22)
 	end

@@ -8,13 +8,13 @@
       if @category == "notification"
         r += [
           {t: check_box_tag("", "", false, class: "notification_check_all"), unclickable: true, v: proc{ |a, index| 
-              event_notification = a.event_notification 
+              event_notification = a.current_event_notification 
               r = check_box_tag("", "", false, class: "notification_check", data: {patient_id: a.id, args: {clinic_name: @clinic.name, patient_name: a.name}}, disabled: event_notification.present?)
               r.html_safe
             }
           },
           {t: "推播訊息狀態", v: proc { |a|
-            event_notification = a.event_notification
+            event_notification = a.current_event_notification
             if event_notification.present?
               r = "<p> #{event_notification.status} </p>"
               r += "<p class='fs10 colorGy1'> #{roc_format(event_notification.created_at, 3)} 已推播</p>"
