@@ -64,7 +64,7 @@ class Event < ApplicationRecord
 		elsif format_type == 2			
 			#ex: 108/11/18 08:30 ~ 08:45
 			r = next_hour_minute(self.hour, self.minute, self.duration)
-			"#{roc_format(self.date, 3)} #{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"			
+			"#{roc_format(self.date, 3)} #{hour_minute_format(self.hour, self.minute)} ~ #{hour_minute_format(r[:hour], r[:minute])}"
 		elsif format_type == 3
 			#ex: 108/11/21 08:30
 			"#{roc_format(self.date, 3)} #{hour_minute_format(self.hour, self.minute)}"

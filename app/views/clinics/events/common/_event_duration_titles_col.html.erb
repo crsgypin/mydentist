@@ -10,23 +10,7 @@
     <% if minute%30 == 0 %>
     <span class="time" style="position: relative; top: <%= row_height/2 * -1 %>px;"><%= hour_minute_format(hour, minute) %></span>
     <% end %>
-    <%# curent time %>
-    <% time = Time.parse("#{Date.today.strftime('%Y/%m/%d')} #{hour}:#{minute}") %>
-    <% if current_time > time && current_time < time + 15.minute %>
-    <span class="current_time" style="top:<%= (row_height * ((current_time - time) / 60 / 15)).to_i %>px;"></span>
-    <script type="text/javascript">
-      $(function(){
-        var d = $(".current_time");
-        var width = function(){
-          if(d.closest('.d_block').length > 0){
-            return d.closest('.d_block').width();
-          } else {
-            return d.closest('.table_box').width();
-          }
-        }();
-        d.css('width', width - 50);
-      })
-    </script>
+    <%#<span class="current_time"></span>%><%# current_time set by js %>
     <% end %>
   </div>
   <% end %>

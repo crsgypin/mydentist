@@ -42,5 +42,33 @@
 			// 	}
 			// })
 		}
+		var currentTimeId = setInterval(function(){
+			checkCurrentTime();
+		}, 60 * 1000);
+		function checkCurrentTime(){
+			var timeNow = new Date;
+			var tn = timeNow.getHours() * 60 + timeNow.getMinutes();
+			$(".d_col.title_col .d_row .current_time").remove();
+			$(".d_col.title_col .d_row").each(function(i, row){
+				var data = $(row).data();
+				var t = data.hour * 60 + data.minute;
+				var delta = tn - t;
+				if(delta > 0 && delta <= 15){
+					var top = $(row).outerHeight() * (delta / 15);
+	        var width = function(){
+	        	var w;
+	          if($(row).closest('.d_block').length > 0){
+	            w = $(row).closest('.d_block').width();
+	          } else {
+	            w =  $(row).closest('.table_box').width();
+	          }
+	          w -= 50; <%# 標題寬度為 50 %>
+	          return w;
+	        }();
+					$(row).append("<div class='current_time' style='top: " + top + "px; width: " + width + "px;'></div>")
+				}
+			});
+		}
+		checkCurrentTime();
 	})
 </script>
