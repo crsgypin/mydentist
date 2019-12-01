@@ -16,6 +16,15 @@
 				text-align: center;
 				font-size: $fs_24p;
 				margin-bottom: 20px;
+				position: relative;
+				a.remove_btn {
+					font-size: $fs_16p;
+					color: $colorGy1;
+					text-decoration: underline;
+					position: absolute;
+					right: 10px;
+					top: 0px;
+				}
 			}
 		}	
 		.side_box {

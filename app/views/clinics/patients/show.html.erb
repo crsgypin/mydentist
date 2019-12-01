@@ -2,7 +2,9 @@
   <%= render_relative_partial "show/navbar" %>
   <div class="content_box">
     <div class="main_box">
-      <h1>病患個人資料</h1>
+      <h1>病患個人資料
+        <%= link_to "刪除病患", url_for(action: :destroy), method: "delete", class: "remove_btn", remote: true, method: "delete", data: {confirm: "確定移除?"} %>
+      </h1>
       <%= form_tag url_for(action: :update), method: "patch", class: "form_box", remote: true do %>
         <%= render_relative_partial "common/table" %>    
         <div class="buttons_box">
