@@ -2,7 +2,28 @@
 #event_duration_lightbox {
 	.inbox {
 		.header_box {
-
+			padding: 0 20px;
+			position: relative;
+			.back {
+				font-size: $fs_16p;
+				text-align: left;
+				position: absolute;
+				left: 0;
+			}
+			.title {
+				font-weight: bold;
+			}
+			.doctor {
+				font-size: $fs_14p;
+			}
+			.date {
+				font-size: $fs_14p;
+				a {
+					font-size: $fs_16p;
+				}
+				display: flex;
+				justify-content: space-between;
+			}
 		}
 		.content_box {
 			#calendar_day {
