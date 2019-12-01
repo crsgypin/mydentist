@@ -185,6 +185,9 @@ Rails.application.routes.draw do
         end
         resources :event_notifications
       end
+      namespace :sys do
+        resources :sys_logs
+      end
     end
   end
 
