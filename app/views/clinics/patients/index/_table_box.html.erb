@@ -49,7 +49,7 @@
       if @category == "all"
         r += [
           {t: "加入推播狀態", unclickable: true, v: proc{|a| 
-            render_relative_partial "table_box/notification", locals: {patient: a}
+            render_relative_partial "../common/notification_action", locals: {patient: a}
           }}
         ]
       end

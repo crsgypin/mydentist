@@ -1,4 +1,6 @@
 
-$("#notification_<%= @patient.id %>").replaceWith("<%= j render_relative_partial '../index/table_box/notification', locals: {patient: @patient} %>");
+$("#notification_<%= @patient.id %>").replaceWith("<%= j render partial: '/clinics/patients/common/notification_action', locals: {patient: @patient} %>");
 
-$("#show_page_nav").replaceWith("<%= j render_relative_partial '../index/navbar' %>");
+if($("#show_page_nav").length > 0){
+	$("#show_page_nav").replaceWith("<%= j render partial: '/clinics/patients/index/navbar' %>");
+}

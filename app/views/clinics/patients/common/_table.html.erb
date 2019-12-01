@@ -5,7 +5,10 @@
   resource: @patient,
   fields: [
     {v: proc{|a| 
-    	text_field_tag "patient[name]", a.name, placeholder: "病患姓名(必填)"
+        r = ""
+    	r += text_field_tag "patient[name]", a.name, placeholder: "病患姓名(必填)"
+        r += render_relative_partial("notification_action", locals: {patient: a})
+        r.html_safe
     }},
     {class: "both", v: proc{|a| 
     	r = ""
