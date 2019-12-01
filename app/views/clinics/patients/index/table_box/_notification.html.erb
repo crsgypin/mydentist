@@ -1,11 +1,11 @@
 
-<div id="notification_<%= patient.id %>">
+<div id="notification_<%= patient.id %>" class="notification_action">
 <%=
 if patient.line_account.present?
   if !patient.clinic_patient_notification.present?
-    link_to icon_tag(:plus), clinic_patient_notification_path(@clinic, patient), remote: true, method: "post"
+    link_to "#{icon_tag(:plus)} 加入".html_safe, clinic_patient_notification_path(@clinic, patient), remote: true, method: "post", class: "add"
   else
-    link_to icon_tag(:minus), clinic_patient_notification_path(@clinic, patient), remote: true, method: "delete"
+    link_to "移除 #{icon_tag(:arrow_right)}".html_safe, clinic_patient_notification_path(@clinic, patient), remote: true, method: "delete", class: "remove"
   end
 else
   "未加入linebot"

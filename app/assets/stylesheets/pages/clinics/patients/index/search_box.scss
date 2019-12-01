@@ -7,13 +7,21 @@
 		.input_box {
 			width: calc(100% - 150px);
 			input[type=text] {
+				height: 40px;
 				width: 100%;
 				padding-left: 10px;
 			}
 		}
 		input[type=submit] {
+			height: 40px;
 			width: 100px;
-		}		
+		}
+		select {
+			height: 40px;
+			line-height: 40px;
+			margin-right: 10px;
+			background: $colorW;
+		}
 	}
 }
 

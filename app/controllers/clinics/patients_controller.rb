@@ -20,6 +20,16 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
+    @has_event_notification = params[:has_event_notification]
+    if @has_event_notification.present?
+      if @has_event_notification == '1'
+        ids = @patients.joins(:event_notifications).pluck(:id).uniq
+        @patients = @patients.where(id: ids)
+      else
+        ids = @patients.joins(:event_notifications).pluck(:id)
+        @patients = @patients.where.not(id: ids)
+      end
+    end
     @patients = @patients.page(params[:page]).per(10)
   end
 

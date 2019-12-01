@@ -2,9 +2,13 @@
 <div id="search_box">
 	<%= form_tag url_for, method: "get" do %>
 	<% if @category == "notification" %>
+	<%# pushnotificaiton is put at table_box %>
 	<%= link_to "javascript: window.pushNotification();", class: "btnW" do %>
 		回診推播(<span class="number">0</span>)
 	<% end %>
+	<% end %>
+	<% if @category == "all" %>
+		<%= select_field_tag "has_event_notification", @has_event_notification, {nil => "選擇加入推播狀態", 1 => "已加入推播", 0 => "未加入推播"}, onchange: "$(this).closest('form').submit();" %>
 	<% end %>
 	<div class="input_box">
 		<%= hidden_field_tag "category", params[:category] %>
