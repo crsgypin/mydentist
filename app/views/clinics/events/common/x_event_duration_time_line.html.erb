@@ -1,0 +1,15 @@
+<% current_time = Time.now %>
+<div class="d_col event_duration_time_line">
+  <div class="d_row" style="height: <%= row_height %>px;">
+  </div>
+  <% hours.each do |hour| %>
+  <% [0, 15, 30, 45].each do |minute| %>
+  <% time = Time.parse("#{Date.today.strftime('%Y/%m/%d')} #{hour}:#{minute}") %>
+  <div class="d_row hour_minute_tr" style="height: <%= row_height %>px;  line-height: <%= row_height %>px;">
+  	<% if current_time > time && current_time < time + 15.minute %>
+  	<span class="current_time" style="top:<%= (row_height * ((current_time - time) / 60 / 15)).to_i %>px;"></span>
+  	<% end %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

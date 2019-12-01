@@ -1,6 +1,6 @@
 
 <div id="clinic-table">
-	<div class="d-row">
+	<div class="d_row">
 		<% cols.each do |col| %>
 		<div class="d_col">
 			<%= col[:t] %>
@@ -8,7 +8,7 @@
 		<% end %>
 	</div>
 	<% resources.each do |resource|%>
-	<div class="d-row">
+	<div class="d_row">
 		<% cols.each do |col| %>
 		<div class="d_col">
 			<%= col[:v].call(resource) %>

@@ -1,14 +1,34 @@
-    <div class="d_col title_col">
-      <div class="d_row" style="height: <%= row_height %>px;">
-      </div>
-      <% hours.each do |hour| %>
-      <% [0, 15, 30, 45].each do |minute| %>
-      <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
-      <div class="d-row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" style="height: <%= row_height %>px;">
-        <% if minute%30 == 0 %>
-        <%= hour_minute_format(hour, minute) %>
-        <% end %>      
-      </div>
-      <% end %>
-      <% end %>
-    </div>
+<% current_time = Time.now %>
+<div class="d_col title_col">
+  <div class="d_row" style="height: <%= row_height %>px;">
+  </div>
+  <% hours.each do |hour| %>
+  <% [0, 15, 30, 45].each do |minute| %>
+  <% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
+  <div class="d_row hour_minute_tr <%= border_style %>" data-hour="<%= hour %>" data-minute="<%= minute %>" style="height: <%= row_height %>px;  line-height: <%= row_height %>px;">
+    <%# show time for 0 and 30 %>
+    <% if minute%30 == 0 %>
+    <span class="time" style="position: relative; top: <%= row_height/2 * -1 %>px;"><%= hour_minute_format(hour, minute) %></span>
+    <% end %>
+    <%# curent time %>
+    <% time = Time.parse("#{Date.today.strftime('%Y/%m/%d')} #{hour}:#{minute}") %>
+    <% if current_time > time && current_time < time + 15.minute %>
+    <span class="current_time" style="top:<%= (row_height * ((current_time - time) / 60 / 15)).to_i %>px;"></span>
+    <script type="text/javascript">
+      $(function(){
+        var d = $(".current_time");
+        var width = function(){
+          if(d.closest('.d_block').length > 0){
+            return d.closest('.d_block').width();
+          } else {
+            return d.closest('.table_box').width();
+          }
+        }();
+        d.css('width', width - 50);
+      })
+    </script>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
+</div>
