@@ -1,6 +1,6 @@
 class Patient < ApplicationRecord
 	belongs_to :clinic
-	has_many :events
+	has_many :events, dependent: :destroy
   has_many :booking_events
   has_one :line_account, class_name: "Line::Account"
   has_one :clinic_patient_notification, class_name: "Clinic::PatientNotification", dependent: :destroy

@@ -75,7 +75,7 @@
       %>
     </div>
     <div class="form_buttons_box">
-      <%= submit_tag "儲存", class: "btnBu" %>
+      <%= submit_tag "儲存", class: "btnBu save_btn" %>
     </div>
   <% end %>
 </div>
@@ -93,37 +93,12 @@
       width: 120, 
       height: 120, 
       text: '<%= @clinic.line_binding_url %>'
-    });    
-  });
-</script>
-
-<%# render :partial => "share/upload_img_modal" %>
-<%#
-<script>
-  function setMode(mode, dom){
-    if(mode == "show"){
-      $("#clinic_info").find("table tr .show").removeClass("hidden");
-      $("#clinic_info").find("table tr .edit").addClass("hidden");
-    } else if(mode == "edit") {
-      setMode("show");
-      $(dom).closest("tr").find(".show").addClass("hidden");
-      $(dom).closest("tr").find(".edit").removeClass("hidden");
-    }
-  }
-
-  function editInfo(e, name) {
-    let form = document.getElementById(`clinic-${name}`);
-    let old_inputs = document.querySelectorAll(`#clinic-${name} input[name="${name}"]`);
-    old_inputs.forEach((old) => {
-      old.remove();
     });
 
-    let input = document.createElement("INPUT");
-    input.type = 'hidden';
-    input.name = name;
-    input.value = e.target.value;
-    form.appendChild(input);
-  }
+    window.listenerInputChangeNotification({
+      inputs: $("#clinic_info").find("input,select"),
+      leaveLinks: $("#clinic_sidemenu").find("a"),
+      saveBtn: $("#clinic_info .save_btn")
+    })
+  });
 </script>
-
-%>
