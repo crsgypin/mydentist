@@ -11,23 +11,38 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
   def index
     @category = params[:category].present? ? params[:category] : "all"
     if @category == "all"
-      @patients = @clinic.patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event, :event_notifications => [:notification_template])
+      @patients = @clinic.patients
     elsif @category == "notification"
-      @patients = @clinic.clinic_notification_patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event)
+      @patients = @clinic.clinic_notification_patients
     else
       raise "invalid category"
     end
+
+    @patients = @patients.includes(:line_account, :clinic_patient_notification, :default_doctor, :current_event, :last_tooth_cleaning_event, :event_notification => [:notification_template])
     if params[:key].present?
       @patients = @patients.where("name like ?", "%#{params[:key]}%")
     end
-    @has_event_notification = params[:has_event_notification]
-    if @has_event_notification.present?
-      if @has_event_notification == '1'
-        ids = @patients.joins(:event_notifications).pluck(:id).uniq
+    @has_patient_notification = params[:has_patient_notification]
+    if @has_patient_notification.present?
+      if @has_patient_notification == '1'
+        ids = @patients.joins(:clinic_patient_notification).pluck(:id).uniq
         @patients = @patients.where(id: ids)
       else
-        ids = @patients.joins(:event_notifications).pluck(:id)
+        ids = @patients.joins(:clinic_patient_notification).pluck(:id)
         @patients = @patients.where.not(id: ids)
+      end
+    end
+    @event_notification_status = params[:event_notification_status]
+    if @event_notification_status.present?
+      if @event_notification_status == '1'
+        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["尚未回覆"])
+        @patients = @patients.where(id: ids)
+      elsif @event_notification_status == '2'
+        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["同意"])
+        @patients = @patients.where(id: ids)
+      elsif @event_notification_status == '3'
+        ids = @patients.joins(:event_notification).where("event_notifications.status = ?", Event::Notification.statuses["取消"])
+        @patients = @patients.where(id: ids)
       end
     end
     @patients = @patients.page(params[:page]).per(10)
