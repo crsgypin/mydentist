@@ -46,13 +46,12 @@
         {t: "下次約診日期", v: proc{|a| a.current_event.try(:date) }},
       ]
 
-      if @category == "all"
-        r += [
-          {t: "加入推播狀態", unclickable: true, v: proc{|a| 
-            render_relative_partial "../common/notification_action", locals: {patient: a}
-          }}
-        ]
-      end
+      title = @category == "all" ? "加入推播狀態" : "清單加入狀況"
+      r += [
+        {t: title, unclickable: true, v: proc{|a| 
+          render_relative_partial "../common/notification_action", locals: {patient: a}
+        }}
+      ]
      r
    end.call,
     row: {
