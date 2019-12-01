@@ -2,7 +2,7 @@
 <div id="clinic_event_form" class="lightbox">
 	<%= form_tag url_for(action: :update), method: "patch", remote: true, class: "inbox" do %>
 		<%= render partial: "clinics/events/common/event_form", locals: {
-			title: '修改預約'
+			title: '預約'
 		} %>
 	<% end %>
 </div>

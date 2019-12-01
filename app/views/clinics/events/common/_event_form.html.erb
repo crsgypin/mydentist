@@ -15,12 +15,18 @@
 	  resource: @patient,
 	  fields: [
 	    {v: proc{|a| 
-	    	r = "<div id='search_box'>"
+	    	r = ""
+	    	r += " <div id='search_box'>"
 	    	r += "  <div class='input_box'>"
 		    r +=     text_field_tag "patient[name]", a.name, placeholder: "病患姓名", disabled: patient_exist, autocomplete: "off"
 		    r += "  <div class='search_result'></div>"
 		    r += "  </div>"
-		    r += "<div>"
+		    r += " </div>"
+		    if a.persisted?
+			    r += render(partial: "clinics/patients/common/notification_action", locals: {
+			    	patient: a
+			    })
+			  end
 		    r.html_safe
 	    }},
 	    {v: proc{|a|
