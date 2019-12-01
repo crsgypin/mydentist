@@ -3,5 +3,11 @@
 	.content_box {
 		width: 90%;
 		margin: 0 auto;
+		form {
+			.form_inbox {
+				max-height: 70vh;
+				overflow-y: scroll;			
+			}
+		}
 	}
 }

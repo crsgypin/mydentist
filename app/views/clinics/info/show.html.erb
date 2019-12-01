@@ -29,7 +29,7 @@
           }},
           {t: "營業時間", v: proc{|a| 
             r = "<div class='field'>"
-            r += link_to "選取診所營業時間", clinic_info_clinic_durations_path(@clinic) 
+            r += link_to "選取診所營業時間", clinic_info_clinic_durations_path(@clinic), remote: true 
             r += "<div>"
             r += a.clinic_durations_note_html
             r += "</div>"
