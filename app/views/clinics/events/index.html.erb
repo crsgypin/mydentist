@@ -28,20 +28,25 @@
 	$(function(){
 		window.reloadFrame = function(){
 			$("#events_index form").submit();
-			// var doctorId = $("#doctor_input").val();
-			// var date = $("#date_input").val();
-			// var segment = $("#segment_input").val();
-			// $.ajax({
-			// 	url: "<%# url_for %>",
-			// 	method: "get",
-			// 	dataType: "script",
-			// 	data: {
-			// 		doctor_id: doctorId,
-			// 		date: date,
-			// 		segment: segment						
-			// 	}
-			// })
 		}
+
+		var startTime, endTime;
+		$("#calendar_day .table_box .patient_event.new").on("mousedown", function(){
+			var d = $(this).data();
+			startTime = d.hour * 60 + d.minute;
+		});
+
+		$("#calendar_day .table_box .patient_event.new").on("mouseup", function(e){
+			var d = $(this).data();
+			endTime = d.hour * 60 + d.minute;
+			var delta = Math.abs(endTime - startTime) + 15;
+	    var x = e.clientX;
+      var y = e.clientY;
+			window.showContentMenu("new", x, y);
+			e.stopPropagation();
+		});
+
+		//current time
 		var currentTimeId = setInterval(function(){
 			checkCurrentTime();
 		}, 60 * 1000);
