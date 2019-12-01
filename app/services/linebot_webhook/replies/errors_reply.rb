@@ -62,6 +62,13 @@ module LinebotWebhook::Replies::ErrorsReply
 		})
 	end
 
+	def reply_no_match
+		reply_message({
+      type: 'text',
+      text: @message
+		})		
+	end
+
 	# def reply_binding_patient
 	# 	reply_message({
 	# 		type: "text",

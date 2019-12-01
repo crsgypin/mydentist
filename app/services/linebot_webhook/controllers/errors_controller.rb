@@ -19,6 +19,10 @@ class LinebotWebhook::Controllers::ErrorsController < LinebotWebhook::Controller
 		reply_unbind_patient
 	end
 
+	def no_match
+		@message = @clinic.clinic_line_systems.find_by(category: "無法判讀").line_template.message_contents.join(",")
+	end
+
 	# def binding_patient
 	# 	reply_binding_patient
 	# end

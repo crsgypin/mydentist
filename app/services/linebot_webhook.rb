@@ -69,6 +69,8 @@ class LinebotWebhook
 			elsif Line::Keyword.find_by(name: @message[:text]).present?
 				to("line_keywords#show")
 
+			else
+				to("errors#no_match")
 			end
 		elsif @message[:type] == "postback"
 			data = @message[:data]
