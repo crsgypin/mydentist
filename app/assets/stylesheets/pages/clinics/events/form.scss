@@ -2,28 +2,37 @@
 #clinic_event_form {
 	.inbox {
 		max-width: 800px;
-		.content_box {
-			.patient_box {
-				padding: 10px 40px;
-				border: 2px solid $colorBu;
-				border-radius: 10px;
-				&.disabled {
-					background: $colorGy_l;
+		.clinic_event_form_inbox {
+			.content_box {
+				.patient_box {
+					padding: 10px 40px;
+					border: 2px solid $colorBu;
+					border-radius: 10px;
+					&.disabled {
+						background: $colorGy_l;
+					}
 				}
-			}
-			.event_box {
-				padding: 10px 40px;
-			}
-			#search_box {
-				width: 100%;
-			}
-			#duration_field {
-				display: flex;
-				span {
-					margin-right: 10px;
+				.event_box {
+					padding: 10px 40px;
+					.patient_list {
+						text-align: left;
+						a {
+							color: $colorBu;
+							text-decoration: underline;
+						}
+					}
 				}
-				a {
-					color: $colorBu;
+				#search_box {
+					width: 100%;
+				}
+				#duration_field {
+					display: flex;
+					span {
+						margin-right: 10px;
+					}
+					a {
+						color: $colorBu;
+					}
 				}
 			}
 		}
