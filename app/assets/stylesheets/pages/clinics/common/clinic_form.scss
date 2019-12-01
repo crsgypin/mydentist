@@ -32,15 +32,10 @@
         &:nth-child(2) {
           width: calc(100% - 100px);
         }
-				.both {
-					input, select {
-						&:nth-child(1) {
-							margin-right: 10px;
-						}
-						&:nth-child(2) {
-							margin-left: 10px;
-						}
-					}
+				input, select {
+          &:not(:first-child){
+            margin-left: 20px;            
+          }
 				}
       }
     }

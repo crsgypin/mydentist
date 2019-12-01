@@ -28,8 +28,8 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
 
   def new
     @event = @clinic.events.new
-    new_edit_set_service
     new_edit_set_doctor
+    new_edit_set_service
     new_edit_set_date
     new_edit_set_patient
     new_edit_set_time_duration
@@ -37,8 +37,8 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
 
   def edit
     @event = @clinic.events.find(params[:id])
-    new_edit_set_service
     new_edit_set_doctor
+    new_edit_set_service
     new_edit_set_date
     new_edit_set_patient
     new_edit_set_time_duration
@@ -140,7 +140,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def new_edit_set_doctor
-    @doctors = @service.doctors
+    @doctors = @clinic.doctors
     if params[:doctor_id].present?
       @doctor = @doctors.find_by(id: params[:doctor_id])
       return if @doctor.present?
@@ -153,9 +153,9 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def new_edit_set_service
-    @services = @clinic.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}
+    @services = @doctor.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}
     if params[:service_id].present?
-      @service = @clinic.services.find_by(id: params[:service_id])
+      @service = @doctor.services.find_by(id: params[:service_id])
       return if @service.present?
     end
     if @event.present?

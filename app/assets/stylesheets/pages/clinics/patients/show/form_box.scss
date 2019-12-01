@@ -19,15 +19,9 @@
 			input {
 				padding-left: 10px;
 			}
-			&.both {
-				input, select, .field_box {
-					&:nth-child(1) {
-						margin-right: 10px;
-					}
-					&:nth-child(2) {
-						margin-left: 10px;
-					}
-					width: 50%;
+			input, select, .field_box {
+				&:not(:first-child){
+					margin-left: 20px;
 				}
 			}
 			.date {
