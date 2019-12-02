@@ -3,7 +3,7 @@
 	<span>看診時間(必填)</span>
 	<div class="link_box">
 		<% if hour.nil? %>
-		<%= link_to "選擇時間", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, duration: duration), remote: true %>
+		<%= link_to "進入時間選填系統", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, duration: duration), remote: true %>
 		<% else %>
 		<% start_str = hour_minute_format(hour, minute) %>
 		<% next_hour_minute = next_hour_minute(hour, minute, duration) %>

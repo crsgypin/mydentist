@@ -47,24 +47,26 @@ module Common::DateHelper
 		return nil if date.nil?
 		if format == 1
 			# 82年10月15日
-			"#{date.year - 1911}年#{date.month}月#{date.day}日"
+			"#{date.year - 1911}年#{d2(date.month)}月#{d2(date.day)}日"
 		elsif format == 2
 			# ch_wday = ["日", "一", "二", "三", "四", "五", "六"]
 			# 民國82年10月15日
 			"民國#{date.year - 1911}年#{date.month}月#{date.day}日(#{ch_wday(date.wday)})"
 		elsif format == 3
 			# 108/2/3
-			"#{date.year - 1911}/#{date.month}/#{date.day}"
+			"#{date.year - 1911}/#{d2(date.month)}/#{d2(date.day)}"
 		elsif format == 4
 			# 108/2/3 (週ㄧ)
-			"#{date.year - 1911}/#{date.month}/#{date.day} (#{ch_wday(date.wday)})"
+			"#{date.year - 1911}/#{d2(date.month)}/#{d2(date.day)} (#{ch_wday(date.wday)})"
 		elsif format == 5
 			# 108/2/3 18:10
 			datetime = date
-			hour = datetime.hour < 10 ? "0#{datetime.hour}" : "#{datetime.hour}"
-			minute = datetime.min < 10 ? "0#{datetime.min}" : "#{datetime.min}"
-			"#{datetime.year - 1911}/#{datetime.month}/#{datetime.day} #{hour}:#{minute}"
+			"#{datetime.year - 1911}/#{d2(datetime.month)}/#{d2(datetime.day)} #{d2(hour)}:#{d2(minute)}"
 		end
+	end
+
+	def d2(number)
+		"%.2d"%number
 	end
 
 	def roc_year(date)
