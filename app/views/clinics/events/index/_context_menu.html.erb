@@ -90,17 +90,12 @@
     	});
     });
     contextMenu.find(".remove").click(function(){
-    	OkCancelLightbox.show({
-    		content: "<p>取消預約</p>",
-    		ok: function(){
-    			$.ajax({
-    				url: "<%= url_for(action: :destroy, id: "tmp") %>".replace("tmp", eventId),
-    				method: "delete",
-    				dataType: "script",
-    				data: {}
-    			})
-    		}
-    	})
+  		$.ajax({
+  			url: "<%= url_for(action: :destroy, id: "tmp") %>".replace("tmp", eventId),
+  			method: "delete",
+  			dataType: "script",
+  			data: {}
+  		})
     });
    //  contextMenu.find(".edit").click(function(){
 			// $.ajax({

@@ -1,0 +1,17 @@
+
+<div id="cancel_event_lightbox" class="lightbox selected">
+  <div class="inbox">
+    <div class="content_box">
+      <div><%= image_tag clinic_static_image_url("danger") %></div>
+      <h2>取消預約?</h2>
+      <p class="patient_name"><%= @event.patient.name %></p>
+      <p class="date_time"><%= @event.desc_format(2) %></p>
+      <p class="service"><%= @event.service.name %>(<%= @event.doctor.title_name %>)</p>
+    </div>
+    <div class="buttons_box">
+    	<%= link_to "取消", "javascript:$('#cancel_event_lightbox').remove();", class: "btnW" %>
+    	<%= link_to "確定", url_for(action: :destroy, id: @event, do_action: 1), class: "btnBu", remote:true, method: :delete %>
+    </div>
+  </div>
+</div>
+

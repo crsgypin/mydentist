@@ -1,3 +1,8 @@
 
-
+<% if params[:do_action] == '1' %>
+$("#cancel_event_lightbox").remove();
 $.getScript(window.location.href);
+
+<% else %>
+$("body").append("<%= j render_relative_partial 'destroy/notification_lightbox' %>");
+<% end %>

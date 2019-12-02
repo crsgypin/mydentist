@@ -20,7 +20,8 @@ module Clinic::StaticImageHelper
 			line_bot: "/imgs/clinics/line_bot.png",
 			search: "/imgs/clinics/search.png",
 			logout: "/imgs/clinics/logout.png",
-			arrow_right: "/imgs/clinics/arrow_right.png"
+			arrow_right: "/imgs/clinics/arrow_right.png",
+			danger: "/imgs/clinics/danger.png"
 		}
 	end
 
