@@ -42,6 +42,7 @@
 			background: $colorW;
 			z-index: 10;
 			overflow-y: scroll;
+		  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 			ul {
 				li {
 					display: flex;

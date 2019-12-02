@@ -24,7 +24,7 @@
     }},
     {v: proc{|a|
         r = "<div class='date'>"
-    	r += "<span>病患生日（必填）</span>"
+    	r += "<span>出生年月日（必填）</span>"
     	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}) + "年</span>"
     	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}) + "月</span>"
     	r += "<span>" + select_field_tag("patient[day]", a.birthday.try(:day) || 1, (1..31).map{|d| [d,d]}) + "日</span>"
@@ -52,3 +52,12 @@
 }
 %>
 </div>
+<script type="text/javascript">
+  $(function(){
+    $(".clinic_form input").on("keydown", function(e){
+      if(e.keyCode == 13){
+        e.preventDefault();
+      }
+    })
+  })
+</script>

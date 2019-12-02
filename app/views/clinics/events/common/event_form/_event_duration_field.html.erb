@@ -1,16 +1,18 @@
 
 <div id="duration_field" class='field_box'>
-<span>看診時間(必填)</span>
-<% if hour.nil? %>
-<%= link_to "選擇時間", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, duration: duration), remote: true %>
-<% else %>
-<% start_str = hour_minute_format(hour, minute) %>
-<% next_hour_minute = next_hour_minute(hour, minute, duration) %>
-<% end_str = hour_minute_format(next_hour_minute[:hour], next_hour_minute[:minute]) %>
-<%= link_to "#{roc_format(date, 3)} #{start_str} - #{end_str}", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, date: date, hour: hour, minute: minute, duration: duration), remote: true %>
-<%= hidden_field_tag "event[date]", date.strftime("%Y/%m/%d") %>
-<%= hidden_field_tag "event[hour]", hour %>
-<%= hidden_field_tag "event[minute]", minute %>
-<%= hidden_field_tag "event[duration]", duration %>
-<% end %>
+	<span>看診時間(必填)</span>
+	<div class="link_box">
+		<% if hour.nil? %>
+		<%= link_to "選擇時間", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, duration: duration), remote: true %>
+		<% else %>
+		<% start_str = hour_minute_format(hour, minute) %>
+		<% next_hour_minute = next_hour_minute(hour, minute, duration) %>
+		<% end_str = hour_minute_format(next_hour_minute[:hour], next_hour_minute[:minute]) %>
+		<%= link_to "#{roc_format(date, 3)} #{start_str} - #{end_str}", clinic_events_selector_event_durations_path(@clinic, doctor_id: doctor_id, date: date, hour: hour, minute: minute, duration: duration), remote: true %>
+		<%= hidden_field_tag "event[date]", date.strftime("%Y/%m/%d") %>
+		<%= hidden_field_tag "event[hour]", hour %>
+		<%= hidden_field_tag "event[minute]", minute %>
+		<%= hidden_field_tag "event[duration]", duration %>
+		<% end %>
+	</div>
 </div>

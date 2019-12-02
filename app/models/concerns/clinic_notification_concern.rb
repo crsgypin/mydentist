@@ -15,6 +15,12 @@ module ClinicNotificationConcern
     end
   end
 
+  def on_change_event_status(event)
+    if event.status == "取消"
+      
+    end
+  end
+
 	def on_line_account_add_patient(line_account)
   	t = Time.now
   	n = line_account.clinic.clinic_notifications.create({

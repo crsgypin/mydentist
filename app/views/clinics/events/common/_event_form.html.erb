@@ -32,23 +32,31 @@
 		    }},
 		    {v: proc{|a|
 		      r = "<div class='date'>"
-		    	r += "<span>病患生日（必填）</span>"
+		    	r += "<span>出生年月日（必填）</span>"
 		    	r += "<span>民國" + select_field_tag("patient[roc_year]", roc_year(a.birthday) || 100, (50..Date.today.year).map{|y| [y,y]}, disabled: patient_exist) + "年</span>"
 		    	r += "<span>" + select_field_tag("patient[month]", a.birthday.try(:month) || 1, (1..12).map{|m| [m,m]}, disabled: patient_exist) + "月</span>"
 		    	r += "<span>" + select_field_tag("patient[day]", a.birthday.try(:day) || 1, (1..31).map{|d| [d,d]}, disabled: patient_exist) + "日</span>"
 		        r += "</div>"
 		    	r.html_safe
 		    }},
-		    {class: "both", v: proc{|a| 
+		    {class: "", v: proc{|a| 
 		    	r = ""
-		    	r += select_field_tag "patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}, disabled: patient_exist
-		    	r += select_field_tag "patient[health_insurance_status]", a.health_insurance_status, [[nil, "病患健保狀況"]] + Patient.health_insurance_statuses.keys, disabled: patient_exist
+		    	r += clinic_field_box({
+		    		value: select_field_tag("patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}, disabled: patient_exist)
+		    	})
+		    	r += clinic_field_box({
+		    		value: select_field_tag("patient[health_insurance_status]", a.health_insurance_status, [[nil, "病患健保狀況"]] + Patient.health_insurance_statuses.keys, disabled: patient_exist)
+		    	})
 		    	r.html_safe
 		    }},
-		    {class: "both", v: proc{|a| 
+		    {class: "", v: proc{|a| 
 		    	r = ""
-		    	r += text_field_tag "patient[person_id]", a.person_id, placeholder: "身分證字號", disabled: patient_exist
-		    	r += text_field_tag "patient[phone]", a.phone, placeholder: "病患聯絡電話", disabled: patient_exist
+		    	r += clinic_field_box({
+		    		value: text_field_tag("patient[person_id]", a.person_id, placeholder: "身分證字號(必填)", disabled: patient_exist)
+		    	})
+		    	r += clinic_field_box({
+		    		value: text_field_tag("patient[phone]", a.phone, placeholder: "聯絡電話(必填)", disabled: patient_exist)
+		    	})
 		    	r.html_safe
 		    }},
 		    {v: proc{|a| 
@@ -64,14 +72,23 @@
 			  id: "event",
 			  resource: @event,
 			  fields: [
-			    {class: "both", v: proc{|a| 
+			    {class: "", v: proc{|a| 
 			    	r = ""
-			    	r += select_field_tag "event[doctor_id]", @doctor.id, @doctors.map{|d| [d.id, d.name]}
-			    	r += select_field_tag "event[service_id]", @service.id, @services.map{|a| [a.id, a.name]}
-			    	r += select_field_tag "event[health_insurance_status]", "", [[nil, "診療健保狀態"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]}
+			    	r += clinic_field_box({
+			    		title: "看診醫生",
+			    		value: select_field_tag("event[doctor_id]", @doctor.id, @doctors.map{|d| [d.id, d.name]})
+			    	})
+			    	r += clinic_field_box({
+			    		title: "診療項目",
+			    		value: select_field_tag("event[service_id]", @service.id, @services.map{|a| [a.id, a.name]})
+			    	})
+			    	r += clinic_field_box({
+			    		title: "診療健保狀況",
+			    		value: select_field_tag("event[health_insurance_status]", "", [[nil, "病患健保狀況（必填）"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]})
+			    	})												
 			    	r.html_safe
 			    }},
-			    {class: "both", v: proc{|a| 
+			    {class: "", v: proc{|a| 
 			    	r = ""
 			    	r += render_relative_partial "event_form/event_duration_field", locals: {
 			    		doctor_id: @doctor.id,
@@ -94,7 +111,7 @@
 	</div>
 	<div class="buttons_box">
 		<%= link_to "取消", "", onclick: "event.preventDefault(); $(this).closest('.lightbox').remove();", class: "btnW" %>
-		<%= link_to "儲存", "", onclick: "event.preventDefault(); $(this).closest('form').submit();", class: "btnBu" %>
+		<%= link_to "預約", "", onclick: "event.preventDefault(); $(this).closest('form').submit();", class: "btnBu" %>
 	</div>
 </div>
 

@@ -14,7 +14,7 @@
 				{title: "病患性別（必填）", v: proc {
 					select_field_tag "patient[gender]", "", Patient.genders.keys
 				}},
-				{title: "病患生日（必填）", v: proc {
+				{title: "出生年月日（必填）", v: proc {
 		      r = "<div class='date'>"
 		    	r += "<span>民國" + select_field_tag("patient[roc_year]", 95, (50..Date.today.year).map{|y| [y,y]}) + "年</span>"
 		    	r += "<span>" + select_field_tag("patient[month]", 1, (1..12).map{|m| [m,m]}) + "月</span>"

@@ -30,8 +30,14 @@
 					span {
 						margin-right: 10px;
 					}
-					a {
-						color: $colorBu;
+					.link_box {
+						border-bottom: 1px solid $colorGy1;
+						width: 70%;
+						text-align: left;
+						a {
+							color: $colorBu;
+							text-decoration: underline;
+						}
 					}
 				}
 			}

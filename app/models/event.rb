@@ -22,7 +22,8 @@ class Event < ApplicationRecord
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
 	after_destroy :set_cancel_to_schedule
-	after_create :check_notification
+	after_create :check_notification_on_create
+	after_update :check_notification_on_update
 	include Common::DateTimeDurationHelper
 	include Common::DateHelper
 
@@ -148,8 +149,14 @@ class Event < ApplicationRecord
 		end
 	end
 
-	def check_notification
+	def check_notification_on_create
     Clinic::Notification.on_add_event(self)
+	end
+
+	def check_notification_on_update
+		if self.changes[:status].present?
+			Clinic::Notification.on_change_event_status(self)
+		end
 	end
 
 	def self.check_event_status

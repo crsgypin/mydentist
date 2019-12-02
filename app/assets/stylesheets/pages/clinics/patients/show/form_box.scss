@@ -16,10 +16,21 @@
 				line-height: $lh_24p;
 				height: 30px;
 			}
+			.field_box {
+				width: 100%;
+				color: $colorGy;
+				font-size: $fs_18p;
+				line-height: $lh_24p;
+				.title {
+					text-align: left;
+					font-size: $fs_14p;;
+					color: $colorGy1;
+				}
+			}
 			input {
 				padding-left: 10px;
 			}
-			input, select, .field_box {
+			.field_box {
 				&:not(:first-child){
 					margin-left: 20px;
 				}
