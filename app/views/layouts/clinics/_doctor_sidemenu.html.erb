@@ -30,7 +30,7 @@
   </ul>		
   <div class="remove_box">
   	<% if @doctor.persisted? %>
-  	<%= link_to "移除醫師", clinic_doctor_path(@clinic, @doctor), remote: true, method: :delete, data: {confirm: "確定移除？"} %>
+  	<%= link_to "刪除醫生", clinic_doctor_path(@clinic, @doctor), remote: true, method: :delete, data: {confirm: "確定移除？"} %>
   	<% end %>
   </div>
 </aside>
