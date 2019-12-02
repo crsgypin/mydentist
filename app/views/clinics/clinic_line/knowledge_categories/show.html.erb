@@ -1,7 +1,7 @@
 
 
-<div id="clinic-knowledge-categories-index">
-	<ul class="knowledge-categories">
+<div id="clinic-knowledge_categories_index">
+	<ul class="knowledge_categories">
 	<% @clinic_line_knowledge_categories.each do |clinic_line_knowledge_category| %>
 		<%= render_relative_partial "show/clinic_line_knowledge_category", locals: {clinic_line_knowledge_category: clinic_line_knowledge_category} %>
 	<% end %>
