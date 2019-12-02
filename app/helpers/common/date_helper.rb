@@ -61,7 +61,7 @@ module Common::DateHelper
 		elsif format == 5
 			# 108/2/3 18:10
 			datetime = date
-			"#{datetime.year - 1911}/#{d2(datetime.month)}/#{d2(datetime.day)} #{d2(hour)}:#{d2(minute)}"
+			"#{datetime.year - 1911}/#{d2(datetime.month)}/#{d2(datetime.day)} #{d2(datetime.hour)}:#{d2(datetime.min)}"
 		end
 	end
 

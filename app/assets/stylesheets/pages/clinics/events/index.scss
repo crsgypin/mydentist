@@ -5,7 +5,7 @@
 		height: 100%;
 		display: flex;
 		.main_box {
-			width: calc(100% - 300px);
+			width: calc(100% - 350px);
 			padding: 0 25px;
 			.doctor_nav_container {
 				height: 60px;
@@ -18,7 +18,7 @@
 			}
 		}
 		.side_box {
-			width: 300px;
+			width: 350px;
 			padding-left: 20px;
 			padding-right: 20px;
 			background: $colorGy_l;

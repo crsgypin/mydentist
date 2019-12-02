@@ -25,6 +25,20 @@
 				i {
 					font-size: $fs_24p;
 				}
+				.inbox {
+					display: flex;
+					.date {
+						position: relative;
+						top: -3px;
+						margin: 0 5px;
+					}
+				}
+				.month6 {
+					span {
+						position: relative;
+						top: -3px;
+					}
+				}
 			}
 		}
 	  .dp-cal-header  {
@@ -32,6 +46,7 @@
 	  }
 	  .dp-cal {
 			min-height: auto;
+			padding: 0 20px;
 	  }
 	  .dp-day {
 	  	padding: 3px;
