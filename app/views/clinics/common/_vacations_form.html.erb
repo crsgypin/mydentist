@@ -2,7 +2,7 @@
 <div class="vacations_form">
 	<div class="main_box clinic_form">
 		<div class="add_btn_box alignR">
-			<%= link_to "新增", url_for(action: :new), class: "btnBu", remote: true %>
+			<%= link_to "新增", url_for(action: :new), class: "btnBu new_btn", remote: true %>
 		</div>
 		<ul>
 			<% vacations.each do |vacation| %>
@@ -11,6 +11,14 @@
 		</ul>
 	</div>
 	<div class="side_box">
+		<%= render_relative_partial "vacations_form/event_notifications_table", locals: {notifications: [], query_path: "", notification_schedule_path: "", category: ""} %>
 	</div>
 </div>
 
+<% if vacations.length == 0 %>
+<script type="text/javascript">
+	$(function(){
+		$(".vacations_form .new_btn").click();
+	})
+</script>
+<% end %>
