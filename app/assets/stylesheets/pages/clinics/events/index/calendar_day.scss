@@ -115,6 +115,10 @@ $title_col_width: 50px;
 		  	background-color: #a4bde8;
 		  	color: $colorW;
 		  }
+		  &.selected_broadcast {
+		  	background-color: #a4bde8;
+		  	color: $colorW;		  
+		  }
 			&:hover {
 				color: $colorGy_l;
 			}

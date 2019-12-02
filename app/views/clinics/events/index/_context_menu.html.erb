@@ -4,6 +4,9 @@
 		<li class="new">新增</li>
 		<li class="broadcast">洗牙推播</li>
 	</ul>
+  <ul class="new_broadcast_mode">
+    <li class="broadcast">洗牙推播</li>
+  </ul>
 	<ul class="edit_mode">
 		<%#<li class="edit">編輯</li>%>
 		<li class="remove">取消預約</li>
@@ -37,8 +40,8 @@
       window.showContentMenu(mode, x, y);
     }, false);
 
-    window.showContentMenu = function(mode, x, y, d){
-      duration = d;
+    window.showContentMenu = function(mode, x, y, args){
+      var args = args || {};
       var patientElm = function(){
         if($(event.target).is(".patient_event")){
           return $(event.target);
@@ -56,7 +59,14 @@
         doctorId = patientElm.data("doctor_id");
         date = patientElm.data("date");
         hour = patientElm.data("hour");
-        minute = patientElm.data("minute");
+        minute = patientElm.data("minute");                
+      } else if(mode == "new_broadcast"){
+        contextMenu.find(".new_broadcast_mode").removeClass("hidden");
+        doctorId = patientElm.data("doctor_id");
+        date = patientElm.data("date");
+        hour = args.hour;
+        minute = args.minute;
+        duration = args.duration;
       } else if(mode == "exist") {
         contextMenu.find(".edit_mode").removeClass("hidden");
         eventId = patientElm.data("id");
@@ -81,7 +91,7 @@
     });
     contextMenu.find(".remove").click(function(){
     	OkCancelLightbox.show({
-    		content: "確定移除?",
+    		content: "<p>取消預約</p>",
     		ok: function(){
     			$.ajax({
     				url: "<%= url_for(action: :destroy, id: "tmp") %>".replace("tmp", eventId),

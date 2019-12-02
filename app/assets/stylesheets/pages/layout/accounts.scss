@@ -20,7 +20,7 @@
 	  }
 	  .subtext {
 	  	font-size: $fs_14p;
-	  	color: $colorGy1;
+	  	color: $colorGy;
 	  	text-align: center;
 	  }
 	  .inbox {
@@ -35,7 +35,7 @@
 	    		padding-top: 30px;
 	    		label {
 	    			font-size: $fs_14p;
-	    			color: $colorGy1;
+	    			color: $colorGy;
 	    			padding-bottom: 6px;
 	    		}
     			input[type=email], input[type=password] {
