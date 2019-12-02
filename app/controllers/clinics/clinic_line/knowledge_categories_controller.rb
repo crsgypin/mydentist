@@ -35,11 +35,10 @@ class ::Clinics::ClinicLine::KnowledgeCategoriesController < ::Clinics::ClinicLi
 	private
 
 	def set_clinic_line_knowledge_categories
-		@clinic_line_knowledge_categories = @clinic.clinic_line_knowledge_categories
-		if @clinic_line_knowledge_categories.length == 0
-			@clinic_line_knowledge_category = @clinic.clinic_line_knowledge_categories.create(name: "未分類")
-			@clinic_line_knowledge_categories.push(@clinic_line_knowledge_category)
+		10.times do |index|
+			@clinic.clinic_line_knowledge_categories[index].nil? && @clinic.clinic_line_knowledge_categories.create(name: "衛教資訊#{index + 1}")
 		end
+		@clinic_line_knowledge_categories = @clinic.clinic_line_knowledge_categories
 	end
 
 	def clinic_line_knowledge_category_params

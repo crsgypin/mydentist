@@ -5,9 +5,9 @@
 	<% @events.each do |event| %>
 		<li data-id="<%= event.id %>">
 			<span><%= event.patient.name %></span>
-			<span><%= event.desc_format(3).gsub(" ","<br>").html_safe %></span>
+			<span><%= event.desc_format(3).html_safe %></span>
 			<span><%= event.service.name %></span>
-			<span><%= event.doctor.name %><br><%= event.doctor.title %></span>
+			<span><%= event.doctor.title_name %></span>
 		</li>
 	<% end %>
 	</ul>
