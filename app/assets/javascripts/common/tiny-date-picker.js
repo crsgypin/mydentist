@@ -187,7 +187,7 @@
    */
 
   var english = {
-    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    days: ['週日', '週一', '週二', '週三', '週日', '週五', '週六'], //已被修改為中文
     months: [
       'January',
       'February',

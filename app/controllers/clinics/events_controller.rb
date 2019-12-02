@@ -74,7 +74,9 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
 
   def destroy
     @event = @clinic.events.find_by(id: params[:id])
-    @event.destroy
+    if params[:do_action] == '1'
+      @event.destroy
+    end
   end
 
   private

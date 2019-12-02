@@ -5,6 +5,11 @@
 	<% @clinic_line_knowledge_categories.each do |clinic_line_knowledge_category| %>
 		<%= render_relative_partial "show/clinic_line_knowledge_category", locals: {clinic_line_knowledge_category: clinic_line_knowledge_category} %>
 	<% end %>
+	<% if @clinic_line_knowledge_categories.length < 10 %>
+		<li class="new">
+			<%= link_to "+ 新增類別", url_for(action: :new), remote: true %>
+		</li>
+	<% end %>
 	</ul>
 	<div id="clinic_knowledge_categories_show">
 	</div>
