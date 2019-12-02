@@ -19,7 +19,7 @@
 	<li id="line_template_<%= resource.id %>">
 		<div class="question">
 			<span class="title">Q</span>
-			<span class="content"><%= cols[:q].call(resource) %></span>
+			<span class="content"><%= short_string(cols[:q].call(resource), 10) %></span>
 		</div>
 		<div class="reply">
 			<span class="title">A</span>
