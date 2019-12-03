@@ -51,19 +51,15 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
         @patient = @clinic.patients.find(params[:patient_id])
       else
         @patient = @clinic.patients.new(patient_params)
-        if !@patient.save
-          raise @patient.errors.full_messages.join(",")
-        end
+        @patient.save!
       end
       @event = @clinic.events.new(event_params)
       @event.patient = @patient
-      if !@event.save
-        raise @event.errors.full_messages.join(",")
-      end
+      @event.save!
     end
     rescue Exception => e
-      Rails.logger.info "fail to create event: #{e.to_s}, #{e.backtrace.first(10)}"
-      js_render_error e.to_s
+      # Rails.logger.info "fail to create event: #{e.to_s}, #{e.backtrace.first(10)}"
+      # js_render_error e.to_s
     end
   end
 
@@ -227,7 +223,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :month, :day, :source)
+    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :roc_year, :month, :day, :source)
   end
 
 end

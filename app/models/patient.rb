@@ -84,17 +84,21 @@ class Patient < ApplicationRecord
   def check_for_source
     if self.source == "現場"
       if !self.name.present?           
-        self.errors.add("請填寫名稱","")
-        return false
+        self.errors.add("name", "請填寫名稱")
       end
       if !self.birthday.present?
-        self.errors.add("請填寫生日","")
-        return false
+        self.errors.add("birthday", "請填寫生日")
       end
-      if self.person_id.nil?
-        self.errors.add("請填寫身份證號碼","")
-        return false
+      if !self.person_id.present?
+        self.errors.add("person_id", "請填寫身份證號碼")
       end
+      if !self.phone.present?
+        self.errors.add("phone", "請填寫電話")
+      end
+    end
+    if self.errors.present?
+      puts "gogog: #{self.errors.full_messages}"
+      return false
     end
     true
   end

@@ -104,11 +104,11 @@ class Event < ApplicationRecord
 			throw :abort
 		end
 		if self.date.nil?
-			self.errors.add("請選擇日期", "")
+			self.errors.add("date", "請選擇日期")
 			throw :abort
 		end
 		if self.hour.nil? || self.minute.nil? || self.duration.nil?
-			self.errors.add("請選擇時間", "")
+			self.errors.add("hour", "請選擇時間")
 			throw :abort
 		end
 		true

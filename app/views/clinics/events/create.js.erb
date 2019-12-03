@@ -1,5 +1,21 @@
 
+<% if @patient.errors.present? %>
+	$("[name]").removeClass("error");
+	<% @patient.errors.keys.each do |key| %>
+ 	$("[name='patient[<%= key %>]'").addClass('error');
+ 	<% end %>
+<% elsif @event.errors.present? %>
+	$("[name], .date_time_box").removeClass("error");
+	<% @event.errors.keys.each do |key| %>
+ 	$("[name='event[<%= key %>]'").addClass('error');
+ 	<% end %>
+ 	<% if @event.errors[:date].present? || @event.errors[:hour].present? %>
+ 	$(".date_time_box").addClass("error");
+ 	<% end %>	
+
+<% else %>
 $("body").append("<%= j render_relative_partial 'create/event_created_lightbox' %>");
 $("#clinic_event_form").remove();
 $.getScript(window.location.href);
 
+<% end %>

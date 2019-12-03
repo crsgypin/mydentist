@@ -30,13 +30,16 @@
 					span {
 						margin-right: 10px;
 					}
-					.link_box {
+					.date_time_box {
 						border-bottom: 1px solid $colorGy1;
 						width: 70%;
 						text-align: left;
 						a {
 							color: $colorBu;
 							text-decoration: underline;
+						}
+						&.error {
+							border-bottom: 3px solid $colorR;
 						}
 					}
 				}

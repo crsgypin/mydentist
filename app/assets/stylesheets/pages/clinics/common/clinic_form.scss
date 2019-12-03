@@ -6,6 +6,9 @@
 		border-bottom: 1px solid $colorGy1;
 		color: $colorGy;
 		background: none;
+    &.error {
+      border-bottom: 3px solid $colorR;
+    }
 	}
   .field {
     margin-top: 5px;
