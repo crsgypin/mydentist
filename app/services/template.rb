@@ -7,19 +7,19 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "admin/dentists/sys",
+			base_dir: "admin/dentists",
 			resources: [
 				{
-					class_name: "Sys::Holiday",
+					class_name: "Clinic",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
-					# associated_resources: [
-					# 	{
-					# 		associated_name: "notifications",
-					# 		index_columns: %w(id),
-					# 		except_show_columns: [],
-					# 	},
-					# ]
+					associated_resources: [
+						{
+							associated_name: "clinic_holidays",
+							index_columns: %w(id),
+							except_show_columns: [],
+						},
+					]
 				},
 				# {
 				# 	class_name: "Event::Notification",

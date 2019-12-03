@@ -21,22 +21,13 @@
 				<div class="holidays_box">
 					<span class="title">固定休息日期：</span>
 					<div class="check_box">
-						<% [
-							{name: "除夕早上", value: "eve_1"},
-							{name: "除夕下午", value: "eve_2"},
-							{name: "除夕晚上", value: "eve_3"},
-							{name: "初一", value: "new_1"},
-							{name: "初二", value: "new_2"},
-							{name: "初三", value: "new_3"},
-							{name: "初四", value: "new_4"},
-							{name: "初五", value: "new_5"},
-							{name: "初六", value: "new_6"},
-							{name: "國定假日", value: "holidays"}
-						].each do |elm| %>
+						<% 
+							Sys::Holiday.categories.keys.each_with_index do |key, index| 
+						%>
 						<div class="check_field">
-							<% id = "id_#{elm[:value]}" %>
-							<%= check_box_tag "day_name", "#{elm[:value]}", false, id: id %>
-							<label for="<%= id %>"><%= elm[:name] %></label>
+							<% id = "holiday_#{index}" %>
+							<%= check_box_tag "clinic_holiday_categories[]", "#{key}", @clinic_holiday_categories.find{|c| c.category == key }, id: id %>
+							<label for="<%= id %>"><%= key %></label>
 						</div>
 						<% end %>
 					</div>

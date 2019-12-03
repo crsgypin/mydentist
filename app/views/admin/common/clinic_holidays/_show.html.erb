@@ -1,0 +1,12 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "clinic_holiday",
+  resource: @clinic_holiday,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "名稱", v: proc{|a| a.name }},
+    {t: "日期", v: proc{|a| a.date }},
+    {t: "起始時間", v: proc{|a| a.start_hour }},
+    {t: "結束時間", v: proc{|a| a.end_hour }},
+  ]
+}
+%>

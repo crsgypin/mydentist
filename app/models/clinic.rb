@@ -53,8 +53,9 @@ class Clinic < ApplicationRecord
 	end
 
 	def has_vacation?(date)
-		date_vacation = self.clinic_vacations.find_by("start_date <= ? and end_date >= ?", date, date)
-		date_vacation.present?
+		return true if self.clinic_holidays.find_by(date: date).present?
+		return true if self.clinic_vacations.find_by("start_date <= ? and end_date >= ?", date, date).present?
+		false
 	end
 
 	def clinic_duration_wdays
@@ -88,7 +89,9 @@ class Clinic < ApplicationRecord
 	end
 
 	def update_clinic_durations_note!
-		self.update!(:clinic_durations_note => wday_durations_note(self.clinic_durations))
+		wday_note = wday_durations_note(self.clinic_durations)
+		holidays_note = "#{self.clinic_holiday_categories.map{|a| a.category}.join("、")} 休假"
+		self.update!(:clinic_durations_note => "#{wday_note}\n#{holidays_note}")
 	end
 
 	def clinic_durations_note_html

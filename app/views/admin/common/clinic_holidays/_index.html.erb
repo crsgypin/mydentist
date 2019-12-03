@@ -1,9 +1,8 @@
 <%= render partial: "admin/common/index_table" , locals: {
-  id: "doctors",
-  resources: @doctors,
+  id: "clinic_holidays",
+  resources: @clinic_holidays,
   cols: [
     {k: "id", v: proc{|a| a.id }},
-    {t: "類別", v: proc{|a| a.category }},
     {t: "名稱", v: proc{|a| a.name }},
     {t: "日期", v: proc{|a| a.date }},
     {t: "起始時間", v: proc{|a| a.start_hour }},

@@ -107,6 +107,7 @@ Rails.application.routes.draw do
           resource :info, only: [:show, :edit, :update], controller: :info        
           resources :events
         end
+        resources :clinic_holidays
       end
     	resources :doctors
       resources :doctors, only: [], module: :doctors do
