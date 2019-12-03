@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20191203155905) do
 
   create_table "clinic_holidays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
+    t.string "name"
     t.date "date"
     t.integer "start_hour", limit: 1
     t.integer "end_hour", limit: 1
@@ -448,6 +449,7 @@ ActiveRecord::Schema.define(version: 20191203155905) do
 
   create_table "sys_holidays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "category", limit: 1
+    t.string "name"
     t.date "date"
     t.integer "start_hour", limit: 1
     t.integer "end_hour", limit: 1

@@ -7,7 +7,7 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "admin/dentist/sys",
+			base_dir: "admin/dentists/sys",
 			resources: [
 				{
 					class_name: "Sys::Holiday",

@@ -124,6 +124,9 @@ Rails.application.routes.draw do
       end
     	resources :services
       resources :line_accounts
+      namespace :sys do
+        resources :sys_holidays
+      end
     end
     namespace :dev do
       resources :clinics
