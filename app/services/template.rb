@@ -7,10 +7,10 @@ class Template
 
 	def self.load1
 		Template.new({
-			base_dir: "admin/dev/sys",
+			base_dir: "admin/dentist/sys",
 			resources: [
 				{
-					class_name: "Sys::Log",
+					class_name: "Sys::Holiday",
 					index_columns: %w(id),
 					except_show_columns: %w(uploaded_at),
 					# associated_resources: [
