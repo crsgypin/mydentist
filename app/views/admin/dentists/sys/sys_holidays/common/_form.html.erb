@@ -1,0 +1,16 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "sys_holiday",
+  resource: @sys_holiday,
+  mode: mode,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {k: "category", v: proc{|a| a.category}},
+    {k: "name", v: proc{|a| a.category}},
+    {k: "date", v: proc{|a| a.date }},
+    {k: "start_hour", v: proc{|a| a.start_hour }},
+    {k: "end_hour", v: proc{|a| a.end_hour }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

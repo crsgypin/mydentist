@@ -18,6 +18,20 @@
 						end
 					} %>
 				</div>
+				<div class="holidays_box">
+					<span class="title">固定休息日期：</span>
+					<div class="check_box">
+						<% 
+							Sys::Holiday.categories.keys.each_with_index do |key, index| 
+						%>
+						<div class="check_field">
+							<% id = "holiday_#{index}" %>
+							<%= check_box_tag "clinic_holiday_categories[]", "#{key}", @clinic_holiday_categories.find{|c| c.category == key }, id: id %>
+							<label for="<%= id %>"><%= key %></label>
+						</div>
+						<% end %>
+					</div>
+				</div>
 				<div class="buttons_box form_buttons_box">
 					<%= link_to "取消", "javascript: $('#clinic_info_clinic_vacations').remove();", class: "btnW" %>
 					<%= submit_tag "儲存", class: "btnBu" %>

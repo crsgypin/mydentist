@@ -4,17 +4,23 @@
   fields: [
     {k: "id", v: proc{|a| a.id }},
     {k: "friendly_id", v: proc{|a| a.friendly_id }},
-    {t: "名稱", v: proc{|a| a.name }},
-    {t: "英文名稱", v: proc{|a| a.name_en }},
-    {t: "電話", v: proc{|a| a.phone }},
-    {t: "地址", v: proc{|a| a.address }},
-    {t: "描述", v: proc{|a| a.description }},
-    {t: "channel_secret", v: proc{|a| a.channel_secret }},
-    {t: "channel_token", v: proc{|a| a.channel_token }},
-    {t: "recommend", v: proc{|a| a.recommend }},
-    {t: "photo", v: proc{|a| a.photo }},
-    {t: "created_at", v: proc{|a| a.created_at }},
-    {t: "updated_at", v: proc{|a| a.updated_at }}
+    {k: "name", v: proc{|a| a.name }},
+    {k: "name_en", v: proc{|a| a.name_en }},
+    {k: "phone", v: proc{|a| a.phone }},
+    {k: "phone2", v: proc{|a| a.phone2 }},
+    {k: "address", v: proc{|a| a.address }},
+    {k: "description", v: proc{|a| a.description }},
+    {k: "channel_secret", v: proc{|a| a.channel_secret }},
+    {k: "channel_token", v: proc{|a| a.channel_token }},
+    {k: "recommend", v: proc{|a| a.recommend }},
+    {k: "photo", v: proc{|a| a.photo }},
+    {k: "lat", v: proc{|a| a.lat }},
+    {k: "lng", v: proc{|a| a.lng }},
+    {k: "map_photo", v: proc{|a| a.map_photo }},
+    {k: "clinic_durations_note", v: proc{|a| a.clinic_durations_note }},
+    {k: "clinic_notifications_read_at", v: proc{|a| a.clinic_notifications_read_at }},
+    {k: "created_at", v: proc{|a| a.created_at }},
+    {k: "updated_at", v: proc{|a| a.updated_at }}
   ]
 }
 %>

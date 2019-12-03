@@ -1,0 +1,22 @@
+
+<%= render partial: "admin/common/index_table" , locals: {
+  id: "sys_holidays",
+  resources: @sys_holidays,
+  cols: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "類別", v: proc{|a| a.category}},
+    {t: "假日", v: proc{|a| a.name }},
+    {t: "日期", v: proc{|a| a.date }},
+    {t: "起始時間", v: proc{|a| a.start_hour }},
+    {t: "結束時間", v: proc{|a| a.end_hour }},
+  ],
+  row: {
+	  default_sel_index: 0,
+  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  },
+  new: {
+  	link_url: url_for(action: :new),
+  	btn_name: "新增假日"
+  }
+}
+%>

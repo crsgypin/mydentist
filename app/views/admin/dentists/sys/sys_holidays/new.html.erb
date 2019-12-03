@@ -1,0 +1,9 @@
+
+<h1>新增假日</h1>
+<%= form_tag url_for(action: :create), method: "post" do %>
+	<%= render_relative_partial "common/form", locals: {mode: "edit"} %>
+	<div class="buttons_box">
+		<%= link_to "取消", url_for(action: :index) %>
+		<%= submit_tag "新增" %>
+	</div>
+<% end %>

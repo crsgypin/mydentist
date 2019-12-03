@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191202074242) do
+ActiveRecord::Schema.define(version: 20191203155905) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -44,6 +44,25 @@ ActiveRecord::Schema.define(version: 20191202074242) do
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_durations_on_clinic_id"
     t.index ["wday_hour_minute"], name: "index_clinic_durations_on_wday_hour_minute"
+  end
+
+  create_table "clinic_holiday_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.integer "category", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_clinic_holiday_categories_on_clinic_id"
+  end
+
+  create_table "clinic_holidays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "clinic_id"
+    t.string "name"
+    t.date "date"
+    t.integer "start_hour", limit: 1
+    t.integer "end_hour", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_clinic_holidays_on_clinic_id"
   end
 
   create_table "clinic_line_broadcasts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -426,6 +445,16 @@ ActiveRecord::Schema.define(version: 20191202074242) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_services_on_clinic_id"
+  end
+
+  create_table "sys_holidays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "category", limit: 1
+    t.string "name"
+    t.date "date"
+    t.integer "start_hour", limit: 1
+    t.integer "end_hour", limit: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sys_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

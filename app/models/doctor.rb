@@ -61,6 +61,7 @@ class Doctor < ApplicationRecord
 	end
 
 	def has_vacation?(date)
+		return true if self.clinic.has_vacation?(date)
 		date_vacation = self.doctor_vacations.find_by("start_date <= ? and end_date >= ?", date, date)		
 		date_vacation.present?
 	end
