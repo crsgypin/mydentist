@@ -8,6 +8,19 @@
 				max-height: 70vh;
 				overflow-y: scroll;			
 			}
+			.holidays_box {
+				display: flex;
+				.title {
+					display: inline-block;
+					width: 200px;
+				}
+				.check_box {
+					text-align: left;
+					.check_field {
+						display: inline-block;
+					}
+				}
+			}
 		}
 	}
 }

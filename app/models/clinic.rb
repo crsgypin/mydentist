@@ -50,6 +50,11 @@ class Clinic < ApplicationRecord
 		end
 	end
 
+	def has_vacation?(date)
+		date_vacation = self.clinic_vacations.find_by("start_date <= ? and end_date >= ?", date, date)
+		date_vacation.present?
+	end
+
 	def clinic_duration_wdays
 		self.clinic_durations.group(:wday).count.keys
 	end
