@@ -45,17 +45,7 @@
 			      <div class="patient"><%= event.patient.name %></div>
 			      <div class="service"><%= event.service.name %></div>
 			    </div>
-		      <div class="status">
-		      	<div class="line_box <%= "selected" if event.source == "網路" %>" id= "<%= "check_id_#{event.id}"%>">
-		      		<%= image_tag clinic_static_image_url(:line_bot) %>
-		      	</div>
-		        <div class="check_in <%= "selected" if event.status == "報到" %>" id= "<%= "check_id_#{event.id}"%>">
-		        	<%= image_tag clinic_static_image_url(:checked_green) %>
-		        </div>
-		        <div class="break <%= "selected" if event.status == "爽約" %>" id="<%= "break_#{event.id}" %>">
-		        	<%= image_tag clinic_static_image_url(:cross_red) %>
-	        	</div>
-		      </div>
+			    <%= day_event_view(event) %>
 		    </div>
 		    <% end %>
 		    <% end %>

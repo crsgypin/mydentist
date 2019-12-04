@@ -48,9 +48,7 @@
 				<% end %>
 				<div class="e_row">
 					<div class="e_col">
-						<%= link_to icon_tag(:check_circle), clinic_event_path(@clinic, event, event: {status: event.status == "報到" ? "已預約" : "報到"}), remote: true, method: "patch", class: "check_in #{"selected" if event.status == "報到"}", id: "check_id_#{event.id}" %>
-						<%= link_to icon_tag(:close_circle), clinic_event_path(@clinic, event, event: {status: event.status == "爽約" ? "已預約" : "爽約"}), remote: true, method: "patch", class: "break #{"selected" if event.status == "爽約"}", id: "break_#{event.id}" %>
-
+						<%= list_event_view(event) %>
 					</div>
 					<div class="e_col"><%= event.patient.name %></div>
 					<div class="e_col"><%= event.service.name %></div>

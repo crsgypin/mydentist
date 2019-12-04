@@ -1,12 +1,9 @@
 
-<% if false %>
-	<% if @event.status == "報到" %>
-	$("[id=check_id_<%= @event.id %>]").addClass("selected");
-	$("[id=break_<%= @event.id %>]").removeClass("selected");
-	<% else %>
-	$("[id=check_id_<%= @event.id %>]").removeClass("selected");
-	$("[id=break_<%= @event.id %>]").addClass("selected");
-	<% end %>
+<% if params[:event].present? && params[:event][:status].present? %>
+	$("#clinic_event_form").remove();
+	$('<%= "#list_event_#{@event.id}" %>').replaceWith("<%= j list_event_view(@event) %>");
+	$('<%= "#day_event_#{@event.id}" %>').replaceWith("<%= j day_event_view(@event) %>");
+<% else %>
+	$("#clinic_event_form").remove();
+	$.getScript(window.location.href);
 <% end %>
-$("#clinic_event_form").remove();
-$.getScript(window.location.href);
