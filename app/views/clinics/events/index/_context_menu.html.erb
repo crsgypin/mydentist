@@ -9,6 +9,8 @@
   </ul>
 	<ul class="edit_mode">
 		<%#<li class="edit">編輯</li>%>
+    <li class="event_arrive">報到</li>
+    <li class="event_delay">爽約</li>
 		<li class="remove">取消預約</li>
 	</ul>	
   <ul class="broadcast_mode">
@@ -54,6 +56,7 @@
       contextMenu.find(".new_mode").addClass("hidden");
       contextMenu.find(".edit_mode").addClass("hidden");
       contextMenu.find(".broadcast_mode").addClass("hidden");
+      contextMenu.find(".new_broadcast_mode").addClass("hidden");
       if(mode == "new"){
         contextMenu.find(".new_mode").removeClass("hidden");
         doctorId = patientElm.data("doctor_id");
@@ -104,6 +107,30 @@
 			// 	dataType: "script",
 			// })
    //  });
+    contextMenu.find(".event_arrive").click(function(){
+      $.ajax({
+        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", eventId),
+        method: "patch",
+        dataType: "script",
+        data: {
+         event: {
+          status: "報到"
+         }
+        }
+      })
+    });
+    contextMenu.find(".event_delay").click(function(){
+      $.ajax({
+        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", eventId),
+        method: "patch",
+        dataType: "script",
+        data: {
+         event: {
+          status: "爽約"
+         }
+        }
+      })
+    });
     contextMenu.find(".broadcast").click(function(){
       $.ajax({
         url: "<%= new_clinic_lightbox_event_notification_schedule_path(@clinic) %>",
