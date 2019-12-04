@@ -26,7 +26,7 @@
 					text_field_tag "patient[person_id]", ""
 				}},
 				{title: "電話號碼（必填）", v: proc {
-					text_field_tag "patient[patient]", ""
+					text_field_tag "patient[phone]", ""
 				}},
 				{title: "健保狀況（必填)", v: proc {
 		    	r = select_field_tag "patient[health_insurance_status]", "有", Patient.health_insurance_statuses.keys
