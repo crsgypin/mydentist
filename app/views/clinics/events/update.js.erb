@@ -1,5 +1,5 @@
 
-<% if params[:event].present? && params[:event][:status].present? %>
+<% if params[:change_status] == '1' %>
 	$("#clinic_event_form").remove();
 	$('<%= "#list_event_#{@event.id}" %>').replaceWith("<%= j list_event_view(@event) %>");
 	$('<%= "#day_event_#{@event.id}" %>').replaceWith("<%= j day_event_view(@event) %>");
