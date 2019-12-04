@@ -1,6 +1,7 @@
 
 
 <div class="search_result">
+	<% if @events.length > 0 %>
 	<ul>
 	<% @events.each do |event| %>
 		<li data-id="<%= event.id %>">
@@ -11,5 +12,8 @@
 		</li>
 	<% end %>
 	</ul>
+	<% else %>
+	<div class="none">無</div>
+	<% end %>
 </div>
 
