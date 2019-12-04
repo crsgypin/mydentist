@@ -1,0 +1,5 @@
+
+$("[name]").removeClass("error");
+<% @patient.errors.keys.each do |key| %>
+$("[name='patient[<%= key %>]'").addClass('error');
+<% end %>

@@ -16,9 +16,10 @@ class Patient < ApplicationRecord
 	before_validation :set_friendly_id, on: :create
   before_validation :set_birthday
   before_validation :check_for_source, on: :create
+  before_validation :check_for_source_on_update, on: :update
 	validates_presence_of :friendly_id
 	validates_uniqueness_of :friendly_id
-  attr_accessor :roc_year, :year, :month, :day
+  attr_accessor :roc_year, :year, :month, :day, :tmp_source
 
   def has_line_account?
     self.line_account.present?
@@ -83,25 +84,37 @@ class Patient < ApplicationRecord
 
   def check_for_source
     if self.source == "現場"
-      if !self.name.present?           
-        self.errors.add("name", "請填寫名稱")
-      end
-      if !self.birthday.present?
-        self.errors.add("birthday", "請填寫生日")
-      end
-      if !self.person_id.present?
-        self.errors.add("person_id", "請填寫身份證號碼")
-      end
-      if !self.phone.present?
-        self.errors.add("phone", "請填寫電話")
-      end
+      check_for_validation
     end
     if self.errors.present?
-      puts "gogog: #{self.errors.full_messages}"
       return false
     end
     true
   end
 
+  def check_for_source_on_update
+    if self.tmp_source == "現場"
+      check_for_validation
+    end
+    if self.errors.present?
+      return false
+    end
+    true
+  end
+
+  def check_for_validation
+    if !self.name.present?           
+      self.errors.add("name", "請填寫名稱")
+    end
+    if !self.birthday.present?
+      self.errors.add("birthday", "請填寫生日")
+    end
+    if !self.person_id.present?
+      self.errors.add("person_id", "請填寫身份證號碼")
+    end
+    if !self.phone.present?
+      self.errors.add("phone", "請填寫電話")
+    end
+  end
 
 end

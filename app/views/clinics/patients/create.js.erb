@@ -1,2 +1,6 @@
 
-window.location.href = "<%= url_for(action: :index) %>";
+<% if @patient.errors.present? %>
+	<%= render_relative_partial "common/error_handler" %>
+<% else %>
+	window.location.href = "<%= url_for(action: :index) %>";
+<% end %>

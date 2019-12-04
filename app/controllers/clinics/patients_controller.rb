@@ -50,16 +50,14 @@ class ::Clinics::PatientsController < ::Clinics::ApplicationController
 
   def create
     @patient = @clinic.patients.new(patient_params)
-    if !@patient.save
-      return js_render_model_error(@patient)
-    end    
+    @patient.source = "現場"
+    !@patient.save
   end
 
   def update
     @patient = @clinic.patients.find(params[:id])
-    if !@patient.update(patient_params)
-      return js_render_model_error(@patient)
-    end
+    @patient.tmp_source = "現場"
+    !@patient.update(patient_params)
   end
 
   private
