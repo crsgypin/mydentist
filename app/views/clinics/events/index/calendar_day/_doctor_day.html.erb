@@ -9,23 +9,20 @@
 	      row_height: row_height, 
 	      hours: doctor_day_segment_hour_event[:hours]
 	    } %>
-	    <div class="d_col value_col">
-	      <div class="d_row day_row" style="height: <%= row_height %>px;">
-	      	<p><%= doctor_day_segment_hour_event[:name] %></p>
-	      </div>
-	      <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
-	        hour_minute_segments: doctor_day_segment_hour_event[:hour_minute_segments],
-	        row_height: row_height,
-	        doctor: @doctor,
-	        has_vacation: @doctor.has_vacation?(@date),
-	        onclick_event: proc do |event|
-	          "$.getScript('#{url_for(action: :edit, id: event)}');"
-	        end,
-	        onclick_new_event: proc do |hour, minute|
-	          # "$.getScript('#{url_for(action: :new, hour: hour, minute: minute)}');"
-	        end
-	      } %>
-	    </div>
+      <%= render partial: "clinics/events/common/event_duration_values_col", locals: {
+      	title: doctor_day_segment_hour_event[:name],
+	      title_class: "day_row",
+        hour_minute_segments: doctor_day_segment_hour_event[:hour_minute_segments],
+        row_height: row_height,
+        doctor: @doctor,
+        has_vacation: @doctor.has_vacation?(@date),
+        onclick_event: proc do |event|
+          "$.getScript('#{url_for(action: :edit, id: event)}');"
+        end,
+        onclick_new_event: proc do |hour, minute|
+          # "$.getScript('#{url_for(action: :new, hour: hour, minute: minute)}');"
+        end
+      } %>
 	  </div>
 	  <% end %>
   </div>
