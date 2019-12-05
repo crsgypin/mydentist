@@ -147,10 +147,15 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
       @doctor = @doctors.find{|d| d == @event.doctor}
       return if @doctor.present?
     end
-    @doctor = @doctors.first    
+    @doctor = nil
   end
 
   def new_edit_set_service
+    if @doctor.nil?
+      @sevice = nil
+      @services = []
+      return
+    end
     @services = @doctor.services.includes(:doctor_services).select{|s| s.doctor_services.length > 0}
     if params[:service_id].present?
       @service = @doctor.services.find_by(id: params[:service_id])
@@ -160,7 +165,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
       @service = @event.service
       return if @service.present?
     end
-    @service = @services.first
+    @service = nil
   end
 
   def new_edit_set_date
@@ -212,9 +217,11 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     #duration
     if params[:duration].present? && params[:duration].to_i > 15
       @duration = params[:duration].to_i
-    else
+    elsif @service.present?
       @doctor_service = @service.doctor_services.find{|s| s.doctor == @doctor}
       @duration = @doctor_service.duration_number
+    else
+      @duration = nil
     end
   end
 

@@ -95,20 +95,22 @@ class Event < ApplicationRecord
 	end
 
 	def check_for_source
-		if self.doctor.nil?						
-			self.errors.add("請選擇醫生","")
-			throw :abort
+		if self.doctor.nil?
+			self.errors.add("doctor_id", "請選擇醫生")
 		end
 		if self.service.nil?
-			self.errors.add("請選擇項目","")
-			throw :abort
+			self.errors.add("service_id", "請選擇項目")
 		end
 		if self.date.nil?
 			self.errors.add("date", "請選擇日期")
-			throw :abort
 		end
 		if self.hour.nil? || self.minute.nil? || self.duration.nil?
 			self.errors.add("hour", "請選擇時間")
+		end
+		if self.source == "現場" && !self.health_insurance_status.present?
+			self.errors.add("health_insurance_status", "請填寫健保狀態")
+		end
+		if self.errors.present?
 			throw :abort
 		end
 		true
