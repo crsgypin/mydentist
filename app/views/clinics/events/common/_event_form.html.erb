@@ -45,7 +45,7 @@
 		    		value: select_field_tag("patient[gender]", a.gender, [[nil, "病患性別(必填)"]] + Patient.genders.map{|a,b| [a,a]}, disabled: patient_exist)
 		    	})
 		    	r += clinic_field_box({
-		    		value: select_field_tag("patient[health_insurance_status]", a.health_insurance_status, [[nil, "病患健保狀況"]] + Patient.health_insurance_statuses.keys, disabled: patient_exist)
+		    		value: select_field_tag("patient[health_insurance_status]", a.health_insurance_status, [[nil, "病患健保狀況(必填)"]] + Patient.health_insurance_statuses.keys, disabled: patient_exist)
 		    	})
 		    	r.html_safe
 		    }},
@@ -75,17 +75,17 @@
 			    {class: "", v: proc{|a| 
 			    	r = ""
 			    	r += clinic_field_box({
-			    		title: "看診醫生",
-			    		value: select_field_tag("event[doctor_id]", @doctor.id, @doctors.map{|d| [d.id, d.name]})
+			    		# title: "看診醫生",
+			    		value: select_field_tag("event[doctor_id]", @doctor.try(:id), [nil, "看診醫生(必填)"] + @doctors.map{|d| [d.id, d.name]})
 			    	})
 			    	r += clinic_field_box({
-			    		title: "診療項目",
-			    		value: select_field_tag("event[service_id]", @service.id, @services.map{|a| [a.id, a.name]})
+			    		# title: "診療項目",
+			    		value: select_field_tag("event[service_id]", @service.try(:id), [nil, ""] @services.map{|a| [a.id, a.name]})
 			    	})
 			    	r += clinic_field_box({
-			    		title: "診療健保狀況",
-			    		value: select_field_tag("event[health_insurance_status]", "", [[nil, "病患健保狀況（必填）"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]})
-			    	})												
+			    		# title: "診療健保狀況",
+			    		value: select_field_tag("event[health_insurance_status]", "", [[nil, "病患健保狀況(必填)"]] + Patient.health_insurance_statuses.map{|a,b| [a,a]})
+			    	})								
 			    	r.html_safe
 			    }},
 			    {class: "", v: proc{|a| 

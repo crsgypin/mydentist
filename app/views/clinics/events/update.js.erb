@@ -1,9 +1,10 @@
 
-<% if params[:event].present? && params[:event][:status].present? %>
+<% if params[:change_status] == '1' %>
 	$("#clinic_event_form").remove();
 	$('<%= "#list_event_#{@event.id}" %>').replaceWith("<%= j list_event_view(@event) %>");
 	$('<%= "#day_event_#{@event.id}" %>').replaceWith("<%= j day_event_view(@event) %>");
 <% else %>
 	$("#clinic_event_form").remove();
+	$("body").append("<%= j render_relative_partial 'update/event_updated_lightbox' %>");
 	$.getScript(window.location.href);
 <% end %>

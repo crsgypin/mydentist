@@ -46,7 +46,7 @@ class Clinic::Notification < ApplicationRecord
 			{
 				category: "回覆同意",
 				index: 3,
-				title: "已變更",
+				title: "已約診",
 				content: "看診時間至{date}",
 				args: {
 					doctor_name: "醫生名稱",
@@ -57,7 +57,7 @@ class Clinic::Notification < ApplicationRecord
 			{
 				category: "回覆取消",
 				index: 4,
-				title: "取消回覆",
+				title: "已拒絕",
 				content: "{date}",
 				args: {
 					date: "日期時間"

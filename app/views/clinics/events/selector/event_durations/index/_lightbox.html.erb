@@ -14,13 +14,13 @@
       </div>
       <div class="date">
         <div class="last_week">
-          <%= link_to icon_tag(:angle_left), url_for(request.query_parameters.merge(date: @date - 7.day)), remote: true %>
+          <%= link_to "#{icon_tag(:angle_left)} 前一週".html_safe, url_for(request.query_parameters.merge(date: @date - 7.day)), remote: true %>
         </div>
         <div class="month">
           <%= @date.month %>月
         </div>
         <div class="next_week">
-          <%= link_to icon_tag(:angle_right), url_for(request.query_parameters.merge(date: @date + 7.day)), remote: true %>
+          <%= link_to "下一週  #{icon_tag(:angle_right)}".html_safe, url_for(request.query_parameters.merge(date: @date + 7.day)), remote: true %>
         </div>
       </div>
     </div>

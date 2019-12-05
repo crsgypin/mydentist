@@ -1,7 +1,7 @@
 
 <div id="clinic_nav">
 	<div class="title">
-		<%= roc_format(Date.today, 2) %>
+		<%= roc_format(@date || Date.today, 2) %>
 		<% if @back_to_today_url.present? %><%# for clinic events %>
 		<div class="back">
 			<%= link_to "< 返回今天", @back_to_today_url %>

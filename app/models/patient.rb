@@ -115,6 +115,9 @@ class Patient < ApplicationRecord
     if !self.phone.present?
       self.errors.add("phone", "請填寫電話")
     end
+    if !self.health_insurance_status.present?
+      self.errors.add("health_insurance_status", "健保未填寫")
+    end
   end
 
 end
