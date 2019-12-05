@@ -1,19 +1,23 @@
 
-<div class="line-templates-form">
+<div class="line_templates_form">
 	<div class="title">
 		<%= title %>
 	</div>
 	<div class="content_box">
-		<div class="inbox keywords-box">
+		<div class="inbox keywords_box">
 			<% if keywords_type == "keywords" %>
 			<%= render_relative_partial "line_template_form/keyword_inputs", locals: {line_template: line_template} %>
 			<% elsif keywords_type == "system" %>
 			<%= render_relative_partial "line_template_form/keyword_system", locals: {system_title: keyword_title} %>
 			<% elsif keywords_type == "broadcast" %>
-			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: broadcast_title} %>
+			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: "標題1"} %>
 			<% end %>
 		</div>
 		<div class="inbox template_messages_box">
+			<span class="title">
+				回答內容
+				<span class="note">註：最多為5個上限</span>
+			</span>
 			<ul>
 				<% line_template.template_messages.each_with_index do |line_template_message, index| %>
 				<%= render_relative_partial "line_template_form/template_message_input", locals: {line_template_message: line_template_message, index: index} %>
@@ -31,7 +35,24 @@
 </div>
 
 <script type="text/javascript">
-	window.addLineTemplateMessage = function(){
-		$(".line-templates-form .template_messages_box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
-	}
+	$(function(){
+		var formBox = $(".line_templates_form");
+		window.addLineTemplateMessage = function(){
+			var templateStr = "<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new(category: "text"), index: "tmp_index"} %>";
+			var nextIndex = formBox.find(".template_messages_box ul li").length;
+			formBox.find(".template_messages_box ul").append(templateStr.replace(/tmp_index/g, nextIndex));
+		}
+		if(formBox.find(".template_messages_box ul li").length == 0){
+			window.addLineTemplateMessage();
+		}
+		formBox.find(".template_messages_box ul").on("change", "li .category", function(e){
+			$(this).siblings(".text_content").addClass("hidden");
+			$(this).siblings(".image_content").addClass("hidden");
+			if(this.value == "text"){
+				$(this).siblings(".text_content").removeClass("hidden");
+			} else if(this.value == "image"){
+				$(this).siblings(".image_content").removeClass("hidden");
+			}
+		});
+	})
 </script>

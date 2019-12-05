@@ -9,7 +9,12 @@
 </div>
 
 <script type="text/javascript">
-	window.addLineKeyword = function(){
-		$(".line-templates-form .keywords-box ul").append("<%= j render_relative_partial 'keyword_inputs/input', locals: {line_keyword: Line::Keyword.new} %>");
-	}	
+	$(function(){
+		window.addLineKeyword = function(){
+			$(".line_templates_form .keywords_box ul").append("<%= j render_relative_partial 'keyword_inputs/input', locals: {line_keyword: Line::Keyword.new} %>");
+		}	
+		<% if line_template.template_messages.length == 0 %>
+			window.addLineKeyword();
+		<% end %>
+	})
 </script>

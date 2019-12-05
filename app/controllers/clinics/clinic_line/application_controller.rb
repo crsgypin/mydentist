@@ -6,13 +6,13 @@ class ::Clinics::ClinicLine::ApplicationController < ::Clinics::ApplicationContr
 	def update_line_template
     ActiveRecord::Base.transaction do 
 			@line_template.keywords.destroy_all
-			@line_template.template_messages.destroy_all
+			# @line_template.template_messages.destroy_all
 			@line_template.update(line_template_params)
 		end
 	end
 
 	def line_template_params
-		params.require(:line_template).permit(keywords_attributes: [:name], template_messages_attributes: [:content])
+		params.require(:line_template).permit(keywords_attributes: [:id, :name, :_destroy], template_messages_attributes: [:id, :content, :category, :file, :_destroy])
 	end
 
 end
