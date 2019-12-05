@@ -6,10 +6,20 @@
 		justify-content: space-between;
 		.input_box {
 			width: calc(100% - 150px);
+			/*
 			input[type=text] {
 				height: 40px;
 				width: 100%;
 				padding-left: 10px;
+			}
+			*/
+			.clinic_form_search {
+				height: 40px;
+				background: $colorW;
+				input {
+					height: 30px;
+					background: none;
+				}
 			}
 		}
 		input[type=submit] {

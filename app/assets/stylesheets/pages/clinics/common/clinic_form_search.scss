@@ -1,0 +1,29 @@
+.clinic_form_search {
+	padding: 5px;
+	border: solid 1px $colorGy1;
+	border-radius: 5px;
+	height: 35px;
+	position: relative;
+	.inbox {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.close_btn {
+			a {
+				color: $colorR;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		}
+		input {
+			width: calc(100% - 25px);
+			border: none;
+			height: 20px;
+		}
+		img {
+			height: 20px;
+		}
+	}
+
+}

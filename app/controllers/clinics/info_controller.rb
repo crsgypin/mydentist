@@ -5,9 +5,7 @@ class ::Clinics::InfoController < ::Clinics::ApplicationController
   end
 
   def update
-  	if !@clinic.update(clinic_params)
-  		return js_render_model_error @clinic
-  	end
+  	@clinic.update(clinic_params)
   end
 
   private

@@ -106,6 +106,9 @@ class Patient < ApplicationRecord
     if !self.name.present?           
       self.errors.add("name", "請填寫名稱")
     end
+    if !self.gender.present?
+      self.errors.add("gender", "請填寫性別")
+    end
     if !self.birthday.present?
       self.errors.add("birthday", "請填寫生日")
     end

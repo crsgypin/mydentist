@@ -44,27 +44,8 @@ $event_search_width: 350px;
 				}
 			}
 		}
-		.search_box {
-			padding: 5px;
-			border: solid 1px $colorGy1;
-			border-radius: 5px;
+		.search_box.clinic_form_search {
 			min-width: $event_search_width;
-			height: 35px;
-			position: relative;
-			.inbox {
-				width: 100%;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				input {
-					width: calc(100% - 25px);
-					border: none;
-					height: 25px;
-				}
-				img {
-					height: 25px;
-				}
-			}
 			.search_result {
 				left: 0;
 				top: 35px;

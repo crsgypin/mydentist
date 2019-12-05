@@ -9,8 +9,10 @@
 			<%= image_tag photo_url, id: "upload_photo_img" %>
 		</div>
 		<div class="center_title">
+			<% if false %>
 			<p>將圖片/影片拖曳到這裡</p>
 			<p>或者</p>
+			<% end %>
 			<%= link_to "選擇要上傳的圖片/影片", "javascript:;", class: "btnBu", onclick: "$('#photo_file_input').click();" %>
 		</div>
 		<%= file_field_tag photo_input_name, class: "hidden", id: "photo_file_input", onchange: "window.showFileImage(this, $('#upload_photo_img'));" %>

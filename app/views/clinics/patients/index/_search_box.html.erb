@@ -13,7 +13,19 @@
 	<% end %>
 	<div class="input_box">
 		<%= hidden_field_tag "category", params[:category] %>
-		<%= text_field_tag "key", params[:key], id: "search" %>
+	  <div class="search_box clinic_form_search">
+	    <div class="inbox">
+	    	<% if params[:key].present? %>
+ 	    	<span class="close_btn">
+	    		<%= link_to icon_tag(:close_circle), url_for %>
+	    	</span>
+	    	<% end %>
+	      <%= text_field_tag "key", params[:key], placeholder: "輸入病患名稱以查詢", class: "clinic_search_input", data: {url: clinic_events_selector_search_events_path(@clinic)} %>
+	      <%= hidden_field_tag "event_id", @event.present? ? @event.id : nil %>
+	      <%= image_tag clinic_static_image_url(:search) %>
+	    </div>
+	  </div>
+		<%# text_field_tag "key", params[:key], id: "search" %>
 		<div class="search_result hidden">
 		</div>
 	</div>
@@ -25,14 +37,16 @@
 
 <script type="text/javascript">
 	$(function(){
-		$("input#search").on("keydown", function(){
-			var key = $(this).val();
-			if(key.length){
-				var path = "<%= url_for %>";
-				path = path + "?key=" + key;
-				$.getScript(path);
-			} else {
-				$("#search_box .search_result").html('');
+		$("input#search").on("keydown", function(e){
+			if(e.keyCode == 13){
+				var key = $(this).val();
+				if(key.length){
+					var path = "<%= url_for %>";
+					path = path + "?key=" + key;
+					$.getScript(path);
+				} else {
+					$("#search_box .search_result").html('');
+				}				
 			}
 		});
 		$("#search_box").on("click", ".search_result ul li", function(){

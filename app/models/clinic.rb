@@ -20,7 +20,7 @@ class Clinic < ApplicationRecord
 	has_many :event_notification_templates, class_name: "Event::NotificationTemplate"
 	has_many :event_notification_schedules, class_name: "Event::NotificationSchedule"
 	accepts_nested_attributes_for :services
-	validates_presence_of :friendly_id
+	validates_presence_of :friendly_id, :name, :phone, :address
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :map_photo, PhotoUploader
 	include Common::DateTimeDurationHelper

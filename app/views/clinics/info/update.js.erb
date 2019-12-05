@@ -1,3 +1,10 @@
 
-
-alert("已更新");
+<% if @clinic.errors.present? %>
+	$("[name]").removeClass("error");
+	<% @clinic.errors.keys.each do |key| %>
+	$("[name='clinic[<%= key %>]'").addClass('error');
+	<% end %>
+<% else %>
+	alert("已更新");
+	window.location.reload();
+<% end %>
