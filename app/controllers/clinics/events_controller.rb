@@ -223,7 +223,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :roc_year, :month, :day, :source)
+    params.require(:patient).permit(:name, :phone, :person_id, :gender, :year, :roc_year, :month, :day, :source, :health_insurance_status)
   end
 
 end
