@@ -94,7 +94,7 @@ class Linebot::Clinics::EventController < Linebot::Clinics::ApplicationControlle
 	private
 
 	def set_doctor
-		@doctors = @clinic.doctors
+		@doctors = @clinic.doctors.form_completes
 		if params[:doctor_id].present?
 			@doctor = @clinic.doctors.find_by(id: params[:doctor_id])
 			return if @doctor.present?

@@ -2,7 +2,7 @@ class LinebotWebhook::Controllers::DoctorsController < LinebotWebhook::Controlle
 	include LinebotWebhook::Replies::DoctorsReply
 
 	def index
-		@doctors = @clinic.doctors
+		@doctors = @clinic.doctors.form_completes
 		reply_doctors
 	end
 

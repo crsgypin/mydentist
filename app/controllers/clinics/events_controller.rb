@@ -83,7 +83,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @segment = "整日" if !@range_segments.include?(@segment) 
 
     @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)
-    @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
+    @doctors = @clinic.doctors.form_completes.includes(:events => [:doctor, :service, :patient])
     @doctor_objs = @doctors.map do |doctor|
       r = {
         doctor: doctor,
@@ -98,7 +98,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
     @segment = "整日" if !@range_segments.include?(@segment) 
 
     @clinic_wday_hours = @clinic.wday_hours(@date.wday, @segment)
-    @doctors = @clinic.doctors.includes(:events => [:doctor, :service, :patient])
+    @doctors = @clinic.doctors.form_completes.includes(:events => [:doctor, :service, :patient])
     @doctor_objs = @doctors.map do |doctor|
       r = {
         doctor: doctor,
@@ -138,7 +138,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   end
 
   def new_edit_set_doctor
-    @doctors = @clinic.doctors
+    @doctors = @clinic.doctors.form_completes
     if params[:doctor_id].present?
       @doctor = @doctors.find_by(id: params[:doctor_id])
       return if @doctor.present?

@@ -13,6 +13,7 @@ class Doctor < ApplicationRecord
 	mount_uploader :photo, PhotoUploader
 	accepts_nested_attributes_for :doctor_services
 	before_save :set_form_complete
+	scope :form_completes, -> { where(form_complete: Doctor.all_complete_number)}
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Clinic::StaticImageHelper
@@ -27,6 +28,18 @@ class Doctor < ApplicationRecord
 
 	def doctor_duration_wdays
 		self.doctor_durations.group(:wday).count.keys #[1,3,4]
+	end
+
+	def self.all_complete_number
+		3
+	end
+
+	def form_complete_note
+		if form_complete == self.class.all_complete_number
+			"已可預約"
+		else
+			"#{form_complete}/3"
+		end
 	end
 
 	def set_form_complete
