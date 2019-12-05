@@ -10,7 +10,7 @@
 			<% elsif keywords_type == "system" %>
 			<%= render_relative_partial "line_template_form/keyword_system", locals: {system_title: keyword_title} %>
 			<% elsif keywords_type == "broadcast" %>
-			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: broadcast_title} %>
+			<%= render_relative_partial "line_template_form/keyword_broadcast", locals: {broadcast_title: "標題1"} %>
 			<% end %>
 		</div>
 		<div class="inbox template_messages_box">
@@ -44,7 +44,13 @@
 			window.addLineTemplateMessage();
 		}
 		formBox.find(".template_messages_box ul li .category").on("change", function(e){
-			alert(this.value);
+			$(this).siblings(".text_content").addClass("hidden");
+			$(this).siblings(".image_content").addClass("hidden");
+			if(this.value == "text"){
+				$(this).siblings(".text_content").removeClass("hidden");
+			} else if(this.value == "image"){
+				$(this).siblings(".image_content").removeClass("hidden");
+			}
 		});
 	})
 </script>

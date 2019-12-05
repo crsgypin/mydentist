@@ -9,7 +9,9 @@
 	</div>
 	<div class="content">
 		<div class="content_inbox">
-			<%= text_field_tag "line_template[keywords_attributes][][name]", line_keyword.name %>
+			<div class="text_content">
+				<%= text_field_tag "line_template[keywords_attributes][][name]", line_keyword.name %>
+			</div>
 		</div>
 		<%= link_to icon_tag(:close_circle1), "javascript:", onclick: "$(this).closest('li').remove();" %>
 	</div>
