@@ -7,17 +7,19 @@
 	</div>
 	<div class="content">
 		<div class="content_inbox">
-			<%= select_field_tag "line_template[category]", line_template_message.category, Line::TemplateMessage.category_names, class: "category" %> 
-			<div class="text_content">
-				<%= text_field_tag "line_template[template_messages_attributes][][content]", line_template_message.content, class: "text_content" %>
+			<%= hidden_field_tag "line_template[template_messages_attributes][#{index}][id]", line_template_message.id %>
+			<%= select_field_tag "line_template[template_messages_attributes][#{index}][category]", line_template_message.category, Line::TemplateMessage.category_names, class: "category" %> 
+			<div class="text_content <%= "hidden" if line_template_message.category != "text" %>">
+				<%= text_field_tag "line_template[template_messages_attributes][#{index}][content]", line_template_message.content, class: "text_content" %>
 			</div>
-			<div class="image_content hidden">
-				<div class="file_name">上傳圖片</div>
+			<div class="image_content <%= "hidden" if line_template_message.category != "image" %>">
+				<div class="file_name"><%= line_template_message[:file] %></div>
 				<%= link_to "上傳", "javascript:;", class: "upload", onclick: "$(this).siblings('.file_input').click();" %>
-				<%= file_field_tag "line_template[file]", class: "file_input hidden" %>
+				<%= file_field_tag "line_template[template_messages_attributes][#{index}][file]", class: "file_input hidden", onchange: "console.log('gogo', this.files[0]); $(this).siblings('.file_name').text(this.files[0].name);" %>
 			</div>
 		</div>
-		<%= link_to icon_tag(:close_circle1), "javascript:", onclick: "$(this).closest('li').remove();" %>
+		<%= check_box_tag "line_template[template_messages_attributes][#{index}][_destroy]", 1, false, class: "hidden destroy_input" %>
+		<%= link_to icon_tag(:close_circle1), "javascript:", onclick: "$(this).closest('li').addClass('hidden'); $(this).siblings('.destroy_input')[0].checked = true;" %>
 	</div>
 </li>
 

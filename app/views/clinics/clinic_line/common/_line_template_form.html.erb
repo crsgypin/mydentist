@@ -4,7 +4,7 @@
 		<%= title %>
 	</div>
 	<div class="content_box">
-		<div class="inbox keywords-box">
+		<div class="inbox keywords_box">
 			<% if keywords_type == "keywords" %>
 			<%= render_relative_partial "line_template_form/keyword_inputs", locals: {line_template: line_template} %>
 			<% elsif keywords_type == "system" %>
@@ -38,12 +38,14 @@
 	$(function(){
 		var formBox = $(".line_templates_form");
 		window.addLineTemplateMessage = function(){
-			formBox.find(".template_messages_box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
+			var templateStr = "<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new(category: "text"), index: "tmp_index"} %>";
+			var nextIndex = formBox.find(".template_messages_box ul li").length;
+			formBox.find(".template_messages_box ul").append(templateStr.replace(/tmp_index/g, nextIndex));
 		}
 		if(formBox.find(".template_messages_box ul li").length == 0){
 			window.addLineTemplateMessage();
 		}
-		formBox.find(".template_messages_box ul li .category").on("change", function(e){
+		formBox.find(".template_messages_box ul").on("change", "li .category", function(e){
 			$(this).siblings(".text_content").addClass("hidden");
 			$(this).siblings(".image_content").addClass("hidden");
 			if(this.value == "text"){

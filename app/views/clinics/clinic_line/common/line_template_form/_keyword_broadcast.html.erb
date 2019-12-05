@@ -1,6 +1,6 @@
 
 <ul>
-	<li>
+	<li class="template_message_box">
 		<div class="header">
 			<span class="title">標題</span>
 			<span class="words">
@@ -8,7 +8,11 @@
 			</span>
 		</div>
 		<div class="content">
-			<%= text_field_tag "clinic_line_broadcast[title]", broadcast_title %>
+			<div class="content_inbox">
+				<div class="text_content">
+					<%= text_field_tag "clinic_line_broadcast[title]", broadcast_title %>
+				</div>
+			</div>
 		</div>
 	</li>
 </ul>
