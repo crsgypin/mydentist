@@ -1,5 +1,5 @@
 
-.line-templates-form {
+.line_templates_form {
 	width: 100%;
 	max-width: 800px;
 	box-shadow: 0 2px 12px 0 rgba(110, 110, 110, 0.5);
@@ -87,6 +87,9 @@
 			}
 			&.template_messages_box {
 				.title {
+					position: relative;
+					top: 30px;
+					padding-left: 30px;
 					.note {
 						color: $colorGy1;
 					}

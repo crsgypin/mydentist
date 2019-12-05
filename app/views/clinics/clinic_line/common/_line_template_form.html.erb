@@ -1,5 +1,5 @@
 
-<div class="line-templates-form">
+<div class="line_templates_form">
 	<div class="title">
 		<%= title %>
 	</div>
@@ -14,6 +14,10 @@
 			<% end %>
 		</div>
 		<div class="inbox template_messages_box">
+			<span class="title">
+				回答內容
+				<span class="note">註：最多為5個上限</span>
+			</span>
 			<ul>
 				<% line_template.template_messages.each_with_index do |line_template_message, index| %>
 				<%= render_relative_partial "line_template_form/template_message_input", locals: {line_template_message: line_template_message, index: index} %>
@@ -31,7 +35,16 @@
 </div>
 
 <script type="text/javascript">
-	window.addLineTemplateMessage = function(){
-		$(".line-templates-form .template_messages_box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
-	}
+	$(function(){
+		var formBox = $(".line_templates_form");
+		window.addLineTemplateMessage = function(){
+			formBox.find(".template_messages_box ul").append("<%= j render_relative_partial 'line_template_form/template_message_input', locals: {line_template_message: Line::TemplateMessage.new} %>");
+		}
+		if(formBox.find(".template_messages_box ul li").length == 0){
+			window.addLineTemplateMessage();
+		}
+		formBox.find(".template_messages_box ul li .category").on("change", function(e){
+			alert(this.value);
+		});
+	})
 </script>
