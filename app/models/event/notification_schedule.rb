@@ -49,6 +49,7 @@ class Event::NotificationSchedule < ApplicationRecord
   end
 
 	def send_instant_messages
+    self.reload #reload template message
 		self.update(status: "發送中")
 		self.notifications.each do |notification|
 			notification.send_message
@@ -79,3 +80,4 @@ class Event::NotificationSchedule < ApplicationRecord
 
 
 end
+ 
