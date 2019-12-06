@@ -1,38 +1,36 @@
-<div class="content_box">
-  <%= render partial: "clinics/common/clinic_form_table" , locals: {
-    id: "clinic_info_table",
-    resource: @member,
-    fields: [
-      {t: "照片", v: proc{ |a| 
-        r = link_to new_clinic_member_photo_path(@clinic, @member), class: "clinic_photo_box", remote: true do
-          r1 = bg_center_image @member.photo_url
-          r1 += image_tag common_static_image_url(:pic_edit3), class: "pic_edit";
-          r1  
-        end
-        r.html_safe
-      }},
-      {t: "權限", v: proc{|a| 
-        text_field_tag "member[level]", a.level, readonly: true
-      }},
-      {t: "註冊信箱", v: proc{|a| 
-        text_field_tag "member[email]", a.email, readonly: true
-      }},
-      # {t: "clinic_duration_id", v: proc{|a| a.clinic_duration_id }},
-      {t: "使用者名稱", v: proc{|a| 
-        r = "<div class='flx flx_j_space_between'>"
-        r += text_field_tag "member[username]", a.username, readonly: true
-        r += link_to "編輯", url_for(action: :edit, target: "username"), remote: true, class: "btnW", style: "width: 100px;"
-        r += "</div>"
-        r.html_safe
-      }},
-      {t: "密碼", v: proc{|a| 
-        r = "<div class='flx flx_j_space_between'>"
-        r += password_field_tag "member[password]", "xxxxxxxxx", readonly: true
-        r += link_to "編輯", url_for(action: :edit, target: "password"), remote: true, class: "btnW", style: "width: 100px;"
-        r += "</div>"
-        r.html_safe
-      }},
-    ]
-  }
-  %>
-</div>
+<%= render partial: "clinics/common/clinic_form_table" , locals: {
+  id: "clinic_info_table",
+  resource: @member,
+  fields: [
+    {t: "照片", v: proc{ |a| 
+      r = link_to new_clinic_member_photo_path(@clinic, @member), class: "clinic_photo_box", remote: true do
+        r1 = bg_center_image @member.photo_url
+        r1 += image_tag common_static_image_url(:pic_edit3), class: "pic_edit";
+        r1  
+      end
+      r.html_safe
+    }},
+    {t: "權限", v: proc{|a| 
+      text_field_tag "member[level]", a.level, readonly: true
+    }},
+    {t: "註冊信箱", v: proc{|a| 
+      text_field_tag "member[email]", a.email, readonly: true
+    }},
+    # {t: "clinic_duration_id", v: proc{|a| a.clinic_duration_id }},
+    {t: "使用者名稱", v: proc{|a| 
+      r = "<div class='flx flx_j_space_between'>"
+      r += text_field_tag "member[username]", a.username, readonly: true
+      r += link_to "編輯", url_for(action: :edit, target: "username"), remote: true, class: "btnW", style: "width: 100px;"
+      r += "</div>"
+      r.html_safe
+    }},
+    {t: "密碼", v: proc{|a| 
+      r = "<div class='flx flx_j_space_between'>"
+      r += password_field_tag "member[password]", "xxxxxxxxx", readonly: true
+      r += link_to "編輯", url_for(action: :edit, target: "password"), remote: true, class: "btnW", style: "width: 100px;"
+      r += "</div>"
+      r.html_safe
+    }},
+  ]
+}
+%>

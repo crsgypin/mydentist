@@ -1,7 +1,9 @@
 
 <div id="clinic_info">
   <%= form_tag url_for(action: :update), method: "patch", class: "inbox form_border clinic_form clinic_form_box", remote: true do %>
-    <%= render_relative_partial 'common/form' %>
+  	<div class="content_box">
+	    <%= render_relative_partial 'common/form' %>
+	  </div>
   <% end %>
   <% if @member.level_number < 200 %>
   <div class="remove_box" style="position: absolute; bottom: 10px;">
