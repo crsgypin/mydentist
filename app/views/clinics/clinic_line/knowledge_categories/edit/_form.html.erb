@@ -1,6 +1,6 @@
 
-<li class="selected">
-	<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
+<li class="knowledge_category selected">
+	<%= form_tag url_for(action: :update), method: "patch", remote: true, id: "knowledge_category_form" do %>
 	<%= text_field_tag "clinic_line_knowledge_category[name]", @clinic_line_knowledge_category.name, autofocus: true %>
 	<% end %>
 </li>

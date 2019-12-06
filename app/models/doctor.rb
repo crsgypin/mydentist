@@ -14,6 +14,7 @@ class Doctor < ApplicationRecord
 	accepts_nested_attributes_for :doctor_services
 	before_save :set_form_complete
 	before_validation :check_length
+	before_validation :validate_phone
 	scope :form_completes, -> { where(form_complete: Doctor.all_complete_number)}
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
@@ -82,6 +83,18 @@ class Doctor < ApplicationRecord
 		return true if self.clinic.has_vacation?(date)
 		date_vacation = self.doctor_vacations.find_by("start_date <= ? and end_date >= ?", date, date)		
 		date_vacation.present?
+	end
+
+	def validate_phone
+		if self.phone[0..1] != "09"
+			self.errors.add("phone", "電話需09開頭")
+		end
+		if self.phone.length != 10
+			self.errors.add("phone", "電話十碼")
+		end
+		if self.errors.present?
+			throw :abort
+		end
 	end
 
 	def day_events(date)
