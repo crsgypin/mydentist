@@ -6,7 +6,7 @@ class ::Clinics::Doctors::InfoController < ::Clinics::Doctors::ApplicationContro
 	end
 
 	def update
-		@doctor.update!(doctor_params)
+		@doctor.update(doctor_params)
 	end
 
 	private

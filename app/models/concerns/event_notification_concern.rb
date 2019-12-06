@@ -1,14 +1,13 @@
 module EventNotificationConcern
+  #currently no use
 	extend ActiveSupport::Concern
   included do
-  	attr_accessor :text_message
 		after_create :send_message
   end
   include LinebotWebhook::Helper::RepliedMessageHelper
   include Common::LineShareHelper
 
   def send_message
-  	raise "no text_message" if !self.text_message.present?
     if self.category == "回診推播"
       sending = self.line_account.sendings.create!({
         source: "server",

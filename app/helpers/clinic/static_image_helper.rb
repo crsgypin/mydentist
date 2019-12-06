@@ -21,7 +21,8 @@ module Clinic::StaticImageHelper
 			search: "/imgs/clinics/search.png",
 			logout: "/imgs/clinics/logout.png",
 			arrow_right: "/imgs/clinics/arrow_right.png",
-			danger: "/imgs/clinics/danger.png"
+			danger: "/imgs/clinics/danger.png",
+			book: "/imgs/clinics/book.png"
 		}
 	end
 

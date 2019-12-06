@@ -15,9 +15,10 @@ class Event::Notification < ApplicationRecord
   after_update :check_notification
   after_create :set_event_notification
   attr_accessor :doctor_id, :service_id, :date, :hour, :minute, :duration #for booking_event
+  include Common::LineShareHelper
   # after_create :send_message
 	# validates_presence_of :category
-	include EventNotificationConcern 
+	# include EventNotificationConcern 
 
   include LinebotWebhook::Helper::RepliedMessageHelper
 
@@ -33,7 +34,11 @@ class Event::Notification < ApplicationRecord
       messages: reply_message({
         type: "confirm",
         alt_text: self.arg_content,
-        text: self.arg_content,
+        text: proc do 
+          c = self.arg_content
+          puts "cc: #{c}"
+          c
+        end.call,
         actions: [
           {
             type: "postback",

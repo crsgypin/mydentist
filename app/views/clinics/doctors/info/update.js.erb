@@ -1,2 +1,9 @@
-
+<% puts "gogog: #{@doctor.errors.full_messages}" %>
+<% if @doctor.errors.present? %>
+	$("[name]").removeClass("error");
+	<% @doctor.errors.keys.each do |key| %>
+	$("[name='doctor[<%= key %>]'").addClass('error');
+	<% end %>
+<% else %>
 window.location.reload();
+<% end %>

@@ -1,2 +1,9 @@
 
 $("#clinic_knowledge_categories_index ul.knowledge_categories li.selected").replaceWith("<%= j render_relative_partial 'edit/form' %>");
+
+$("body").on("click.category", function(e){
+	if($(e.target).closest('.knowledge_category').length == 0){
+		$("#knowledge_category_form").submit();
+		$("body").off("click.category");
+	}
+});

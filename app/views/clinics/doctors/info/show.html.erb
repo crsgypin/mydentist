@@ -3,7 +3,9 @@
   <div class="content_box">
     <div id="doctors_show_container">
       <%= form_tag url_for(action: :update), method: :patch, class: "clinic_form clinic_form_box", remote: true do %>
-      <%= render_relative_partial "common/form" %>
+      <div class="content_box">
+        <%= render_relative_partial "common/form" %>
+      </div>
       <div class="buttons_box form_buttons_box">
         <%= submit_tag "儲存", class: "btnBu save_btn" %>
       </div>

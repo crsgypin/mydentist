@@ -1,19 +1,59 @@
 
 #clinic_knowledge_categories_index {
-	ul.knowledge_categories {
-		display: flex;
-		li {
-			min-width: 100px;
-			text-align: center;
-			a {
-				color: $colorGy1;
-				display: inline-block;
-				width: 100%;
-				border-bottom: 1px solid $colorGy1;
+	.knowledge_categories_box {
+		overflow-x: scroll;
+		margin-right: 30px;
+		ul.knowledge_categories {
+			display: flex;
+			li {
+				min-width: 100px;
+				text-align: center;
+				a {
+					color: $colorGy1;
+					display: inline-block;
+					width: 100%;
+					border-bottom: 1px solid $colorGy1;
+				}
+				&.selected a {
+					color: $colorBu;
+					border-bottom: 3px solid $colorBu;
+				}
+				form {
+					display: inline-block;
+					width: 100%;
+					border-bottom: 3px solid $colorBu;
+					input {
+						color: $colorBu;
+						width: 100px;
+						height: 30px;
+					}				
+				}
 			}
-			&.selected a {
-				color: $colorBu;
-				border-bottom: 3px solid $colorBu;
+		}
+	}
+	#clinic_knowledge_categories_show {
+		position: relative;
+		.inbox{
+			min-height: 80vh;
+			position: relative;
+		}
+		.no_content {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 500px;
+			transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			z-index: -1;
+			img {
+				display: block;
+				width: 180px;
+				margin: 0 auto 20px;
+			}
+			p {
+				text-align: center;
+				font-size: $fs_24p;
+				color: $colorGy1;
 			}
 		}
 	}

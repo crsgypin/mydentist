@@ -1,12 +1,20 @@
 
 
 <div id="clinic_knowledge_categories_index">
-	<ul class="knowledge_categories">
-	<% @clinic_line_knowledge_categories.each do |clinic_line_knowledge_category| %>
-		<%= render_relative_partial "show/clinic_line_knowledge_category", locals: {clinic_line_knowledge_category: clinic_line_knowledge_category} %>
-	<% end %>
-	</ul>
+	<div class="knowledge_categories_box">
+		<ul class="knowledge_categories">
+		<% @clinic_line_knowledge_categories.each do |clinic_line_knowledge_category| %>
+			<%= render_relative_partial "show/clinic_line_knowledge_category", locals: {clinic_line_knowledge_category: clinic_line_knowledge_category} %>
+		<% end %>
+		</ul>
+	</div>
 	<div id="clinic_knowledge_categories_show">
+		<div class="inbox">
+		</div>
+		<div class="no_content hidden">
+			<%= image_tag clinic_static_image_url(:book) %>
+			<p>填寫病患可能會詢問的牙齒相關衛教資訊</p>
+		</div>
 	</div>
 </div>
 

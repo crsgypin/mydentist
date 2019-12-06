@@ -3,6 +3,7 @@ class Service < ApplicationRecord
 	has_many :events
 	has_many :doctor_services, class_name: "Doctor::Service"
 	has_many :doctors, through: :doctor_services
+	validates_uniqueness_of :name, scope: :clinic
 	enum category: {"一般" => 0, "洗牙" => 1}
 	extend ServiceDurationsConcern
 	enum duration: self.init_durations

@@ -18,9 +18,9 @@
 		<div class="content_box">
 			<%= hidden_field_tag "event_notification_schedule[schedule_type]", @schedule[:schedule_type] %>
 			<%= hidden_field_tag "event_notification_schedule[notification_template_id]", @event_notification_template.id %>
-			<%= text_area_tag "text_message", @event_notification_template.content, autofocus: true %>
+			<%= text_area_tag "event_notification_schedule[template_message]", @event_notification_template.content, autofocus: true, id: "schedule_text" %>
 			<% @event_notification_template.args.each do |key, name| %>
-			<%= link_to name, "", class: "btnBu" %>
+			<%= link_to name, "javascript:;", class: "btnBu name_btn", data: {key: key} %>
 			<% end %>
 		</div>
 		<div class="buttons_box">
@@ -29,3 +29,12 @@
 		</div>
 	<% end %>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+		$("#event_notification_schedule_lightbox").find('.name_btn').click(function(e){
+			var name = $(this).data("key");
+			$('#schedule_text').val($('#schedule_text').val() + "{" + name + "}");
+		});
+	})
+</script>

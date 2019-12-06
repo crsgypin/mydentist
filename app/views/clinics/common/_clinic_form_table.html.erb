@@ -8,8 +8,7 @@
 <% value_style = local_assigns[:value_style] || "" %>
 <% fields_per_row = local_assigns[:fields_per_row] || 1 %>
 
-<%# variable: mode, trs %>
-<table class="table table-sm <%= table_class %>" style="<%= table_style %>">
+<table class="clinic_form_table table table-sm <%= table_class %>" style="<%= table_style %>">
 <% fields.each_with_index do |field, index| %>
 	<%= "<tr>".html_safe if index % fields_per_row == 0 %>
 		<td class="<%= title_class %>" style="<%= title_style %>">

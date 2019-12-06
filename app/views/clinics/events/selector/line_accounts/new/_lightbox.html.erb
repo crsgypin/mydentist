@@ -20,4 +20,13 @@
 		height: 200, 
 		text: '<%= @clinic.line_binding_url %>'
 	});
+	window.timeId = setInterval(function(){
+		if(("#clinc_line_account_lightbox").length == 0){
+			clearInterval(window.timeId);
+		}
+		$.ajax({
+			url: "<%= url_for(action: :create, patient_id: @patient.id) %>",
+			method: "post",
+		})
+	}, 5000);
 </script>

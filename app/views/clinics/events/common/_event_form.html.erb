@@ -23,6 +23,7 @@
 			    r += "  <div class='search_result'></div>"
 			    r += "  </div>"
 			    r += " </div>"
+
 			    if a.persisted?
 				    r += render(partial: "clinics/patients/common/notification_action", locals: {
 				    	patient: a
@@ -118,6 +119,7 @@
 <script type="text/javascript">
 	$(function(){
 		var box = $("#clinic_event_form");
+		box.find(".patient_box").find("input,select");
 		var patientInput = box.find("[name='patient_id']");
 		var serviceInput = box.find("[name='event[service_id]']");
 		var doctorInput = box.find("[name='event[doctor_id]']");

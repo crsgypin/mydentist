@@ -1,0 +1,22 @@
+
+<div id="line_account_binding_lightbox" class="lightbox clinic_lightbox">
+	<div class="inbox">
+		<div class="header_box">
+		</div>
+		<div class="content_box">
+			<div><%= image_tag clinic_static_image_url(:checked_blue), class: "checked_blue" %></div>
+			<h2>綁定成功</h2>
+			<p class="patient_name"><%= @patient.name %></p>
+			<p>(<%= @patient.gender %>)</p>
+			<p><%= roc_format(@patient.birthday, 3) %></p>
+			<p><%= @patient.health_insurance_status == "有" ? "健保" : "" %></p>
+			<p><%= @patient.person_id %></p>
+			<p><%= @patient.phone %></p>
+		</div>
+		<div class="buttons_box">
+			<%= link_to "確定", "javascript: $('#line_account_binding_lightbox').remove();", class: "btnBu" %>
+		</div>
+	</div>
+</div>
+
+

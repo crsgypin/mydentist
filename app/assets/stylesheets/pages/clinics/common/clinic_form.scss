@@ -17,29 +17,31 @@
 }
 
 .clinic_form_box {
-  border-radius: 10px;
-  border: 1px solid $colorGy1;
-  padding: 20px;
-  table {
-    tr {
-      td {
-        border-top: 0;
-        vertical-align: middle;
-        a {
-          color: $colorBu;
-          text-decoration: underline;
-        }
-        &:first-child {
-          width: 100px;
-        }
-        &:nth-child(2) {
-          width: calc(100% - 100px);
-        }
-				input, select {
-          &:not(:first-child){
-            margin-left: 20px;            
+  .content_box {
+    border-radius: 10px;
+    border: 1px solid $colorGy1;
+    padding: 20px;
+    table {
+      tr {
+        td {
+          border-top: 0;
+          vertical-align: middle;
+          a {
+            color: $colorBu;
+            text-decoration: underline;
           }
-				}
+          &:first-child {
+            width: 100px;
+          }
+          &:nth-child(2) {
+            width: calc(100% - 100px);
+          }
+  				input, select {
+            &:not(:first-child){
+              margin-left: 20px;            
+            }
+  				}
+        }
       }
     }
   }

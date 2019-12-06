@@ -1,5 +1,5 @@
 <%= render partial: "clinics/common/clinic_form_table" , locals: {
-  id: "doctor",
+  id: "doctor_form",
   resource: @doctor,
   fields: [
     {t: "照片", v: proc{ |a| 
@@ -16,25 +16,41 @@
     }},
     {t: "醫師姓名", v: proc{|a|
       r = "<div class='flx both'>"
-      r +=  text_field_tag "doctor[title]", a.title, placeholder: "輸入醫師職稱"
-      r +=  text_field_tag "doctor[name]", a.name, placeholder: "輸入醫師姓名"
+      r +=  text_field_tag "doctor[title]", a.title, placeholder: "輸入醫師職稱(必填)"
+      r +=  text_field_tag "doctor[name]", a.name, placeholder: "輸入醫師姓名(必填)"
       r += "</div>"
       r.html_safe
     }},
     {t: "主治", v: proc{|a| 
-      text_area_tag "doctor[pro]", a.pro, placeholder: "輸入主要項目(必填) 例：主治：兒童牙齒"
+      r = "<div class='form_field'>"
+      r += text_area_tag "doctor[pro]", a.pro, placeholder: "輸入主要項目(必填) 例：主治：兒童牙齒", onkeyup: "$(this).siblings('.note').find('span').text(this.value.length)"
+      r += "<div class='note'><span>#{a.pro.length}</span>/45</div>"
+      r += "</div>"
+      r.html_safe
     }},
     {t: "學經歷", v: proc{|a| 
-      text_area_tag "doctor[experience]", a.experience, placeholder: "輸入學經歷(必填) 例：學經歷：臺北醫學大學畢業"
+      r = "<div class='form_field'>"
+      r +=  text_area_tag "doctor[experience]", a.experience, placeholder: "輸入學經歷(必填) 例：學經歷：臺北醫學大學畢業", onkeyup: "$(this).siblings('.note').find('span').text(this.value.length)"
+      r += "<div class='note'><span>#{a.experience.length}</span>/500</div>"
+      r += "</div>"
+      r.html_safe
     }},
     {t: "網頁連結", v: proc{|a| 
       text_field_tag "doctor[web_link]", a.web_link, placeholder: "輸入網址"
     }},
     {t: "聯絡電話", v: proc{|a| 
-      text_field_tag "doctor[phone]", a.phone, placeholder: "輸入聯絡電話(必填)"
+      r = "<div class='form_field'>"
+      r += text_field_tag "doctor[phone]", a.phone, placeholder: "輸入聯絡電話(必填)"
+      r += "<div class='note'>不會顯示於Line上</div>"
+      r += "</div>"
+      r.html_safe
     }},
     {t: "備註", v: proc{|a| 
-      text_field_tag "doctor[note]", a.note, placeholder: "輸入備註"
+      r = "<div class='form_field'>"
+      r += text_field_tag "doctor[note]", a.note, placeholder: "輸入備註"
+      r += "<div class='note'>不會顯示於Line上</div>"
+      r += "</div>"
+      r.html_safe
     }},
   ]
 }
