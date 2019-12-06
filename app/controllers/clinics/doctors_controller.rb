@@ -16,9 +16,7 @@ class ::Clinics::DoctorsController < ::Clinics::ApplicationController
 
   def create
     @doctor = @clinic.doctors.new(doctor_params)
-    if !@doctor.save
-      return js_render_model_error(@doctor)
-    end
+    @doctor.save
   end
 
   def destroy
@@ -31,7 +29,7 @@ class ::Clinics::DoctorsController < ::Clinics::ApplicationController
   private
 
   def doctor_params
-    params.require(:doctor).permit(:name, :title, :experience, :intro, :pro)
+    params.require(:doctor).permit(:name, :title, :experience, :intro, :pro, :web_link, :phone, :note)
   end
 
 end

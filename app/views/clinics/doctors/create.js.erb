@@ -1,3 +1,10 @@
 
-alert("新增成功");
-window.location.href="<%= url_for(action: :show, id: @doctor) %>";
+<% if @doctor.errors.present? %>
+	$("[name]").removeClass("error");
+	<% @doctor.errors.keys.each do |key| %>
+	$("[name='doctor[<%= key %>]'").addClass('error');
+	<% end %>
+<% else %>
+	alert("新增成功");
+	window.location.href="<%= url_for(action: :show, id: @doctor) %>";
+<% end %>

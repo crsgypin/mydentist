@@ -8,11 +8,12 @@ class Doctor < ApplicationRecord
 	has_many :event_durations, through: :events
 	enum status: {"在職" => 1, "離職" => 2}
 	before_validation :set_friendly_id, on: :create
-	validates_presence_of :friendly_id, :name, :title
+	validates_presence_of :friendly_id, :name, :title, :pro, :experience, :phone
 	validates_uniqueness_of :friendly_id
 	mount_uploader :photo, PhotoUploader
 	accepts_nested_attributes_for :doctor_services
 	before_save :set_form_complete
+	before_validation :check_length
 	scope :form_completes, -> { where(form_complete: Doctor.all_complete_number)}
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
@@ -65,8 +66,12 @@ class Doctor < ApplicationRecord
 		end
 	end
 
+	def experience
+		self[:experience].present? ? self[:experience] : ""		
+	end
+
 	def pro
-		self[:pro].present? ? self[:pro] : "(建置中)"
+		self[:pro].present? ? self[:pro] : ""
 	end
 
 	def title_name
@@ -125,6 +130,18 @@ class Doctor < ApplicationRecord
 	end
 
   private
+
+  def check_length
+  	if self.pro.length > 45
+  		self.errors.add("pro", "主治超過45個字")
+  	end
+  	if self.pro.length > 500
+  		self.errors.add("experience", "學經歷超過500個字")
+  	end
+  	if self.errors.present?
+	  	throw :abort
+	  end
+  end
 
   def set_friendly_id
   	if self.friendly_id.nil?
