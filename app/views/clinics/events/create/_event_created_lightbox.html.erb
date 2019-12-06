@@ -19,7 +19,7 @@
 		</div>
 		<div class="buttons_box">
 			<%= link_to "略過", "javascript: $('#event_created_lightbox').remove()", class: "btnW" %>
-			<%= link_to "馬上綁定", new_clinic_events_selector_line_account_path(@clinic), class: "btnBu", remote: true %>
+			<%= link_to "馬上綁定", new_clinic_events_selector_line_account_path(@clinic, patient_id: @patient.id), class: "btnBu", remote: true %>
 		</div>
 	</div>
 </div>

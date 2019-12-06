@@ -1,0 +1,19 @@
+
+<div id="<%= id %>" class="alert_lightbox lightbox selected">
+  <div class="inbox">
+    <div class="content_box">
+      <div><%= image_tag clinic_static_image_url("danger") %></div>
+      <h2><%= title %></h2>
+      <div>
+      	<%= content %>
+      </div>
+    </div>
+    <div class="buttons_box">
+    	<%= link_to "取消", "javascript:$('#alert_lightbox').remove();", class: "btnW" %>
+    	<%= confirm_tag %>
+    </div>
+  </div>
+</div>
+
+
+

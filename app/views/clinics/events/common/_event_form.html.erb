@@ -119,7 +119,7 @@
 <script type="text/javascript">
 	$(function(){
 		var box = $("#clinic_event_form");
-		box.(".patient_box").find("input,select")
+		box.find(".patient_box").find("input,select");
 		var patientInput = box.find("[name='patient_id']");
 		var serviceInput = box.find("[name='event[service_id]']");
 		var doctorInput = box.find("[name='event[doctor_id]']");

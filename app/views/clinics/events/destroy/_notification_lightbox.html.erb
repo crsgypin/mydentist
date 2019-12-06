@@ -1,4 +1,16 @@
 
+<%= render partial: "clinics/common/alert_lightbox", locals: {
+  id: "cancel_event_lightbox",
+  title: "取消預約?",
+  content: capture do %>
+    <p class="patient_name"><%= @event.patient.name %></p>
+    <p class="date_time"><%= @event.desc_format(2) %></p>
+    <p class="service"><%= @event.service.name %>(<%= @event.doctor.title_name %>)</p>
+<% end,
+  confirm_tag: link_to("確定", url_for(action: :destroy, id: @event, do_action: 1), class: "btnBu", remote:true, method: :delete)
+} %>
+
+<% if false %>
 <div id="cancel_event_lightbox" class="lightbox selected">
   <div class="inbox">
     <div class="content_box">
@@ -14,4 +26,4 @@
     </div>
   </div>
 </div>
-
+<% end %>

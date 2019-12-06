@@ -5,7 +5,6 @@
  	$("[name='patient[<%= key %>]'").addClass('error');
  	<% end %>
 <% elsif @event.errors.present? %>
-<% puts "eee: #{@event.errors.full_messages}" %>
 	$("[name], .date_time_box").removeClass("error");
 	<% @event.errors.keys.each do |key| %>
  	$("[name='event[<%= key %>]'").addClass('error');

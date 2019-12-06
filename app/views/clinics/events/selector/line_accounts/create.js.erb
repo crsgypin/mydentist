@@ -1,0 +1,9 @@
+
+<% if @patient.line_account.present? %>
+	clearInterval(window.timeId);
+	$("#clinc_line_account_lightbox").remove();
+	$("body").append("<%= j render_relative_partial 'create/lightbox' %>");
+<% else %>
+	<%# do nothing %>
+<% end %>
+
