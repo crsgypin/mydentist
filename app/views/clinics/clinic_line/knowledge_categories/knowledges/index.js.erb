@@ -1,5 +1,8 @@
 
 
-$("#clinic_knowledge_categories_show").html("<%= j render_relative_partial 'index/content' %>");
+$("#clinic_knowledge_categories_show .inbox").html("<%= j render_relative_partial 'index/content' %>");
 
+<% if @clinic_line_knowledges.length == 0 %>
+$("#clinic_knowledge_categories_show .no_content").removeClass("hidden");
+<% end %>
 

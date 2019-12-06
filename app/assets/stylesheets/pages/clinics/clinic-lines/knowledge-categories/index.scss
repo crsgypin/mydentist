@@ -31,5 +31,31 @@
 			}
 		}
 	}
+	#clinic_knowledge_categories_show {
+		position: relative;
+		.inbox{
+			min-height: 80vh;
+			position: relative;
+		}
+		.no_content {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 500px;
+			transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			z-index: -1;
+			img {
+				display: block;
+				width: 180px;
+				margin: 0 auto 20px;
+			}
+			p {
+				text-align: center;
+				font-size: $fs_24p;
+				color: $colorGy1;
+			}
+		}
+	}
 }
 
