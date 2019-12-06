@@ -19,8 +19,7 @@
 	private
 
 	def event_notification_schedule_params
-		params.require(:event_notification_schedule).permit(:doctor_id, :date, :hour, :minute, :duration, :schedule_type, :notification_template_id, notifications_attributes: [:event_id, :patient_id, :args, :notification_template_id])
-		# params.require(:line_template).permit(keywords_attributes: [:name], template_messages_attributes: [:content])
+		params.require(:event_notification_schedule).permit(:doctor_id, :date, :hour, :minute, :duration, :template_message, :schedule_type, :notification_template_id, notifications_attributes: [:event_id, :patient_id, :args, :notification_template_id])
 	end
 
 	# for schedule params

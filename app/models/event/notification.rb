@@ -33,7 +33,11 @@ class Event::Notification < ApplicationRecord
       messages: reply_message({
         type: "confirm",
         alt_text: self.arg_content,
-        text: self.arg_content,
+        text: proc do 
+          c = self.arg_content
+          puts "cc: #{c}"
+          c
+        end.call,
         actions: [
           {
             type: "postback",
