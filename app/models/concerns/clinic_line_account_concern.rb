@@ -30,8 +30,12 @@ module ClinicLineAccountConcern
 		end
 	end
 
-	def line_developer_url
+	def line_manager_developer_url
 		"https://developers.line.biz/console/channel/#{self.line_channel_id}"
+	end
+
+	def line_manager_liff_url
+		"https://developers.line.biz/console/channel/#{self.line_channel_id}/liff"
 	end
 
 	def line_liff_event_url
