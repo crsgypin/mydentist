@@ -1,5 +1,17 @@
 <%= form_tag url_for, method: "get" do %>
-  <%= text_field_tag "name", params[:name] %>
+  <div class="pv5">
+    <label class="pr5">
+      關鍵字
+      <%= text_field_tag "name", params[:name], placeholder: "輸入關鍵字" %>
+    </label>
+    <label class="pr5">
+      Line 帳號
+      <%= select_field_tag "has_line_account", params[:has_line_account], [[nil, "全部"], [0, "無LINE帳號"], [1, "有LINE帳號"]] %>
+    </label>
+  </div>
+  <div class="pv5">
+    <%= submit_tag "查詢", class: "btnW" %>
+  </div>
 <% end %>
 <%= paginate @patients %>
 <%= render partial: "admin/common/index_table" , locals: {
@@ -10,11 +22,14 @@
     {t: "名稱", v: proc{|a| a.name }},
     {t: "電話", v: proc{|a| a.phone }},
     {t: "出生日期", v: proc{|a| a.birthday }},
+    {t: "目前推播", v: proc{|a| 
+      a.current_event_notification.try(:id) 
+    }},
     {t: "LINE", v: proc{|a| 
     	if a.line_account
 	    	r = "#{a.line_account.try(:id)}-#{a.line_account.try(:display_name)}"
 	    else
-	    	"無"
+	    	"<span class='colorGy1'>無</span>".html_safe
 	    end
 	   }},
   ],

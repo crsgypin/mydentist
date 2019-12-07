@@ -14,6 +14,15 @@ class Admin::Dev::PatientsController < Admin::Dev::ApplicationController
     if params[:name].present?
       @patiens = @patients.where("name like ?", "%#{params[:name]}%")
     end
+    if params[:has_line_account].present?
+      if params[:has_line_account] == '0'
+        ids = @patients.joins(:line_account).pluck(:id)
+        @patients = @patients.where.not(id: ids)
+      elsif params[:has_line_account] == '1'
+        ids = @patients.joins(:line_account).pluck(:id)
+        @patients = @patients.where(id: ids)
+      end
+    end
     @patients = @patients.page(params[:page]).per(20)
   end
 
