@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     	resources :clinics
       resources :clinics, only: [], module: :clinics do
         resource :info, only: [:show, :edit, :update], controller: :info
+        resource :line_config, controller: :line_config
         resources :doctors
         resources :doctors, only: [], module: :doctors do
           resource :info, only: [:show, :edit, :update], controller: :info        

@@ -1,0 +1,8 @@
+
+<%= form_tag url_for(action: :update), method: "patch", remote: true do %>
+	<%= render_relative_partial "common/table", locals: {mode: "edit"} %>
+	<div class="buttons_box">
+		<%= link_to "取消", url_for(action: :show), class: "btnW" %>
+		<%= submit_tag "更新", class: "btnBu" %>
+	</div>
+<% end %>
