@@ -1,0 +1,21 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "member",
+  resource: @member,
+  mode: mode,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "使用者名稱", v: proc{|a| a.username}, e: proc { |a|
+      text_field_tag "member[username]", a.username
+    }},
+    {t: "email", v: proc{|a| a.email }, e: proc{ |a|
+      email_field_tag "member[email]", a.email
+    }},
+    {t: "level", v: proc{|a| a.level }, e: proc{ |a|
+      select_field_tag "member[level]", a.level || "操作人員", a.class.levels.keys
+    }},
+    {t: "pasword", e: proc{ |a|
+      password_field_tag "", "", data: {name: "member[password]"}, onchange: "$(this).attr('name', $(this).data('name'))"
+    }},
+  ]
+}
+%>

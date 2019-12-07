@@ -1,14 +1,2 @@
-<%= render partial: "admin/common/index_table" , locals: {
-  id: "members",
-  resources: @members,
-  cols: [
-    {k: "id", v: proc{|a| a.id }},
-    {t: "email", v: proc{|a| a.email }},
-    {t: "username", v: proc{|a| a.username }}
-  ],
-  row: {
-	  default_sel_index: 0,
-  	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
-  }
-}
-%>
+
+<%= render "admin/common/members/index" %>
