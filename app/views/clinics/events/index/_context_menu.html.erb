@@ -159,17 +159,13 @@
       })
     });
     $("body").click(function(){
-      if(window.durationNewMode){
-        window.durationNewMode = false;
-        return;
-      }
-    	contextMenu.removeClass("selected");
+      contextMenu.removeClass("selected");
     })
 
     //for broadcast
     var startHour, startMinute, selectedElm;
     var tableBox = $("#calendar_day .table_box");
-    var selBroadcastElm, baseTop, selTop, selHeight;
+    var selBroadcastElm, baseTop, selTop, selHeight, lastBroadcastElm;
     tableBox.find(".patient_event.new").on("mousedown", function(){
       var tr = $(this).closest('.d_row.value_row');
       // $(this).addClass("selected_broadcast");
@@ -220,21 +216,27 @@
         var startTime = d.start_hour * 60 + d.start_minute;
         var endTime = d.end_hour * 60 + d.end_minute;
         var delta = Math.abs(endTime - startTime) + 15;
-        if(delta >= 15){
-          var x = e.clientX;
-          var y = e.clientY;
-          window.showContentMenu("new_broadcast", x, y, {
-            doctorId: d.doctor_id,
-            date: d.date,
-            hour: d.start_hour,
-            minute: d.start_minute,
-            duration: delta,
-          });
-          window.durationNewMode = true;        
-        }
-        selBroadcastElm = null
+        var x = e.clientX;
+        var y = e.clientY;
+        window.showContentMenu("new_broadcast", x, y, {
+          doctorId: d.doctor_id,
+          date: d.date,
+          hour: d.start_hour,
+          minute: d.start_minute,
+          duration: delta,
+        });
+        lastBroadcastElm = selBroadcastElm;
+        selBroadcastElm = null;
       }
+    });
 
+    $("body").on("mousedown", function(){
+      if(lastBroadcastElm){
+        var tr = lastBroadcastElm.closest(".d_row");
+        lastBroadcastElm.css({top: 0, height: tr.height()})
+        lastBroadcastElm.addClass("hidden");
+        return;
+      }      
     });
 	})
 	
