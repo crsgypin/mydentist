@@ -8,9 +8,12 @@
 		</div>
 		<% end %>
 	</div>
-	<div class="notification" onclick="$(this).addClass('selected');">
-		<%= link_to clinic_lightbox_clinic_notifications_path(@clinic), remote: true do %>
+	<div class="notification">
+		<%= link_to clinic_lightbox_clinic_notifications_path(@clinic), remote: true, class: "unselbell" do %>
 			<%= icon_tag(:bell) %>
+	  <% end %>
+	  <%= link_to "javascript:;", class: "selbell" do %>
+			<%= icon_tag(:bell) %>	  
 	  <% end %>
 	  <div id="clinic_notification_box"></div>
 	 </div>

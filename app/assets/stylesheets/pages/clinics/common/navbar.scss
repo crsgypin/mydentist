@@ -38,11 +38,22 @@
     line-height: 60px;
     font-size: $fs_24p;
     >a {
-    	color: $colorGy1;
+      &.unselbell {
+        color: $colorGy1;
+      }
+      &.selbell {
+        color: $colorY;
+        display: none;      
+      }
     }
     &.selected {
       > a {
-        color: $colorY;
+        &.unselbell {
+          display: none;        
+        }
+        &.selbell {
+          display: block;
+        }
       }
     }
 	}

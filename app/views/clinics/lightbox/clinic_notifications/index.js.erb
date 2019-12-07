@@ -1,3 +1,12 @@
 
 $("#clinic_notification_box").remove();
 $("#clinic_nav .notification").append("<%= j render_relative_partial 'index/lightbox' %>");
+$("#clinic_nav .notification").addClass("selected");
+
+$("body").on("click.clinic_notification", function(e){
+	if($(e.target).closest("#clinic_notification_box").length == 0){
+		$("#clinic_notification_box").remove();
+		$("body").off("click.clinic_notification")
+		$("#clinic_nav .notification").removeClass("selected");
+	}
+});
