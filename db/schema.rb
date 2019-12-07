@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191203155905) do
+ActiveRecord::Schema.define(version: 20191207050602) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -149,8 +149,13 @@ ActiveRecord::Schema.define(version: 20191203155905) do
     t.string "phone2", limit: 100
     t.string "address", limit: 100
     t.text "description"
-    t.string "channel_secret"
-    t.string "channel_token"
+    t.string "line_account_id", limit: 100
+    t.string "line_channel_id", limit: 100
+    t.string "line_channel_secret"
+    t.string "line_channel_access_token"
+    t.string "line_liff_event_url", limit: 100
+    t.string "line_liff_doctor_url", limit: 100
+    t.string "line_liff_patient_url", limit: 100
     t.text "recommend"
     t.text "photo"
     t.string "lat"
@@ -162,6 +167,15 @@ ActiveRecord::Schema.define(version: 20191203155905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "doctor_duration_schedules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer "doctor_id"
+    t.string "name"
+    t.date "start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_doctor_duration_schedules_on_doctor_id"
+  end
+
   create_table "doctor_durations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "doctor_id"
     t.string "wday_hour_minute", limit: 50
@@ -171,7 +185,9 @@ ActiveRecord::Schema.define(version: 20191203155905) do
     t.integer "duration", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration_schedule_id"
     t.index ["doctor_id"], name: "index_doctor_durations_on_doctor_id"
+    t.index ["duration_schedule_id"], name: "index_doctor_durations_on_duration_schedule_id"
     t.index ["wday_hour_minute"], name: "index_doctor_durations_on_wday_hour_minute"
   end
 
