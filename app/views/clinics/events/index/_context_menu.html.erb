@@ -159,40 +159,65 @@
     })
 
     //for broadcast
-    var selecting = false;
     var startHour, startMinute, selectedElm;
     var tableBox = $("#calendar_day .table_box");
+    var selBroadcastElm, baseTop, selTop, selHeight;
     tableBox.find(".patient_event.new").on("mousedown", function(){
-      var d = $(this).data();
+      var tr = $(this).closest('.d_row.value_row');
+      // $(this).addClass("selected_broadcast");
+      selBroadcastElm = tr.find(".broadcast_event")
+      selBroadcastElm.removeClass("hidden");
+      selTop = selBroadcastElm.offset().top;
+      baseTop = selBroadcastElm.offset().top - selBroadcastElm.position().top;
+      selHeight = selBroadcastElm.height();
+
+      //save hour and minute
+      var d = tr.data();
       startHour = d.hour;
       startMinute = d.minute;
-      $(this).addClass("selected_broadcast");
-      selecting = true;
+      selBroadcastElm.data("start_hour", start_hour);
+      selBroadcastElm.data("end_hour", end_hour);
     });
 
     tableBox.on("mousemove", function(e){
-      if(selecting){
-        $(e.target).closest(".patient_event").addClass("selected_broadcast");
+      if(!selBroadcastElm){
+        return;
+      }
+      var tr = $(e.target).closest('.d_row.value_row');
+      if(!tr.length == 0){
+        return;
+      }
+      var thisTop = tr.offset().top;
+      var thisHeight = tr.height();
+      if(thisTop >= selTop){
+        var height = thisTop - selTop + selHeight;
+        selBroadcastElm.css({top: selTop - baseTop, height: height + "px"});
+      } else {
+        var height = selTop - thisTop + selHeight;
+        selBroadcastElm.css({top: thisTop - baseTop, height: height + "px"});
       }
     });
 
-    tableBox.find(".patient_event.new").on("mouseup", function(e){
-      var d = $(this).data();
-      var startTime = startHour * 60 + startMinute;
-      var endTime = d.hour * 60 + d.minute;
-      var delta = Math.abs(endTime - startTime) + 15;
-      if(delta > 15){
-        var x = e.clientX;
-        var y = e.clientY;
-        window.showContentMenu("new_broadcast", x, y, {
-          hour: startHour,
-          minute: startMinute,
-          duration: delta,
-        });
-        window.durationNewMode = true;        
+    tableBox.on("mouseup", function(e){
+      if(selBroadcastElm){
+        selBroadcastElm = null
+        var d = $(e.target).closest(".d-row").data();
+        var startTime = startHour * 60 + startMinute;
+        var endTime = d.hour * 60 + d.minute;
+        var delta = Math.abs(endTime - startTime) + 15;
+        if(delta > 15){
+          var x = e.clientX;
+          var y = e.clientY;
+          window.showContentMenu("new_broadcast", x, y, {
+            hour: startHour,
+            minute: startMinute,
+            duration: delta,
+          });
+          window.durationNewMode = true;        
+        }
+        tableBox.find(".selected_broadcast").removeClass("selected_broadcast");
       }
-      tableBox.find(".selected_broadcast").removeClass("selected_broadcast");
-      selecting = false;
+
     });
 	})
 	
