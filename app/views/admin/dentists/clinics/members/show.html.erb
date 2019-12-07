@@ -1,24 +1,2 @@
-<%= render partial: "admin/common/show_table" , locals: {
-  id: "member",
-  resource: @member,
-  fields: [
-    {k: "id", v: proc{|a| a.id }},
-    {k: "account", v: proc{|a| a.account }},
-    {k: "username", v: proc{|a| a.username }},
-    {k: "email", v: proc{|a| a.email }},
-    {k: "encrypted_password", v: proc{|a| a.encrypted_password }},
-    {k: "reset_password_token", v: proc{|a| a.reset_password_token }},
-    {k: "reset_password_sent_at", v: proc{|a| a.reset_password_sent_at }},
-    {k: "role", v: proc{|a| a.role }},
-    {k: "level", v: proc{|a| a.level }},
-    {k: "remember_created_at", v: proc{|a| a.remember_created_at }},
-    {k: "sign_in_count", v: proc{|a| a.sign_in_count }},
-    {k: "current_sign_in_at", v: proc{|a| a.current_sign_in_at }},
-    {k: "last_sign_in_at", v: proc{|a| a.last_sign_in_at }},
-    {k: "current_sign_in_ip", v: proc{|a| a.current_sign_in_ip }},
-    {k: "last_sign_in_ip", v: proc{|a| a.last_sign_in_ip }},
-    {k: "created_at", v: proc{|a| a.created_at }},
-    {k: "updated_at", v: proc{|a| a.updated_at }}
-  ]
-}
-%>
+
+<%= render "admin/common/members/show" %>

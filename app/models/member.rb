@@ -10,6 +10,7 @@ class Member < ApplicationRecord
   has_one :doctor
   before_destroy :check_level_for_destroy
   mount_uploader :photo, PhotoUploader
+  validates_presence_of :level
   include Clinic::StaticImageHelper
 
   def photo_url

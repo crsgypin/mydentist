@@ -1,9 +1,9 @@
 class Clinic < ApplicationRecord
-	has_many :members
-	has_many :doctors
-	has_many :services
-	has_many :patients
-	has_many :events
+	has_many :members, dependent: :restrict_with_exception
+	has_many :doctors, dependent: :restrict_with_exception
+	has_many :services, dependent: :restrict_with_exception
+	has_many :patients, dependent: :restrict_with_exception
+	has_many :events, dependent: :restrict_with_exception
 	has_many :event_durations, through: :events
 	has_many :line_accounts, class_name: "Line::Account"
 	has_many :clinic_durations, class_name: "Clinic::Duration"
@@ -20,24 +20,18 @@ class Clinic < ApplicationRecord
 	has_many :event_notification_templates, class_name: "Event::NotificationTemplate"
 	has_many :event_notification_schedules, class_name: "Event::NotificationSchedule"
 	accepts_nested_attributes_for :services
+	before_validation :check_and_set_member, on: :create
 	validates_presence_of :friendly_id, :name, :phone, :address
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :map_photo, PhotoUploader
 	include Common::DateTimeDurationHelper
 	include Common::StaticImageHelper
 	include Common::ImageHelper
-	include Common::LineShareHelper
+	include ClinicLineAccountConcern
+	attr_accessor :member_email, :member_password
 
 	def self.default_duration
 		15
-	end
-
-	def add_line_friend_path
-		Rails.application.config_for(:api_key)['line']['add_friend_url']
-	end
-
-	def line_binding_url
-		liff_patient_binding_url(self)
 	end
 
 	def to_param
@@ -121,4 +115,19 @@ class Clinic < ApplicationRecord
 		true
 	end
 	
+	def check_and_set_member
+		if !self.member_email.present?
+			self.errors.add("member_email",  "未填寫email")
+		end
+		if !self.member_password.present?
+			self.errors.add("member_password",  "未填寫密碼")
+		end
+		throw :abort if self.errors.present?
+		new_member = self.members.new
+		new_member.email = self.member_email
+		new_member.password = self.member_password
+		new_member.level = "管理者"
+		true
+	end
+
 end

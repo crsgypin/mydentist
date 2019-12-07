@@ -29,8 +29,8 @@ class Line::Account < ApplicationRecord
 	def get_profile
 		begin
 			client = Line::Bot::Client.new do |config|
-			  config.channel_secret = Rails.application.config_for(:api_key)["line"]["channel_secret"]
-			  config.channel_token = Rails.application.config_for(:api_key)["line"]["channel_access_token"]
+	      config.channel_secret = self.clinic.line_channel_secret #Rails.application.config_for('api_key')["line"]["channel_secret"]
+  	    config.channel_token = self.clinic.line_channel_access_token #Rails.application.config_for('api_key')["line"]["channel_access_token"]
 			end
 		  response = client.get_profile(self.line_user_id)
 			result = JSON.parse(response.body)

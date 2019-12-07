@@ -4,7 +4,7 @@ class Admin::Dentists::Clinics::MembersController < Admin::Dentists::Clinics::Ap
       variable_name: "member",
       new_resource: proc { @clinic.members.new},
       find_resource: proc { @clinic.members.find(params[:id])},
-      resource_params: proc { params.require(:member).permit(@member.class.accessable_atts)}
+      resource_params: proc { params.require(:member).permit(@member.class.accessable_atts + [:password])}
     })
   }
 
