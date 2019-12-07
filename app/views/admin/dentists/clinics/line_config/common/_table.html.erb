@@ -34,19 +34,34 @@ end %>
   <p class="fs12 ml6">"新增官方帳號", "填寫LINE帳號代碼", 請前往 
     <%= link_to "LINE官方帳號網址", "https://developers.line.biz/console/", target: "_blank", class: "colorBu" %></p>
 </div>
+<% if @clinic.line_account_id.present? %>
 <div class="border pv5 ph5">
   <p class="fs12">Webhook：</p>
   <% if @clinic.line_account_id %>
-  <p class="fs12">webhook網址, 請前往
+  <p class="pl5 fs12">webhook網址, 請前往
     <%= link_to "此網址", "https://manager.line.biz/account/#{@clinic.line_account_id}/setting/messaging-api", class: "colorBu", target: "_blank" %>
     填寫以下網址</p>
-  <p class="fs12">
+  <p class="fs12 pl5">
     <%= linebot_clinic_webhook_url(@clinic)  %>
   </p>
   <% else %>
-  尚未填寫『LINE帳號代碼』
+  <p class="pl5 fs12"> 尚未填寫『LINE帳號代碼』</p>
   <% end %>
 </div>
+<div class="border pv5 ph5">
+  <p>填表狀態</p>
+  <p class="pl5 fs12">
+    <%= status = @clinic.line_urls_complete
+        if status == "已完成"
+          status = "<span class='colorGn'>#{status}</span>"
+        else
+          status = status.gsub(" ", "<br>")
+        end
+        status.html_safe
+    %>
+  </p>
+</div>
+<% end %>
 
 <div class="content_box pv10">
 <%= render partial: "admin/common/show_table" , locals: {
@@ -55,15 +70,6 @@ end %>
   mode: mode,
   fields: [
     {k: "id", v: proc{|a| a.id }},
-    {t: "填表狀態", v: proc{|a| 
-      status = a.line_urls_complete
-      if status == "已完成"
-        status = "<span class='colorGn'>#{status}</span>"
-      else
-        status = status.gsub(" ", "<br>")
-      end
-      status.html_safe
-    }},
     {t: "LINE帳號代碼", v: proc{|a| a.line_account_id }, e: proc{|a|
         text_field_tag("clinic[line_account_id]", a.line_account_id)
     }},
