@@ -90,13 +90,19 @@ end %>
           s = text_field_tag "clinic[line_channel_access_token]", a.line_channel_access_token
       }},
     {t: liff_title.call("Liff網址 預約時間"), v: proc{|a| a.line_liff_event_url }, e: proc{ |a|
-        text_field_tag "clinic[line_liff_event_url]", a.line_liff_event_url
+        r = "<p class='fs12 colorGn'>#{a.web_liff_event_url}</p>"
+        r += text_field_tag "clinic[line_liff_event_url]", a.line_liff_event_url
+        r.html_safe
     }},
     {t: liff_title.call("Liff網址 醫生資訊"), v: proc{|a| a.line_liff_doctor_url }, e: proc{ |a|
-        text_field_tag "clinic[line_liff_doctor_url]", a.line_liff_doctor_url
+        r = "<p class='fs12 colorGn'>#{a.web_liff_doctor_url}</p>"
+        r += text_field_tag "clinic[line_liff_doctor_url]", a.line_liff_doctor_url
+        r.html_safe
     }},
     {t: liff_title.call("Liff網址 綁定病患"), v: proc{|a| a.line_liff_patient_url }, e: proc{ |a|
-        text_field_tag "clinic[line_liff_patient_url]", a.line_liff_patient_url
+        r = "<p class='fs12 colorGn'>#{a.web_liff_doctor_url}</p>"
+        r += text_field_tag "clinic[line_liff_patient_url]", a.line_liff_patient_url
+        r.html_safe
     }},
   ]
 }
