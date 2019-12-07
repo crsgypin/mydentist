@@ -1,4 +1,6 @@
-
+<div class="pv5">
+	<%= link_to "移除目前推播", url_for(action: :update, id: @patient, patient: {current_event_notification_id: ""}), remote: true, method: "patch" %>
+</div>
 <%= render :partial => "admin/common/tabs_iframe", locals: {
   id: "patient",
   sel_tab_index: 1,
