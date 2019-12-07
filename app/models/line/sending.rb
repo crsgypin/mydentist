@@ -40,8 +40,8 @@ class Line::Sending < ApplicationRecord
 			return
 		end
     linebot ||= Line::Bot::Client.new do |config|
-      config.channel_secret = Rails.application.config_for('api_key')["line"]["channel_secret"]
-      config.channel_token = Rails.application.config_for('api_key')["line"]["channel_access_token"]
+      config.channel_secret = self.account.clinic.line_channel_secret #Rails.application.config_for('api_key')["line"]["channel_secret"]
+      config.channel_token = self.account.clinic.line_channel_access_token #Rails.application.config_for('api_key')["line"]["channel_access_token"]
     end
 
     begin
