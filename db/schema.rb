@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191207050602) do
+ActiveRecord::Schema.define(version: 20191207102708) do
 
   create_table "booking_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "clinic_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20191207050602) do
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
-    t.integer "duration", limit: 1
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_booking_events_on_clinic_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20191207050602) do
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
-    t.integer "duration", limit: 1
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_durations_on_clinic_id"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 20191207050602) do
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
-    t.integer "duration", limit: 1
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration_schedule_id"
@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(version: 20191207050602) do
     t.integer "wday", limit: 1
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
-    t.integer "duration", limit: 1
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_durations_on_event_id"
@@ -323,7 +323,7 @@ ActiveRecord::Schema.define(version: 20191207050602) do
     t.date "date"
     t.integer "hour", limit: 1
     t.integer "minute", limit: 1
-    t.integer "duration", limit: 1
+    t.integer "duration"
     t.integer "event_durations_count", limit: 1, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -9,25 +9,27 @@
 	  <% events = hour_minute_segment[:events] %>
 		<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 		<% zindex = 100 + index %>
-		<% new_zindex = index %>
-		<% if false %>
-			<div class="d_row hour_minute_tr <%= border_style %> vacation" data-hour="<%= hour %>" style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
-			</div>
-			<% next %>
-		<% end %>
-		<div class="d_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>" data-hour="<%= hour %>" style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
+		<% new_zindex = 10 + index %>
+		<% broadcast_zindex = 5  + index %>
+		<div class="d_row value_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>"
+	  	data-doctor_id="<%= doctor.id %>"
+	  	data-date="<%= @date %>" 
+	  	data-hour="<%= hour %>"
+	  	data-minute="<%= minute %>"
+			style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
+			<%# z-index 狀態: 有掛號 > 無掛號 > 推播中 > 休假 %>
 			<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
 			<% if broadcast_event.present? %>
 				<% height = broadcast_event.event_durations_count * row_height %>
-				<div class="patient_event broadcast"
-					data-mode="broadcast"
-		    	data-id="<%= broadcast_event.id %>"
-		      style="height: <%= height %>px; line-height: <%= height %>px; z-index: <%= zindex %>; width: 100%;">
-		      推播中
+				<div class="broadcast_event exist" style="width: calc(100%); height: <%= height %>px; line-height: <%= height %>px; z-index: <%= broadcast_zindex %>;">
+					推播中
 				</div>
 			<% else %>
+				<div class="broadcast_event hidden new" style="width: 100%; height: <%= row_height %>px;z-index: <%= broadcast_zindex %>;" >
+				</div>
+			<% end %>
 
-	  	<% selected_events = events.select {|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %>
+	  	<% selected_events = events.select {|e| e.hour == hour && e.minute == minute && e.is_valid_in_line?} %><%# event 有多個區間，取第一個區間當 selected_events %>
 		  <% if events.length > 0 %>
 				<% width = "#{80 / selected_events.length}%" if selected_events.length > 0 %>
 				<%# 80 表示 最滿為 80% %>
@@ -53,14 +55,9 @@
 		  <% new_event_width = "#{selected_events.length > 0 ? 20 : 100}%" %>
 		  <div class="patient_event new"
 				data-mode="new"
-		  	data-doctor_id="<%= doctor.id %>"
-		  	data-date="<%= @date %>" 
-		  	data-hour="<%= hour %>"
-		  	data-minute="<%= minute %>"
 		  	style="height: <%= row_height %>px; z-index: <%= new_zindex %>; width: <%= new_event_width %>;" 
 		  	onclick="<%= onclick_new_event.call(hour, minute) %>">
 		  </div>
-			<% end %>
 		</div>
 	<% end %>
 </div>
