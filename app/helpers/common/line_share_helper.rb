@@ -19,7 +19,7 @@ module Common::LineShareHelper
 		# else
 		# 	url = Rails.application.routes.url_helpers.linebot_clinic_event_url(clinic, line_account_id: line_account.id, host: Rails.application.config_for(:api_key)["base_domain"])
 		# end	
-		url = "#{clinic.line_liff_event_url}" + "?"
+		url = "#{clinic.line_liff_event_url}" + "?line_account_id=#{line_account.id}"
 		url += "&doctor_id=#{args[:doctor_id]}" if args[:doctor_id].present?
 		url += "&event_id=#{args[:event_id]}" if args[:event_id].present?
 		url += "&event_id=#{args[:hour]}" if args[:hour].present?
