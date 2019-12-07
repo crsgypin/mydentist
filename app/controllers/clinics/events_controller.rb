@@ -71,7 +71,7 @@ class ::Clinics::EventsController < ::Clinics::ApplicationController
   def destroy
     @event = @clinic.events.find_by(id: params[:id])
     if params[:do_action] == '1'
-      @event.destroy
+      @event.update(status: "取消")
     end
   end
 

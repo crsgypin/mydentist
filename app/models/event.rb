@@ -21,7 +21,7 @@ class Event < ApplicationRecord
 	after_save :check_hour_minute_duration
 	after_save :set_special_event_to_patient
 	after_create :set_default_doctor
-	after_destroy :set_cancel_to_schedule
+	after_save :set_cancel_to_schedule
 	after_create :check_notification_on_create
 	after_update :check_notification_on_update
 	include Common::DateTimeDurationHelper
@@ -158,8 +158,8 @@ class Event < ApplicationRecord
 	end
 
 	def set_cancel_to_schedule
-		if self.event_notification_schedule.present?
-			self.event_notification_schedule.update(status: "取消", event: nil)
+		if self.status == "取消" && self.event_notification_schedule.present?
+			self.event_notification_schedule.update(status: "已取消", event: nil)
 		end
 	end
 

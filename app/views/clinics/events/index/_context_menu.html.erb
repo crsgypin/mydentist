@@ -51,6 +51,14 @@
         window.showContentMenu(mode, x, y, {
           id: patientElm.data("id")
         });
+      } else {
+        var bn = $(event.target).closest(".broadcast_event");
+        if(bn.length > 0){
+          console.log('idd', bn.data("id"));
+          window.showContentMenu("broadcast_mode", x, y, {
+            id: bn.data("id")
+          })
+        }
       }
     }, false);
 
@@ -83,6 +91,11 @@
           hour: args.hour,
           minute: args.minute,       
           duration: args.duration
+        }
+      } else if(mode == "broadcast_mode"){
+        contextMenu.find(".broadcast_mode").removeClass("hidden");
+        contextData = {
+          id: args.id
         }
       }
     }

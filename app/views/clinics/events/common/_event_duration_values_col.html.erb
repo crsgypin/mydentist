@@ -10,14 +10,14 @@
 		<% border_style ={0 => "border3", 15 => "border2", 30 => "border3", 45 => "border1"}[minute] %>
 		<% zindex = 100 + index %>
 		<% new_zindex = 10 + index %>
-		<% broadcast_zindex = 5  + index %>
+		<% broadcast_zindex = 30  + index %>
 		<div class="d_row value_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>"
 	  	data-doctor_id="<%= doctor.id %>"
 	  	data-date="<%= @date %>" 
 	  	data-hour="<%= hour %>"
 	  	data-minute="<%= minute %>"
 			style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
-			<%# z-index 狀態: 有掛號 > 無掛號 > 推播中 > 休假 %>
+			<%# z-index 狀態: 有掛號 > 推播中 > 無掛號 > 休假 %>
 			<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
 			<% if broadcast_event.present? %>
 				<% height = broadcast_event.event_durations_count * row_height %>
