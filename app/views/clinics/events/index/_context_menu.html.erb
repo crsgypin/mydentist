@@ -13,6 +13,7 @@
 		<li class="remove">取消預約</li>
 	</ul>	
   <ul class="broadcast_mode">
+    <li class="new">新增</li>
     <li class="remove">取消預約</li>
   </ul> 
 </div>
@@ -38,26 +39,25 @@
       var y = e.clientY;
       mode = patientElm.data("mode");
       if(mode == "new"){
-        var tr = patientElm.closest("tr");
-        window.showContentMenu(mode, x, y, {
-          mode: "new",
-          doctorId: tr.data("doctor_id"),
-          date: tr.data("date"),
-          hour: tr.data("hour"),
-          minute: tr.data("minute")
-        });
+        var tr = patientElm.closest(".d_row");
+        var bn = tr.find(".broadcast_event.exist");
+        if(bn.length > 0){
+          window.showContentMenu("broadcast_mode", x, y, {
+            id: bn.data("id")
+          })
+        } else {
+          window.showContentMenu(mode, x, y, {
+            mode: "new",
+            doctorId: tr.data("doctor_id"),
+            date: tr.data("date"),
+            hour: tr.data("hour"),
+            minute: tr.data("minute")
+          });          
+        }
       } else if(mode == "exist"){
         window.showContentMenu(mode, x, y, {
           id: patientElm.data("id")
         });
-      } else {
-        var bn = $(event.target).closest(".broadcast_event");
-        if(bn.length > 0){
-          console.log('idd', bn.data("id"));
-          window.showContentMenu("broadcast_mode", x, y, {
-            id: bn.data("id")
-          })
-        }
       }
     }, false);
 
