@@ -14,7 +14,6 @@ module EventNotificationScheduleConcern
   end
 
 	#for 排成
-
 	def create_broadcast_event
     self.event = Event.create!({
       clinic: self.clinic,
@@ -76,6 +75,7 @@ module EventNotificationScheduleConcern
     end
     self.update(status: "發送中")
  		valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
+      #取沒有現在回診推播的病患
 			patient.line_account.present? && !patient.current_event_notification.present?
 		end
     valid_count = self.get_valid_pushed_count
