@@ -34,11 +34,12 @@ module ClinicNotificationConcern
 
 	def on_change_event_notification(event_notification)
     clinic = event_notification.notification_template.clinic
+
     event = event_notification.event
     if event_notification.status == "同意"
       n = clinic.clinic_notifications.create({
         category: "回覆同意", 
-        patient: event.patient,
+        patient: event_notification.patient,
         args_json: {
           doctor_name: event.doctor.name,
           date: roc_format(event.start_date_time , 5),
@@ -48,7 +49,7 @@ module ClinicNotificationConcern
     elsif event_notification.status == "取消"
       n = clinic.clinic_notifications.create({
         category: "回覆取消",
-        patient: event.patient,
+        patient: event_notification.patient,
         args_json: {
           date: roc_format(Time.now, 5)
         }
