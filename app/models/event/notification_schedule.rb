@@ -9,7 +9,7 @@ class Event::NotificationSchedule < ApplicationRecord
 	enum status: {"尚未發送" => 0, "發送中" => 1, "已發送" => 2, 
     "推播中" => 11, "推播逾期" => 12, "已佔滿" => 13, "已取消" => 14}
 	validates_presence_of :schedule_type
-	after_create :check_notification_type
+	after_create :check_notification_type_on_create
   accepts_nested_attributes_for :notifications
   before_create :set_message_to_template
   attr_accessor :template_message
@@ -26,7 +26,7 @@ class Event::NotificationSchedule < ApplicationRecord
 
 	private
 
-	def check_notification_type
+	def check_notification_type_on_create
 		if self.schedule_type == "立即發送"
       self.reload #reload template message
       self.update(status: "發送中")
@@ -37,6 +37,7 @@ class Event::NotificationSchedule < ApplicationRecord
     elsif self.schedule_type == "排程發送"
       #create pseudo event for broadcast
       self.create_broadcast_event
+      self.status = "推播中"
       self.save
 		end
     true

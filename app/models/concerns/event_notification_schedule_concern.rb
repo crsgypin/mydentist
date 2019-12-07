@@ -73,7 +73,7 @@ module EventNotificationScheduleConcern
     	self.update(status: "已佔滿")
     	return
     end
-    self.update(status: "發送中")
+    self.update(status: "推播中")
  		valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
       #取沒有現在回診推播的病患
 			patient.line_account.present? && !patient.current_event_notification.present?
@@ -97,9 +97,16 @@ module EventNotificationScheduleConcern
  			})
       n.save
 		end
+    r = {pass: 0, fail: 0}
     self.notifications.where(status: "尚未發送").each do |notification|
-      notification.send_message
+      s = notification.send_message
+      if s
+        r[:pass] += 1
+      else
+        r[:fail] += 1
+      end
     end
+    r
   end
 
 	def start_date_time
