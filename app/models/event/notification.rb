@@ -36,7 +36,6 @@ class Event::Notification < ApplicationRecord
         alt_text: self.arg_content,
         text: proc do 
           c = self.arg_content
-          puts "cc: #{c}"
           c
         end.call,
         actions: [
@@ -106,7 +105,15 @@ class Event::Notification < ApplicationRecord
     elsif self.patient.present?
       self.line_account = self.patient.line_account
       self.booking_event = self.patient.booking_events.last || self.patient.booking_events.new
-      #no save due to on create
+      self.booking_event.assign_attributes({
+        clinic: patient.clinic,
+        doctor_id: self.doctor_id,
+        date: self.date,
+        hour: self.hour,
+        minute: self.minute,
+        duration: self.duration
+      })
+      #no save due to on create process
     end
     true
   end

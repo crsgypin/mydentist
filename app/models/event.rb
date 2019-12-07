@@ -32,11 +32,21 @@ class Event < ApplicationRecord
 	end
 
 	def expired?
-		Time.now > self.date_time
+		Time.now > self.end_date_time
 	end
 
-	def date_time
-		Time.parse("#{self.date} #{self.hour}:#{self.minute}")
+	def start_date_time
+		self.date + self.hour.hour + self.minute.minute
+	end
+
+	def end_date_time
+		self.start_date_time + self.duration.minute
+	end
+
+	def in_range?(time)
+		start_time = self.start_date_time
+		end_time = self.end_date_time
+		return time >= start_time && time < end_time
 	end
 
 	def hour_minute=(str)
