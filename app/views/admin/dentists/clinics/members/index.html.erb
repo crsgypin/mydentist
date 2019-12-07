@@ -2,7 +2,9 @@
   id: "members",
   resources: @members,
   cols: [
-    {k: "id", v: proc{|a| a.id }}
+    {k: "id", v: proc{|a| a.id }},
+    {t: "email", v: proc{|a| a.email }},
+    {t: "username", v: proc{|a| a.username }}
   ],
   row: {
 	  default_sel_index: 0,

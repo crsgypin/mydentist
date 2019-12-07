@@ -1,0 +1,38 @@
+<%= render partial: "admin/common/show_table" , locals: {
+  id: "clinic",
+  resource: @clinic,
+  mode: mode,
+  fields: [
+    {k: "id", v: proc{|a| a.id }},
+    {t: "網址代碼", v: proc{|a| a.friendly_id }, e: proc{|a|
+        text_field_tag("clinic[friendly_id]", a.friendly_id)
+    }},
+    {t: "名稱", v: proc{|a| a.name }, e: proc{ |a|
+        text_field_tag "clinic[name]", a.name
+    }},
+    {t: "英文名稱", v: proc{|a| a.name_en }},
+    {t: "電話", v: proc{|a| a.phone }, e: proc{ |a|
+      text_field_tag("clinic[phone]", a.phone)
+    }},
+    {t: "電話2", v: proc{|a| a.phone2 }},
+    {t: "地址", v: proc{|a| a.address }, e: proc{ |a|
+      text_field_tag("clinic[address]", a.address)
+    }},
+    {t: "會員email", e: proc{|a| 
+      email_field_tag "clinic[member_email]", ""
+    }},
+    {t: "會員密碼", e: proc{|a| 
+      password_field_tag "clinic[member_password]", ""
+    }},
+    {t: "描述", v: proc{|a| a.description }},
+    {t: "channel_secret", v: proc{|a| a.channel_secret }},
+    {t: "channel_token", v: proc{|a| a.channel_token }},
+    {t: "備註", v: proc{|a| a.recommend }},
+    {t: "照片", v: proc{|a| a.photo }},
+    {t: "clinic_durations_note", v: proc{|a| a.clinic_durations_note }},
+    {t: "clinic_notifications_read_at", v: proc{|a| a.clinic_notifications_read_at }},
+    {t: "新增時間", v: proc{|a| a.created_at }},
+    {t: "更新時間", v: proc{|a| a.updated_at }}
+  ]
+}
+%>

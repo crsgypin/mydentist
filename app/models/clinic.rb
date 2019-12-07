@@ -20,6 +20,7 @@ class Clinic < ApplicationRecord
 	has_many :event_notification_templates, class_name: "Event::NotificationTemplate"
 	has_many :event_notification_schedules, class_name: "Event::NotificationSchedule"
 	accepts_nested_attributes_for :services
+	before_validation :check_and_set_member, on: :create
 	validates_presence_of :friendly_id, :name, :phone, :address
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :map_photo, PhotoUploader
@@ -27,6 +28,7 @@ class Clinic < ApplicationRecord
 	include Common::StaticImageHelper
 	include Common::ImageHelper
 	include Common::LineShareHelper
+	attr_accessor :member_email, :member_password
 
 	def self.default_duration
 		15
@@ -121,4 +123,18 @@ class Clinic < ApplicationRecord
 		true
 	end
 	
+	def check_and_set_member
+		if !self.member_email.present?
+			self.errors.add("member_email",  "未填寫email")
+		end
+		if !self.member_password.present?
+			self.errors.add("member_password",  "未填寫密碼")
+		end
+		throw :abort if self.errors.present?
+		new_member = self.members.new
+		new_member.email = self.member_email
+		new_member.password = self.member_password
+		true
+	end
+
 end

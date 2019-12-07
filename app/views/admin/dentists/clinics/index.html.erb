@@ -12,6 +12,10 @@
   row: {
 	  default_sel_index: 0,
   	iframe_link_url: proc {|a| url_for(action: :show, id: a)}
+  },
+  new: {
+    link_url: url_for(action: :new),
+    btn_name: "新增診所"
   }
 }
 %>

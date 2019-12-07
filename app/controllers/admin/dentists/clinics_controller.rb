@@ -5,7 +5,7 @@ class Admin::Dentists::ClinicsController < Admin::Dentists::ApplicationControlle
       variable_name: "clinic",
       new_resource: proc { ::Clinic.new},
       find_resource: proc { ::Clinic.find_by(friendly_id: params[:id])},
-      resource_params: proc { params.require(:clinic).permit(Clinic.accessable_atts)}
+      resource_params: proc { params.require(:clinic).permit(Clinic.accessable_atts + [:member_email, :member_password])}
     })
   }
 

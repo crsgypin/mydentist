@@ -1,6 +1,10 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
+  def self.accessable_atts
+    self.column_names - ["id", "created_at", "updated_at"]
+  end
+
   def self.json_format(*keys)
     keys.each do |key|
       define_method "#{key}_json" do |option=nil|
