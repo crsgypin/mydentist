@@ -1,9 +1,9 @@
 class Clinic < ApplicationRecord
-	has_many :members
-	has_many :doctors
-	has_many :services
-	has_many :patients
-	has_many :events
+	has_many :members, dependent: :restrict_with_exception
+	has_many :doctors, dependent: :restrict_with_exception
+	has_many :services, dependent: :restrict_with_exception
+	has_many :patients, dependent: :restrict_with_exception
+	has_many :events, dependent: :restrict_with_exception
 	has_many :event_durations, through: :events
 	has_many :line_accounts, class_name: "Line::Account"
 	has_many :clinic_durations, class_name: "Clinic::Duration"
@@ -134,6 +134,7 @@ class Clinic < ApplicationRecord
 		new_member = self.members.new
 		new_member.email = self.member_email
 		new_member.password = self.member_password
+		new_member.level = "管理者"
 		true
 	end
 
