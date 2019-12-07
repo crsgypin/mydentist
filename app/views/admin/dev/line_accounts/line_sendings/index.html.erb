@@ -19,6 +19,9 @@
         a.messages.to_s[0..100]
       end
     }},
+    {t: "錯誤訊息", v: proc{|a|
+      a.error_message
+    }},
     {k: "created_at", v: proc{|a| a.created_at }},
   ],
   row: {

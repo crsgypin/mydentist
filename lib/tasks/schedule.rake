@@ -5,13 +5,19 @@ namespace :schedule do
 		Sys::Log.create({name: "爽約確認", note: r})
 	end
 
-	task :check_event_notification_schedule => do
+	task :check_event_notification_schedule => :environment do
 		t = Time.now
 		if t.hour >= 6 && t.hour < 24
+			r = {pass: 0, fail: 0}
 			Event::NotificationSchedule.where(schedule_type: "排程發送", status: "推播中").each do |s|
-				s.update(trigger_schedule: 1)
+				k = s.update(trigger_schedule: 1)
+				if k
+					r[:pass] += 1
+				else
+					r[:fail] += 1
+				end
 			end
-			Sys::Log.create({name: "掛號推播中", note: r})
+			Sys::Log.create({name: "掛號推播中", note: k.to_s})
 		end
 	end
 
