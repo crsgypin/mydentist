@@ -8,7 +8,7 @@ module ClinicNotificationConcern
         patient: event.patient,
         args_json: {
           doctor_name: event.doctor.name,
-          date: roc_format(event.date_time, 5),
+          date: roc_format(event.start_date_time, 5),
           service_name: event.service.name
         }
       })      
@@ -41,7 +41,7 @@ module ClinicNotificationConcern
         patient: event.patient,
         args_json: {
           doctor_name: event.doctor.name,
-          date: roc_format(event.date_time , 5),
+          date: roc_format(event.start_date_time , 5),
           service_name: event.service.name
         }
       })
