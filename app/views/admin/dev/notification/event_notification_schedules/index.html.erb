@@ -4,13 +4,12 @@
   cols: [
     {k: "id", v: proc{|a| a.id }},
     {t: "排程", v: proc{|a| a.schedule_type }},
-    {t: "類別", v: proc{|a| a.notification_template.category }},
+    {t: "類別", v: proc{|a| a.category }},
     {t: "狀態", v: proc{|a| a.status }},
     {t: "醫師", v: proc{|a| a.doctor.try(:name) }},
-    {t: "排成日期", v: proc{|a| a.date }},
-    {t: "排成時", v: proc{|a| a.hour }},
-    {t: "排成分", v: proc{|a| a.minute }},
-    {t: "排成區間", v: proc{|a| a.duration }},
+    {t: "推播數", v: proc{|a| a.notifications.length }},
+    {t: "推薦時間", v: proc{|a| a.start_date_time.strftime('%Y/%d/%m %H:%M') if a.start_date_time }},
+    {t: "推薦區間", v: proc{|a| a.duration }},
     {t: "製作時間", v: proc{|a| a.created_at }}
   ],
   row: {

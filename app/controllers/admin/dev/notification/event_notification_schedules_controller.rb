@@ -10,7 +10,8 @@ class Admin::Dev::Notification::EventNotificationSchedulesController < Admin::De
   }
 
   def index
-    @event_notification_schedules = ::Event::NotificationSchedule.all
+    @event_notification_schedules = ::Event::NotificationSchedule.order(id: :desc)
+    @event_notification_schedules = @event_notification_schedules.includes(:notifications, :doctor, :notification_template)
     @event_notification_schedules = @event_notification_schedules.page(params[:page]).per(20)
   end
 

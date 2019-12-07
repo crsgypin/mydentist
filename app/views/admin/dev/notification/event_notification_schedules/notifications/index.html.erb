@@ -3,17 +3,20 @@
   resources: @notifications,
   cols: [
     {t: "id", v: proc{|a| a.id }},
-    {t: "line_account_id", v: proc{|a| a.line_account_id }},
+    {t: "LINE帳號", v: proc{|a| "#{a.line_account_id} #{a.line_account.try(:display_name)}" }},
     {t: "掛號", v: proc{|a| 
       if a.event.present?
         "#{a.event.id} #{a.event.status} #{a.event.desc_format(2)}"
       end
     }},
-    {t: "booking_event_id", v: proc{|a| 
-      a.booking_event_id 
+    {t: "預約的掛號", v: proc{|a| 
+      if a.booking_event_id.present?
+        "#{a.booking_event_id}"
+      end
     }},
     {t: "狀態", v: proc{|a| a.status }},
     {t: "參數", v: proc{|a| a.args }},
+    {t: "發送時間", v: proc{|a| a.created_at }},
   ],
   row: {
 	  default_sel_index: 0,
