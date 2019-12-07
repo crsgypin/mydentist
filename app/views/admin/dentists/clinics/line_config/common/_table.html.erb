@@ -1,7 +1,13 @@
 
-<p class="fs12">說明： </p>
-<p class="fs12 ml6">"新增官方帳號", "填寫LINE帳號代碼", 請前往 
-  <%= link_to "LINE官方帳號網址", "https://developers.line.biz/console/", target: "_blank", class: "colorBu" %></p>
+<% manager_title = proc do |title|
+  r = title
+  if @clinic.line_account_id.present?
+    r += link_to "參考網址", "https://manager.line.biz/account/#{@clinic.line_account_id}/setting/messaging-api", target: "_blank", class: "colorGn"
+  else
+    r += " <span class='colorGn'>請填寫LINE帳號代碼，將會出現參考網址</span>"
+  end
+  r.html_safe  
+end %>
 
 <% dev_title = proc do |title|
   r = title
@@ -23,6 +29,26 @@ end %>
 end %>
 
 
+<div class="border pv5 ph5">
+  <p class="fs12">新增帳號： </p>
+  <p class="fs12 ml6">"新增官方帳號", "填寫LINE帳號代碼", 請前往 
+    <%= link_to "LINE官方帳號網址", "https://developers.line.biz/console/", target: "_blank", class: "colorBu" %></p>
+</div>
+<div class="border pv5 ph5">
+  <p class="fs12">Webhook：</p>
+  <% if @clinic.line_account_id %>
+  <p class="fs12">webhook網址, 請前往
+    <%= link_to "此網址", "https://manager.line.biz/account/#{@clinic.line_account_id}/setting/messaging-api", class: "colorBu", target: "_blank" %>
+    填寫以下網址</p>
+  <p class="fs12">
+    <%= linebot_clinic_webhook_url(@clinic)  %>
+  </p>
+  <% else %>
+  尚未填寫『LINE帳號代碼』
+  <% end %>
+</div>
+
+<div class="content_box pv10">
 <%= render partial: "admin/common/show_table" , locals: {
   id: "clinic",
   resource: @clinic,
@@ -41,31 +67,22 @@ end %>
     {t: "LINE帳號代碼", v: proc{|a| a.line_account_id }, e: proc{|a|
         text_field_tag("clinic[line_account_id]", a.line_account_id)
     }},
-    {t: proc do 
-        r = "Channel"
-        if @clinic.line_account_id.present?
-          r += link_to "參考網址", "https://manager.line.biz/account/#{@clinic.line_account_id}/setting/messaging-api", target: "_blank", class: "colorGn"
-        else
-          r += " <span class='colorGn'>請填寫LINE帳號代碼，將會出現參考網址</span>"
-        end
-        r.html_safe
-      end.call, v: proc{|a| a.line_channel_id }, e: proc{ |a|
+    {t: manager_title.call("Channel"), v: proc{|a| a.line_channel_id }, e: proc{ |a|
       text_field_tag "clinic[line_channel_id]", a.line_channel_id
     }},
-    {t: proc do
-      r = "line_channel_secret"
-      if @clinic.line_account_id.present?
-        r += link_to "參考網址", "https://manager.line.biz/account/#{@clinic.line_account_id}/setting/messaging-api", target: "_blank", class: "colorGn"
-      else
-        r += " <span class='colorGn'>請填寫LINE帳號代碼，將會出現參考網址</span>"
-      end
-      r.html_safe      
-    end.call, v: proc{|a| a.line_channel_secret }, e: proc{ |a|
+    {t: manager_title.call("line_channel_secret"), v: proc{|a| a.line_channel_secret }, e: proc{ |a|
         text_field_tag "clinic[line_channel_secret]", a.line_channel_secret
     }},
-    {t: dev_title.call("line_channel_access_token"), v: proc{|a| a.line_channel_access_token }, e: proc{ |a|
-        text_field_tag "clinic[line_channel_access_token]", a.line_channel_access_token
-    }},
+    {t: dev_title.call("line_channel_access_token"), 
+        v: proc{|a| 
+          s = "<div style='word-break: break-all; width: 500px;'>"
+          s += "#{a.line_channel_access_token }"
+          s += "</div>"
+          s.html_safe          
+        }, 
+        e: proc{ |a|
+          s = text_field_tag "clinic[line_channel_access_token]", a.line_channel_access_token
+      }},
     {t: liff_title.call("Liff網址 預約時間"), v: proc{|a| a.line_liff_event_url }, e: proc{ |a|
         text_field_tag "clinic[line_liff_event_url]", a.line_liff_event_url
     }},
@@ -78,3 +95,4 @@ end %>
   ]
 }
 %>
+</div>
