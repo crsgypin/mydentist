@@ -11,9 +11,11 @@
 		<% zindex = 100 + index %>
 		<% new_zindex = 10 + index %>
 		<% broadcast_zindex = 5  + index %>
-		<div class="d_row value_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>" 	
-			data-hour="<%= hour %>"
-			data-minute="<%= minute %>"
+		<div class="d_row value_row hour_minute_tr <%= border_style %> <%= "vacation" if has_vacation %>"
+	  	data-doctor_id="<%= doctor.id %>"
+	  	data-date="<%= @date %>" 
+	  	data-hour="<%= hour %>"
+	  	data-minute="<%= minute %>"
 			style="margin-left: 0; margin-right: 0; height: <%= row_height %>px;">
 			<%# z-index 狀態: 有掛號 > 無掛號 > 推播中 > 休假 %>
 			<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
@@ -53,10 +55,6 @@
 		  <% new_event_width = "#{selected_events.length > 0 ? 20 : 100}%" %>
 		  <div class="patient_event new"
 				data-mode="new"
-		  	data-doctor_id="<%= doctor.id %>"
-		  	data-date="<%= @date %>" 
-		  	data-hour="<%= hour %>"
-		  	data-minute="<%= minute %>"
 		  	style="height: <%= row_height %>px; z-index: <%= new_zindex %>; width: <%= new_event_width %>;" 
 		  	onclick="<%= onclick_new_event.call(hour, minute) %>">
 		  </div>

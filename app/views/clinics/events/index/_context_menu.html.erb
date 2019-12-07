@@ -21,7 +21,7 @@
 <script type="text/javascript">
 	$(function(){
 		var contextMenu = $("#context_menu");
-		var eventId, doctorId, date, hour, minute, duration;
+    var contextData = {}
     $("body")[0].addEventListener('contextmenu', function(e) {
       if(!$(e.target).closest('#calendar_day').length > 0){
         contextMenu.removeClass("selected");
@@ -38,19 +38,24 @@
       var x = e.clientX;
       var y = e.clientY;
       mode = patientElm.data("mode");
-
-      window.showContentMenu(mode, x, y);
+      if(mode == "new"){
+        var tr = patientElm.closest("tr");
+        window.showContentMenu(mode, x, y, {
+          mode: "new",
+          doctorId: tr.data("doctor_id"),
+          date: tr.data("date"),
+          hour: tr.data("hour"),
+          minute: tr.data("minute")
+        });
+      } else if(mode == "exist"){
+        window.showContentMenu(mode, x, y, {
+          id: patientElm.data("id")
+        });
+      }
     }, false);
 
     window.showContentMenu = function(mode, x, y, args){
       var args = args || {};
-      var patientElm = function(){
-        if($(event.target).is(".patient_event")){
-          return $(event.target);
-        } else {
-          return $(event.target).closest(".patient_event")
-        }
-      }();
       contextMenu.css({top: y, left: x});
       contextMenu.addClass("selected");
       contextMenu.find(".new_mode").addClass("hidden");
@@ -59,23 +64,26 @@
       contextMenu.find(".new_broadcast_mode").addClass("hidden");
       if(mode == "new"){
         contextMenu.find(".new_mode").removeClass("hidden");
-        doctorId = patientElm.data("doctor_id");
-        date = patientElm.data("date");
-        hour = patientElm.data("hour");
-        minute = patientElm.data("minute");                
-      } else if(mode == "new_broadcast"){
-        contextMenu.find(".new_broadcast_mode").removeClass("hidden");
-        doctorId = patientElm.data("doctor_id");
-        date = patientElm.data("date");
-        hour = args.hour;
-        minute = args.minute;
-        duration = args.duration;
+        contextData = {
+          doctorId: args.doctorId,
+          date: args.date,
+          hour: args.hour,
+          minute: args.minute,
+        }
       } else if(mode == "exist") {
         contextMenu.find(".edit_mode").removeClass("hidden");
-        eventId = patientElm.data("id");
-      } else {
-        contextMenu.find(".broadcast_mode").removeClass("hidden");
-        eventId = patientElm.data("id");
+        contextData = {
+          id: args.id
+        }
+      } else if(mode == "new_broadcast"){
+        contextMenu.find(".new_broadcast_mode").removeClass("hidden");
+        contextData = {
+          doctorId: args.doctorId,
+          date: args.date,
+          hour: args.hour,
+          minute: args.minute,       
+          duration: args.duration
+        }
       }
     }
     contextMenu.find(".new").click(function(){
@@ -84,17 +92,17 @@
     		method: "get",
     		dataType: "script",
     		data: {
-    			doctor_id: doctorId,
-    			date: date,
-    			hour: hour,
-    			minute: minute,
-    			duration: duration
+    			doctor_id: contextData.doctorId,
+    			date: contextData.date,
+    			hour: contextData.hour,
+    			minute: contextData.minute,
+    			duration: contextData.duration
     		}
     	});
     });
     contextMenu.find(".remove").click(function(){
   		$.ajax({
-  			url: "<%= url_for(action: :destroy, id: "tmp") %>".replace("tmp", eventId),
+  			url: "<%= url_for(action: :destroy, id: "tmp") %>".replace("tmp", contextData.id),
   			method: "delete",
   			dataType: "script",
   			data: {}
@@ -102,14 +110,14 @@
     });
    //  contextMenu.find(".edit").click(function(){
 			// $.ajax({
-			// 	url: "<%# url_for(action: :edit, id: "tmp") %>".replace("tmp", eventId),
+			// 	url: "<%# url_for(action: :edit, id: "tmp") %>".replace("tmp", contextData.id),
 			// 	method: "get",
 			// 	dataType: "script",
 			// })
    //  });
     contextMenu.find(".event_arrive").click(function(){
       $.ajax({
-        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", eventId),
+        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", contextData.id),
         method: "patch",
         dataType: "script",
         data: {
@@ -122,7 +130,7 @@
     });
     contextMenu.find(".event_delay").click(function(){
       $.ajax({
-        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", eventId),
+        url: "<%= url_for(action: :update, id: "tmp") %>".replace("tmp", contextData.id),
         method: "patch",
         dataType: "script",
         data: {
@@ -173,10 +181,12 @@
 
       //save hour and minute
       var d = tr.data();
-      startHour = d.hour;
-      startMinute = d.minute;
-      selBroadcastElm.data("start_hour", start_hour);
-      selBroadcastElm.data("end_hour", end_hour);
+      selBroadcastElm.data("doctor_id", tr.data("doctor_id"));
+      selBroadcastElm.data("date", tr.data("date"));
+      selBroadcastElm.data("start_hour", d.hour);
+      selBroadcastElm.data("start_minute", d.minute);
+      selBroadcastElm.data("end_hour", d.hour);
+      selBroadcastElm.data("end_minute", d.minute);
     });
 
     tableBox.on("mousemove", function(e){
@@ -184,9 +194,10 @@
         return;
       }
       var tr = $(e.target).closest('.d_row.value_row');
-      if(!tr.length == 0){
+      if(tr.length == 0){
         return;
       }
+      //set position
       var thisTop = tr.offset().top;
       var thisHeight = tr.height();
       if(thisTop >= selTop){
@@ -196,26 +207,32 @@
         var height = selTop - thisTop + selHeight;
         selBroadcastElm.css({top: thisTop - baseTop, height: height + "px"});
       }
+
+      //set hour and minute
+      var d = tr.data();
+      selBroadcastElm.data("end_hour", d.hour);
+      selBroadcastElm.data("end_minute", d.minute);
     });
 
     tableBox.on("mouseup", function(e){
       if(selBroadcastElm){
-        selBroadcastElm = null
-        var d = $(e.target).closest(".d-row").data();
-        var startTime = startHour * 60 + startMinute;
-        var endTime = d.hour * 60 + d.minute;
+        var d = selBroadcastElm.data();
+        var startTime = d.start_hour * 60 + d.start_minute;
+        var endTime = d.end_hour * 60 + d.end_minute;
         var delta = Math.abs(endTime - startTime) + 15;
-        if(delta > 15){
+        if(delta >= 15){
           var x = e.clientX;
           var y = e.clientY;
           window.showContentMenu("new_broadcast", x, y, {
-            hour: startHour,
-            minute: startMinute,
+            doctorId: d.doctor_id,
+            date: d.date,
+            hour: d.start_hour,
+            minute: d.start_minute,
             duration: delta,
           });
           window.durationNewMode = true;        
         }
-        tableBox.find(".selected_broadcast").removeClass("selected_broadcast");
+        selBroadcastElm = null
       }
 
     });
