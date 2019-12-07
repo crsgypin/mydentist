@@ -149,16 +149,20 @@
           event_notification_schedule: {
             category: "回診推播",
             schedule_type: "排程發送",
-            doctor_id: doctorId,
-            date: date,
-            hour: hour,
-            minute: minute,
-            duration: 60
+            doctor_id: contextData.doctorId,
+            date: contextData.date,
+            hour: contextData.hour,
+            minute: contextData.minute,
+            duration: contextData.duration
           }
         }
       })
     });
     $("body").click(function(){
+      if(window.newBroadcastMode){
+        window.newBroadcastMode = false;
+        return;
+      }
       contextMenu.removeClass("selected");
     })
 
@@ -169,6 +173,11 @@
     tableBox.find(".d_row.value_row").on("mousedown", function(){
       //clear previous one
       $(".broadcast_event.new").addClass("hidden");
+
+      if(event.which != 1){
+        <%# 1 是滑鼠左鍵, 3  是滑鼠右鍵 %>
+        return;
+      }
 
       //start sel broadcast
       var tr = $(this);
@@ -235,6 +244,7 @@
         });
         lastBroadcastElm = selBroadcastElm;
         selBroadcastElm = null;
+        window.newBroadcastMode = true;
       }
     });
 	})

@@ -77,14 +77,23 @@ class Event < ApplicationRecord
 			self.event_durations.destroy_all
 			default_duration = Clinic.default_duration
 			(self.duration / default_duration).times do |index|
+				hour = self.hour
 				minute = self.minute + index * default_duration
-				if minute < 60
-					self.event_durations.create(hour: self.hour, minute: minute, duration: default_duration)
-				else
-					h = self.hour + 1
-					m = minute - 60
-					self.event_durations.create(hour: h, minute: m, duration: default_duration)
+				loop do
+					if minute < 60
+						self.event_durations.create(hour: hour, minute: minute, duration: default_duration)
+						break
+					end
+					hour += 1
+					minute -= 60
 				end
+				# if minute < 60
+				# 	self.event_durations.create(hour: self.hour, minute: minute, duration: default_duration)
+				# else
+				# 	h = self.hour + 1
+				# 	m = minute - 60
+				# 	self.event_durations.create(hour: h, minute: m, duration: default_duration)
+				# end
 			end				
 		end
 		true
