@@ -1,13 +1,15 @@
 
 <%= render partial: "clinics/common/alert_lightbox", locals: {
   id: "cancel_event_lightbox",
-  title: "取消預約?",
+  title: "取消推播?",
   content: capture do %>
-    <% if @event.patient.present? %>
+  <% if @event.status == "推播中" %>
+    <p>確定取消推播?</p>
+  <% else %>
     <p class="patient_name"><%= @event.patient.name %></p>
-    <% end %>
     <p class="date_time"><%= @event.desc_format(2) %></p>
     <p class="service"><%= @event.service.name %>(<%= @event.doctor.title_name %>)</p>
+  <% end %>
 <% end,
   confirm_tag: link_to("確定", url_for(action: :destroy, id: @event, do_action: 1), class: "btnBu", remote:true, method: :delete)
 } %>
