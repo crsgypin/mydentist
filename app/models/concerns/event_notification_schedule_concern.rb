@@ -1,4 +1,18 @@
 module EventNotificationScheduleConcern
+  #以下方法，都是針對 schedule_type = 排程發送 的情況
+  extend ActiveSupport::Concern
+  included do
+    attr_accessor :trigger_schedule
+    after_save :check_trigger_schedule
+  end
+
+  def check_trigger_schedule
+    if self.trigger_schedule.present?
+      self.trigger_schedule = nil
+      self.check_and_send_schedule_messages
+    end
+  end
+
 	#for 排成
 
 	def create_broadcast_event
@@ -14,8 +28,37 @@ module EventNotificationScheduleConcern
     })		
 	end
 
+  def notifications_count_per_duration
+    #30
+    # count = duration / Clinic.default_duration
+    # 1 * count
+    1
+  end
+
+  def notifications_schedule_time
+    #unit: minute
+    #15
+    2
+  end
+
+  def get_expected_pushed_count
+    #計算應推播的人次數
+    time_count = ((Time.now - self.created_at) / (self.notifications_schedule_time * 60)).to_i
+    expected_pushed_count = time_count * self.notifications_count_per_duration
+  end
+
+  def get_valid_pushed_count
+    #計算可推播的人次數 = 應推播的人次數 - 推播的人次數
+    if self.expired? || self.schedule_type != "排程發送"
+      return 0
+    end
+    expected_pushed_count = get_expected_pushed_count
+    pushed_count = self.notifications.where(status: "尚未回覆").count
+    expected_pushed_count - pushed_count    
+  end
+
   #以下為『排成發送』的方法
-  def check_schedule_messages
+  def check_and_send_schedule_messages
   	#called by schedule
     if self.schedule_type != "排程發送"
       return
@@ -31,9 +74,12 @@ module EventNotificationScheduleConcern
     	self.update(status: "已佔滿")
     	return
     end
- 		self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
+    self.update(status: "發送中")
+ 		valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
 			patient.line_account.present? && !patient.current_event_notification.present?
-		end.each do |patient|
+		end
+    valid_count = self.get_valid_pushed_count
+    valid_patients.sample(valid_count).each do |patient|
 			n = self.notifications.find_or_initialize_by({
 				notification_template: self.notification_template,
 				patient: patient
@@ -51,11 +97,10 @@ module EventNotificationScheduleConcern
  			})
       n.save
 		end
-    self.update(status: "發送中")
     self.notifications.where(status: "尚未發送").each do |notification|
       notification.send_message
     end
-  end	
+  end
 
 	def start_date_time
 		if self.schedule_type != "排程發送"

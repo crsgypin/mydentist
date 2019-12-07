@@ -5,7 +5,7 @@ class Admin::Dev::Notification::EventNotificationSchedulesController < Admin::De
       variable_name: "event_notification_schedule",
       new_resource: proc { ::Event::NotificationSchedule.new},
       find_resource: proc { ::Event::NotificationSchedule.find(params[:id])},
-      resource_params: proc { params.require(:event_notification_schedule).permit(Event::NotificationSchedule.accessable_atts)}
+      resource_params: proc { params.require(:event_notification_schedule).permit(Event::NotificationSchedule.accessable_atts + [:trigger_schedule])}
     })
   }
 

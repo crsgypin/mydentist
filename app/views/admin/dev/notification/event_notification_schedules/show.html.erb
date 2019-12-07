@@ -1,3 +1,7 @@
+<div class="pv5">
+  <%= link_to "立即發送", url_for(action: :update, id: @event_notification_schedule, event_notification_schedule: {trigger_schedule: 1}), remote: true, method: "patch" %>
+</div>
+
 <%= render :partial => "admin/common/tabs_iframe", locals: {
   id: "line_account",
   sel_tab_index: 1,

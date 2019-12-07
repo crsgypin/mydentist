@@ -7,10 +7,11 @@
     {t: "類別", v: proc{|a| a.category }},
     {t: "狀態", v: proc{|a| a.status }},
     {t: "醫師", v: proc{|a| a.doctor.try(:name) }},
-    {t: "推播數", v: proc{|a| a.notifications.length }},
     {t: "推薦時間", v: proc{|a| a.start_date_time.strftime('%Y/%d/%m %H:%M') if a.start_date_time }},
     {t: "推薦區間", v: proc{|a| a.duration }},
-    {t: "製作時間", v: proc{|a| a.created_at }}
+    {t: "製作時間", v: proc{|a| a.created_at }},
+    {t: "已推播數", v: proc{|a| a.notifications.length }},
+    {t: "預期發送人數", v: proc{|a| a.get_valid_pushed_count}},
   ],
   row: {
 	  default_sel_index: 0,
