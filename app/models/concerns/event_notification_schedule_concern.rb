@@ -56,6 +56,24 @@ module EventNotificationScheduleConcern
     expected_pushed_count - pushed_count    
   end
 
+  def get_valid_patients
+    valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
+      #取沒有現在回診推播的病患
+      patient.line_account.present? && !patient.current_event_notification.present?
+    end
+    valid_patients
+  end
+
+  def get_valid_events
+    valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
+      #取沒有現在回診推播的病患
+      patient.line_account.present? && !patient.current_event_notification.present?
+    end
+    puts "gogo: #{valid_patients.inspect}"
+    events = self.clinic.events.where("date > ?", self.date).where(patient_id: valid_patients.map{|a| a.id})
+    events
+  end
+
   #以下為『排成發送』的方法
   def check_and_send_schedule_messages
   	#called by schedule
@@ -74,29 +92,36 @@ module EventNotificationScheduleConcern
     	return
     end
     self.update(status: "推播中")
- 		valid_patients = self.clinic.patients.includes(:current_event_notification, :line_account).select do |patient|
-      #取沒有現在回診推播的病患
-			patient.line_account.present? && !patient.current_event_notification.present?
-		end
-    valid_count = self.get_valid_pushed_count
-    valid_patients.sample(valid_count).each do |patient|
-			n = self.notifications.find_or_initialize_by({
-				notification_template: self.notification_template,
-				patient: patient
-      })
-      n.assign_attributes({
-        doctor_id: self.doctor_id,
-        service_id: self.service_id,
-        hour: self.hour,
-        minute: self.minute,
-        duration: self.duration,
-				args_json: {
-					clinic_name: self.clinic.name,
- 					patient_name: patient.name
-				}
- 			})
-      n.save
-		end
+    if self.category == "回診推播"
+      valid_count = self.get_valid_pushed_count
+      valid_patients = get_valid_patients
+      valid_patients.sample(valid_count).each do |patient|
+  			n = self.notifications.find_or_initialize_by({
+  				notification_template: self.notification_template,
+  				patient: patient
+        })
+        n.assign_attributes({
+          doctor_id: self.doctor_id,
+          service_id: self.service_id,
+          hour: self.hour,
+          minute: self.minute,
+          duration: self.duration,
+  				args_json: {
+  					clinic_name: self.clinic.name,
+   					patient_name: patient.name
+  				}
+   			})
+        n.save
+  		end
+    elsif self.category == "回診修改掛號"
+      valid_patients = get_valid_patients
+      valid_events.sample(valid_count).each do |event|
+        n = self.notifications.find_or_initialize_by({
+          notification_template: self.notification_template,
+          event: event
+        })
+      end
+    end
     r = {pass: 0, fail: 0}
     self.notifications.where(status: "尚未發送").each do |notification|
       s = notification.send_message
