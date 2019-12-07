@@ -166,14 +166,22 @@
     var startHour, startMinute, selectedElm;
     var tableBox = $("#calendar_day .table_box");
     var selBroadcastElm, baseTop, selTop, selHeight, lastBroadcastElm;
-    tableBox.find(".patient_event.new").on("mousedown", function(){
-      var tr = $(this).closest('.d_row.value_row');
-      // $(this).addClass("selected_broadcast");
-      selBroadcastElm = tr.find(".broadcast_event")
+    tableBox.find(".d_row.value_row").on("mousedown", function(){
+      //clear previous one
+      $(".broadcast_event.new").addClass("hidden");
+
+      //start sel broadcast
+      var tr = $(this);
+      var elm = tr.find(".broadcast_event")
+      if(elm.hasClass("exist")){
+        //推播中
+        return;
+      }
+      selBroadcastElm = elm;
       selBroadcastElm.removeClass("hidden");
       selTop = selBroadcastElm.offset().top;
       baseTop = selBroadcastElm.offset().top - selBroadcastElm.position().top;
-      selHeight = selBroadcastElm.height();
+      selHeight = selBroadcastElm.closest(".d_row").height();
 
       //save hour and minute
       var d = tr.data();
@@ -228,15 +236,6 @@
         lastBroadcastElm = selBroadcastElm;
         selBroadcastElm = null;
       }
-    });
-
-    $("body").on("mousedown", function(){
-      if(lastBroadcastElm){
-        var tr = lastBroadcastElm.closest(".d_row");
-        lastBroadcastElm.css({top: 0, height: tr.height()})
-        lastBroadcastElm.addClass("hidden");
-        return;
-      }      
     });
 	})
 	

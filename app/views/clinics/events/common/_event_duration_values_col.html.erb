@@ -21,11 +21,11 @@
 			<% broadcast_event = events.find {|e| e.hour == hour && e.minute == minute && e.status == "推播中" } %>
 			<% if broadcast_event.present? %>
 				<% height = broadcast_event.event_durations_count * row_height %>
-				<div class="broadcast_event" style="width: calc(100%); height: <%= height %>px; line-height: <%= height %>px; z-index: <%= broadcast_zindex %>;">
+				<div class="broadcast_event exist" style="width: calc(100%); height: <%= height %>px; line-height: <%= height %>px; z-index: <%= broadcast_zindex %>;">
 					推播中
 				</div>
 			<% else %>
-				<div class="broadcast_event hidden" style="width: 100%; height: <%= row_height %>px;z-index: <%= broadcast_zindex %>;" >
+				<div class="broadcast_event hidden new" style="width: 100%; height: <%= row_height %>px;z-index: <%= broadcast_zindex %>;" >
 				</div>
 			<% end %>
 
