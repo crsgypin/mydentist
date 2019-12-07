@@ -17,7 +17,8 @@ namespace :schedule do
 					r[:fail] += 1
 				end
 			end
-			Sys::Log.create({name: "掛號推播中", note: k.to_s})
+			n = "pass: #{r[:pass]}, fail: #{r[:fail]}"
+			Sys::Log.create({name: "掛號推播中", note: n})
 		end
 	end
 
