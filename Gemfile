@@ -59,7 +59,7 @@ gem 'line-bot-api'
 gem 'awesome_rails_console'
 gem 'exception_notification'
 gem 'slack-notifier'
-gem 'rails_admin', '~> 1.3'
+gem 'rails_admin', '~> 1.4'
 gem 'roo-xls'
 gem 'roo'
 
